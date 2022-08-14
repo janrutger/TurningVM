@@ -38,6 +38,23 @@ ret
     call :clearRB
 ret 
 
+@swap
+    loada
+    loadb
+    storea
+    storeb
+    call :clearRB
+ret
+
+@over
+    loada
+    loadb
+    storeb
+    storea
+    storeb
+    call :clearRB
+ret
+
 :clearRB
     clra
     clrb

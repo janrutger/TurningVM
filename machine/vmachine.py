@@ -90,42 +90,37 @@ class Machine:
         self.exec.run_rpc([('SPEED', 40), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
 
     def minus(self):
-        #last = self.pop()
-        #self.push(self.pop() - last)
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])
 
     def mul(self):
-        #self.push(self.pop() * self.pop())
         self.exec.run_rpc([('CALL', '@mul'), ('HALT', '')])
 
     def div(self):
-        #last = self.pop()
-        #self.push(int(self.pop() / last))
         self.exec.run_rpc([('CALL', '@div'), ('HALT', '')])
 
     def mod(self):
-        #last = self.pop()
-        #self.push(self.pop() % last)
         self.exec.run_rpc([('CALL', '@mod'), ('HALT', '')])
 
     def dup(self):
         self.push(self.top())
 
     def over(self):
-        b = self.pop()
-        a = self.pop()
-        self.push(a)
-        self.push(b)
-        self.push(a)
+        # b = self.pop()
+        # a = self.pop()
+        # self.push(a)
+        # self.push(b)
+        # self.push(a)
+        self.exec.run_rpc([('CALL', '@over'), ('HALT', '')])
 
     def drop(self):
         self.pop()
 
     def swap(self):
-        b = self.pop()
-        a = self.pop()
-        self.push(b)
-        self.push(a)
+        # b = self.pop()
+        # a = self.pop()
+        # self.push(b)
+        # self.push(a)
+        self.exec.run_rpc([('CALL', '@swap'), ('HALT', '')])
 
     def println(self):
         sys.stdout.write("%s\n" % self.pop())
