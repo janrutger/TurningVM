@@ -39,6 +39,7 @@ class Machine:
             "swap":     self.swap,
             ".":        self.println,
             "init":     self.init,
+            "main":     self.main,
             "exit":     self.exit    
         }
         
@@ -58,14 +59,18 @@ class Machine:
         self.push(value)
         return value
 
-
-    def run(self, code):
-        self.instruction_pointer =  0
-        self.code = code
-        while self.instruction_pointer < len(self.code):
-            opcode = self.code[self.instruction_pointer]
-            self.instruction_pointer += 1
+    def parse(self, code):
+        while len(code) > 0:
+            opcode = code.pop(0)
             self.dispatch(opcode)
+
+    # def run(self, code):
+    #     self.instruction_pointer =  0
+    #     self.code = code
+    #     while self.instruction_pointer < len(self.code):
+    #         opcode = self.code[self.instruction_pointer]
+    #         self.instruction_pointer += 1
+    #         self.dispatch(opcode)
 
     def dispatch(self, op):
         if op in self.dispatch_map:
@@ -86,6 +91,9 @@ class Machine:
     def exit(self):
         sys.exit(0)
 
+    def main(self):
+        self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
+
     def init(self):
         self.exec.run_rpc([('SPEED', 40), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
 
@@ -105,51 +113,51 @@ class Machine:
         self.push(self.top())
 
     def over(self):
-        # b = self.pop()
-        # a = self.pop()
-        # self.push(a)
-        # self.push(b)
-        # self.push(a)
         self.exec.run_rpc([('CALL', '@over'), ('HALT', '')])
 
     def drop(self):
         self.pop()
 
     def swap(self):
-        # b = self.pop()
-        # a = self.pop()
-        # self.push(b)
-        # self.push(a)
         self.exec.run_rpc([('CALL', '@swap'), ('HALT', '')])
 
     def println(self):
         sys.stdout.write("%s\n" % self.pop())
         sys.stdout.flush()
 
-    
-
-    def parse(self,text):
-        # Note that the tokenizer module is intended for parsing Python source
-        # code, so if you're going to expand on the parser, you may have to use
-        # another tokenizer.
-
-        if sys.version[0] == "2":
-            stream = StringIO(unicode(text))
-        else:
-            stream = StringIO(text)
-
-        tokens = tokenize.generate_tokens(stream.readline)
-
-        for toknum, tokval, _, _, _ in tokens:
-            if toknum == tokenize.NUMBER:
-                yield int(tokval)
-            elif toknum in [tokenize.OP, tokenize.STRING, tokenize.NAME]:
-                yield tokval
-            elif toknum in [tokenize.ENDMARKER, tokenize.NEWLINE]:
-                break
+    def tokenise(self,text):
+        code = []
+        tokens = text.split()
+        for token in tokens:
+            if token.isnumeric():
+                code.append(int(token))
             else:
-                raise RuntimeError("Unknown token %s: '%s'" %
-                        (tokenize.tok_name[toknum], tokval))
+                code.append(token)
+        return(code)
+
+
+    # def parse(self,text):
+    #     # Note that the tokenizer module is intended for parsing Python source
+    #     # code, so if you're going to expand on the parser, you may have to use
+    #     # another tokenizer.
+
+    #     if sys.version[0] == "2":
+    #         stream = StringIO(unicode(text))
+    #     else:
+    #         stream = StringIO(text)
+
+    #     tokens = tokenize.generate_tokens(stream.readline)
+
+    #     for toknum, tokval, _, _, _ in tokens:
+    #         if toknum == tokenize.NUMBER:
+    #             yield int(tokval)
+    #         elif toknum in [tokenize.OP, tokenize.STRING, tokenize.NAME]:
+    #             yield tokval
+    #         elif toknum in [tokenize.ENDMARKER, tokenize.NEWLINE]:
+    #             break
+    #         else:
+    #             raise RuntimeError("Unknown token %s: '%s'" %
+    #                     (tokenize.tok_name[toknum], tokval))
 
 
     def repl(self):
@@ -158,8 +166,9 @@ class Machine:
         while True:
             try:
                 source = get_input("> ")
-                code = list(self.parse(source))
-                self.run(code)
+                code = list(self.tokenise(source))
+                #code = list(self.parse(source))
+                self.parse(code)
             except (RuntimeError, IndexError) as e:
                 print("IndexError: %s" % e)
             except KeyboardInterrupt:
