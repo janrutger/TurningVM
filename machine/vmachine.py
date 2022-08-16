@@ -10,9 +10,10 @@ This version should work on both Python 2 and 3.
 
 from __future__ import print_function
 #from collections import deque
-from io import StringIO
+#from io import StringIO
 import sys
-import tokenize
+#import tokenize
+import copy
 
 
 def get_input(*args, **kw):
@@ -27,6 +28,7 @@ def get_input(*args, **kw):
 class Machine:
     def __init__(self, executer):
         self.exec = executer
+        self.word_map = {}
         self.dispatch_map = {
             "%":        self.mod,
             "*":        self.mul,
@@ -59,21 +61,48 @@ class Machine:
         self.push(value)
         return value
 
-    def parse(self, code):
-        while len(code) > 0:
-            opcode = code.pop(0)
-            self.dispatch(opcode)
+    def tokenise(self,text):
+        code = []
+        tokens = text.split()
+        for token in tokens:
+            if token.isnumeric():
+                code.append(int(token))
+            else:
+                code.append(token)
+        return(code)
 
-    # def run(self, code):
-    #     self.instruction_pointer =  0
-    #     self.code = code
-    #     while self.instruction_pointer < len(self.code):
-    #         opcode = self.code[self.instruction_pointer]
-    #         self.instruction_pointer += 1
-    #         self.dispatch(opcode)
+    def parse(self, code):
+        _code = copy.copy(code)
+        while len(_code) > 0:
+            opcode = _code.pop(0)
+            if opcode == ":":
+                wordcode = []
+                word = str(_code.pop(0))
+                nextToken = _code.pop(0)
+                while nextToken != ";":
+                    wordcode.append(nextToken)
+                    nextToken = _code.pop(0)
+                self.word_map[word] = wordcode
+            elif opcode == "if":
+                trueValue = self.pop()
+                if trueValue == 0:    #True
+                    ifCode = []
+                    nextToken = _code.pop(0)
+                    while nextToken != "then":
+                        ifCode.append(nextToken)
+                        nextToken = _code.pop(0)
+                    self.parse(ifCode)
+                else:               #False
+                    nextToken = _code.pop(0)
+                    while nextToken != "then":
+                        nextToken = _code.pop(0)
+            else:
+                self.dispatch(opcode)
 
     def dispatch(self, op):
-        if op in self.dispatch_map:
+        if str(op) in self.word_map:
+            self.parse(self.word_map[str(op)])
+        elif op in self.dispatch_map:
             self.dispatch_map[op]()
         elif isinstance(op, int):
             self.push(op) # push numbers on stack
@@ -81,6 +110,24 @@ class Machine:
             self.push(op[1:-1]) # push quoted strings on stack
         else:
             raise RuntimeError("Unknown opcode: '%s'" % op)
+
+    def repl(self):
+        print('Hit CTRL+D or type "exit" to quit.')
+
+        while True:
+            try:
+                source = get_input("> ")
+                code = list(self.tokenise(source))
+                self.parse(code)
+            except (RuntimeError, IndexError) as e:
+                print("IndexError: %s" % e)
+            except KeyboardInterrupt:
+                print("\nKeyboardInterrupt")
+
+
+
+
+
 
     # OPERATIONS FOLLOW:
 
@@ -124,53 +171,4 @@ class Machine:
     def println(self):
         sys.stdout.write("%s\n" % self.pop())
         sys.stdout.flush()
-
-    def tokenise(self,text):
-        code = []
-        tokens = text.split()
-        for token in tokens:
-            if token.isnumeric():
-                code.append(int(token))
-            else:
-                code.append(token)
-        return(code)
-
-
-    # def parse(self,text):
-    #     # Note that the tokenizer module is intended for parsing Python source
-    #     # code, so if you're going to expand on the parser, you may have to use
-    #     # another tokenizer.
-
-    #     if sys.version[0] == "2":
-    #         stream = StringIO(unicode(text))
-    #     else:
-    #         stream = StringIO(text)
-
-    #     tokens = tokenize.generate_tokens(stream.readline)
-
-    #     for toknum, tokval, _, _, _ in tokens:
-    #         if toknum == tokenize.NUMBER:
-    #             yield int(tokval)
-    #         elif toknum in [tokenize.OP, tokenize.STRING, tokenize.NAME]:
-    #             yield tokval
-    #         elif toknum in [tokenize.ENDMARKER, tokenize.NEWLINE]:
-    #             break
-    #         else:
-    #             raise RuntimeError("Unknown token %s: '%s'" %
-    #                     (tokenize.tok_name[toknum], tokval))
-
-
-    def repl(self):
-        print('Hit CTRL+D or type "exit" to quit.')
-
-        while True:
-            try:
-                source = get_input("> ")
-                code = list(self.tokenise(source))
-                #code = list(self.parse(source))
-                self.parse(code)
-            except (RuntimeError, IndexError) as e:
-                print("IndexError: %s" % e)
-            except KeyboardInterrupt:
-                print("\nKeyboardInterrupt")
 
