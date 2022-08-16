@@ -55,6 +55,19 @@ ret
     call :clearRB
 ret
 
+@eq
+    loada
+    loadb
+    teste
+    jumpt :settrue
+    push 1
+    jump :end
+    :settrue
+        push 0
+    :end
+    call :clearRB
+ret
+
 :clearRB
     clra
     clrb

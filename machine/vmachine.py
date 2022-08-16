@@ -35,6 +35,7 @@ class Machine:
             "+":        self.plus,
             "-":        self.minus,
             "/":        self.div,
+            "=":        self.eq,
             "drop":     self.drop,
             "dup":      self.dup, 
             "over":     self.over,
@@ -155,6 +156,9 @@ class Machine:
 
     def mod(self):
         self.exec.run_rpc([('CALL', '@mod'), ('HALT', '')])
+
+    def eq(self):
+        self.exec.run_rpc([('CALL', '@eq'), ('HALT', '')])
 
     def dup(self):
         self.push(self.top())
