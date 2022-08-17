@@ -59,13 +59,13 @@ ret
     loada
     loadb
     teste
-    jumpt :settrue
+    jumpt :settrue_eq
     push 1
-    jump :end
-    :settrue
+    jump :end_eq
+    :settrue_eq
         push 0
-    :end
-    call :clearRB
+    :end_eq
+        call :clearRB
 ret
 
 :clearRB

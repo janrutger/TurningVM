@@ -143,7 +143,7 @@ class Machine:
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 40), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 400), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])
