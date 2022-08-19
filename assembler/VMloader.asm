@@ -68,6 +68,19 @@ ret
         call :clearRB
 ret
 
+@neq
+    loada
+    loadb
+    teste
+    jumpf :settrue_eq
+    push 1
+    jump :end_eq
+    :settrue_eq
+        push 0
+    :end_eq
+        call :clearRB
+ret
+
 :clearRB
     clra
     clrb

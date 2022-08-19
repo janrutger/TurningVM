@@ -36,6 +36,7 @@ class Machine:
             "-":        self.minus,
             "/":        self.div,
             "=":        self.eq,
+            "!=":       self.neq,
             "drop":     self.drop,
             "dup":      self.dup, 
             "over":     self.over,
@@ -84,6 +85,9 @@ class Machine:
                     wordcode.append(nextToken)
                     nextToken = _code.pop(0)
                 self.word_map[word] = wordcode
+            elif str(opcode) in self.word_map:
+                wordCode = self.word_map[str(opcode)]
+                _code = wordCode + _code
             elif opcode == "if":
                 trueValue = self.pop()
                 if trueValue == 0:    #True
@@ -92,7 +96,8 @@ class Machine:
                     while nextToken != "then":
                         ifCode.append(nextToken)
                         nextToken = _code.pop(0)
-                    self.parse(ifCode)
+                    #self.parse(ifCode)
+                    _code = ifCode + _code
                 else:               #False
                     nextToken = _code.pop(0)
                     while nextToken != "then":
@@ -101,9 +106,9 @@ class Machine:
                 self.dispatch(opcode)
 
     def dispatch(self, op):
-        if str(op) in self.word_map:
-            self.parse(self.word_map[str(op)])
-        elif op in self.dispatch_map:
+        # if str(op) in self.word_map:
+        #     self.parse(self.word_map[str(op)])
+        if op in self.dispatch_map:
             self.dispatch_map[op]()
         elif isinstance(op, int):
             self.push(op) # push numbers on stack
@@ -143,7 +148,7 @@ class Machine:
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 400), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 2), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])
@@ -159,6 +164,9 @@ class Machine:
 
     def eq(self):
         self.exec.run_rpc([('CALL', '@eq'), ('HALT', '')])
+
+    def neq(self):
+        self.exec.run_rpc([('CALL', '@neq'), ('HALT', '')])
 
     def dup(self):
         self.push(self.top())
