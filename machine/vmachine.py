@@ -64,7 +64,7 @@ class Machine:
         self.push(value)
         return value
 
-    def tokenise(self,text):
+    def tokenice(self,text):
         code = []
         tokens = text.split()
         for token in tokens:
@@ -89,6 +89,17 @@ class Machine:
             elif str(opcode) in self.word_map:
                 wordCode = self.word_map[str(opcode)]
                 _code = wordCode + _code
+            elif opcode == "do":
+                indexVal = self.pop()
+                countVal = self.pop()
+                doCode = []
+                nextToken = _code.pop(0)
+                while nextToken != "loop":
+                    doCode.append(nextToken)
+                    nextToken = _code.pop(0)
+                while countVal != indexVal:
+                    _code = doCode + _code
+                    countVal = countVal - 1
             elif opcode == "if":
                 trueValue = self.pop()
                 if trueValue == 0:    #True
@@ -124,7 +135,7 @@ class Machine:
         while True:
             try:
                 source = get_input("> ")
-                code = list(self.tokenise(source))
+                code = list(self.tokenice(source))
                 self.parse(code)
             except (RuntimeError, IndexError) as e:
                 print("IndexError: %s" % e)
@@ -149,7 +160,7 @@ class Machine:
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 2), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 0.2), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])
