@@ -11,31 +11,31 @@ nop
     loada
     add
     storea
-    call :clearRB
+    call :clearAB
 ret
 
 @minus
     sub
     storeb
-    call :clearRB
+    call :clearAB
 ret
 
 @mul
     multi
     storeb
-    call :clearRB
+    call :clearAB
 ret
 
 @div 
     call @modulo
     storea
-    call :clearRB
+    call :clearAB
 ret
 
 @mod
     call @modulo 
     storeb
-    call :clearRB
+    call :clearAB
 ret 
 
 @swap
@@ -43,7 +43,7 @@ ret
     loadb
     storea
     storeb
-    call :clearRB
+    call :clearAB
 ret
 
 @over
@@ -52,7 +52,7 @@ ret
     storeb
     storea
     storeb
-    call :clearRB
+    call :clearAB
 ret
 
 @eq
@@ -65,23 +65,23 @@ ret
     :settrue_eq
         push 0
     :end_eq
-        call :clearRB
+        call :clearAB
 ret
 
 @neq
     loada
     loadb
     teste
-    jumpf :settrue_eq
+    jumpf :settrue_neq
     push 1
     jump :end_eq
-    :settrue_eq
+    :settrue_neq
         push 0
     :end_eq
-        call :clearRB
+        call :clearAB
 ret
 
-:clearRB
+:clearAB
     clra
     clrb
 ret 
@@ -109,7 +109,9 @@ ret
     jump :loop
 
     :return
-        ret
+        clra
+        clrb
+ret
 
 
 @modulo

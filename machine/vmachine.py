@@ -34,6 +34,7 @@ class Machine:
             "*":        self.mul,
             "+":        self.plus,
             "-":        self.minus,
+            "!":        self.fac,
             "/":        self.div,
             "=":        self.eq,
             "!=":       self.neq,
@@ -155,6 +156,9 @@ class Machine:
 
     def mul(self):
         self.exec.run_rpc([('CALL', '@mul'), ('HALT', '')])
+
+    def fac(self):
+        self.exec.run_rpc([('CALL', '@factorial'), ('HALT', '')])
 
     def div(self):
         self.exec.run_rpc([('CALL', '@div'), ('HALT', '')])
