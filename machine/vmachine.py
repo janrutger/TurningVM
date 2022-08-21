@@ -2,13 +2,11 @@
 # coding: utf-8
 
 """
-A simple VM interpreter.
-
-Code from the post at http://csl.name/post/vm/
-This version should work on both Python 2 and 3.
+Deze code is gebaseerd op http://csl.name/post/vm/
+waarvoor veel dank.
 """
-
 from __future__ import print_function
+import threading
 #from collections import deque
 #from io import StringIO
 import sys
@@ -26,8 +24,9 @@ def get_input(*args, **kw):
 
 
 class Machine:
-    def __init__(self, executer):
-        self.exec = executer
+    def __init__(self, executer, plotter):
+        self.exec     = executer
+        self.plotter  = plotter
         self.word_map = {}
         self.dispatch_map = {
             "%":        self.mod,
@@ -48,6 +47,9 @@ class Machine:
             "exit":     self.exit    
         }
         
+    def startPlotter(self, IObuff):
+        self.plotter.start(IObuff)
+        return
 
     def pop(self):
         val = self.exec.run_commando('PULL', None)
@@ -154,13 +156,18 @@ class Machine:
         self.exec.run_rpc([('CALL', '@plus'), ('HALT', '')])
 
     def exit(self):
+        if self.plotter.online:
+            self.plotter.stop()
+            self.plt0.join()
         sys.exit(0)
 
     def main(self):
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 0.2), ('CLRA', ''), ('CLRB', ''), ('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 2), ('CLRA', ''), ('IOBUFF', '%_plotter'), ('LIFO', '%_system'), ('HALT', '')])
+        self.plt0 = threading.Thread(target=self.startPlotter, args=(('%_plotter',)))
+        self.plt0.start()
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])

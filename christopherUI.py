@@ -6,10 +6,12 @@ from assembler import assembler as ASM
 from mmu       import mmu       as MMU
 from cpu       import executer  as ex
 from machine   import vmachine  as vm
+from machine   import plotter   as plt
 
 memory    = MMU.MMU()
-executer  = ex.Executer(memory) 
-machine   = vm.Machine(executer)
+executer  = ex.Executer(memory)
+plotter   = plt.Plotter(memory) 
+machine   = vm.Machine(executer, plotter)
 
 assembler = ASM.Assembler()
 ALLTAPES = ["ST", "RA", "RB", "S"] 
@@ -88,7 +90,7 @@ while True:
     #print(values['-open-'])
     if event == sg.WIN_CLOSED or event == '-shutdown-':
         window['-stout-'].print("Shutdown, waiting for finisch")
-        executer.stopPlotter()
+        #executer.stopPlotter()
         if THREAD == True:
             job.join()
             break

@@ -1,10 +1,10 @@
 @oeis
     push 1 
     push 1
-    storem %plotter     
+    storem %_plotter     
     push 1  
     push 1
-    storem %plotter    
+    storem %_plotter    
 
     push 2      
     storem $n
@@ -34,7 +34,7 @@
 
     storea 
     storea
-    storem %plotter     
+    storem %_plotter     
     jump :incn  
 
 :no-cf          
@@ -49,7 +49,7 @@
 
     storea  
     storea
-    storem %plotter   
+    storem %_plotter   
     jump :incn  
 
 :incn
@@ -60,7 +60,7 @@
     storea      
     storem $n  
 
-    push 650    
+    push 11
     loadb
     teste      
     jumpt :done 
