@@ -48,4 +48,5 @@ class Plotter:
 
     def stop(self):
         self.online = False
+        self.newPlot = True
         
