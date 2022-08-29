@@ -23,7 +23,10 @@ class MMU:
 
         for line in binProgram:
             if line[0] == "@":
-                self.symbolTable[line] = len(self.memory)
+                info = line.split()
+                self.symbolTable[info[0]] = len(self.memory)
+                if len(info) > 1:
+                    self.symbolMap[info[1]] = len(self.memory)
             else:
                 self.memory.append(line)
         print(self.memory)
@@ -32,6 +35,7 @@ class MMU:
     def initMem(self):
         self.memory = []
         self.virtMemAdresses = {}
+        self.symbolMap ={}
         self.symbolTable = {}
         self.loader = False
 

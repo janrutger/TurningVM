@@ -87,7 +87,7 @@ window = sg.Window('Christopher (TM)', layout)
 while True:             
     event, values = window.read(timeout=100)
     #print(event, values)
-    #print(values['-open-'])
+    #print(values['-open-'])23
     if event == sg.WIN_CLOSED or event == '-shutdown-':
         window['-stout-'].print("Shutdown, waiting for finisch")
         #executer.stopPlotter()

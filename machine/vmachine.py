@@ -165,7 +165,7 @@ class Machine:
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 4), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 0), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('LIFO', '%_system'), ('HALT', '')])
         if not self.plotter.online:
             self.plt0 = threading.Thread(target=self.startPlotter, args=(('%_plotter',)))
             self.plt0.start()

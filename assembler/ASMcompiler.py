@@ -52,8 +52,9 @@ class Compiler:
         linenumber = 0
         for line in program:
             if line[0] == "@":
-                symbol = line.split()[0]
-                newProgram.append(symbol)
+                # symbol = line.split()[0]
+                # newProgram.append(symbol)
+                newProgram.append(line)
             elif line[0] == ":":
                 label = line.split()[0]
                 self.labels[label] = linenumber
