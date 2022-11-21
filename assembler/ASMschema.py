@@ -30,6 +30,7 @@ def loadSchema():
     schema["loada"]     = ("LDA", None)
     schema["loadb"]     = ("LDB", None)
     schema["loadm"]     = ("LDM", "s")
+    schema["input"]     = ("INPUT", None)
 
     schema["lifo"]      = ("LIFO", "s")
 

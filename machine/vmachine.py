@@ -24,9 +24,11 @@ def get_input(*args, **kw):
 
 
 class Machine:
-    def __init__(self, executer, plotter):
+    def __init__(self, executer, plotter, keyboard):
         self.exec     = executer
         self.plotter  = plotter
+        self.keyboard = keyboard
+
         self.word_map = {}
         self.dispatch_map = {
             "%":        self.mod,
@@ -49,6 +51,10 @@ class Machine:
         
     def startPlotter(self, IObuff):
         self.plotter.start(IObuff)
+        return
+
+    def startKeyboard(self, IObuff):
+        self.keyboard.start(IObuff)
         return
 
     def pop(self):
@@ -159,16 +165,23 @@ class Machine:
         if self.plotter.online:
             self.plotter.stop()
             self.plt0.join()
+        if self.keyboard.online:
+            self.keyboard.stop()
+            self.kbd.join()
         sys.exit(0)
 
     def main(self):
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 20), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 20), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('IOBUFF', '%_kbd'),('LIFO', '%_system'), ('HALT', '')])
         if not self.plotter.online:
             self.plt0 = threading.Thread(target=self.startPlotter, args=(('%_plotter',)))
             self.plt0.start()
+        if not self.keyboard.online:
+            self.kbd = threading.Thread(target=self.startKeyboard, args=(('%_kbd',)))
+            self.kbd.start()
+        
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])

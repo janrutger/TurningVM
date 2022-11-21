@@ -7,11 +7,13 @@ from mmu       import mmu       as MMU
 from cpu       import executer  as ex
 from machine   import vmachine  as vm
 from machine   import plotter   as plt
+from machine   import keyboard  as kbd
 
 memory    = MMU.MMU()
 executer  = ex.Executer(memory)
 plotter   = plt.Plotter(memory) 
-machine   = vm.Machine(executer, plotter)
+keyboard  = kbd.Keyboard(memory)
+machine   = vm.Machine(executer, plotter, keyboard)
 
 assembler = ASM.Assembler()
 ALLTAPES = ["ST", "RA", "RB", "S"] 

@@ -1,10 +1,12 @@
-nop
+@main
+
+input
+
+loadm %_kbd
+loadm %_kbd
 
 
-@mod1
-nop
 ret
 
-@module2 +
-nop
-ret
+
+halt

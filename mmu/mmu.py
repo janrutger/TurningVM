@@ -1,15 +1,7 @@
 class MMU:
     def __init__(self):
         self.initMem()
-        #self.memory = []
-        #self.virtMemAdresses = {}
-
-
-    # def loadMem1(self, binProgram):
-    #     i = 0
-    #     while i < len(binProgram):
-    #         self.memory.append(binProgram[i])
-    #         i = i + 1
+        self.waitForInput = False
     
     def loadMem(self, binProgram):
         if binProgram[0][0] !=  "@":
@@ -25,8 +17,8 @@ class MMU:
             if line[0] == "@":
                 info = line.split()
                 self.symbolTable[info[0]] = len(self.memory)
-                if len(info) > 1:
-                    self.symbolMap[info[1]] = len(self.memory)
+                #if len(info) > 1:
+                #    self.symbolMap[info[1]] = len(self.memory)
             else:
                 self.memory.append(line)
         print(self.memory)
@@ -35,7 +27,7 @@ class MMU:
     def initMem(self):
         self.memory = []
         self.virtMemAdresses = {}
-        self.symbolMap ={}
+        #self.symbolMap ={}
         self.symbolTable = {}
         self.loader = False
 
@@ -50,7 +42,20 @@ class MMU:
                 #memVal_ = memVal.pop()
                 return(memVal)
             else:
-                return("error: unknow memtype")    
+                return("error: unknow memtype") 
+        else:
+             return("error: unknow mem adres") 
+
+    def writeIObuff(self, adres, value):
+        if adres in self.virtMemAdresses.keys():
+            memType, memVal_ = self.memory[self.virtMemAdresses[adres]]
+            if memType == "IObuff":
+                memVal_.append(int(value))
+                self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
+            else:
+                return("error: unknow memtype") 
+        else:
+             return("error: unknow mem adres") 
 
     def readMem(self, adres):
         if isinstance(adres, int):
@@ -66,6 +71,12 @@ class MMU:
                 if memType == "LIFO":
                     memVal_ = memVal.pop()
                     return(memVal_)
+                if memType == "IObuff":
+                    if len(memVal) == 0:
+                        memVal.append(0)
+                        memVal.append(1)
+                    memVal_ = memVal.pop(0)
+                    return(bin(memVal_)[2:])
                 else:
                     return("error: unknow memtype")
             else:
