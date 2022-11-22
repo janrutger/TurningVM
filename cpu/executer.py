@@ -40,6 +40,12 @@ class Executer:
             self.memory.makeStack("LIFO", operand)
             self.pc = self.pc + 1
             return(exitCode)
+        if commando =="INDEX":
+            exitCode="HALT"
+            adres = self.execNOP.pull()
+            self.memory.index(adres, operand + self.pc)
+            self.pc = self.pc + 1
+            return(exitCode)
         if commando == "PUSH":
             exitCode = self.execNOP.push(operand)
             self.pc = self.pc + 1

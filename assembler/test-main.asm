@@ -1,4 +1,8 @@
 @main
+speed 6
+
+push '+'
+index @plus
 
 input
 

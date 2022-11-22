@@ -113,3 +113,12 @@ class MMU:
             self.memory.append((memType, memVal))
         else:
             self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
+
+    def index(self, adres, memVal):      #adres=stack value, memVal=adress pointer (int, @xx, :nn)
+        memType = "INDEX"
+        if adres not in self.virtMemAdresses.keys():
+            self.virtMemAdresses[adres] = len(self.memory)
+            self.memory.append((memType, memVal))
+        else:
+            self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
+        

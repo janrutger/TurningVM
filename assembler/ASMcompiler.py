@@ -6,6 +6,10 @@ class Compiler:
         self.ASMschema = schema.loadSchema()
         self.labels = {}
 
+        self.stringTable = {}
+        self.stringTable["null"] = 0
+        self.stringTable["+"] = 1
+
     def checkOperand(self, operandType, operand_, progLen):
         if operand_[0] == ":":                      # operand is a mem label
             return(self.labels[operand_] - progLen)
@@ -15,8 +19,10 @@ class Compiler:
             return(str(operand_))
         if operand_[0] == "@":                      # operand is a symbol
             return(str(operand_))
-        if operand_ == "plotter":
-            return("plotter")
+        #if operand_ == "plotter":
+        #    return("plotter")
+        if operand_[0]==operand_[-1]=="'":
+            return(bin(self.stringTable[operand_[1:-1]])[2:])
         if operand_.isnumeric():                    # operand is numeriek
             if operandType == "n":
                 return(int(operand_))
@@ -32,9 +38,9 @@ class Compiler:
                 return(int(operand_, 2))
         else:                                       # input is string (dit lijkt niet te werken)
             if operandType == "b":
-                return(error)
+                return("error")
             if operandType == "n":
-                return(error)
+                return("error")
             
         
 
