@@ -99,6 +99,13 @@ class Executer:
             self.memory.writeMem("%_system", self.pc)
             self.pc = operand + self.pc
             return(exitCode)
+        if commando == "CALLI":
+            exitCode = "HALT"
+            self.memory.writeMem("%_system", self.pc)
+            label = self.execNOP.pull()
+            adres = self.memory.readMem(label)
+            self.pc = adres
+            return(exitCode)
         if commando == "RET":
             exitCode = "HALT"
             adres =self.memory.readMem("%_system")

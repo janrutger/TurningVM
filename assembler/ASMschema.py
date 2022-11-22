@@ -21,6 +21,7 @@ def loadSchema():
     schema["jumpf"]     = ("JPF", "n")
 
     schema["call"]      = ("CALL", "n")
+    schema["calli"]     = ("CALLI", None)
     schema["ret"]       = ("RET", None)
 
     schema["storea"]    = ("STA", None)

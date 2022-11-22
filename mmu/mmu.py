@@ -66,7 +66,9 @@ class MMU:
         else:
             if adres in self.virtMemAdresses.keys():
                 memType, memVal = self.memory[self.virtMemAdresses[adres]]
-                if memType == "MEM":
+                if memType == "MEM":        #stores a value
+                    return(memVal)
+                if memType == "INDEX":      #stores a adress
                     return(memVal)
                 if memType == "LIFO":
                     memVal_ = memVal.pop()
@@ -80,7 +82,7 @@ class MMU:
                 else:
                     return("error: unknow memtype")
             else:
-                return("error")
+                return("error: unknow adress")
 
     def writeMem(self, adres, memVal):
         if isinstance(adres, int):
