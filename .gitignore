@@ -1,5 +1,2 @@
 .idea/
-assembler/
-cpu/
-machine/
-mmu/
+*__pycache__*
