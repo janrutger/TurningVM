@@ -8,6 +8,9 @@ class Keyboard:
         self.stringTable = {}
         self.stringTable["null"] = 0
         self.stringTable["+"] = 1
+        self.stringTable["."] = 2
+        self.stringTable["halt"] = 900
+        
 
 
 

@@ -38,6 +38,10 @@ ret
     call :clearAB
 ret 
 
+@print
+    prt 
+ret
+
 @swap
     loada
     loadb
