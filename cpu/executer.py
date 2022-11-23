@@ -131,13 +131,13 @@ class Executer:
         return "HALT"
 
     def run_rpc(self, program):
-        self.pc = 0
-        while self.pc < len(program):
-            self.memory.writeMem(self.pc, program[self.pc])
-            self.pc = self.pc + 1
+        pc = 0
+        while pc < len(program):
+            self.memory.writeMem(pc, program[pc])
+            pc = pc + 1
 
-        self.pc = 0
-        self.run_memory(self.pc)
+        pc = 0
+        self.run_memory(pc)
 
     def run_memory(self, pc):
         self.pc = pc
