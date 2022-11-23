@@ -29,7 +29,6 @@ class Executer:
             self.pc = self.pc + 1
             return exit_code
 
-
     def input(self, operand):
         self.memory.waitForInput = True
         while self.memory.waitForInput:
