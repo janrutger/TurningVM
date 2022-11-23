@@ -7,10 +7,10 @@ waarvoor veel dank.
 """
 from __future__ import print_function
 import threading
-#from collections import deque
-#from io import StringIO
+# from collections import deque
+# from io import StringIO
 import sys
-#import tokenize
+# import tokenize
 import copy
 
 
@@ -22,33 +22,32 @@ def get_input(*args, **kw):
         return input(*args, **kw)
 
 
-
 class Machine:
     def __init__(self, executer, plotter, keyboard):
-        self.exec     = executer
-        self.plotter  = plotter
+        self.exec = executer
+        self.plotter = plotter
         self.keyboard = keyboard
 
         self.word_map = {}
         self.dispatch_map = {
-            "%":        self.mod,
-            "*":        self.mul,
-            "+":        self.plus,
-            "-":        self.minus,
-            "!":        self.fac,
-            "/":        self.div,
-            "=":        self.eq,
-            "!=":       self.neq,
-            "drop":     self.drop,
-            "dup":      self.dup, 
-            "over":     self.over,
-            "swap":     self.swap,
-            ".":        self.println,
-            "init":     self.init,
-            "main":     self.main,
-            "exit":     self.exit    
+            "%": self.mod,
+            "*": self.mul,
+            "+": self.plus,
+            "-": self.minus,
+            "!": self.fac,
+            "/": self.div,
+            "=": self.eq,
+            "!=": self.neq,
+            "drop": self.drop,
+            "dup": self.dup,
+            "over": self.over,
+            "swap": self.swap,
+            ".": self.println,
+            "init": self.init,
+            "main": self.main,
+            "exit": self.exit
         }
-        
+
     def startPlotter(self, IObuff):
         self.plotter.start(IObuff)
         return
@@ -59,7 +58,7 @@ class Machine:
 
     def pop(self):
         val = self.exec.run_commando('PULL', None)
-        value = int(val,2)
+        value = int(val, 2)
         return value
 
     def push(self, value):
@@ -67,12 +66,12 @@ class Machine:
         self.exec.run_commando('PUSH', value)
 
     def top(self):
-        #return self.data_stack.top()
+        # return self.data_stack.top()
         value = self.pop()
         self.push(value)
         return value
 
-    def tokenice(self,text):
+    def tokenice(self, text):
         code = []
         tokens = text.split()
         for token in tokens:
@@ -80,7 +79,7 @@ class Machine:
                 code.append(int(token))
             else:
                 code.append(token)
-        return(code)
+        return (code)
 
     def parse(self, code):
         _code = copy.copy(code)
@@ -110,15 +109,15 @@ class Machine:
                     countVal = countVal - 1
             elif opcode == "if":
                 trueValue = self.pop()
-                if trueValue == 0:    #True
+                if trueValue == 0:  # True
                     ifCode = []
                     nextToken = _code.pop(0)
                     while nextToken != "then":
                         ifCode.append(nextToken)
                         nextToken = _code.pop(0)
-                    #self.parse(ifCode)
+                    # self.parse(ifCode)
                     _code = ifCode + _code
-                else:               #False
+                else:  # False
                     nextToken = _code.pop(0)
                     while nextToken != "then":
                         nextToken = _code.pop(0)
@@ -131,9 +130,9 @@ class Machine:
         if op in self.dispatch_map:
             self.dispatch_map[op]()
         elif isinstance(op, int):
-            self.push(op) # push numbers on stack
-        elif isinstance(op, str) and op[0]==op[-1]=='"':
-            self.push(op[1:-1]) # push quoted strings on stack
+            self.push(op)  # push numbers on stack
+        elif isinstance(op, str) and op[0] == op[-1] == '"':
+            self.push(op[1:-1])  # push quoted strings on stack
         else:
             raise RuntimeError("Unknown opcode: '%s'" % op)
 
@@ -150,15 +149,10 @@ class Machine:
             except KeyboardInterrupt:
                 print("\nKeyboardInterrupt")
 
-
-
-
-
-
     # OPERATIONS FOLLOW:
 
     def plus(self):
-        #self.push(self.pop() + self.pop())
+        # self.push(self.pop() + self.pop())
         self.exec.run_rpc([('CALL', '@plus'), ('HALT', '')])
 
     def exit(self):
@@ -174,14 +168,14 @@ class Machine:
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 20), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('IOBUFF', '%_kbd'),('LIFO', '%_system'), ('HALT', '')])
+        self.exec.run_rpc([('SPEED', 20), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('IOBUFF', '%_kbd'),
+                           ('LIFO', '%_system'), ('HALT', '')])
         if not self.plotter.online:
             self.plt0 = threading.Thread(target=self.startPlotter, args=(('%_plotter',)))
             self.plt0.start()
         if not self.keyboard.online:
             self.kbd = threading.Thread(target=self.startKeyboard, args=(('%_kbd',)))
             self.kbd.start()
-        
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])
@@ -219,4 +213,3 @@ class Machine:
     def println(self):
         sys.stdout.write("%s\n" % self.pop())
         sys.stdout.flush()
-
