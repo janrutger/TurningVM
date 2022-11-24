@@ -23,6 +23,8 @@
 
 :is-cmd
     storea
+    clra
+    clrb
     calli
     jump :repl
 
