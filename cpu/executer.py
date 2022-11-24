@@ -21,9 +21,15 @@ class Executer:
     def refresh_tapes(self, tapes):
         return self.execNOP.print(tapes)
 
+    def is_str(self, v):
+        return type(v) is str
+
     def run_commando(self, commando, operand):
         try:
-            return eval(commando.lower())(operand)
+            if self.is_str(operand):
+                return eval("self." + commando.lower() + "(\'" + operand + "\')")
+            else:
+                return eval("self." + commando.lower() + "(" + str(operand) + ")")
         except:
             exit_code = self.execOP.run(commando)
             self.pc = self.pc + 1
@@ -41,7 +47,7 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
-    def lifq(self, operand):
+    def lifo(self, operand):
         self.memory.makeStack("LIFO", operand)
         self.pc = self.pc + 1
         return "HALT"
@@ -129,6 +135,11 @@ class Executer:
     def nop(self, operand):
         self.pc = self.pc + 1
         return "HALT"
+
+    def clra(self, operand):
+        exit_code = self.execOP.run("CLRA")
+        self.pc = self.pc + 1
+        return exit_code
 
     def run_rpc(self, program):
         pc = 0

@@ -7,11 +7,9 @@ from machine.keyboard import Keyboard
 from machine.plotter import Plotter
 from machine.vmachine import Machine
 from mmu import mmu
-from mmu.mmu import MMU
 
 
-def runner():
-    memory = mmu.MMU()
+def runner(memory):
     plotter = Plotter(memory)
     keyboard = Keyboard(memory)
     executes = Executer(memory)
@@ -24,9 +22,10 @@ class Testing(unittest.TestCase):
     def test_string(self):
         assembler = Assembler()
 
-        my_mmu = MMU()
-        my_mmu.loadMem(assembler.compile(assembler.readASM("/Users/ernstvorsteveld/git/jr/TurningVM/assembler/VMloader.asm")))
-        my_mmu.loadMem(assembler.compile(assembler.readASM("/Users/ernstvorsteveld/git/jr/TurningVM/assembler/VMmain.asm")))
+        memory = mmu.MMU()
+        memory.loadMem(assembler.compile(assembler.readASM("/Users/ernstvorsteveld/git/jr/TurningVM/assembler/VMloader.asm")))
+        memory.loadMem(assembler.compile(assembler.readASM("/Users/ernstvorsteveld/git/jr/TurningVM/assembler/VMmain.asm")))
 
-        job = threading.Thread(target=runner)
-        job.start()
+        # job = threading.Thread(target=runner)
+        # job.start()
+        runner(memory)
