@@ -24,6 +24,8 @@
 
 :is-string
     storea
+    clra
+    clrb
     calli
 
     jump :repl
