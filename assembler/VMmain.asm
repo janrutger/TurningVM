@@ -17,17 +17,15 @@
     push 'null'
     loadb
     teste
-    jumpf :is-string
-
+    jumpf :is-cmd
     input
     jump :repl
 
-:is-string
+:is-cmd
     storea
     clra
     clrb
     calli
-
     jump :repl
 
 :exit
@@ -40,6 +38,18 @@ ret
 :mapping
     push '+'
     index @plus 
+
+    push '-'
+    index @minus 
+
+    push '*'
+    index @mul 
+
+    push '/'
+    index @div 
+
+    push '%'
+    index @mod 
 
     push '.'
     index @print

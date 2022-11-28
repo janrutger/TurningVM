@@ -9,8 +9,13 @@ class Compiler:
         self.stringTable = {}
         self.stringTable["null"] = 0
         self.stringTable["+"] = 1
-        self.stringTable["."] = 2
-        self.stringTable["halt"] = 900
+        self.stringTable["-"] = 2
+        self.stringTable["*"] = 3
+        self.stringTable["/"] = 4
+        self.stringTable["%"] = 5
+        self.stringTable["."] = 6
+        
+        self.stringTable["halt"] = 9
 
     def checkOperand(self, operandType, operand_, progLen):
         if operand_[0] == ":":                      # operand is a mem label
