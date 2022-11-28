@@ -30,7 +30,7 @@ def runner():
 def updateTapeInfo():
     pos = 0;
     #result = executer.run_commando("PRINT", ALLTAPES)
-    result = executer.refreshTapes(ALLTAPES)
+    result = executer.refresh_tapes(ALLTAPES)
     for tape in result.keys():
         data = result[tape]
         window[Template('-TapeLeftPos${pos}-').substitute(pos = pos)].update(data[0])

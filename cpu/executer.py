@@ -1,154 +1,166 @@
-#import threading
+# import threading
 import time
 
-#from christopherUI import tapeLayout
-from cpu import tapecommander as tc 
+# from christopherUI import tapeLayout
+from cpu import tapecommander as tc
 from cpu import exec_no_opcode as nop
 from cpu import exec_opcode as op
-#from cpu import plotter as yplt
+
+
+# from cpu import plotter as yplt
 
 class Executer:
     def __init__(self, memory):
         self.memory = memory
-        #self.plotter = yplt.Plotter(memory)
-        self.tapecommander = tc.Tapecommander()
-        self.execNOP = nop.Exec_no_opcode(self.tapecommander)
-        self.execOP  = op.Exec_opcode(self.tapecommander)
+        # self.plotter = yplt.Plotter(memory)
+        self.tape_commander = tc.Tapecommander()
+        self.execNOP = nop.Exec_no_opcode(self.tape_commander)
+        self.execOP = op.Exec_opcode(self.tape_commander)
         self.pc = int(0)
 
-    def refreshTapes(self, tapeList):
-        exitCode = self.execNOP.print(tapeList)
-        return(exitCode)
+    def refresh_tapes(self, tapes):
+        return self.execNOP.print(tapes)
 
+    def is_str(self, v):
+        return type(v) is str
 
     def run_commando(self, commando, operand):
+        try:
+            if self.is_str(operand):
+                return eval("self." + commando.lower() + "(\'" + operand + "\')")
+            else:
+                return eval("self." + commando.lower() + "(" + str(operand) + ")")
+        except:
+            exit_code = self.execOP.run(commando)
+            self.pc = self.pc + 1
+            return exit_code
 
-        if commando == "INPUT":
-            exitCode="HALT"
-            self.memory.waitForInput=True
-            while self.memory.waitForInput:
-                time.sleep(1)
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "IOBUFF":
-            exitCode="HALT"
-            self.memory.makeStack("IObuff", operand)
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando =="LIFO":
-            exitCode="HALT"
-            self.memory.makeStack("LIFO", operand)
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando =="INDEX":
-            exitCode="HALT"
-            adres = self.execNOP.pull()
-            self.memory.index(adres, operand + self.pc)
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "PUSH":
-            exitCode = self.execNOP.push(operand)
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "HALT":
-            exitCode = "CPUstopped"
-            self.pc = self.pc
-            return(exitCode)
-        if commando == "PULL":
-            exitCode = self.execNOP.pull()
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando =="STM":
-            exitCode="HALT"
-            val = self.execNOP.pull()
-            self.memory.writeMem(operand, val)
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando =="PRT":
-            exitCode="HALT"
-            val = self.execNOP.pull()
-            print("-->", int(val,2))
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "LDM":
-            exitCode ="HALT"
-            val = self.memory.readMem(operand)
-            self.execNOP.push(val)
-            self.pc = self.pc +1
-            return(exitCode)
-        if commando == "JP":
-            exitCode = "HALT"
+    def input(self, operand):
+        self.memory.waitForInput = True
+        while self.memory.waitForInput:
+            time.sleep(1)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def iobuff(self, operand):
+        self.memory.makeStack("IObuff", operand)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def lifo(self, operand):
+        self.memory.makeStack("LIFO", operand)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def index(self, operand):
+        self.memory.index(self.execNOP.pull(), operand + self.pc)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def push(self, operand):
+        exit_code = self.execNOP.push(operand)
+        self.pc = self.pc + 1
+        return exit_code
+
+    def halt(self, operand):
+        exit_code = "CPUstopped"
+        self.pc = self.pc
+        return exit_code
+
+    def pull(self, operand):
+        exit_code = self.execNOP.pull()
+        self.pc = self.pc + 1
+        return exit_code
+
+    def stm(self, operand):
+        val = self.execNOP.pull()
+        self.memory.writeMem(operand, val)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def prt(self, operand):
+        val = self.execNOP.pull()
+        print("-->", int(val, 2))
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def ldm(self, operand):
+        val = self.memory.readMem(operand)
+        self.execNOP.push(val)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def jp(self, operand):
+        self.pc = operand + self.pc
+        return "HALT"
+
+    def jpt(self, operand):
+        exit_code = self.execNOP.returnStatus()
+        if exit_code == "true":
             self.pc = operand + self.pc
-            return(exitCode)
-        if commando == "JPT":
-            exitCode = self.execNOP.returnStatus()
-            if exitCode == "true":
-                self.pc = operand + self.pc
-            else:
-                self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "JPF":
-            exitCode = self.execNOP.returnStatus()
-            if exitCode == "false":
-                self.pc = operand + self.pc
-            else:
-                self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "CALL":
-            exitCode = "HALT"
-            self.memory.writeMem("%_system", self.pc)
-            self.pc = operand + self.pc
-            return(exitCode)
-        if commando == "CALLI":
-            exitCode = "HALT"
-            self.memory.writeMem("%_system", self.pc)
-            label = self.execNOP.pull()
-            adres = self.memory.readMem(label)
-            self.pc = adres
-            return(exitCode)
-        if commando == "RET":
-            exitCode = "HALT"
-            adres =self.memory.readMem("%_system")
-            self.pc = adres+1
-            return(exitCode)
-        if commando == "SPEED":
-            exitCode = "HALT"
-            self.tapecommander.CPUspeed = operand
-            self.pc = self.pc + 1
-            return(exitCode)
-        if commando == "NOP":
-            exitCode = "HALT"
-            self.pc = self.pc + 1
-            return(exitCode)
         else:
-            exitCode = self.execOP.run(commando)
             self.pc = self.pc + 1
-            return(exitCode)
+        return exit_code
+
+    def jpf(self, operand):
+        exit_code = self.execNOP.returnStatus()
+        if exit_code == "false":
+            self.pc = operand + self.pc
+        else:
+            self.pc = self.pc + 1
+        return exit_code
+
+    def call(self, operand):
+        self.memory.writeMem("%_system", self.pc)
+        self.pc = operand + self.pc
+        return "HALT"
+
+    def calli(self, operand):
+        self.memory.writeMem("%_system", self.pc)
+        label = self.execNOP.pull()
+        adres = self.memory.readMem(label)
+        self.pc = adres
+        return "HALT"
+
+    def ret(self, operand):
+        adres = self.memory.readMem("%_system")
+        self.pc = adres + 1
+        return "HALT"
+
+    def speed(self, operand):
+        self.tape_commander.CPUspeed = operand
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def nop(self, operand):
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def clra(self, operand):
+        exit_code = self.execOP.run("CLRA")
+        self.pc = self.pc + 1
+        return exit_code
 
     def run_rpc(self, program):
-        self.pc = 0
-        while self.pc < len(program):
-            programline = program[self.pc]
-            self.memory.writeMem(self.pc, programline)
-            self.pc = self.pc + 1
-        
-        self.pc = 0
-        self.run_memory(self.pc)
-    
+        pc = 0
+        while pc < len(program):
+            self.memory.writeMem(pc, program[pc])
+            pc = pc + 1
+
+        pc = 0
+        self.run_memory(pc)
+
     def run_memory(self, pc):
         self.pc = pc
-        exitcode = "CPUrunning"
+        exit_code = "CPUrunning"
 
-        while exitcode != "CPUstopped":
-            adresValue = self.memory.readMem(self.pc)
-            opcode  = adresValue[0]
-            operand = adresValue[1]
-            #print(self.pc, opcode, operand)
+        while exit_code != "CPUstopped":
+            address_value = self.memory.readMem(self.pc)
+            # print(self.pc, address_value[0], address_value[1])
 
-            exitcode = self.run_commando(opcode, operand)
+            exit_code = self.run_commando(address_value[0], address_value[1])
 
-        if exitcode == "CPUstopped":
-            return("HALT")
+        if exit_code == "CPUstopped":
+            return "HALT"
         else:
-            return("error")
-
+            return "error"
