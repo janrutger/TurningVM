@@ -14,12 +14,12 @@
     teste
     jumpt :exit
 
-    push 'null'
-    loadb
-    teste
+    #push 'null'
+    #loadb
+    #teste
     jumpf :is-cmd
-    input
-    jump :repl
+    #input
+    #jump :repl
 
 :is-cmd
     storea
@@ -57,6 +57,6 @@ ret
 ret
 
 :readKBD
-    loadm %_kbd
+    input %_kbd
     loadm %_kbd
 ret

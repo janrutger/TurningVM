@@ -47,11 +47,11 @@ class Keyboard:
         self.online = True
         
         while self.online:
-            if self.memory.waitForInput:
+            if self.memory.waitForInput == IObuff:
                 tokens = self.input()
                 for token in tokens:
                     self.memory.writeIObuff(IObuff, token)
-                self.memory.waitForInput = False
+                self.memory.waitForInput = "REQ-done"
             else:
                 time.sleep(1)
 
