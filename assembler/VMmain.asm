@@ -17,7 +17,7 @@
     #push 'null'
     #loadb
     #teste
-    jumpf :is-cmd
+    #jumpf :is-cmd
     #input
     #jump :repl
 
