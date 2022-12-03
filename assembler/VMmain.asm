@@ -14,12 +14,12 @@
     teste
     jumpt :exit
 
-    #push 'null'
-    #loadb
-    #teste
-    #jumpf :is-cmd
+    push 'null'
+    loadb
+    teste
+    jumpf :is-cmd
     #input
-    #jump :repl
+    jump :repl
 
 :is-cmd
     storea

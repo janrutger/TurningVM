@@ -39,6 +39,8 @@ class Keyboard:
 
     def input(self):
         inputLine = input("...>>")
+        if inputLine == '':
+            inputLine = 'null'
         tokens =self.tokenice(inputLine)
         return(tokens)
 
