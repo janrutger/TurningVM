@@ -16,6 +16,7 @@ class Compiler:
         self.stringTable["."] = 6
         
         self.stringTable["halt"] = 9
+        self.stringTable["xyz"] = 10
 
     def checkOperand(self, operandType, operand_, progLen):
         if operand_[0] == ":":                      # operand is a mem label

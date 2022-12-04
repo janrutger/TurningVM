@@ -107,6 +107,12 @@ class MMU:
         else:
             if adres in self.virtMemAdresses.keys():
                 memType, memVal_ = self.memory[self.virtMemAdresses[adres]]
+                if memType == "INDEX":  # stores a adress
+                    if memVal_ in self.virtMemAdresses.keys():
+                        self.writeMem(memVal_, memVal)
+                    else:
+                        return ("error: unknown index")
+
                 if memType == "MEM":
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
                 if memType == "LIFO":
@@ -116,13 +122,13 @@ class MMU:
                     memVal_.append(int(memVal, 2))
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
                 else:
-                    return ("error: unknow memtype")
+                    return ("error: unknown memtype")
 
             if adres not in self.virtMemAdresses.keys() and adres[0] == "$":
                 self.virtMemAdresses[adres] = len(self.memory)
                 self.memory.append(("MEM", memVal))
             else:
-                return ("error")
+                return ("error: unknown adres/invalid memtype")
 
     def makeStack(self, memType, adres):
         memVal = []
