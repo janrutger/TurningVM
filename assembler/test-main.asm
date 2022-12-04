@@ -5,14 +5,18 @@ storem $test
 
 push 'xyz'
 index $test
-
 loadm 'xyz'
-
-prt
 
 push 4
 storem 'xyz'
 loadm $test
+
+push '+'
+index @plus
+
+push '+'
+calli
+
 prt
 
 ret
