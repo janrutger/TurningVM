@@ -36,9 +36,11 @@ class Executer:
             return exit_code
 
     def input(self, operand):
-        self.memory.waitForInput = True
-        while self.memory.waitForInput:
-            time.sleep(1)
+        val = self.memory.input(operand)
+        self.execNOP.push(val)
+        # self.memory.waitForInput = True
+        # while self.memory.waitForInput:
+        #     time.sleep(1)
         self.pc = self.pc + 1
         return "HALT"
 

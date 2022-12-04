@@ -18,7 +18,7 @@
     loadb
     teste
     jumpf :is-cmd
-    input
+    #input
     jump :repl
 
 :is-cmd
@@ -57,6 +57,6 @@ ret
 ret
 
 :readKBD
-    loadm %_kbd
+    input %_kbd
     loadm %_kbd
 ret

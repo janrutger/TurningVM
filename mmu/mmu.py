@@ -1,7 +1,9 @@
+import time
+
 class MMU:
     def __init__(self):
         self.initMem()
-        self.waitForInput = False
+        self.waitForInput = "REQ-done"
 
     def loadMem(self, binProgram):
         if binProgram[0][0] != "@":
@@ -55,6 +57,20 @@ class MMU:
         else:
             return ("error: unknow mem adres")
 
+    def input(self, adres):
+        if adres in self.virtMemAdresses.keys():
+            memType, memVal = self.memory[self.virtMemAdresses[adres]]
+            if memType == "IObuff":
+                if len(memVal) == 0:
+                    self.waitForInput = adres
+                    while self.waitForInput != "REQ-done":
+                        time.sleep(1)
+                return (self.readMem(adres))
+            else:
+                return ("error: unknow memtype")
+        else:
+            return ("error: unknow mem adres")
+
     def readMem(self, adres):
         if isinstance(adres, int):
             opcode, operand = self.memory[adres]
@@ -72,9 +88,6 @@ class MMU:
                     memVal_ = memVal.pop()
                     return (memVal_)
                 if memType == "IObuff":
-                    if len(memVal) == 0:
-                        memVal.append(0)
-                        memVal.append(1)
                     memVal_ = memVal.pop(0)
                     return (bin(memVal_)[2:])
                 else:
