@@ -4,8 +4,11 @@ class MMU:
     def __init__(self):
         self.initMem()
         self.waitForInput = "REQ-done"
+        #self.stringTable = {}
 
     def loadMem(self, binProgram):
+        line = binProgram.pop(0)
+        self.stringTable = dict(line[1:-1])
         if binProgram[0][0] != "@":
             self.initMem()
             self.loader = True
