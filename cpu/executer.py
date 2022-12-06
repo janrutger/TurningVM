@@ -55,7 +55,10 @@ class Executer:
         return "HALT"
 
     def index(self, operand):
-        self.memory.index(self.execNOP.pull(), operand + self.pc)
+        if isinstance(operand, int):
+            self.memory.index(self.execNOP.pull(), operand + self.pc)
+        else:
+            self.memory.index(self.execNOP.pull(), operand)
         self.pc = self.pc + 1
         return "HALT"
 

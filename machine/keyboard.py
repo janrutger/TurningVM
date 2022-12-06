@@ -15,6 +15,7 @@ class Keyboard:
         self.stringTable["."] = 6
         
         self.stringTable["halt"] = 9
+        self.stringTable["xyz"] = 10
         
 
 
