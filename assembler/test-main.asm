@@ -1,15 +1,20 @@
 @main
- 
-push 2
-storem $test
+
+iobuff %test
 
 push 'xyz'
-index $test
+index %test
+
+push 2
+push 40
+
+storem %test
+storem 'xyz'
+
+loadm %test
 loadm 'xyz'
 
-push 4
-storem 'xyz'
-loadm $test
+
 
 push '+'
 index @plus
