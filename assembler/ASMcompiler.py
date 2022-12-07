@@ -17,6 +17,7 @@ class Compiler:
         
         self.stringTable["halt"] = 9
         self.stringTable["xyz"] = 10
+        self.nextString = 16
 
     def stringTable(self):
         return str(self.stringTable())
@@ -33,7 +34,13 @@ class Compiler:
         #if operand_ == "plotter":
         #    return("plotter")
         if operand_[0]==operand_[-1]=="'":
-            return(bin(self.stringTable[operand_[1:-1]])[2:])
+            if operand_[1:-1] in self.stringTable:
+                return (bin(self.stringTable[operand_[1:-1]])[2:])
+            else:
+                self.stringTable[operand_[1:-1]] = self.nextString
+                self.nextString = self.nextString +1
+                return (bin(self.stringTable[operand_[1:-1]])[2:])
+
         if operand_.isnumeric():                    # operand is numeriek
             if operandType == "n":
                 return(int(operand_))

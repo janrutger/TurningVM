@@ -8,7 +8,7 @@ class MMU:
 
     def loadMem(self, binProgram):
         line = binProgram.pop(0)
-        self.stringTable = dict(line[1:-1])
+        self.stringTable = eval(line)
         if binProgram[0][0] != "@":
             self.initMem()
             self.loader = True
