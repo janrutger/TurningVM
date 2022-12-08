@@ -33,7 +33,9 @@ class Keyboard:
                 code.append(self.memory.stringTable[token])
                 code.append("1")            # a 1 means number on stack is referance to a string
             else:
-                self.tokenice('null')       # A UNKOWN token return null
+                code.append(self.memory.stringTable['null'])
+                code.append("1")       # a 1 means number on stack is referance to a string
+               
             
         return(code)
 

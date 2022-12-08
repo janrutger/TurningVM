@@ -4,7 +4,7 @@ class MMU:
     def __init__(self):
         self.initMem()
         self.waitForInput = "REQ-done"
-        #self.stringTable = {}
+        self.stringTable = {}
 
     def loadMem(self, binProgram):
         line = binProgram.pop(0)
