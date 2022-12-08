@@ -1,5 +1,5 @@
 @main
-#speed 0
+speed 0
 #plotter %plotter
 
 call @oeis

@@ -57,6 +57,12 @@ ret
     push '!'
     index @factorial
 
+    push 'swap'
+    index @swap
+
+    push '='
+    index @eq
+
 
 
 ret
