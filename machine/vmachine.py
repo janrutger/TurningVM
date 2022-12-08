@@ -45,7 +45,7 @@ class Machine:
             ".": self.println,
             "init": self.init,
             "main": self.main,
-            "exit": self.exit
+            "halt": self.halt
         }
 
     def startPlotter(self, IObuff):
@@ -155,7 +155,7 @@ class Machine:
         # self.push(self.pop() + self.pop())
         self.exec.run_rpc([('CALL', '@plus'), ('HALT', '')])
 
-    def exit(self):
+    def halt(self):
         if self.plotter.online:
             self.plotter.stop()
             self.plt0.join()

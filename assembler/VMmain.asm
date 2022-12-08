@@ -9,7 +9,7 @@
 
     loada
 
-    push 'halt'
+    push 'exit'
     loadb
     teste
     jumpt :exit

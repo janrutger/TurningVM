@@ -16,7 +16,7 @@ class Compiler:
         self.stringTable["."] = 6
         
         self.stringTable["halt"] = 9
-        self.stringTable["xyz"] = 10
+        self.stringTable["exit"] = 15
         self.nextString = 16
 
     def stringTable(self):
