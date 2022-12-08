@@ -54,6 +54,11 @@ ret
     push '.'
     index @print
 
+    push '!'
+    index @factorial
+
+
+
 ret
 
 :readKBD
