@@ -8,6 +8,7 @@ Inspired by:
 - von Neumann https://nl.wikipedia.org/wiki/Von_Neumann-architectuur
 - Stack computing https://en.wikipedia.org/wiki/Stack_machine
 - Forth https://en.wikipedia.org/wiki/Forth_(programming_language)
+- Bytecode https://en.m.wikipedia.org/wiki/Bytecode 
 - Z80 https://nl.wikipedia.org/wiki/Z80
 - ZX81 https://nl.wikipedia.org/wiki/Sinclair_ZX81
 - PDP https://nl.wikipedia.org/wiki/PDP-11
