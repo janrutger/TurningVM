@@ -7,9 +7,9 @@ Inspired by:
 - Turing State machine https://en.wikipedia.org/wiki/Turing_machine
 - von Neumann https://nl.wikipedia.org/wiki/Von_Neumann-architectuur
 - Stack computing https://en.wikipedia.org/wiki/Stack_machine
+- Forth https://en.wikipedia.org/wiki/Forth_(programming_language)
 - Z80 https://nl.wikipedia.org/wiki/Z80
 - ZX81 https://nl.wikipedia.org/wiki/Sinclair_ZX81
-- Forth https://en.wikipedia.org/wiki/Forth_(programming_language)
 - PDP https://nl.wikipedia.org/wiki/PDP-11
 
 also inspriration from:
