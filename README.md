@@ -9,3 +9,4 @@ A Forth like virtual machine using a 4 tape Turing compatible ALU
 - ZX81 https://nl.wikipedia.org/wiki/Sinclair_ZX81
 - Forth https://en.wikipedia.org/wiki/Forth_(programming_language)
 - PDP https://nl.wikipedia.org/wiki/PDP-11
+- Ben Eater https://youtu.be/TardkN4OGJg
