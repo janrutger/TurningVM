@@ -9,7 +9,7 @@
 
     loada
 
-    push 'halt'
+    push 'exit'
     loadb
     teste
     jumpt :exit
@@ -53,6 +53,17 @@ ret
 
     push '.'
     index @print
+
+    push '!'
+    index @factorial
+
+    push 'swap'
+    index @swap
+
+    push '='
+    index @eq
+
+
 
 ret
 

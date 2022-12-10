@@ -19,6 +19,9 @@ class Assembler:
         program = self.compiler.ProcesLabels(program)
         # print(program)
         BINprogram = self.compiler.ProcesLines(program)
+        stringTable = str(self.compiler.stringTable)
+
+        BINprogram.insert(0, str(stringTable))
         print(BINprogram)
 
         return (BINprogram)

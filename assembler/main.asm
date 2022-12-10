@@ -1,6 +1,6 @@
 @main
-#speed 0
-#plotter %plotter
+speed 5
+iobuff %_plotter
 
 call @oeis
 

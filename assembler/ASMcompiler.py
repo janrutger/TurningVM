@@ -16,7 +16,11 @@ class Compiler:
         self.stringTable["."] = 6
         
         self.stringTable["halt"] = 9
-        self.stringTable["xyz"] = 10
+        self.stringTable["exit"] = 15
+        self.nextString = 16
+
+    def stringTable(self):
+        return str(self.stringTable())
 
     def checkOperand(self, operandType, operand_, progLen):
         if operand_[0] == ":":                      # operand is a mem label
@@ -30,7 +34,13 @@ class Compiler:
         #if operand_ == "plotter":
         #    return("plotter")
         if operand_[0]==operand_[-1]=="'":
-            return(bin(self.stringTable[operand_[1:-1]])[2:])
+            if operand_[1:-1] in self.stringTable:
+                return (bin(self.stringTable[operand_[1:-1]])[2:])
+            else:
+                self.stringTable[operand_[1:-1]] = self.nextString
+                self.nextString = self.nextString +1
+                return (bin(self.stringTable[operand_[1:-1]])[2:])
+
         if operand_.isnumeric():                    # operand is numeriek
             if operandType == "n":
                 return(int(operand_))
