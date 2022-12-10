@@ -53,7 +53,7 @@ def loadSchema():
     schema["prt"]       = ("PRT", None)
     #schema["plotter"]   = ("PLOTTER", "n")
 
-    schema["stop"]      = ("STOP", "s")
+    #schema["stop"]      = ("STOP", "s")
     schema["nop"]       = ("NOP", None)
 
     return(schema)

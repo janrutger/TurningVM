@@ -42,7 +42,6 @@ class MMU:
         if adres in self.virtMemAdresses.keys():
             memType, memVal = self.memory[self.virtMemAdresses[adres]]
             if memType == "IObuff":
-                # memVal_ = memVal.pop()
                 return (memVal)
             else:
                 return ("error: unknow memtype")

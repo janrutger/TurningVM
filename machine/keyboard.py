@@ -5,18 +5,6 @@ class Keyboard:
         self.memory  = memory
         self.online = False
 
-        # self.stringTable = {}
-        # self.stringTable["null"] = 0
-        # self.stringTable["+"] = 1
-        # self.stringTable["-"] = 2
-        # self.stringTable["*"] = 3
-        # self.stringTable["/"] = 4
-        # self.stringTable["%"] = 5
-        # self.stringTable["."] = 6
-        
-        # self.stringTable["halt"] = 9
-        # self.stringTable["xyz"] = 10
-        
 
 
 
