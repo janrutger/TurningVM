@@ -31,9 +31,10 @@ class Compiler:
             return(str(operand_))
         if operand_[0] == "@":                      # operand is a symbol
             return(str(operand_))
-        #if operand_ == "plotter":
-        #    return("plotter")
-        if operand_[0]==operand_[-1]=="'":
+        if operand_[0] == "*":                      # operand is a mem array adres
+            return (str(operand_))
+            
+        if operand_[0]==operand_[-1]=="'":          # operand is a string
             if operand_[1:-1] in self.stringTable:
                 return (bin(self.stringTable[operand_[1:-1]])[2:])
             else:
@@ -55,7 +56,7 @@ class Compiler:
             if operandType == "n":
                 return(int(operand_, 2))
         else:                                       # input is string (dit lijkt niet te werken)
-            if operandType == "b":
+            if operandType == "b":                     #THIS NEEDS ATTENTION, old code
                 return("error")
             if operandType == "n":
                 return("error")

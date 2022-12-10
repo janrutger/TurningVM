@@ -48,6 +48,11 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
+    def array(self, operand):
+        self.memory.array(operand)
+        self.pc = self.pc + 1
+        return "HALT"
+
     def index(self, operand):
         if isinstance(operand, int):
             self.memory.index(self.execNOP.pull(), operand + self.pc)

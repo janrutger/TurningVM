@@ -22,8 +22,6 @@ class MMU:
             if line[0] == "@":
                 info = line.split()
                 self.symbolTable[info[0]] = len(self.memory)
-                # if len(info) > 1:
-                #    self.symbolMap[info[1]] = len(self.memory)
             else:
                 self.memory.append(line)
         print(self.memory)
@@ -98,6 +96,9 @@ class MMU:
                 if memType == "IObuff":
                     memVal_ = memVal.pop(0)
                     return (bin(memVal_)[2:])
+                if memType == "ARRAY":
+                    memVal_ = memVal[0]
+                    return (bin(memVal_)[2:])
                 else:
                     return ("error: unknown memtype")
             else:
@@ -123,6 +124,10 @@ class MMU:
                 if memType == "IObuff":
                     memVal_.append(int(memVal, 2))
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
+                if memType == "ARRAY":
+                    memVal_.append(memVal)
+                    memVal_[0] = len(memVal_) - 1
+                    self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
                 else:
                     return ("error: unknown memtype")
 
@@ -143,6 +148,16 @@ class MMU:
     def index(self, adres, memVal):  # adres=stack value, memVal=adress pointer (int, @xx, :nn)
         memType = "INDEX"
         if adres not in self.virtMemAdresses.keys():
+            self.virtMemAdresses[adres] = len(self.memory)
+            self.memory.append((memType, memVal))
+        else:
+            self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
+
+    def array(self, adres): #init a array
+        memType = "ARRAY"
+        memVal = []
+        memVal.append(0) # set a empty array, lenght = 0
+        if adres not in self.virtMemAdresses.keys() and adres[0] == "*":
             self.virtMemAdresses[adres] = len(self.memory)
             self.memory.append((memType, memVal))
         else:

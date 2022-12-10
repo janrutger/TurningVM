@@ -1,32 +1,20 @@
 @main
 
-iobuff %test
+array *test
 
-push 'xyz'
-index %test
+push 3
+storem *test
 
-push 2
-push 40
+push 'jrk'
+index *test
 
-storem %test
-storem 'xyz'
-
-loadm %test
-loadm 'xyz'
+loadm *test
+storem 'jrk'
 
 
+array *test
 
-push '+'
-index @plus
-
-push '+'
-calli
-
-prt
-
-push 'nogeen'
-
-ret
+#ret
 
 
 halt
