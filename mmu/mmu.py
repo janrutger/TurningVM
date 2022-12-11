@@ -34,6 +34,11 @@ class MMU:
         self.symbolTable = {}
         self.loader = False
 
+    def panic(self, message): #print fatal messsage andsleep forever
+        print(message)
+        while True:
+            time.sleep(1)
+
     def dumpMem(self):
         return (self.memory)
 
@@ -43,9 +48,12 @@ class MMU:
             if memType == "IObuff":
                 return (memVal)
             else:
-                return ("error: unknow memtype")
+                #return ("error: unknow memtype")
+                self.panic("FATAL: readIObuff [unknown memtype]")
+
         else:
-            return ("error: unknow mem adres")
+            #return ("error: unknow mem adres")
+            self.panic("FATAL: readIObuff [unknown mem adress]")
 
     def writeIObuff(self, adres, value):
         if adres in self.virtMemAdresses.keys():
@@ -54,9 +62,11 @@ class MMU:
                 memVal_.append(int(value))
                 self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
             else:
-                return ("error: unknow memtype")
+                #return ("error: unknow memtype")
+                self.panic("FATAL: writeIObuff [unknown memtype]")
         else:
-            return ("error: unknow mem adres")
+            #return ("error: unknow mem adres")
+            self.panic("FATAL: writeIObuff [unknown mem adress]")
 
     def input(self, adres):
         if adres in self.virtMemAdresses.keys():
@@ -68,9 +78,11 @@ class MMU:
                         time.sleep(1)
                 return (self.readMem(adres))
             else:
-                return ("error: unknow memtype")
+                #return ("error: unknow memtype")
+                self.panic("FATAL: input [unknown memtype]")
         else:
-            return ("error: unknow mem adres")
+            #return ("error: unknow mem adres")
+            self.panic("FATAL: input [unknown mem adress]")
     
     def readElement(self, adres, element):
         if adres in self.virtMemAdresses.keys():
@@ -88,11 +100,8 @@ class MMU:
                     return (memVal)
                 else:
                     return ("no-element")
-
-            if memType == "LIFO":
-                if len(memVal) == 0:
-                    return ("no-element")
-                elif len(memVal) < element:
+            if memType == "LIFO" :
+                if len(memVal) == 0 or len(memVal) < element:
                     return ("no-element")
                 else:
                     memVal_ = memVal[element]
@@ -100,20 +109,14 @@ class MMU:
                         return("adres-element")
                     else:
                         return (memVal_)
-
             if memType == "IObuff":
-                if len(memVal) == 0:
-                    return ("no-element")
-                elif len(memVal) < element:
+                if len(memVal) == 0 or len(memVal) < element:
                     return ("no-element")
                 else:
                     memVal_ = memVal[element]
                     return (bin(memVal_)[2:])
-
             if memType == "ARRAY":
-                if len(memVal) == 0:
-                    return ("no-element")
-                elif len(memVal) < element:
+                if len(memVal) == 0 or len(memVal) < element:
                     return ("no-element")
                 else:
                     if element == 0:
@@ -144,23 +147,26 @@ class MMU:
                     elif memVal in self.virtMemAdresses.keys():
                         return (self.readMem(memVal))
                     else:
-                        return ("error: unknown index")
+                        #return ("error: unknown index")
+                        self.panic("FATAL: readMem [unknown index]")
 
-                if memType == "MEM":  # stores a value
+                elif memType == "MEM":  # stores a value
                     return (memVal)
-                if memType == "LIFO":
+                elif memType == "LIFO":
                     memVal_ = memVal.pop()
                     return (memVal_)
-                if memType == "IObuff":
+                elif memType == "IObuff":
                     memVal_ = memVal.pop(0)
                     return (bin(memVal_)[2:])
-                if memType == "ARRAY":
+                elif memType == "ARRAY":
                     memVal_ = memVal[0]
                     return (bin(memVal_)[2:])
                 else:
-                    return ("error: unknown memtype")
+                    #return ("error: unknown memtype")
+                    self.panic("FATAL: readMem [unknown memtype]")
             else:
-                return ("error: unknown adress")
+                #return ("error: unknown adress")
+                self.panic("FATAL: readMem [unknown adress]")
 
     def writeMem(self, adres, memVal):
         if isinstance(adres, int):
@@ -172,28 +178,31 @@ class MMU:
                     if memVal_ in self.virtMemAdresses.keys():
                         self.writeMem(memVal_, memVal)
                     else:
-                        return ("error: unknown index")
+                        #return ("error: unknown index")
+                        self.panic("FATAL: WriteMem [unknown index]")
 
-                if memType == "MEM":
+                elif memType == "MEM":
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
-                if memType == "LIFO":
+                elif memType == "LIFO":
                     memVal_.append(memVal)
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
-                if memType == "IObuff":
+                elif memType == "IObuff":
                     memVal_.append(int(memVal, 2))
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
-                if memType == "ARRAY":
+                elif memType == "ARRAY":
                     memVal_.append(memVal)
                     memVal_[0] = len(memVal_) - 1
                     self.memory[self.virtMemAdresses[adres]] = (memType, memVal_)
                 else:
-                    return ("error: unknown memtype")
+                    #return ("error: unknown memtype")
+                    self.panic("FATAL: WriteMem [unknown memtype]")
 
-            if adres not in self.virtMemAdresses.keys() and adres[0] == "$":
+            elif adres[0] == "$":
                 self.virtMemAdresses[adres] = len(self.memory)
                 self.memory.append(("MEM", memVal))
             else:
-                return ("error: unknown adres/invalid memtype")
+                self.panic("FATAL: WriteMem [unknown adres/invalid memtype]")
+                #return ("error: unknown adres/invalid memtype")
                 #sys.exit("error: unknown adres/invalid memtype")
 
     def makeStack(self, memType, adres):
