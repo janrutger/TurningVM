@@ -109,12 +109,23 @@ class MMU:
                 return (bin(memVal_)[2:])
 
         if memType == "ARRAY":
-            memVal_ = memVal[0]
-            return (bin(memVal_)[2:])
+            if len(memVal) == 0:
+                return ("no-element")
+            elif len(memVal) < element:
+                return ("no-element")
+            else:
+                if element == 0:
+                    memVal_ = memVal[0]
+                    return (bin(memVal_)[2:])
+                else:
+                    memVal_ = memVal[elelement]
+                    return (memVal_)
         else:
             return ("no-element")
     else:
         return ("no-element")
+
+
 
     def readMem(self, adres):
         if isinstance(adres, int):
