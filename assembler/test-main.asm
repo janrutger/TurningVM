@@ -1,20 +1,13 @@
 @main
 
-array *test
+push 7
+storem $jrk
 
 push 3
-storem *test
-
-push 'jrk'
-index *test
-
-loadm *test
-storem 'jrk'
+elemr $jrk
 
 
-array *test
-
-#ret
+ret
 
 
 halt

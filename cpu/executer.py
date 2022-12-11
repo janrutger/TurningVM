@@ -61,6 +61,21 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
+    def elemr(self, operand):
+        index = self.execNOP.pull()
+        exit_code = self.memory.readElement(operand, index)
+        if exit_code == "no-element":
+            self.push("0")
+            self.execNOP.status("unset")
+        elif exit_code == "adres-element":
+            self.push("1")
+            self.execNOP.status("unset")
+        else:
+            self.push(exit_code)
+            self.execNOP.status("set")
+        self.pc = self.pc + 1
+        return "HALT"
+
     def push(self, operand):
         exit_code = self.execNOP.push(operand)
         self.pc = self.pc + 1

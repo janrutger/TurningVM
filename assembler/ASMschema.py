@@ -32,6 +32,7 @@ def loadSchema():
     schema["loadb"]     = ("LDB", None)
     schema["loadm"]     = ("LDM", "s")
     schema["input"]     = ("INPUT", "s")
+    schema["elemr"]     = ("ELEMR", "s")
 
     schema["lifo"]      = ("LIFO", "s")
     schema["iobuff"]    = ("IOBUFF", "s")

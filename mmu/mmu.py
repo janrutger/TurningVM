@@ -85,6 +85,7 @@ class MMU:
             self.panic("FATAL: input [unknown mem adress]")
     
     def readElement(self, adres, element):
+        element = int(element, 2)
         if adres in self.virtMemAdresses.keys():
             memType, memVal = self.memory[self.virtMemAdresses[adres]]
             if memType == "INDEX":  # stores a adress
