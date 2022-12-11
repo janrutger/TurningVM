@@ -1,4 +1,5 @@
 import time
+import sys
 
 class MMU:
     def __init__(self):
@@ -70,6 +71,50 @@ class MMU:
                 return ("error: unknow memtype")
         else:
             return ("error: unknow mem adres")
+    
+    def readElement(self, adres, element):
+        if adres in self.virtMemAdresses.keys():
+        memType, memVal = self.memory[self.virtMemAdresses[adres]]
+        if memType == "INDEX":  # stores a adress
+            if isinstance(memVal, int):
+                return ("adres-element")
+            elif memVal in self.virtMemAdresses.keys():
+                return (self.readMem(memVal))
+            else:
+                return ("no-element")
+
+        if memType == "MEM":
+            if element == 0:
+                return (memVal)
+
+        if memType == "LIFO":
+            if len(memVal) == 0:
+                return ("no-element")
+            elif len(memVal) < element:
+                return ("no-element")
+            else:
+                memVal_ = memVal[element]
+                if isinstance(memVal_, int):
+                    return("adres-element")
+                else:
+                    return (memVal_)
+
+        if memType == "IObuff":
+            if len(memVal) == 0:
+                return ("no-element")
+            elif len(memVal) < element:
+                return ("no-element")
+            else:
+                memVal_ = memVal[element]
+                return (bin(memVal_)[2:])
+
+        if memType == "ARRAY":
+            memVal_ = memVal[0]
+            return (bin(memVal_)[2:])
+        else:
+            return ("no-element")
+    else:
+        return ("no-element")
 
     def readMem(self, adres):
         if isinstance(adres, int):
@@ -136,6 +181,7 @@ class MMU:
                 self.memory.append(("MEM", memVal))
             else:
                 return ("error: unknown adres/invalid memtype")
+                #sys.exit("error: unknown adres/invalid memtype")
 
     def makeStack(self, memType, adres):
         memVal = []
