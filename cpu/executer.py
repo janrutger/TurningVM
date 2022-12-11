@@ -73,7 +73,8 @@ class Executer:
         else:
             self.push(exit_code)
             self.execNOP.status("set")
-        self.pc = self.pc + 1
+        #self.pc = self.pc + 1 
+        # self.pc is managed byg self.push
         return "HALT"
 
     def push(self, operand):
