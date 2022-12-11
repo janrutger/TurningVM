@@ -79,13 +79,15 @@ class MMU:
             if isinstance(memVal, int):
                 return ("adres-element")
             elif memVal in self.virtMemAdresses.keys():
-                return (self.readMem(memVal))
+                return (self.readElement(memVal, element))
             else:
                 return ("no-element")
 
         if memType == "MEM":
             if element == 0:
                 return (memVal)
+            else:
+                return ("no-element")
 
         if memType == "LIFO":
             if len(memVal) == 0:
