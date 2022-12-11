@@ -74,58 +74,58 @@ class MMU:
     
     def readElement(self, adres, element):
         if adres in self.virtMemAdresses.keys():
-        memType, memVal = self.memory[self.virtMemAdresses[adres]]
-        if memType == "INDEX":  # stores a adress
-            if isinstance(memVal, int):
-                return ("adres-element")
-            elif memVal in self.virtMemAdresses.keys():
-                return (self.readElement(memVal, element))
-            else:
-                return ("no-element")
-
-        if memType == "MEM":
-            if element == 0:
-                return (memVal)
-            else:
-                return ("no-element")
-
-        if memType == "LIFO":
-            if len(memVal) == 0:
-                return ("no-element")
-            elif len(memVal) < element:
-                return ("no-element")
-            else:
-                memVal_ = memVal[element]
-                if isinstance(memVal_, int):
-                    return("adres-element")
+            memType, memVal = self.memory[self.virtMemAdresses[adres]]
+            if memType == "INDEX":  # stores a adress
+                if isinstance(memVal, int):
+                    return ("adres-element")
+                elif memVal in self.virtMemAdresses.keys():
+                    return (self.readElement(memVal, element))
                 else:
-                    return (memVal_)
+                    return ("no-element")
 
-        if memType == "IObuff":
-            if len(memVal) == 0:
-                return ("no-element")
-            elif len(memVal) < element:
-                return ("no-element")
-            else:
-                memVal_ = memVal[element]
-                return (bin(memVal_)[2:])
-
-        if memType == "ARRAY":
-            if len(memVal) == 0:
-                return ("no-element")
-            elif len(memVal) < element:
-                return ("no-element")
-            else:
+            if memType == "MEM":
                 if element == 0:
-                    memVal_ = memVal[0]
-                    return (bin(memVal_)[2:])
+                    return (memVal)
                 else:
-                    memVal_ = memVal[elelement]
-                    return (memVal_)
+                    return ("no-element")
+
+            if memType == "LIFO":
+                if len(memVal) == 0:
+                    return ("no-element")
+                elif len(memVal) < element:
+                    return ("no-element")
+                else:
+                    memVal_ = memVal[element]
+                    if isinstance(memVal_, int):
+                        return("adres-element")
+                    else:
+                        return (memVal_)
+
+            if memType == "IObuff":
+                if len(memVal) == 0:
+                    return ("no-element")
+                elif len(memVal) < element:
+                    return ("no-element")
+                else:
+                    memVal_ = memVal[element]
+                    return (bin(memVal_)[2:])
+
+            if memType == "ARRAY":
+                if len(memVal) == 0:
+                    return ("no-element")
+                elif len(memVal) < element:
+                    return ("no-element")
+                else:
+                    if element == 0:
+                        memVal_ = memVal[0]
+                        return (bin(memVal_)[2:])
+                    else:
+                        memVal_ = memVal[elelement]
+                        return (memVal_)
+            else:
+                return ("no-element")
         else:
             return ("no-element")
-    else:
-        return ("no-element")
 
 
 
