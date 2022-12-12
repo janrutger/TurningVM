@@ -1,5 +1,7 @@
 @main
 
+
+
 push 7
 storem $jrk
 
@@ -14,7 +16,11 @@ elemr %test
 call @swap
 storem %test
 
+
 elemr %test
+
+push 0
+elemr %_system
 
 
 ret
