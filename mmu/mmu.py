@@ -117,14 +117,14 @@ class MMU:
                     memVal_ = memVal[element]
                     return (bin(memVal_)[2:])
             if memType == "ARRAY":
-                if len(memVal) == 0 or len(memVal) < element:
+                if len(memVal) == 0 or len(memVal)-1 < element:
                     return ("no-element")
                 else:
                     if element == 0:
                         memVal_ = memVal[0]
                         return (bin(memVal_)[2:])
                     else:
-                        memVal_ = memVal[elelement]
+                        memVal_ = memVal[element]
                         return (memVal_)
             else:
                 return ("no-element")

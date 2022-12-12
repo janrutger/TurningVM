@@ -1,26 +1,32 @@
 @main
 
+array *test
 
-
+push 8
 push 7
-storem $jrk
+push 6
+
+storem *test
+storem *test
+storem *test
+
+loadm *test
+
+push 0
+elemr *test
+
+push 1
+elemr *test
+
+push 2
+elemr *test
 
 push 3
-elemr $jrk
-elemr $jrk
-
-lifo %test
-
-push 0
-elemr %test
-call @swap
-storem %test
+elemr *test
 
 
-elemr %test
-
-push 0
-elemr %_system
+push 4
+elemr *test
 
 
 ret
