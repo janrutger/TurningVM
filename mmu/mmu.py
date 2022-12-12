@@ -94,15 +94,16 @@ class MMU:
                 elif memVal in self.virtMemAdresses.keys():
                     return (self.readElement(memVal, element))
                 else:
-                    return ("no-element")
+                    #return ("no-element")
+                    self.panic("FATAL: readElement [unknown index]")
 
-            if memType == "MEM":
+            elif memType == "MEM":
                 if element == 0:
                     return (memVal)
                 else:
                     return ("no-element")
-            if memType == "LIFO" :
-                if len(memVal) == 0 or len(memVal) < element:
+            elif memType == "LIFO" :
+                if len(memVal) == 0 or len(memVal) <= element:
                     return ("no-element")
                 else:
                     memVal_ = memVal[element]
@@ -110,13 +111,13 @@ class MMU:
                         return("adres-element")
                     else:
                         return (memVal_)
-            if memType == "IObuff":
-                if len(memVal) == 0 or len(memVal) < element:
+            elif memType == "IObuff":
+                if len(memVal) == 0 or len(memVal) <= element:
                     return ("no-element")
                 else:
                     memVal_ = memVal[element]
                     return (bin(memVal_)[2:])
-            if memType == "ARRAY":
+            elif memType == "ARRAY":
                 if len(memVal) == 0 or len(memVal)-1 < element:
                     return ("no-element")
                 else:
@@ -127,7 +128,8 @@ class MMU:
                         memVal_ = memVal[element]
                         return (memVal_)
             else:
-                return ("no-element")
+                #return ("no-element")
+                self.panic("FATAL: readElement [unknown memtype]")
         else:
             return ("no-element")
 
