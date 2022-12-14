@@ -39,7 +39,7 @@ def loadSchema():
     schema["index"]     = ("INDEX", "n")
     schema["array"]     = ("ARRAY", "s")
 
-
+    schema["incb"]      = ("INCB", None)
     schema["decb"]      = ("DECB", None)    
     schema["add"]       = ("ADD", None)
     schema["multi"]     = ("MULTI", None)
