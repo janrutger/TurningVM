@@ -94,7 +94,6 @@ class MMU:
                 elif memVal in self.virtMemAdresses.keys():
                     return (self.readElement(memVal, element))
                 else:
-                    #return ("no-element")
                     self.panic("FATAL: readElement [unknown index]")
 
             elif memType == "MEM":
@@ -128,10 +127,9 @@ class MMU:
                         memVal_ = memVal[element]
                         return (memVal_)
             else:
-                #return ("no-element")
                 self.panic("FATAL: readElement [unknown memtype]")
         else:
-            return ("no-element")
+            self.panic("FATAL: readElement [unknown adress]")
 
 
 

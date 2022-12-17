@@ -16,25 +16,30 @@ storem *brommer
 
 
 push 0
-elemr *brommer
+readelm *brommer
 
 push 1
-elemr *brommer
+readelm *brommer
 
 push 2
-elemr *brommer
+readelm *brommer
 
 push 3
-elemr *brommer
+readelm *brommer
 
 push 4
-elemr *brommer
+readelm *brommer
+
+prt
+prt
+prt
+prt
 
 push '+'
 index @plus
 
 push 0
-elemr '+'
+readelm '+'
 
 ret
 
