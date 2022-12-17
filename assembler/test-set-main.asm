@@ -2,7 +2,7 @@
 
 
 push 'index'
-set $
+set $MEM
 
 push 5
 push 'index'
@@ -15,7 +15,7 @@ loadi
 prt
 
 push 'lifo'
-set %
+set %LIFO
 
 push 6
 push 'lifo'
@@ -26,9 +26,21 @@ loadi
 
 prt
 
+push 'iobuff'
+set %IObuff
+
+push 15
+push 'iobuff'
+storei
+
+push 'iobuff'
+loadi
+
+prt
+
 
 push 'array'
-set *
+set *ARRAY
 
 push 7
 push 8

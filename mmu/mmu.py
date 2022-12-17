@@ -233,15 +233,19 @@ class MMU:
             self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
 
     def set(self, memType, index):
-        if memType == "$":
+        if memType == "$MEM":
             adres = "$_" + index
             self.writeMem(adres, "0")
             self.index(index, adres)
-        elif memType == "%":
+        elif memType == "%LIFO":
+            adres = "%_" + index
+            self.makeStack("LIFO", adres)
+            self.index(index, adres)
+        elif memType == "%IObuff":
             adres = "%_" + index
             self.makeStack("IObuff", adres)
             self.index(index, adres)
-        elif memType == "*":
+        elif memType == "*ARRAY":
             adres = "*_" + index
             self.array(adres)
             self.index(index, adres)
