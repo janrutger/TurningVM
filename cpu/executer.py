@@ -65,16 +65,15 @@ class Executer:
         index = self.execNOP.pull()
         exit_code = self.memory.readElement(operand, index)
         if exit_code == "no-element":
-            self.push("0")
+            self.execNOP.push("0")
             self.execNOP.status("unset")
         elif exit_code == "adres-element":
-            self.push("1")
+            self.execNOP.push("1")
             self.execNOP.status("unset")
         else:
-            self.push(exit_code)
+            self.execNOP.push(exit_code)
             self.execNOP.status("set")
-        #self.pc = self.pc + 1 
-        # self.pc is managed byg self.push
+        self.pc = self.pc + 1 
         return "HALT"
 
     def push(self, operand):
@@ -98,10 +97,24 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
+    def sti(self, operand):
+        index = self.execNOP.pull()
+        val = self.execNOP.pull()
+        self.memory.writeMem(index, val)
+        self.pc = self.pc + 1
+        return "HALT"
+
     def prt(self, operand):
         val = self.execNOP.pull()
         print("-->", int(val, 2))
         self.pc = self.pc + 1
+        return "HALT"
+
+    def ldi(self, operand):
+        index =self.execNOP.pull()
+        val =self.memory.readMem(index)
+        self.execNOP.push(val)
+        self.pc = self.pc +1
         return "HALT"
 
     def ldm(self, operand):

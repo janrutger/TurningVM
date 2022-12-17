@@ -27,10 +27,13 @@ def loadSchema():
     schema["storea"]    = ("STA", None)
     schema["storeb"]    = ("STB", None)
     schema["storem"]    = ("STM", "s")
+    schema["storei"]    = ("STI", None)
     
     schema["loada"]     = ("LDA", None)
     schema["loadb"]     = ("LDB", None)
     schema["loadm"]     = ("LDM", "s")
+    schema["loadi"]     = ("LDI", None)
+
     schema["input"]     = ("INPUT", "s")
     schema["elemr"]     = ("ELEMR", "s")
 
