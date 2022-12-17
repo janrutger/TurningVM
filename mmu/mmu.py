@@ -92,7 +92,7 @@ class MMU:
                 if isinstance(memVal, int):
                     return ("adres-element")
                 elif memVal in self.virtMemAdresses.keys():
-                    return (self.readElement(memVal, element))
+                    return (self.readElement(memVal, bin(element)[2:]))
                 else:
                     self.panic("FATAL: readElement [unknown index]")
 
@@ -231,3 +231,19 @@ class MMU:
             self.memory.append((memType, memVal))
         else:
             self.memory[self.virtMemAdresses[adres]] = (memType, memVal)
+
+    def set(self, memType, index):
+        if memType == "$":
+            adres = "$_" + index
+            self.writeMem(adres, "0")
+            self.index(index, adres)
+        elif memType == "%":
+            adres = "%_" + index
+            self.makeStack("IObuff", adres)
+            self.index(index, adres)
+        elif memType == "*":
+            adres = "*_" + index
+            self.array(adres)
+            self.index(index, adres)
+        else:
+            self.panic("FATAL: set [unknown memtype]")

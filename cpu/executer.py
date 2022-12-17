@@ -61,6 +61,12 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
+    def set(self, operand):
+        index = self.execNOP.pull()
+        self.memory.set(operand, index)
+        self.pc = self.pc + 1
+        return "HALT"
+
     def readelm(self, operand):
         index = self.execNOP.pull()
         exit_code = self.memory.readElement(operand, index)
@@ -70,6 +76,18 @@ class Executer:
             self.execNOP.push(exit_code)
             self.execNOP.status("set")
         self.pc = self.pc + 1 
+        return "HALT"
+
+    def readelmi(self, operand):
+        adres = self.execNOP.pull()
+        index = self.execNOP.pull()
+        exit_code = self.memory.readElement(adres, index)
+        if exit_code == "no-element" or exit_code == "adres-element":
+            self.execNOP.status("unset")
+        else:
+            self.execNOP.push(exit_code)
+            self.execNOP.status("set")
+        self.pc = self.pc + 1
         return "HALT"
 
     def push(self, operand):
