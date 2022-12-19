@@ -25,11 +25,14 @@
     push ':'
     loadb
     teste
-    jumpf :is-cmd
+    jumpf :checklist
     call @makeWord
     jump :repl
 
+
+:checklist
     call @check-wordlist
+jump :repl
 
 :is-cmd
     storea
@@ -44,8 +47,52 @@
 ret
 
 @check-wordlist
-    nop
-ret
+    storea
+    storem $word
+
+    loadm *wordList
+    loada
+    testz
+    jumpt :eindecheck
+    ex
+
+:checkloop
+    storeb
+    readelm *wordList
+
+    loada
+    storeb
+    loadm $word
+    loadb
+
+    teste
+    jumpt :validword
+
+    loadb
+    decb
+    jumpt :eindecheck
+
+    jump :checkloop
+
+
+:validword
+    push 1
+    loadb
+
+:copyword
+    storeb
+    loadm $word
+    readelmi
+    jumpf :eindecheck
+    storem %inputBuffer
+    incb
+    jump :copyword
+
+:eindecheck
+    loada
+    clra
+    clrb
+    ret
 
 
 
