@@ -16,6 +16,8 @@ class Compiler:
         self.stringTable["."] = 6
         
         self.stringTable["halt"] = 9
+        self.stringTable["jrk"] = 10
+        self.stringTable["test"] = 11
         self.stringTable["exit"] = 15
         self.nextString = 16
 

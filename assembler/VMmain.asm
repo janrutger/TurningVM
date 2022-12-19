@@ -1,7 +1,10 @@
 @main
+    lifo %inputBuffer
+    array *wordList
+
     call :mapping
 :repl
-    call :readKBD
+    call :readInput
 
     loada
     testz
@@ -17,9 +20,16 @@
     push 'null'
     loadb
     teste
-    #jumpf :is-cmd
-    #input
     jumpt :repl
+
+    push ':'
+    loadb
+    teste
+    jumpf :is-cmd
+    call @makeWord
+    jump :repl
+
+    call @check-wordlist
 
 :is-cmd
     storea
@@ -33,7 +43,60 @@
     clrb
 ret
 
+@check-wordlist
+    nop
+ret
 
+
+
+@makeWord
+    call :readInput
+    loada
+    testz
+    jumpt :error
+    loada
+    storea
+    storea
+    storea
+
+    set *ARRAY
+    storem *wordList
+    storem $word
+
+:readword
+    call :readInput
+    loada
+    testz
+    jumpt :writenum
+
+:writestring
+    loada
+
+    push ';'
+    loadb
+    teste
+    jumpt :stop
+
+    storea
+    push 1
+    loadm $word
+    storei
+    loadm $word
+    storei
+    jump :readword
+
+:writenum
+    push 0
+    loadm $word
+    storei 
+    loadm $word
+    storei
+    jump :readword
+
+:stop
+    clra
+    clrb
+    ret
 
 :mapping
     push '+'
@@ -64,7 +127,10 @@ ret
     index @eq
 ret
 
-:readKBD
+:readInput
     input %_kbd
     loadm %_kbd
 ret
+
+:error  
+    halt
