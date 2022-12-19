@@ -17,9 +17,9 @@
     push 'null'
     loadb
     teste
-    jumpf :is-cmd
+    #jumpf :is-cmd
     #input
-    jump :repl
+    jumpt :repl
 
 :is-cmd
     storea
@@ -62,9 +62,6 @@ ret
 
     push '='
     index @eq
-
-
-
 ret
 
 :readKBD

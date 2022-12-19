@@ -13,6 +13,15 @@ class Exec_no_opcode:
         if bit == "_":
             return "null"
 
+    def status(self, switch):
+        write_set = {"S": "1"}
+        write_unset = {"S": "0"}
+        if switch == "set":
+            self.tapecommander.do_write(write_set)
+        elif switch == "unset":
+            self.tapecommander.do_write(write_unset)
+
+
     def push(self, operand):
         move_left = {"ST": "L"}
         write_separator = {"ST": "#"}

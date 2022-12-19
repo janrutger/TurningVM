@@ -7,12 +7,9 @@ from cpu import exec_no_opcode as nop
 from cpu import exec_opcode as op
 
 
-# from cpu import plotter as yplt
-
 class Executer:
     def __init__(self, memory):
         self.memory = memory
-        # self.plotter = yplt.Plotter(memory)
         self.tape_commander = tc.Tapecommander()
         self.execNOP = nop.Exec_no_opcode(self.tape_commander)
         self.execOP = op.Exec_opcode(self.tape_commander)
@@ -38,9 +35,6 @@ class Executer:
     def input(self, operand):
         val = self.memory.input(operand)
         self.execNOP.push(val)
-        # self.memory.waitForInput = True
-        # while self.memory.waitForInput:
-        #     time.sleep(1)
         self.pc = self.pc + 1
         return "HALT"
 
@@ -54,11 +48,45 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
+    def array(self, operand):
+        self.memory.array(operand)
+        self.pc = self.pc + 1
+        return "HALT"
+
     def index(self, operand):
         if isinstance(operand, int):
             self.memory.index(self.execNOP.pull(), operand + self.pc)
         else:
             self.memory.index(self.execNOP.pull(), operand)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def set(self, operand):
+        index = self.execNOP.pull()
+        self.memory.set(operand, index)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def readelm(self, operand):
+        index = self.execNOP.pull()
+        exit_code = self.memory.readElement(operand, index)
+        if exit_code == "no-element" or exit_code == "adres-element":
+            self.execNOP.status("unset")
+        else:
+            self.execNOP.push(exit_code)
+            self.execNOP.status("set")
+        self.pc = self.pc + 1 
+        return "HALT"
+
+    def readelmi(self, operand):
+        adres = self.execNOP.pull()
+        index = self.execNOP.pull()
+        exit_code = self.memory.readElement(adres, index)
+        if exit_code == "no-element" or exit_code == "adres-element":
+            self.execNOP.status("unset")
+        else:
+            self.execNOP.push(exit_code)
+            self.execNOP.status("set")
         self.pc = self.pc + 1
         return "HALT"
 
@@ -83,10 +111,24 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
+    def sti(self, operand):
+        index = self.execNOP.pull()
+        val = self.execNOP.pull()
+        self.memory.writeMem(index, val)
+        self.pc = self.pc + 1
+        return "HALT"
+
     def prt(self, operand):
         val = self.execNOP.pull()
         print("-->", int(val, 2))
         self.pc = self.pc + 1
+        return "HALT"
+
+    def ldi(self, operand):
+        index =self.execNOP.pull()
+        val =self.memory.readMem(index)
+        self.execNOP.push(val)
+        self.pc = self.pc +1
         return "HALT"
 
     def ldm(self, operand):
@@ -122,8 +164,8 @@ class Executer:
 
     def calli(self, operand):
         self.memory.writeMem("%_system", self.pc)
-        label = self.execNOP.pull()
-        adres = self.memory.readMem(label)
+        index = self.execNOP.pull()
+        adres = self.memory.readMem(index)
         self.pc = adres
         return "HALT"
 
