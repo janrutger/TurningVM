@@ -1,5 +1,5 @@
 @main
-speed 0
+speed 50
 iobuff %_plotter
 
 call @oeis
