@@ -10,6 +10,8 @@
     testz
     jumpt :repl
 
+    storem $word
+    loadm $word
     loada
 
     push 'exit'
@@ -32,10 +34,10 @@
 
 :checklist
     call @check-wordlist
-jump :repl
+#jump :repl
 
 :is-cmd
-    storea
+    loadm $word
     clra
     clrb
     calli
@@ -61,11 +63,12 @@ ret
     readelm *wordList
 
     loada
-    storeb
+    #storeb
     loadm $word
     loadb
 
     teste
+    storeb
     jumpt :validword
 
     loadb
@@ -89,7 +92,7 @@ ret
     jump :copyword
 
 :eindecheck
-    loada
+    #loada
     clra
     clrb
     ret
