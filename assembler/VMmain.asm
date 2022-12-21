@@ -87,10 +87,15 @@ ret
     storeb
     loadm $word
     readelmi
-    jumpf :eindecheck
+    jumpf :setword
     storem %inputBuffer
     incb
     jump :copyword
+
+
+:setword
+    push 'nop'
+    storem $word
 
 :eindecheck
     #loada
@@ -176,6 +181,9 @@ ret
 
     push '='
     index @eq
+
+    push 'nop'
+    index @nop
 ret
 
 :readInput
@@ -185,3 +193,7 @@ ret
 
 :error  
     halt
+
+
+@nop
+    ret
