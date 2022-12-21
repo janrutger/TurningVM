@@ -1,5 +1,6 @@
 @main
-    lifo %inputBuffer
+    speed 100
+    iobuff %inputBuffer
     array *wordList
 
     call :mapping
@@ -28,9 +29,10 @@
     loadb
     teste
     jumpf :checklist
+
+
     call @makeWord
     jump :repl
-
 
 :checklist
     call @check-wordlist
@@ -133,16 +135,18 @@ ret
     teste
     jumpt :stop
 
-    storea
     push 1
+    storea
     loadm $word
     storei
     loadm $word
     storei
     jump :readword
 
-:writenum
+:writenum  
+    storem $tmp
     push 0
+    loadm $tmp
     loadm $word
     storei 
     loadm $word
@@ -187,6 +191,14 @@ ret
 ret
 
 :readInput
+    push 0
+    readelm %inputBuffer
+    jumpf :gokbd
+    storem $rommel
+    loadm %inputBuffer
+    loadm %inputBuffer
+ret
+:gokbd
     input %_kbd
     loadm %_kbd
 ret
