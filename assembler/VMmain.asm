@@ -63,14 +63,15 @@ ret
     readelm *wordList
 
     loada
-    #storeb
+    storeb
+    storem $checkindex
     loadm $word
     loadb
 
     teste
-    storeb
     jumpt :validword
 
+    loadm $checkindex
     loadb
     decb
     jumpt :eindecheck
