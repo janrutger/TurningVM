@@ -1,5 +1,5 @@
 @main
-    speed 100
+    
     iobuff %inputBuffer
     array *wordList
 
@@ -188,6 +188,9 @@ ret
 
     push 'nop'
     index @nop
+
+    push 'dup'
+    index @dup
 ret
 
 :readInput

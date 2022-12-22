@@ -52,6 +52,13 @@ ret
     call :clearAB
 ret
 
+@dup
+    loada
+    storea
+    storea
+    clra
+ret
+
 @over
     loada
     loadb
