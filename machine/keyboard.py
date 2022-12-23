@@ -5,12 +5,6 @@ class Keyboard:
         self.memory  = memory
         self.online = False
 
-        self.stringTable = {}
-        self.stringTable["null"] = 0
-        self.stringTable["+"] = 1
-        self.stringTable["."] = 2
-        self.stringTable["halt"] = 900
-        
 
 
 
@@ -23,17 +17,21 @@ class Keyboard:
                 #binary = bin(decimal)[2:]
                 code.append(decimal)
                 code.append("0")            # a 0 means number on stack is integer
-            elif token in self.stringTable:
-                code.append(self.stringTable[token])
-                code.append("1")            # a 1 means number on stack is referance to a Module
+            elif token in self.memory.stringTable:
+                code.append(self.memory.stringTable[token])
+                code.append("1")            # a 1 means number on stack is referance to a string
             else:
-                pass                        # A UNKOWN token
+                code.append(self.memory.stringTable['null'])
+                code.append("1")       # a 1 means number on stack is referance to a string
+               
             
         return(code)
 
 
     def input(self):
         inputLine = input("...>>")
+        if inputLine == '':
+            inputLine = 'null'
         tokens =self.tokenice(inputLine)
         return(tokens)
 
@@ -42,11 +40,11 @@ class Keyboard:
         self.online = True
         
         while self.online:
-            if self.memory.waitForInput:
+            if self.memory.waitForInput == IObuff:
                 tokens = self.input()
                 for token in tokens:
                     self.memory.writeIObuff(IObuff, token)
-                self.memory.waitForInput = False
+                self.memory.waitForInput = "REQ-done"
             else:
                 time.sleep(1)
 

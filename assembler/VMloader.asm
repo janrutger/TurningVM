@@ -6,6 +6,8 @@ nop
 nop
 nop
 nop
+nop
+nop
 
 @plus
     loada

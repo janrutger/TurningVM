@@ -9,7 +9,7 @@
 
     loada
 
-    push 'halt'
+    push 'exit'
     loadb
     teste
     jumpt :exit
@@ -17,15 +17,15 @@
     push 'null'
     loadb
     teste
-    jumpf :is-string
+    #jumpf :is-cmd
+    #input
+    jumpt :repl
 
-    input
-    jump :repl
-
-:is-string
+:is-cmd
     storea
+    clra
+    clrb
     calli
-
     jump :repl
 
 :exit
@@ -39,12 +39,32 @@ ret
     push '+'
     index @plus 
 
+    push '-'
+    index @minus 
+
+    push '*'
+    index @mul 
+
+    push '/'
+    index @div 
+
+    push '%'
+    index @mod 
+
     push '.'
     index @print
 
+    push '!'
+    index @factorial
+
+    push 'swap'
+    index @swap
+
+    push '='
+    index @eq
 ret
 
 :readKBD
-    loadm %_kbd
+    input %_kbd
     loadm %_kbd
 ret

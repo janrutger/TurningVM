@@ -27,15 +27,24 @@ def loadSchema():
     schema["storea"]    = ("STA", None)
     schema["storeb"]    = ("STB", None)
     schema["storem"]    = ("STM", "s")
+    schema["storei"]    = ("STI", None)
     
     schema["loada"]     = ("LDA", None)
     schema["loadb"]     = ("LDB", None)
     schema["loadm"]     = ("LDM", "s")
-    schema["input"]     = ("INPUT", None)
+    schema["loadi"]     = ("LDI", None)
+
+    schema["input"]     = ("INPUT", "s")
+    schema["set"]       = ("SET", "s")
+    schema["readelm"]   = ("READELM", "s")
+    schema["readelmi"]  = ("READELMI", None) 
 
     schema["lifo"]      = ("LIFO", "s")
+    schema["iobuff"]    = ("IOBUFF", "s")
     schema["index"]     = ("INDEX", "n")
+    schema["array"]     = ("ARRAY", "s")
 
+    schema["incb"]      = ("INCB", None)
     schema["decb"]      = ("DECB", None)    
     schema["add"]       = ("ADD", None)
     schema["multi"]     = ("MULTI", None)
@@ -52,7 +61,7 @@ def loadSchema():
     schema["prt"]       = ("PRT", None)
     #schema["plotter"]   = ("PLOTTER", "n")
 
-    schema["stop"]      = ("STOP", "s")
+    #schema["stop"]      = ("STOP", "s")
     schema["nop"]       = ("NOP", None)
 
     return(schema)

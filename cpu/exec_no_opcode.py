@@ -1,38 +1,41 @@
-
-
-
 class Exec_no_opcode:
     def __init__(self, tapecommander):
         self.tapecommander = tapecommander
 
     def returnStatus(self):
-        tapeList = {"S"}
-        result   = self.tapecommander.do_read(tapeList)
+        tape_list = {"S"}
+        result = self.tapecommander.do_read(tape_list)
         bit = result["S"]
         if bit == "1":
-            return("true")
+            return "true"
         if bit == "0":
-            return("false")
+            return "false"
         if bit == "_":
-            return("null")
+            return "null"
+
+    def status(self, switch):
+        write_set = {"S": "1"}
+        write_unset = {"S": "0"}
+        if switch == "set":
+            self.tapecommander.do_write(write_set)
+        elif switch == "unset":
+            self.tapecommander.do_write(write_unset)
+
 
     def push(self, operand):
-        moveLeft = {"ST": "L"}
-        writeSeperator = {"ST": "#"}
-        writeBit = {}
-        self.tapecommander.do_move(moveLeft)
-        self.tapecommander.do_write(writeSeperator)
+        move_left = {"ST": "L"}
+        write_separator = {"ST": "#"}
+        write_bit = {}
+        self.tapecommander.do_move(move_left)
+        self.tapecommander.do_write(write_separator)
         for bit in operand:
-            writeBit["ST"] = bit
-            self.tapecommander.do_move(moveLeft)
-            self.tapecommander.do_write(writeBit)
-        return("oke")    
+            write_bit["ST"] = bit
+            self.tapecommander.do_move(move_left)
+            self.tapecommander.do_write(write_bit)
+        return "oke"
 
     def print(self, tapeList):
-        resultValue = {}
-        resultValue = self.tapecommander.print_tape(tapeList)
-        return(resultValue)
-
+        return self.tapecommander.print_tape(tapeList)
 
     def pull(self):
         result = ""
@@ -49,4 +52,4 @@ class Exec_no_opcode:
         self.tapecommander.do_write(writeBlank)
         self.tapecommander.do_move(move)
 
-        return(result)
+        return (result)
