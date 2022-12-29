@@ -36,6 +36,9 @@ memory = mmu.MMU()
 memory.loadMem(assembler.compile(assembler.readASM("/home/pi/Projecten/TurningVM/assembler/VMloader.asm")))
 memory.loadMem(assembler.compile(assembler.readASM("/home/pi/Projecten/TurningVM/assembler/VMmain.asm")))
 
-job = threading.Thread(target=runner, args=((memory,)))
-#job = threading.Thread(target=runner)
-job.start()
+# job = threading.Thread(target=runner, args=((memory,)))
+# #job = threading.Thread(target=runner)
+# job.start()
+
+
+runner(memory)
