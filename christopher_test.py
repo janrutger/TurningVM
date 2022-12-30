@@ -17,28 +17,15 @@ def runner(memory):
     exitcode = machine.repl()
 
 
-# class Testing(unittest.TestCase):
+class Testing(unittest.TestCase):
 
-#     def test_string(self):
-#         assembler = Assembler()
+    def test_string(self):
+        assembler = Assembler()
 
-#         memory = mmu.MMU()
-#         memory.loadMem(assembler.compile(assembler.readASM("/home/pi/Projecten/TurningVM/assembler/VMloader.asm")))
-#         memory.loadMem(assembler.compile(assembler.readASM("/home/pi/Projecten/TurningVM/assembler/VMmain.asm")))
-
-#         job = threading.Thread(target=runner)
-#         job.start()
-#         #runner(memory)
-
-assembler = Assembler()
-
-memory = mmu.MMU()
-memory.loadMem(assembler.compile(assembler.readASM("/home/pi/Projecten/TurningVM/assembler/VMloader.asm")))
-memory.loadMem(assembler.compile(assembler.readASM("/home/pi/Projecten/TurningVM/assembler/VMmain.asm")))
-
-# job = threading.Thread(target=runner, args=((memory,)))
-# #job = threading.Thread(target=runner)
-# job.start()
+        memory = mmu.MMU()
+        memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMloader.asm")))
+        memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMmain.asm")))
 
 
-runner(memory)
+        runner(memory)
+
