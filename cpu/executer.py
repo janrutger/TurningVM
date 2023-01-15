@@ -8,11 +8,11 @@ from cpu import exec_opcode as op
 
 
 class Executer:
-    def __init__(self, memory):
+    def __init__(self, memory, ui):
         self.memory = memory
         self.tape_commander = tc.Tapecommander()
-        self.execNOP = nop.Exec_no_opcode(self.tape_commander)
-        self.execOP = op.Exec_opcode(self.tape_commander)
+        self.execNOP = nop.Exec_no_opcode(self.tape_commander, ui)
+        self.execOP = op.Exec_opcode(self.tape_commander, ui)
         self.pc = int(0)
 
     def refresh_tapes(self, tapes):
