@@ -1,0 +1,18 @@
+body {
+    width: 1290px;
+    border: 1px solid black;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#RAleft, #RBleft, #STleft, #Sleft {
+    text-align: right;
+}
+
+#RAhead, #RBhead, #SThead, #Shead {
+    text-align: center;
+    font-weight: bold;
+}
+
+#RAright, #RBright, #STright, #Sright {
+    text-align: left;
+}

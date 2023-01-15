@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="christopher.js"></script>
+        <link rel="stylesheet" type="text/css" href="./christopher.css"
+        <title>Christopher</title>
+    </head>
+    
+    <body>
+    <div class="application">
+        <h1 id="applicationname">Christopher</h1>
+
+        <div class="tapeview" id="tapeview">
+            <table class="tapes">
+                <tr>
+                    <td id="STname">STACK</td>
+                    <td id="STleft">STleft</td>
+                    <td id="SThead">SThead</td>
+                    <td id="STright">STright</td>
+                </tr>
+                <tr>
+                    <td id="RAname">RegisterA</td>
+                    <td id="RAleft">RAleft</td>
+                    <td id="RAhead">RAhead</td>
+                    <td id="RAright">RAright</td>
+                    
+                </tr>
+                <tr>
+                    <td id="RBname">RegisterB</td>
+                    <td id="RBleft">RBleft</td>
+                    <td id="RBhead">RBhead</td>
+                    <td id="RBright">RBright</td>
+                    
+                </tr>
+                <tr>
+                    <td id="Sname">STATUS</td>
+                    <td id="Sleft">Sleft</td>
+                    <td id="Shead">Shead</td>
+                    <td id="Sright">Sright</td>
+                    
+                </tr>
+            </table>
+        </div>
+        <div class="buttonview">
+            <p>
+                <input id="connect" type="button" value="Connect" onClick="connect();">
+                <input id="load" type="button" value="Load">
+                <input id="run" type="button" value="Run">
+            </p>
+        </div>
+    </div>
+    </body>
+</html>
