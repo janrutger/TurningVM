@@ -199,7 +199,8 @@ class Machine:
         self.exec.run_rpc([('CALL', '@neq'), ('HALT', '')])
 
     def dup(self):
-        self.push(self.top())
+        self.exec.run_rpc([('CALL', '@dup'), ('HALT', '')])
+        #self.push(self.top())
 
     def over(self):
         self.exec.run_rpc([('CALL', '@over'), ('HALT', '')])
