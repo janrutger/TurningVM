@@ -5,16 +5,16 @@ from SimpleWebSocketServer import WebSocket, SimpleWebSocketServer
  
 PORTNUM = 8001
 
-webclients = []
-clients    = []
+
+clients = []
 # Websocket class to echo received data
 class Echo(WebSocket):
  
     def handleMessage(self):
-        #print("Echoing '%s'" % self.data)
+        print("Echoing '%s'" % self.data)
         input = (json.loads(self.data))
-        if "tapeUpdate" in input:
-            for client in webclients:
+        if input["tapeUpdate"]:
+            for client in clients:
                 if client != self:
                     try:
                         #client.sendMessage(json.dumps(input))
@@ -22,15 +22,8 @@ class Echo(WebSocket):
                         self.sendMessage("sent" + self.data)
                     except Exception as n:
                         print(n)
-        elif "register" in input:
-            if input["register"] == "webclient":
-                webclients.clear()
-                webclients.append(self)
-            
-            print(self.address, "set client", len(clients), len(webclients))           
         else:
-            #self.sendMessage(input)
-            print("Unkown input messagetype" % self.data)
+            self.sendMessage(input)
         
     def handleConnected(self):
         print(self.address, 'connected')

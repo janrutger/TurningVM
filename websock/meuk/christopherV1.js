@@ -11,9 +11,9 @@ function connect()
     
   }
 
-function register()
-{
-    websock.send(JSON.stringify({"register" : "webclient"}));
+function register(){
+    register = {"register" : webclient}
+    websock.send(JSON.stringify(register));
 }
 
 
