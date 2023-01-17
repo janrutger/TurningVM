@@ -7,6 +7,7 @@ PORTNUM = 8001
 
 webclients = []
 clients    = []
+backends   = []
 # Websocket class to echo received data
 class Echo(WebSocket):
  
@@ -26,8 +27,13 @@ class Echo(WebSocket):
             if input["register"] == "webclient":
                 webclients.clear()
                 webclients.append(self)
+            if input["register"] == "backend":
+                backends.clear()
+                backends.append(self)
+                clients.remove(self)
             
-            print(self.address, "set client", len(clients), len(webclients))           
+            print(self.address, "set client", len(clients),
+                  len(webclients), len(backends))
         else:
             #self.sendMessage(input)
             print("Unkown input messagetype" % self.data)
