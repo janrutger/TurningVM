@@ -26,8 +26,8 @@ class Machine:
     #def __init__(self, executer, plotter, keyboard):
     def __init__(self, executer):
         self.exec = executer
-        self.plotter = plotter
-        self.keyboard = keyboard
+        #self.plotter = plotter
+        #self.keyboard = keyboard
 
         self.word_map = {}
         self.dispatch_map = {
