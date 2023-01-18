@@ -20,23 +20,42 @@ class Echo(WebSocket):
                     try:
                         #client.sendMessage(json.dumps(input))
                         client.sendMessage(self.data)
-                        self.sendMessage("sent" + self.data)
+                        #self.sendMessage("sent" + self.data)
                     except Exception as n:
                         print(n)
         elif "register" in input:
             if input["register"] == "webclient":
                 webclients.clear()
                 webclients.append(self)
-            if input["register"] == "backend":
+            elif input["register"] == "backend":
                 backends.clear()
                 backends.append(self)
                 clients.remove(self)
             
             print(self.address, "set client", len(clients),
                   len(webclients), len(backends))
+
+        elif "commando" in input:
+            if input["commando"] == "load":
+                for client in backends:
+                    if client != self:
+                        try:
+                            # client.sendMessage(json.dumps(input))
+                            client.sendMessage(self.data)
+                        except Exception as n:
+                            print(n)
+            
+            if input["commando"] == "start":
+                for client in backends:
+                    if client != self:
+                        try:
+                            # client.sendMessage(json.dumps(input))
+                            client.sendMessage(self.data)
+                        except Exception as n:
+                            print(n)
         else:
             #self.sendMessage(input)
-            print("Unkown input messagetype" % self.data)
+            print("Unkown input messagetype", input)
         
     def handleConnected(self):
         print(self.address, 'connected')

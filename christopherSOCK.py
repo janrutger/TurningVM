@@ -5,21 +5,23 @@ import json
 
 from assembler.assembler import Assembler
 from cpu.executer import Executer
-from machine.keyboard import Keyboard
-from machine.plotter import Plotter
-from machine.vmachine import Machine
+#from machine.keyboard import Keyboard
+#from machine.plotter import Plotter
+from machine.vmachineSock import Machine
 from mmu import mmu
+from websock import UIconnect as UI
 
 
-def _runner(memory):
-    plotter = Plotter(memory)
-    keyboard = Keyboard(memory)
-    executes = Executer(memory)
-    machine = Machine(executes, plotter, keyboard)
+def runner(memory):
+    print("runner")
+    #plotter = Plotter(memory)
+    #keyboard = Keyboard(memory)
+    executes = Executer(memory, ui)
+    machine = Machine(executes)
     exitcode = machine.repl()
 
 def start():
-    _runner(memory)
+    runner(memory)
 
 def load():
     assembler = Assembler()
@@ -30,15 +32,29 @@ def load():
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMmain.asm")))
 
+    executes = Executer(memory, ui)
+    machine = Machine(executes)
+    exitcode = machine.repl()
+
+    return(memory)
+
 
 
 def on_message(wsapp, message):
-    print(message)
+    input = json.loads(message)
+    if input["commando"] == "load":
+        print(input)
+        memory = load()
+    elif input["commando"] == "start":
+        print(input)
+        runner(memory)
+        
 
 def on_open(wsapp):
     print("register")
     message = {"register": "backend"}
     wsapp.send(json.dumps(message))
+    ui = UI.UIconnect(wsapp)
 
 
 

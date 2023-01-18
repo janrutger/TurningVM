@@ -3,8 +3,9 @@ import json
 
 
 class UIconnect:
-    def __init__(self):
-        self.ws = websocket.create_connection("ws://localhost:8001/")
+    def __init__(self, wsapp):
+        #self.ws = websocket.create_connection("ws://localhost:8001/")
+        self.ws = wsapp
 
     
     def send_status(self, tapestate):

@@ -13,7 +13,18 @@ function connect()
 
 function register()
 {
+    console.log("register button")
     websock.send(JSON.stringify({"register" : "webclient"}));
+}
+
+function load() {
+    console.log("load button")
+    websock.send(JSON.stringify({"commando": "load"}));
+}
+
+function start() {
+    console.log("start button")
+    websock.send(JSON.stringify({ "commando": "start" }));
 }
 
 
