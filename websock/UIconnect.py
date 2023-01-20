@@ -7,9 +7,9 @@ class UIconnect:
         if ws:
             self.ws = websocket.create_connection("ws://localhost:8001/")
 
-
     def set(self, ws):
         self.ws = ws
+
 
     def send_status(self, tapestate):
         message = {"tapeUpdate": tapestate}

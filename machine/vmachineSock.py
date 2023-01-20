@@ -163,7 +163,8 @@ class Machine:
         # if self.keyboard.online:
         #     self.keyboard.stop()
         #     self.kbd.join()
-        sys.exit(0)
+        # sys.exit(0)
+        exit()
 
     def main(self):
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
