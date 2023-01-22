@@ -13,15 +13,17 @@ from websock import UIconnect as UI
 
 memory = mmu.MMU()
 ui = UI.UIconnect()
+executes = Executer(memory, ui)
+machine = Machine(executes)
 
 def runner(memory):
 
     print("runner")
     #plotter = Plotter(memory)
     #keyboard = Keyboard(memory)
-    executes = Executer(memory, ui)
+    #executes = Executer(memory, ui)
     #machine = Machine(executes, plotter, keyboard)
-    machine = Machine(executes)
+    #machine = Machine(executes)
     exitcode = machine.repl()
 
 
@@ -61,6 +63,8 @@ def on_open(wsapp):
     print("register")
     message = {"register": "backend"}
     wsapp.send(json.dumps(message))
+    text2print = {"printline" : "Backend activated"}
+    wsapp.send(json.dumps(text2print))
     ui.set(wsapp)
 
 

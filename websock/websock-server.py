@@ -18,9 +18,7 @@ class Echo(WebSocket):
             for client in webclients:
                 if client != self:
                     try:
-                        #client.sendMessage(json.dumps(input))
                         client.sendMessage(self.data)
-                        #self.sendMessage("sent" + self.data)
                     except Exception as n:
                         print(n)
         elif "register" in input:
@@ -40,7 +38,6 @@ class Echo(WebSocket):
                 for client in backends:
                     if client != self:
                         try:
-                            # client.sendMessage(json.dumps(input))
                             client.sendMessage(self.data)
                         except Exception as n:
                             print(n)
@@ -49,12 +46,19 @@ class Echo(WebSocket):
                 for client in backends:
                     if client != self:
                         try:
-                            # client.sendMessage(json.dumps(input))
                             client.sendMessage(self.data)
                         except Exception as n:
                             print(n)
+
+        elif "printline" in input:
+            for client in webclients:
+                if client != self:
+                    try:
+                        client.sendMessage(self.data)
+                    except Exception as n:
+                        print(n)
+
         else:
-            #self.sendMessage(input)
             print("Unkown input messagetype", input)
         
     def handleConnected(self):
