@@ -33,6 +33,8 @@ function start() {
 function println(text2print){
     console.log("print something")
     document.getElementById("printer").value += (text2print + "\n")
+    printarea = document.getElementById('printer');
+    printarea.scrollTop = printarea.scrollHeight;
 }
 
 
@@ -64,7 +66,7 @@ function sock_message(evt)
 
         } else if ("printline" in input){
             println(input["printline"])
-            
+
         } else {
             console.log("received other or wrong messagetype\n");
         }

@@ -14,3 +14,7 @@ class UIconnect:
     def send_status(self, tapestate):
         message = {"tapeUpdate": tapestate}
         self.ws.send(json.dumps(message))
+
+    def println(self, text2print):
+        message = {"printline": text2print}
+        self.ws.send(json.dumps(message))

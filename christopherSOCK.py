@@ -14,7 +14,7 @@ from websock import UIconnect as UI
 memory = mmu.MMU()
 ui = UI.UIconnect()
 executes = Executer(memory, ui)
-machine = Machine(executes)
+machine = Machine(executes, ui)
 
 def runner(memory):
 

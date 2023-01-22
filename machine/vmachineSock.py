@@ -24,8 +24,9 @@ def get_input(*args, **kw):
 
 class Machine:
     #def __init__(self, executer, plotter, keyboard):
-    def __init__(self, executer):
+    def __init__(self, executer, ui):
         self.exec = executer
+        self.ui = ui 
         #self.plotter = plotter
         #self.keyboard = keyboard
 
@@ -214,5 +215,6 @@ class Machine:
         self.exec.run_rpc([('CALL', '@swap'), ('HALT', '')])
 
     def println(self):
-        sys.stdout.write("%s\n" % self.pop())
-        sys.stdout.flush()
+        self.ui.println(self.pop())
+        #sys.stdout.write("%s\n" % self.pop())
+        #sys.stdout.flush()
