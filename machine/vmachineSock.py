@@ -7,6 +7,7 @@ waarvoor veel dank.
 """
 from __future__ import print_function
 import threading
+import time
 # from collections import deque
 # from io import StringIO
 import sys
@@ -14,12 +15,12 @@ import sys
 import copy
 
 
-def get_input(*args, **kw):
-    """Read a string from standard input."""
-    if sys.version[0] == "2":
-        return raw_input(*args, **kw)
-    else:
-        return input(*args, **kw)
+# def get_input(*args, **kw):
+#     """Read a string from standard input."""
+#     if sys.version[0] == "2":
+#         return raw_input(*args, **kw)
+#     else:
+#         return input(*args, **kw)
 
 
 class Machine:
@@ -138,12 +139,19 @@ class Machine:
         else:
             raise RuntimeError("Unknown opcode: '%s'" % op)
 
+    def get_input(self):
+        self.inputResponse = None
+        self.ui.input()
+        # while self.inputResponse == None:
+        #     time.sleep(1)
+        # return (self.inputResponse)
+
     def repl(self):
         print('Hit CTRL+D or type "exit" to quit.')
 
         while True:
             try:
-                source = get_input("> ")
+                source = self.get_input()
                 code = list(self.tokenice(source))
                 self.parse(code)
             except (RuntimeError, IndexError) as e:

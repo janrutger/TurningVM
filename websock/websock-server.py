@@ -57,6 +57,22 @@ class Echo(WebSocket):
                         client.sendMessage(self.data)
                     except Exception as n:
                         print(n)
+            
+        elif "inputReq" in input:
+            for client in webclients:
+                print("sent inpurReq")
+                try:
+                    client.sendMessage(self.data)
+                except Exception as n:
+                    print(n)
+
+        elif "response" in input:
+            for client in backends:
+                try:
+                    print("Response", input)
+                    client.sendMessage(self.data)
+                except Exception as n:
+                    print(n)
 
         else:
             print("Unkown input messagetype", input)

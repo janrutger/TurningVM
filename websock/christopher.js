@@ -18,6 +18,20 @@ function register()
     println("Activate console")
 }
 
+function getInput() {
+    console.log("getting input")
+    document.getElementById("keyboard").focus()
+    input = document.getElementById("keyboard")
+    input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            //event.preventDefault();
+            console.log(input.value)
+            websock.send(JSON.stringify({"response" : input.value}))
+            input.value = ""
+        }
+    });
+}
+
 function load() {
     console.log("load button")
     websock.send(JSON.stringify({"commando": "load"}));
@@ -36,6 +50,9 @@ function println(text2print){
     printarea = document.getElementById('printer');
     printarea.scrollTop = printarea.scrollHeight;
 }
+
+
+
 
 
 // Display incoming data
@@ -66,6 +83,9 @@ function sock_message(evt)
 
         } else if ("printline" in input){
             println(input["printline"])
+
+        } else if ("inputReq" in input) {
+            getInput()
 
         } else {
             console.log("received other or wrong messagetype\n");

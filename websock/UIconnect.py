@@ -1,4 +1,5 @@
 import websocket
+import time
 import json
 
 
@@ -17,4 +18,8 @@ class UIconnect:
 
     def println(self, text2print):
         message = {"printline": text2print}
+        self.ws.send(json.dumps(message))
+
+    def input(self):
+        message = {"inputReq": "keyboard"}
         self.ws.send(json.dumps(message))

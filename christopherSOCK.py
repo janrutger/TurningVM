@@ -49,12 +49,15 @@ def load():
 
 def on_message(wsapp, message):
     input = json.loads(message)
-    if input["commando"] == "load":
+    if "commando" in input and input["commando"] == "load":
         print(input)
         load()
-    elif input["commando"] == "start":
+    elif "commando" in input and input["commando"] == "start":
         print(input)
         runner(memory)
+    elif "response" in input:
+        #machine.inputResponse = input["response"]
+        print(input)
         
         
         
