@@ -58,13 +58,13 @@ class Echo(WebSocket):
                     except Exception as n:
                         print(n)
             
-        # elif "inputReq" in input:
-        #     for client in webclients:
-        #         print("sent inpurReq")
-        #         try:
-        #             client.sendMessage(self.data)
-        #         except Exception as n:
-        #             print(n)
+        elif "inputReq" in input:
+            print("sent inputReq :", input)
+            for client in webclients:
+                try:
+                    client.sendMessage(self.data)
+                except Exception as n:
+                    print(n)
 
         elif "keyboard" in input:
             print("Keyboard", input)

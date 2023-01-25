@@ -26,7 +26,7 @@ function keyboard() {
     input = document.getElementById("keyboard")
     input.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
-            //event.preventDefault();
+            event.preventDefault();
             console.log(input.value)
             websock.send(JSON.stringify({"keyboard" : input.value}))
             input.value = ""
@@ -86,6 +86,9 @@ function sock_message(evt)
         } else if ("printline" in input){
             println(input["printline"])
 
+        } else if ("inputReq" in input){
+            keyboard()
+        
 
         } else {
             console.log("received other or wrong messagetype\n");

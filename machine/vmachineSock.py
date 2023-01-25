@@ -147,8 +147,10 @@ class Machine:
 
     def get_input(self):
         while len(self.kbdBuff) == 0:
+            self.ui.inputReq()
             time.sleep(1)
         resp = self.kbdBuff.pop(0)
+        self.ui.println(resp)
         return (resp)
 
 

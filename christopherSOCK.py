@@ -54,7 +54,9 @@ def on_message(wsapp, message):
         load()
     elif "commando" in input and input["commando"] == "start":
         print(input)
-        runner()
+        #runner()
+        job = threading.Thread(target=runner)
+        job.start()
     elif "keyboard" in input:
         machine.writeKbdBuff(input["keyboard"])
 
