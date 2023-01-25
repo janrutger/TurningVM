@@ -16,9 +16,11 @@ function register()
     console.log("register button")
     websock.send(JSON.stringify({"register" : "webclient"}));
     println("Activate console")
+    keyboard()
+    println("Keyboard activated")
 }
 
-function getInput() {
+function keyboard() {
     console.log("getting input")
     document.getElementById("keyboard").focus()
     input = document.getElementById("keyboard")
@@ -26,7 +28,7 @@ function getInput() {
         if (event.key === "Enter") {
             //event.preventDefault();
             console.log(input.value)
-            websock.send(JSON.stringify({"response" : input.value}))
+            websock.send(JSON.stringify({"keyboard" : input.value}))
             input.value = ""
         }
     });
@@ -84,8 +86,6 @@ function sock_message(evt)
         } else if ("printline" in input){
             println(input["printline"])
 
-        } else if ("inputReq" in input) {
-            getInput()
 
         } else {
             console.log("received other or wrong messagetype\n");

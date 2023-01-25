@@ -5,8 +5,8 @@ import json
 
 from assembler.assembler import Assembler
 from cpu.executer import Executer
-from machine.keyboard import Keyboard
-from machine.plotter import Plotter
+#from machine.keyboard import Keyboard
+#from machine.plotter import Plotter
 from machine.vmachineSock import Machine
 from mmu import mmu
 from websock import UIconnect as UI
@@ -16,7 +16,7 @@ ui = UI.UIconnect()
 executes = Executer(memory, ui)
 machine = Machine(executes, ui)
 
-def runner(memory):
+def runner():
 
     print("runner")
     #plotter = Plotter(memory)
@@ -54,10 +54,10 @@ def on_message(wsapp, message):
         load()
     elif "commando" in input and input["commando"] == "start":
         print(input)
-        runner(memory)
-    elif "response" in input:
-        #machine.inputResponse = input["response"]
-        print(input)
+        runner()
+    elif "keyboard" in input:
+        machine.writeKbdBuff(input["keyboard"])
+
         
         
         

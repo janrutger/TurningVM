@@ -28,8 +28,10 @@ class Machine:
     def __init__(self, executer, ui):
         self.exec = executer
         self.ui = ui 
+        self.kbdBuff = []
         #self.plotter = plotter
         #self.keyboard = keyboard
+
 
         self.word_map = {}
         self.dispatch_map = {
@@ -55,9 +57,13 @@ class Machine:
         self.plotter.start(IObuff)
         return
 
-    def startKeyboard(self, IObuff):
-        self.keyboard.start(IObuff)
-        return
+    def writeKbdBuff(self, value):
+        self.kbdBuff.append(value)
+        print(self.kbdBuff)
+
+    # def startKeyboard(self, IObuff):
+    #     self.keyboard.start(IObuff)
+    #     return
 
     def pop(self):
         val = self.exec.run_commando('PULL', None)
@@ -140,11 +146,11 @@ class Machine:
             raise RuntimeError("Unknown opcode: '%s'" % op)
 
     def get_input(self):
-        self.inputResponse = None
-        self.ui.input()
-        # while self.inputResponse == None:
-        #     time.sleep(1)
-        # return (self.inputResponse)
+        while len(self.kbdBuff) == 0:
+            time.sleep(1)
+        resp = self.kbdBuff.pop(0)
+        return (resp)
+
 
     def repl(self):
         print('Hit CTRL+D or type "exit" to quit.')
@@ -152,6 +158,7 @@ class Machine:
         while True:
             try:
                 source = self.get_input()
+                print(source)
                 code = list(self.tokenice(source))
                 self.parse(code)
             except (RuntimeError, IndexError) as e:
