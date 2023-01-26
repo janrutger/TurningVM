@@ -30,9 +30,9 @@ function keyboard() {
     // input.addEventListener("keypress", function (event) {
     //    if (event.key === "Enter") {
             //event.preventDefault();
-            console.log(input.value)
-            websock.send(JSON.stringify({"keyboard" : input.value}))
-            input.value = ""
+    console.log(document.getElementById("keyboard").value)
+    websock.send(JSON.stringify({ "keyboard": document.getElementById("keyboard").value}))
+    document.getElementById("keyboard").value = ""
         }
     //});
 //}
