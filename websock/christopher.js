@@ -8,6 +8,9 @@ function connect()
     websock.onmessage = function(evt) {sock_message(evt)};
     websock.onerror   = function(evt) {sock_error(evt)};
     connected = true;
+
+    input = document.getElementById("keyboard")
+    input.addEventListener("change", keyboard)
     
   }
 
@@ -16,23 +19,23 @@ function register()
     console.log("register button")
     websock.send(JSON.stringify({"register" : "webclient"}));
     println("Activate console")
-    keyboard()
-    println("Keyboard activated")
+    
+    //println("Keyboard activated")
 }
 
 function keyboard() {
     console.log("getting input")
-    document.getElementById("keyboard").focus()
-    input = document.getElementById("keyboard")
-    input.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault();
+    //document.getElementById("keyboard").focus()
+    //input = document.getElementById("keyboard")
+    // input.addEventListener("keypress", function (event) {
+    //    if (event.key === "Enter") {
+            //event.preventDefault();
             console.log(input.value)
             websock.send(JSON.stringify({"keyboard" : input.value}))
             input.value = ""
         }
-    });
-}
+    //});
+//}
 
 function load() {
     console.log("load button")
@@ -111,5 +114,7 @@ function sock_close(evt)
         websock.close();
     }
 
-  window.addEventListener("load", connect, false);
+
+
+window.addEventListener("load", connect, false);
 
