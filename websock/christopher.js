@@ -11,6 +11,7 @@ function connect()
 
     input = document.getElementById("keyboard")
     input.addEventListener("change", keyboard)
+    println("Keyboard listener")
     
   }
 
@@ -20,22 +21,15 @@ function register()
     websock.send(JSON.stringify({"register" : "webclient"}));
     println("Activate console")
     
-    //println("Keyboard activated")
+    
 }
 
 function keyboard() {
-    console.log("getting input")
-    //document.getElementById("keyboard").focus()
-    //input = document.getElementById("keyboard")
-    // input.addEventListener("keypress", function (event) {
-    //    if (event.key === "Enter") {
-            //event.preventDefault();
-    console.log(document.getElementById("keyboard").value)
+    console.log("Sending KBD")
+    //console.log(document.getElementById("keyboard").value)
     websock.send(JSON.stringify({ "keyboard": document.getElementById("keyboard").value}))
     document.getElementById("keyboard").value = ""
-        }
-    //});
-//}
+}
 
 function load() {
     console.log("load button")
@@ -64,9 +58,9 @@ function println(text2print){
 function sock_message(evt)
     {
         // console.log(evt.data);
-        console.log(evt.data)
+        //console.log(evt.data)
         input = JSON.parse(evt.data)
-        console.log(input)
+        //console.log(input)
         if ("tapeUpdate" in input) {
             console.log("received tape update\n")
 
@@ -88,10 +82,6 @@ function sock_message(evt)
 
         } else if ("printline" in input){
             println(input["printline"])
-
-        } else if ("inputReq" in input){
-            keyboard()
-        
 
         } else {
             console.log("received other or wrong messagetype\n");

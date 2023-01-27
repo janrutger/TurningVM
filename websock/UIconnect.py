@@ -20,6 +20,4 @@ class UIconnect:
         message = {"printline": text2print}
         self.ws.send(json.dumps(message))
 
-    def inputReq(self):
-        message = {"inputReq": "keyboard"}
-        self.ws.send(json.dumps(message))
+    

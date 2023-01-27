@@ -53,13 +53,13 @@ class Machine:
             "halt": self.halt
         }
 
-    def startPlotter(self, IObuff):
-        self.plotter.start(IObuff)
-        return
+    # def startPlotter(self, IObuff):
+    #     self.plotter.start(IObuff)
+    #     return
 
     def writeKbdBuff(self, value):
         self.kbdBuff.append(value)
-        print(self.kbdBuff)
+        #print(self.kbdBuff)
 
     # def startKeyboard(self, IObuff):
     #     self.keyboard.start(IObuff)
@@ -147,7 +147,6 @@ class Machine:
 
     def get_input(self):
         while len(self.kbdBuff) == 0:
-            #self.ui.inputReq()
             time.sleep(1)
         resp = self.kbdBuff.pop(0)
         self.ui.println(resp)
@@ -155,12 +154,12 @@ class Machine:
 
 
     def repl(self):
-        print('Hit CTRL+D or type "exit" to quit.')
+        self.ui.println('Type "halt" to quit.')
 
         while True:
             try:
                 source = self.get_input()
-                print(source)
+                #print(source)
                 code = list(self.tokenice(source))
                 self.parse(code)
             except (RuntimeError, IndexError) as e:
@@ -232,6 +231,8 @@ class Machine:
         self.exec.run_rpc([('CALL', '@swap'), ('HALT', '')])
 
     def println(self):
-        self.ui.println(self.pop())
+        val = str(self.pop())
+        self.ui.println(val)
+        #self.ui.println(self.pop())
         #sys.stdout.write("%s\n" % self.pop())
         #sys.stdout.flush()
