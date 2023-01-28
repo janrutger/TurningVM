@@ -50,6 +50,12 @@ function println(text2print){
     printarea.scrollTop = printarea.scrollHeight;
 }
 
+function plotter(values){
+    console.log("Plot something")
+    document.getElementById("plotter").value += (values + "\n")
+    // printarea = document.getElementById('printer');
+    // printarea.scrollTop = printarea.scrollHeight;
+}
 
 
 
@@ -82,6 +88,11 @@ function sock_message(evt)
 
         } else if ("printline" in input){
             println(input["printline"])
+
+        } else if ("output" in input) {
+            if (input["output"] == '%_plotter') {
+                plotter(input["values"])}
+            
 
         } else {
             console.log("received other or wrong messagetype\n");

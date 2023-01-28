@@ -37,6 +37,11 @@ class Executer:
         self.execNOP.push(val)
         self.pc = self.pc + 1
         return "HALT"
+    
+    def output(self, operand):
+        val = self.memory.output(operand)
+        self.pc = self.pc + 1
+        return "HALT"
 
     def iobuff(self, operand):
         self.memory.makeStack("IObuff", operand)

@@ -11,8 +11,8 @@ from machine.vmachineSock import Machine
 from mmu import mmu
 from websock import UIconnect as UI
 
-memory = mmu.MMU()
 ui = UI.UIconnect()
+memory = mmu.MMU(ui)
 executes = Executer(memory, ui)
 machine = Machine(executes, ui)
 
@@ -31,18 +31,22 @@ def runner():
 def load():
     assembler = Assembler()
 
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMmain.asm")))
+
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMmain.asm")))
+        assembler.readASM("./assembler/A133058.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/main.asm")))
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/A133058.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/main.asm")))
-
+    #     assembler.readASM("./assembler/test.asm")))
 
 
 
@@ -58,7 +62,7 @@ def on_message(wsapp, message):
         job = threading.Thread(target=runner)
         job.start()
     elif "keyboard" in input:
-        machine.writeKbdBuff(input["keyboard"])
+        ui.writeKbdBuff(input["keyboard"])
 
         
         

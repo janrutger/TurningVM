@@ -2,8 +2,9 @@ import time
 import sys
 
 class MMU:
-    def __init__(self):
+    def __init__(self, ui):
         self.initMem()
+        self.ui = ui
         self.waitForInput = "REQ-done"
         self.stringTable = {}
 
@@ -42,11 +43,12 @@ class MMU:
     def dumpMem(self):
         return (self.memory)
 
-    def readIObuff(self, adres):
+    def output(self, adres):
         if adres in self.virtMemAdresses.keys():
             memType, memVal = self.memory[self.virtMemAdresses[adres]]
             if memType == "IObuff":
-                return (memVal)
+                #return (memVal)
+                self.ui.output(adres, memVal)
             else:
                 #return ("error: unknow memtype")
                 self.panic("FATAL: readIObuff [unknown memtype]")

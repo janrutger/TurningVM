@@ -15,12 +15,7 @@ import sys
 import copy
 
 
-# def get_input(*args, **kw):
-#     """Read a string from standard input."""
-#     if sys.version[0] == "2":
-#         return raw_input(*args, **kw)
-#     else:
-#         return input(*args, **kw)
+
 
 
 class Machine:
@@ -28,7 +23,7 @@ class Machine:
     def __init__(self, executer, ui):
         self.exec = executer
         self.ui = ui 
-        self.kbdBuff = []
+        #self.kbdBuff = []
         #self.plotter = plotter
         #self.keyboard = keyboard
 
@@ -57,9 +52,6 @@ class Machine:
     #     self.plotter.start(IObuff)
     #     return
 
-    def writeKbdBuff(self, value):
-        self.kbdBuff.append(value)
-        #print(self.kbdBuff)
 
     # def startKeyboard(self, IObuff):
     #     self.keyboard.start(IObuff)
@@ -145,12 +137,6 @@ class Machine:
         else:
             raise RuntimeError("Unknown opcode: '%s'" % op)
 
-    def get_input(self):
-        while len(self.kbdBuff) == 0:
-            time.sleep(1)
-        resp = self.kbdBuff.pop(0)
-        self.ui.println(resp)
-        return (resp)
 
 
     def repl(self):
@@ -158,7 +144,7 @@ class Machine:
 
         while True:
             try:
-                source = self.get_input()
+                source = self.ui.get_input()
                 #print(source)
                 code = list(self.tokenice(source))
                 self.parse(code)
@@ -233,6 +219,4 @@ class Machine:
     def println(self):
         val = str(self.pop())
         self.ui.println(val)
-        #self.ui.println(self.pop())
-        #sys.stdout.write("%s\n" % self.pop())
-        #sys.stdout.flush()
+        
