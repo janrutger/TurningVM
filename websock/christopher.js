@@ -52,10 +52,40 @@ function println(text2print){
 
 function plotter(values){
     console.log("Plot something")
-    document.getElementById("plotter").value += (values + "\n")
-    // printarea = document.getElementById('printer');
-    // printarea.scrollTop = printarea.scrollHeight;
-}
+    var ctx = document.getElementById("plotter");
+
+    xyValues =[]
+    for (let i = 0; i < values.length; i++) {
+        var x;
+        var y;
+        xyValues[i] = { x: i, y: values[i] };
+    }
+
+
+    var options = {
+        responsive: true, // Instruct chart js to respond nicely.
+        //maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+        legend: { display: false}
+        
+    };
+
+    // End Defining data
+    var myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'PLOTTER', // Name the series
+                data: xyValues, // Specify the data values array
+                borderColor: '#2196f3', // Add custom color border            
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            }]
+        },
+        options: options
+    });
+
+    
+    }
+
 
 
 
@@ -91,7 +121,9 @@ function sock_message(evt)
 
         } else if ("output" in input) {
             if (input["output"] == '%_plotter') {
-                plotter(input["values"])}
+                
+                plotter(input["values"])
+            }
             
 
         } else {

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <script type="text/javascript" src="christopher.js"></script>
         <link rel="stylesheet" type="text/css" href="./christopher.css"
         <title>Christopher</title>
@@ -54,10 +55,7 @@
             <input id="keyboard" name="keyboard"  type="text" size="50" >
             <p></p>
         </div>
-        <div class="plotter">
-            <textarea id="plotter" name="plotter" rows="9" cols="50" readonly></textarea>
-            <p></p>
-        </div>
-    </div>
+        <div style=" width: 800px;"><canvas id="plotter"></canvas></div>
+    </div> 
     </body>
 </html>
