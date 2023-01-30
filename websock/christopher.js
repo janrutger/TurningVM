@@ -1,6 +1,6 @@
 function connect()
   {
-    var url = "ws://0.0.0.0:8001/";
+    var url = "ws://camera:8001/";
     console.log("Opening websocket " + url + "\n");
     websock = new WebSocket(url);
     websock.onopen    = function(evt) {sock_open(evt)};
@@ -13,12 +13,19 @@ function connect()
     input.addEventListener("change", keyboard)
     println("Keyboard listener")
     
+    
   }
+
+function tapeReq () {
+    //console.log("tape Request")
+    websock.send(JSON.stringify({ "tapeReq": "tapeReq" }))
+}
 
 function register()
 {
     console.log("register button")
     websock.send(JSON.stringify({"register" : "webclient"}));
+    setInterval(tapeReq, 10)
     println("Activate console")
     
     
@@ -41,6 +48,7 @@ function start() {
     console.log("start button")
     websock.send(JSON.stringify({ "commando": "start" }));
     println("Start VMmachine")
+    
 }
 
 function println(text2print){
@@ -60,7 +68,6 @@ function plotter(values){
         var y;
         xyValues[i] = { x: i, y: values[i] };
     }
-
 
     var options = {
         responsive: true, // Instruct chart js to respond nicely.
@@ -120,8 +127,7 @@ function sock_message(evt)
             println(input["printline"])
 
         } else if ("output" in input) {
-            if (input["output"] == '%_plotter') {
-                
+            if (input["output"] == '%_plotter') {     
                 plotter(input["values"])
             }
             

@@ -63,6 +63,9 @@ def on_message(wsapp, message):
         job.start()
     elif "keyboard" in input:
         ui.writeKbdBuff(input["keyboard"])
+    elif "tapeReq" in input:
+        #print("Tapereq")
+        ui.send_status(executes.refresh_tapes({"ST", "RA", "RB", "S"}))
 
         
         

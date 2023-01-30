@@ -6,6 +6,7 @@ import json
 class UIconnect:
     def __init__(self):
         self.kbdBuff = []
+        self.updateCount = 0
 
     def set(self, ws):
         self.ws = ws
@@ -14,6 +15,7 @@ class UIconnect:
     def send_status(self, tapestate):
         message = {"tapeUpdate": tapestate}
         self.ws.send(json.dumps(message))
+        
 
     def println(self, text2print):
         message = {"printline": text2print}

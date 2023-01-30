@@ -25,8 +25,7 @@ class Exec_opcode:
 
             self.tapecommander.do_write(writeValue)
             self.tapecommander.do_move(moveValue)
-            self.ui.send_status(
-                self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+            #self.ui.send_status(self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
             stepCounter = stepCounter + 1
             #tapeprint =self.tapecommander.print_tape({"ST", "RA", "RB", "S"})
@@ -47,7 +46,7 @@ class Exec_opcode:
 
             self.tapecommander.do_write(writeValue)
             self.tapecommander.do_move(moveValue)
-            self.ui.send_status(self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+            #self.ui.send_status(self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
         
             stepCounter = stepCounter + 1

@@ -8,6 +8,7 @@ PORTNUM = 8001
 webclients = []
 clients    = []
 backends   = []
+
 # Websocket class to echo received data
 class Echo(WebSocket):
  
@@ -21,6 +22,15 @@ class Echo(WebSocket):
                         client.sendMessage(self.data)
                     except Exception as n:
                         print(n)
+
+        elif "tapeReq" in input:
+            #print("Received tapeReq")
+            for client in backends:
+                try:
+                    client.sendMessage(self.data)
+                except Exception as n:
+                    print(n)
+
         elif "register" in input:
             if input["register"] == "webclient":
                 webclients.clear()
