@@ -18,14 +18,14 @@ function connect()
 
 function tapeReq () {
     //console.log("tape Request")
-    websock.send(JSON.stringify({ "tapeReq": "tapeReq" }))
+    websock.send(JSON.stringify({ "request": "tapeUpdate" }))
 }
 
 function register()
 {
     console.log("register button")
     websock.send(JSON.stringify({"register" : "webclient"}));
-    setInterval(tapeReq, 10)
+    //setInterval(tapeReq, 10)
     println("Activate console")
     
     
@@ -53,10 +53,11 @@ function start() {
 
 function println(text2print){
     console.log("print something")
-    document.getElementById("printer").value += (text2print + "\n")
+    document.getElementById("printer").value += (text2print + "\r\n")
     printarea = document.getElementById('printer');
     printarea.scrollTop = printarea.scrollHeight;
 }
+
 
 function plotter(values){
     console.log("Plot something")
@@ -70,9 +71,10 @@ function plotter(values){
     }
 
     var options = {
-        responsive: true, // Instruct chart js to respond nicely.
+        responsive: false, // Instruct chart js to respond nicely.
         //maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
-        legend: { display: false}
+        legend: { display: false},
+        animation: false
         
     };
 
@@ -102,6 +104,7 @@ function sock_message(evt)
     {
         // console.log(evt.data);
         //console.log(evt.data)
+        const start = Date.now();
         input = JSON.parse(evt.data)
         //console.log(input)
         if ("tapeUpdate" in input) {
@@ -135,6 +138,9 @@ function sock_message(evt)
         } else {
             console.log("received other or wrong messagetype\n");
         }
+        const end = Date.now();
+        const elapsed = end - start;
+        console.log(elapsed);
     }
 
 function sock_open(evt)

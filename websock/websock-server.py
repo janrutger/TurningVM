@@ -19,11 +19,12 @@ class Echo(WebSocket):
             for client in webclients:
                 if client != self:
                     try:
+                        #print(self.data)
                         client.sendMessage(self.data)
                     except Exception as n:
                         print(n)
 
-        elif "tapeReq" in input:
+        elif "request" in input:
             #print("Received tapeReq")
             for client in backends:
                 try:
@@ -62,11 +63,12 @@ class Echo(WebSocket):
 
         elif "printline" in input:
             for client in webclients:
-                if client != self:
-                    try:
-                        client.sendMessage(self.data)
-                    except Exception as n:
-                        print(n)
+                try:
+                    client.sendMessage(self.data)
+                except Exception as n:
+                    print(n)
+                    
+
 
         elif "output" in input: 
             print("Output", input["output"])

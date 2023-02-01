@@ -21,6 +21,7 @@ class UIconnect:
         message = {"printline": text2print}
         self.ws.send(json.dumps(message))
 
+    
     def output(self, adres, values):
         message = {"output": adres, "values" : values}
         self.ws.send(json.dumps(message))
@@ -32,6 +33,7 @@ class UIconnect:
         self.kbdBuff.append(value)
 
     def get_input(self):
+        self.println("2>>")
         while len(self.kbdBuff) == 0:
             time.sleep(1)
         resp = self.kbdBuff.pop(0)

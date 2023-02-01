@@ -63,7 +63,6 @@
     add         
     storea      
     storem $n  
-
     push 700
     loadb
     teste      
@@ -71,6 +70,7 @@
 
     clra
     clrb
+    
     jump :loop
 
 :done   

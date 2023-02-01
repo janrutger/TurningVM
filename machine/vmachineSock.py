@@ -144,6 +144,7 @@ class Machine:
 
         while True:
             try:
+                self.ui.println(".>>")
                 source = self.ui.get_input()
                 #print(source)
                 code = list(self.tokenice(source))

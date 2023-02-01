@@ -33,10 +33,16 @@ class Tape:
     def read(self):
         return(self.tape[self.head])
 
-    def print(self):
+    def print(self): #sends the full tape lenght
         if self.head == len(self.tape) - 1:
             return [''.join(self.tape[:self.head]), self.tape[self.head], '']
         return [''.join(self.tape[:self.head]), self.tape[self.head], ''.join(self.tape[self.head+1:])]
+
+    # def print(self): #sends right/left 100 digits of the tape
+    #     if self.head == len(self.tape) - 1:
+    #         return [''.join(self.tape[self.head-100:self.head]), self.tape[self.head], '']
+    #     return [''.join(self.tape[self.head-100:self.head]), self.tape[self.head], ''.join(self.tape[self.head+1:self.head+100])]
+
 
     def hasName(self, name):
         return self.name == name

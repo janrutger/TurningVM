@@ -14,4 +14,4 @@ output %_plotter
 storem %_plotter
 output %_plotter
 
-halt
+ret
