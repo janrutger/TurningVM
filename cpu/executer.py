@@ -13,6 +13,7 @@ class Executer:
         self.tape_commander = tc.Tapecommander()
         self.execNOP = nop.Exec_no_opcode(self.tape_commander, ui)
         self.execOP = op.Exec_opcode(self.tape_commander, ui)
+        self.ui = ui
         self.pc = int(0)
 
     def refresh_tapes(self, tapes):
@@ -211,6 +212,7 @@ class Executer:
             # print(self.pc, address_value[0], address_value[1])
 
             exit_code = self.run_commando(address_value[0], address_value[1])
+            self.ui.send_status(self.refresh_tapes({"ST", "RA", "RB", "S"}))
 
         if exit_code == "CPUstopped":
             return "HALT"

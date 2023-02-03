@@ -149,6 +149,8 @@ class Machine:
                 #print(source)
                 code = list(self.tokenice(source))
                 self.parse(code)
+                self.ui.send_status(
+                    self.exec.refresh_tapes({"ST", "RA", "RB", "S"}))
             except (RuntimeError, IndexError) as e:
                 print("IndexError: %s" % e)
             except KeyboardInterrupt:

@@ -6,7 +6,8 @@ import json
 class UIconnect:
     def __init__(self):
         self.kbdBuff = []
-        self.updateCount = 0
+        self.updateRefreshCount = 0
+        self.updateRefreshRate  = 3
 
     def set(self, ws):
         self.ws = ws
@@ -39,3 +40,11 @@ class UIconnect:
         resp = self.kbdBuff.pop(0)
         self.println(resp)
         return (resp)
+
+    
+    def checkRefresh(self):
+        self.updateRefreshCount += 1
+        if self.updateRefreshCount % self.updateRefreshRate == 0:
+            return(True)
+        else:
+            return(False)
