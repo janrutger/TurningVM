@@ -7,7 +7,7 @@ class UIconnect:
     def __init__(self):
         self.kbdBuff = []
         self.updateRefreshCount = 0
-        self.updateRefreshRate  = 3
+        self.updateRefreshRate  = 1
 
     def set(self, ws):
         self.ws = ws

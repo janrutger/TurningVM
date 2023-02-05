@@ -73,11 +73,12 @@ def on_message(wsapp, message):
         
 
 def on_open(wsapp):
-    print("register")
-    message = {"register": "backend"}
-    wsapp.send(json.dumps(message))
-    text2print = {"printline" : "Backend activated"}
-    wsapp.send(json.dumps(text2print))
+    #print("register")
+    #message = {"register": "backend"}
+    #wsapp.send(json.dumps(message))
+    #text2print = {"printline" : "Backend activated"}
+    #wsapp.send(json.dumps(text2print))
+    print("register websocket")
     ui.set(wsapp)
 
 

@@ -23,8 +23,8 @@ function tapeReq () {
 
 function register()
 {
-    console.log("register button")
-    websock.send(JSON.stringify({"register" : "webclient"}));
+    //console.log("register button")
+    //websock.send(JSON.stringify({"register" : "webclient"}));
     //setInterval(tapeReq, 10)
     println("Activate console")
     
