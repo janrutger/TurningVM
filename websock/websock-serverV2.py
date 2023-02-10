@@ -5,9 +5,9 @@ from SimpleWebSocketServer import WebSocket, SimpleWebSocketServer
  
 PORTNUM = 8001
 
-#webclients = []
+
 clients    = []
-#backends   = []
+
 
 # Websocket class to echo received data
 class Echo(WebSocket):
@@ -23,72 +23,7 @@ class Echo(WebSocket):
                 except Exception as n:
                     print(n)
 
-        # elif "request" in input:
-        #     #print("Received tapeReq")
-        #     for client in backends:
-        #         try:
-        #             client.sendMessage(self.data)
-        #         except Exception as n:
-        #             print(n)
-
-        # elif "register" in input:
-        #     if input["register"] == "webclient":
-        #         webclients.clear()
-        #         webclients.append(self)
-        #     elif input["register"] == "backend":
-        #         backends.clear()
-        #         backends.append(self)
-        #         clients.remove(self)
-            
-        #     print(self.address, "set client", len(clients),
-        #           len(webclients), len(backends))
-
-        # elif "commando" in input:
-        #     if input["commando"] == "load":
-        #         for client in backends:
-        #             if client != self:
-        #                 try:
-        #                     client.sendMessage(self.data)
-        #                 except Exception as n:
-        #                     print(n)
-            
-        #     if input["commando"] == "start":
-        #         for client in backends:
-        #             if client != self:
-        #                 try:
-        #                     client.sendMessage(self.data)
-        #                 except Exception as n:
-        #                     print(n)
-
-        # elif "printline" in input:
-        #     for client in webclients:
-        #         try:
-        #             client.sendMessage(self.data)
-        #         except Exception as n:
-        #             print(n)
-                    
-
-
-        # elif "output" in input: 
-        #     print("Output", input["output"])
-        #     for client in webclients:
-        #         try:
-        #             client.sendMessage(self.data)
-        #         except Exception as n:
-        #             print(n)
-
-            
-        # elif "keyboard" in input:
-        #     print("Keyboard", input)
-        #     for client in backends:
-        #         try:
-        #             client.sendMessage(self.data)
-        #         except Exception as n:
-        #             print(n)
-
         
-        # else:
-        #     print("Unkown input messagetype", input)
         
     def handleConnected(self):
         print(self.address, 'connected')
