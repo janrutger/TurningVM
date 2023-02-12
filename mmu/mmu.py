@@ -75,16 +75,30 @@ class MMU:
             memType, memVal = self.memory[self.virtMemAdresses[adres]]
             if memType == "IObuff":
                 if len(memVal) == 0:
-                    self.waitForInput = adres
-                    while self.waitForInput != "REQ-done":
-                        time.sleep(1)
+                    tokens = self.ui.kbdRead(self.stringTable)
+                    for token in tokens:
+                        self.writeIObuff(adres, token)
                 return (self.readMem(adres))
             else:
-                #return ("error: unknow memtype")
                 self.panic("FATAL: input [unknown memtype]")
         else:
-            #return ("error: unknow mem adres")
             self.panic("FATAL: input [unknown mem adress]")
+
+    # def input(self, adres):
+    #     if adres in self.virtMemAdresses.keys():
+    #         memType, memVal = self.memory[self.virtMemAdresses[adres]]
+    #         if memType == "IObuff":
+    #             if len(memVal) == 0:
+    #                 self.waitForInput = adres
+    #                 while self.waitForInput != "REQ-done":
+    #                     time.sleep(1)
+    #             return (self.readMem(adres))
+    #         else:
+    #             #return ("error: unknow memtype")
+    #             self.panic("FATAL: input [unknown memtype]")
+    #     else:
+    #         #return ("error: unknow mem adres")
+    #         self.panic("FATAL: input [unknown mem adress]")
     
     def readElement(self, adres, element):
         element = int(element, 2)

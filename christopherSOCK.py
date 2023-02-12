@@ -31,17 +31,17 @@ def runner():
 def load():
     assembler = Assembler()
 
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMloader.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMmain.asm")))
-
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/A133058.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/main.asm")))
+        assembler.readASM("./assembler/VMmain.asm")))
+
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/A133058.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/main.asm")))
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))

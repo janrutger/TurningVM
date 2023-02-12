@@ -126,7 +126,9 @@ class Executer:
 
     def prt(self, operand):
         val = self.execNOP.pull()
-        print("-->", int(val, 2))
+        text2print = int(val, 2)
+        self.ui.println(text2print)
+        #print("-->", int(val, 2))
         self.pc = self.pc + 1
         return "HALT"
 
