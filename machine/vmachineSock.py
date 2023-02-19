@@ -8,10 +8,7 @@ waarvoor veel dank.
 from __future__ import print_function
 import threading
 import time
-# from collections import deque
-# from io import StringIO
 import sys
-# import tokenize
 import copy
 
 
@@ -19,13 +16,9 @@ import copy
 
 
 class Machine:
-    #def __init__(self, executer, plotter, keyboard):
     def __init__(self, executer, ui):
         self.exec = executer
         self.ui = ui 
-        #self.kbdBuff = []
-        #self.plotter = plotter
-        #self.keyboard = keyboard
 
 
         self.word_map = {}
@@ -48,14 +41,6 @@ class Machine:
             "halt": self.halt
         }
 
-    # def startPlotter(self, IObuff):
-    #     self.plotter.start(IObuff)
-    #     return
-
-
-    # def startKeyboard(self, IObuff):
-    #     self.keyboard.start(IObuff)
-    #     return
 
     def pop(self):
         val = self.exec.run_commando('PULL', None)
@@ -67,7 +52,6 @@ class Machine:
         self.exec.run_commando('PUSH', value)
 
     def top(self):
-        # return self.data_stack.top()
         value = self.pop()
         self.push(value)
         return value
@@ -163,14 +147,8 @@ class Machine:
         self.exec.run_rpc([('CALL', '@plus'), ('HALT', '')])
 
     def halt(self):
-        # if self.plotter.online:
-        #     self.plotter.stop()
-        #     self.plt0.join()
-        # if self.keyboard.online:
-        #     self.keyboard.stop()
-        #     self.kbd.join()
-        # sys.exit(0)
-        exit()
+        sys.exit(0)
+        #exit()
 
     def main(self):
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
@@ -178,12 +156,6 @@ class Machine:
     def init(self):
         self.exec.run_rpc([('SPEED', 1), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('OUTPUT', '%_plotter'), ('IOBUFF', '%_kbd'),
                            ('LIFO', '%_system'), ('HALT', '')])
-        # if not self.plotter.online:
-        #     self.plt0 = threading.Thread(target=self.startPlotter, args=(('%_plotter',)))
-        #     self.plt0.start()
-        # if not self.keyboard.online:
-        #     self.kbd = threading.Thread(target=self.startKeyboard, args=(('%_kbd',)))
-        #     self.kbd.start()
 
     def minus(self):
         self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])

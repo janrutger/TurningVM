@@ -1,7 +1,6 @@
 # import threading
 import time
 
-# from christopherUI import tapeLayout
 from cpu import tapecommander as tc
 from cpu import exec_no_opcode as nop
 from cpu import exec_opcode as op
@@ -183,7 +182,6 @@ class Executer:
         return "HALT"
 
     def speed(self, operand):
-        #self.tape_commander.CPUspeed = operand
         self.ui.setSpeed(operand)
         self.pc = self.pc + 1
         return "HALT"

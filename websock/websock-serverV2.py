@@ -4,11 +4,7 @@ import signal, sys, json
 from SimpleWebSocketServer import WebSocket, SimpleWebSocketServer
  
 PORTNUM = 8001
-
-
 clients    = []
-
-
 # Websocket class to echo received data
 class Echo(WebSocket):
  

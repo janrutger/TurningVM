@@ -5,8 +5,6 @@ import json
 
 from assembler.assembler import Assembler
 from cpu.executer import Executer
-#from machine.keyboard import Keyboard
-#from machine.plotter import Plotter
 from machine.vmachineSock import Machine
 from mmu import mmu
 from websock import UIconnect as UI
@@ -19,11 +17,6 @@ machine = Machine(executes, ui)
 def runner():
 
     print("runner")
-    #plotter = Plotter(memory)
-    #keyboard = Keyboard(memory)
-    #executes = Executer(memory, ui)
-    #machine = Machine(executes, plotter, keyboard)
-    #machine = Machine(executes)
     exitcode = machine.repl()
 
 
@@ -31,10 +24,10 @@ def runner():
 def load():
     assembler = Assembler()
 
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMloader.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMmain.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMmain.asm")))
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
@@ -48,6 +41,10 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/test.asm")))
 
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/VMloader.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/SoManyZeross.asm")))
 
 
 
@@ -73,11 +70,8 @@ def on_message(wsapp, message):
         
 
 def on_open(wsapp):
-    #print("register")
-    #message = {"register": "backend"}
-    #wsapp.send(json.dumps(message))
-    #text2print = {"printline" : "Backend activated"}
-    #wsapp.send(json.dumps(text2print))
+    text2print = {"printline" : "Backend activated"}
+    wsapp.send(json.dumps(text2print))
     print("register websocket")
     ui.set(wsapp)
 
