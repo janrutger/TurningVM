@@ -4,13 +4,13 @@
 PRINT 10
 
 LET a = 5
-LET b = 1
+LET b = 4
 
-LET c = a + b - 1
+LET c = a + b / 2
 
 PRINT c
 
-PRINT 2 * 3
+PRINT c * 3
 
 
 #WHILE nums > 0 REPEAT

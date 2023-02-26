@@ -13,7 +13,7 @@ push 5
 call @swap
 storei
 push 'b'
-push 1
+push 4
 call @swap
 storei
 push 'c'
@@ -22,10 +22,10 @@ loadi
 push '+'
 push 'b'
 loadi
+push '/'
+push 2
 call @swap
 calli
-push '-'
-push 1
 call @swap
 calli
 call @swap
@@ -33,7 +33,8 @@ storei
 push 'c'
 loadi
 prt
-push 2
+push 'c'
+loadi
 push '*'
 push 3
 call @swap
