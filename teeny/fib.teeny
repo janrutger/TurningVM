@@ -6,9 +6,11 @@ PRINT 10
 LET a = 5
 LET b = 1
 
-LET c = a + b
+LET c = a + b - 1
 
 PRINT c
+
+PRINT 2 * 3
 
 
 #WHILE nums > 0 REPEAT

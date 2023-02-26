@@ -221,9 +221,11 @@ class Parser:
         self.unary()
         # Can have 0 or more *// and expressions.
         while self.checkToken(TokenType.ASTERISK) or self.checkToken(TokenType.SLASH):
-            self.emitter.emit(self.curToken.text)
+            self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
             self.nextToken()
             self.unary()
+            self.emitter.emitLine("call @swap")
+            self.emitter.emitLine("calli")
 
 
     # unary ::= ["+" | "-"] primary

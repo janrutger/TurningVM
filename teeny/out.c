@@ -24,9 +24,19 @@ push 'b'
 loadi
 call @swap
 calli
+push '-'
+push 1
+call @swap
+calli
 call @swap
 storei
 push 'c'
 loadi
+prt
+push 2
+push '*'
+push 3
+call @swap
+calli
 prt
 ret
