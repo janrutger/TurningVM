@@ -36,15 +36,18 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/main.asm")))
 
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMloader.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/test.asm")))
-
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/SoManyZeross.asm")))
+        assembler.readASM("./assembler/VMbasicIO.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/test.asm")))
+
+
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/SoManyZeross.asm")))
 
 
 
