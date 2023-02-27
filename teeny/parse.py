@@ -13,8 +13,13 @@ class Parser:
 
         self.curToken = None
         self.peekToken = None
+        self.labelnumber = 0 
         self.nextToken()
         self.nextToken()    # Call this twice to initialize current and peek.
+
+    def lnumber(self):
+        self.labelnumber = self.labelnumber + 1
+        return(str(self.labelnumber))
 
     # Return true if the current token matches.
     def checkToken(self, kind):
@@ -93,20 +98,29 @@ class Parser:
 
         # "IF" comparison "THEN" block "ENDIF"
         elif self.checkToken(TokenType.IF):
+            num = self.lnumber()
             self.nextToken()
-            self.emitter.emit("if(")
+            self.emitter.emitLine("call " + ":" + "_if_comp_" + num)
+            self.emitter.emitLine("loada")
+            self.emitter.emitLine("testz")
+            self.emitter.emitLine("jumpf " + ":" + "_if_end_" + num)
+            self.emitter.emitLine("jump " + ":" + "_if_action_" + num)
+            self.emitter.emitLine(":" + "_if_comp_" + num)
+
             self.comparison()
+            self.emitter.emitLine("ret")
 
             self.match(TokenType.THEN)
             self.nl()
-            self.emitter.emitLine("){")
+            self.emitter.emitLine(":" + "_if_action_" + num)
 
             # Zero or more statements in the body.
             while not self.checkToken(TokenType.ENDIF):
                 self.statement()
 
             self.match(TokenType.ENDIF)
-            self.emitter.emitLine("}")
+            self.emitter.emitLine(":" + "_if_end_" + num)
+            self.emitter.emitLine("clra")
 
         # "WHILE" comparison "REPEAT" block "ENDWHILE"
         elif self.checkToken(TokenType.WHILE):
@@ -192,14 +206,19 @@ class Parser:
         self.expression()
         # Must be at least one comparison operator and another expression.
         if self.isComparisonOperator():
-            self.emitter.emit(self.curToken.text)
+            self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
             self.nextToken()
             self.expression()
+            self.emitter.emitLine("call @swap")
+            self.emitter.emitLine("calli")
         # Can have 0 or more comparison operator and expressions.
         while self.isComparisonOperator():
-            self.emitter.emit(self.curToken.text)
+            self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
             self.nextToken()
             self.expression()
+            self.emitter.emitLine("call @swap")
+            self.emitter.emitLine("calli")
+
 
 
     # expression ::= term {( "-" | "+" ) term}

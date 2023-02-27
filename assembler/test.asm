@@ -1,50 +1,41 @@
 @main
 call @basicsys
-push 'teller'
+push 'a'
 set $MEM
-push 'som'
+push 'b'
 set $MEM
-push 'getal'
-set $MEM
-push 'teller'
+push 'a'
 push 1
 call @swap
 storei
-push 'som'
-push 0
+push 'b'
+push 1
 call @swap
 storei
-:lus
-push 'getal'
-call @input
-call @swap
-storei
-push 'som'
-push 'som'
+call :_if_comp_1
+loada
+testz
+jumpf :_if_end_1
+jump :_if_action_1
+:_if_comp_1
+push 'a'
 loadi
-push '+'
-push 'getal'
+push '!='
+push 'b'
 loadi
 call @swap
 calli
-call @swap
-storei
-push 'som'
+ret
+:_if_action_1
+push 'a'
 loadi
-push '/'
-push 'teller'
+push '+'
+push 'a'
 loadi
 call @swap
 calli
 prt
-push 'teller'
-push 'teller'
-loadi
-push '+'
-push 1
-call @swap
-calli
-call @swap
-storei
-jump :lus
+:_if_end_1
+clra
 ret
+

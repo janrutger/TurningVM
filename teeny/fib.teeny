@@ -1,15 +1,20 @@
-LET teller = 1
-LET som = 0
+#LET teller = 1
+#LET som = 0
 
 
-LABEL lus
-    INPUT getal
-    LET som = som + getal
-    PRINT som / teller
-    LET teller = teller + 1
-    GOTO lus
+#LABEL lus
+#    INPUT getal
+#    LET som = som + getal
+#    PRINT som / teller
+#    LET teller = teller + 1
+#    GOTO lus
 
+LET a = 1
+LET b = 1
 
+IF a == b THEN
+    PRINT a + a
+ENDIF
 
 
 #WHILE nums > 0 REPEAT

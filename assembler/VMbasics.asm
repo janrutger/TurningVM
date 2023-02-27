@@ -22,6 +22,9 @@
     push '=='
     index @eq
 
+    push '!='
+    index @neq
+
     speed 1
 
 ret
