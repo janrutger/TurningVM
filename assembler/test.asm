@@ -1,43 +1,50 @@
 @main
-call @basicio
-push 'a'
+call @basicsys
+push 'teller'
 set $MEM
-push 'b'
+push 'som'
 set $MEM
-push 'c'
+push 'getal'
 set $MEM
-push 10
-prt
-push 'a'
-push 5
+push 'teller'
+push 1
 call @swap
 storei
-push 'b'
-push 4
+push 'som'
+push 0
 call @swap
 storei
-push 'c'
-push 'a'
+:lus
+push 'getal'
+call @input
+call @swap
+storei
+push 'som'
+push 'som'
 loadi
 push '+'
-push 'b'
+push 'getal'
 loadi
-push '/'
-push 2
-call @swap
-calli
 call @swap
 calli
 call @swap
 storei
-push 'c'
+push 'som'
 loadi
-prt
-push 'c'
+push '/'
+push 'teller'
 loadi
-push '*'
-push 3
 call @swap
 calli
 prt
+push 'teller'
+push 'teller'
+loadi
+push '+'
+push 1
+call @swap
+calli
+call @swap
+storei
+jump :lus
 ret

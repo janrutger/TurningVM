@@ -1,16 +1,15 @@
-# PRINT "How many fibonacci numbers do you want?"
-# INPUT nums
-# PRINT ""
-PRINT 10
+LET teller = 1
+LET som = 0
 
-LET a = 5
-LET b = 4
 
-LET c = a + b / 2
+LABEL lus
+    INPUT getal
+    LET som = som + getal
+    PRINT som / teller
+    LET teller = teller + 1
+    GOTO lus
 
-PRINT c
 
-PRINT c * 3
 
 
 #WHILE nums > 0 REPEAT

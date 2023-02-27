@@ -49,7 +49,7 @@ class Parser:
     # program ::= {statement}
     def program(self):
         self.emitter.headerLine("@main")
-        self.emitter.headerLine("call @basicio")
+        self.emitter.headerLine("call @basicsys")
         
         # Since some newlines are required in our grammar, need to skip the excess.
         while self.checkToken(TokenType.NEWLINE):
@@ -134,14 +134,14 @@ class Parser:
                 self.abort("Label already exists: " + self.curToken.text)
             self.labelsDeclared.add(self.curToken.text)
 
-            self.emitter.emitLine(self.curToken.text + ":")
+            self.emitter.emitLine(":" + self.curToken.text)
             self.match(TokenType.IDENT)
 
         # "GOTO" ident
         elif self.checkToken(TokenType.GOTO):
             self.nextToken()
             self.labelsGotoed.add(self.curToken.text)
-            self.emitter.emitLine("goto " + self.curToken.text + ";")
+            self.emitter.emitLine("jump " + ":" + self.curToken.text)
             self.match(TokenType.IDENT)
 
         # "LET" ident = expression
@@ -151,10 +151,8 @@ class Parser:
             #  Check if ident exists in symbol table. If not, declare it.
             if self.curToken.text not in self.symbols:
                 self.symbols.add(self.curToken.text)
-                self.emitter.headerLine(
-                    "push " + "'" + self.curToken.text + "'")
-                self.emitter.headerLine(
-                    "set $MEM")
+                self.emitter.headerLine("push " + "'" + self.curToken.text + "'")
+                self.emitter.headerLine("set $MEM")
 
             self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
             self.match(TokenType.IDENT)
@@ -171,14 +169,14 @@ class Parser:
             # If variable doesn't already exist, declare it.
             if self.curToken.text not in self.symbols:
                 self.symbols.add(self.curToken.text)
-                self.emitter.headerLine("float " + self.curToken.text + ";")
+                self.emitter.headerLine("push " + "'" + self.curToken.text + "'")
+                self.emitter.headerLine("set $MEM")
 
             # Emit scanf but also validate the input. If invalid, set the variable to 0 and clear the input.
-            self.emitter.emitLine("if(0 == scanf(\"%" + "f\", &" + self.curToken.text + ")) {")
-            self.emitter.emitLine(self.curToken.text + " = 0;")
-            self.emitter.emit("scanf(\"%")
-            self.emitter.emitLine("*s\");")
-            self.emitter.emitLine("}")
+            self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+            self.emitter.emitLine("call @input")
+            self.emitter.emitLine("call @swap")
+            self.emitter.emitLine("storei")
             self.match(TokenType.IDENT)
 
         # This is not a valid statement. Error!
