@@ -25,6 +25,12 @@
     push '!='
     index @neq
 
+    push '>'
+    index @gt
+
+    push '<'
+    index @lt
+
     speed 1
 
 ret

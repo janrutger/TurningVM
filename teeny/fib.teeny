@@ -9,18 +9,41 @@
 #    LET teller = teller + 1
 #    GOTO lus
 
+
+
+
+#LET a = 1
+#WHILE a != 5  REPEAT
+#    LET b = 1
+##    WHILE b != 5 REPEAT
+#        PRINT a * b
+#        LET b = b + 1
+#    ENDWHILE
+#    LET a = a + 1      
+#ENDWHILE    
+
+
+INPUT nums
 LET a = 1
-LET b = 1
+WHILE nums > 1 REPEAT
+    LET c = a * nums
+    LET a = c
+    LET nums = nums - 1
+    PRINT a
+ENDWHILE
 
-IF a == b THEN
-    PRINT a + a
-ENDIF
 
 
-#WHILE nums > 0 REPEAT
-#    PRINT a
-#    LET c = a + b
-#    LET a = b
-#    LET b = c
-#    LET nums = nums - 1
-#ENDWHILE
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,41 +1,62 @@
 @main
 call @basicsys
+push 'nums'
+set $MEM
 push 'a'
 set $MEM
-push 'b'
+push 'c'
 set $MEM
+push 'nums'
+call @input
+call @swap
+storei
 push 'a'
 push 1
 call @swap
 storei
-push 'b'
-push 1
-call @swap
-storei
-call :_if_comp_1
+:_while_start_0
+call :_while_comp_0
 loada
 testz
-jumpf :_if_end_1
-jump :_if_action_1
-:_if_comp_1
-push 'a'
+jumpf :_while_end_0
+jump :_while_action_0
+:_while_comp_0
+push 'nums'
 loadi
-push '!='
-push 'b'
-loadi
+push '>'
+push 1
 call @swap
 calli
 ret
-:_if_action_1
+:_while_action_0
+push 'c'
 push 'a'
 loadi
-push '+'
-push 'a'
+push '*'
+push 'nums'
 loadi
 call @swap
 calli
+call @swap
+storei
+push 'a'
+push 'c'
+loadi
+call @swap
+storei
+push 'nums'
+push 'nums'
+loadi
+push '-'
+push 1
+call @swap
+calli
+call @swap
+storei
+push 'a'
+loadi
 prt
-:_if_end_1
+jump :_while_start_0
+:_while_end_0
 clra
 ret
-

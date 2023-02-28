@@ -13,7 +13,7 @@ class Parser:
 
         self.curToken = None
         self.peekToken = None
-        self.labelnumber = 0 
+        self.labelnumber = -1 
         self.nextToken()
         self.nextToken()    # Call this twice to initialize current and peek.
 
@@ -124,20 +124,31 @@ class Parser:
 
         # "WHILE" comparison "REPEAT" block "ENDWHILE"
         elif self.checkToken(TokenType.WHILE):
+            num = self.lnumber()
             self.nextToken()
-            self.emitter.emit("while(")
+            self.emitter.emitLine(":" + "_while_start_" + num)
+            self.emitter.emitLine("call " + ":" + "_while_comp_" + num)
+            self.emitter.emitLine("loada")
+            self.emitter.emitLine("testz")
+            self.emitter.emitLine("jumpf " + ":" + "_while_end_" + num)
+            self.emitter.emitLine("jump " + ":" + "_while_action_" + num)
+            self.emitter.emitLine(":" + "_while_comp_" + num)
+             
             self.comparison()
+            self.emitter.emitLine("ret")
 
             self.match(TokenType.REPEAT)
             self.nl()
-            self.emitter.emitLine("){")
+            self.emitter.emitLine(":" + "_while_action_" + num)
 
             # Zero or more statements in the loop body.
             while not self.checkToken(TokenType.ENDWHILE):
                 self.statement()
+            self.emitter.emitLine("jump " + ":" + "_while_start_" + num)
 
             self.match(TokenType.ENDWHILE)
-            self.emitter.emitLine("}")
+            self.emitter.emitLine(":" + "_while_end_" + num)
+            self.emitter.emitLine("clra")
 
         # "LABEL" ident
         elif self.checkToken(TokenType.LABEL):
