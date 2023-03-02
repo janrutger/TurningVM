@@ -94,22 +94,9 @@ ret
         call :clearAB
 ret
 
-@lt
-    loada
-    loadb
-    testg
-    jumpt :settrue_lt
-    push 1
-    jump :end_lt
-    :settrue_lt
-        push 0
-    :end_lt
-        call :clearAB
-ret
-
 @gt
-    loadb
     loada
+    loadb
     testg
     jumpt :settrue_gt
     push 1
@@ -117,6 +104,19 @@ ret
     :settrue_gt
         push 0
     :end_gt
+        call :clearAB
+ret
+
+@lt
+    loadb
+    loada
+    testg
+    jumpt :settrue_lt
+    push 1
+    jump :end_lt
+    :settrue_lt
+        push 0
+    :end_lt
         call :clearAB
 ret
 

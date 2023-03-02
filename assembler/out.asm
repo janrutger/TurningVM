@@ -24,7 +24,7 @@ jump :_while_action_0
 push 'nums'
 loadi
 push '>'
-push 0
+push 1
 call @swap
 calli
 ret

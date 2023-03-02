@@ -90,8 +90,6 @@ class Parser:
 
             else:
                 # Expect an expression and print the result as int.
-                #self.emitter.emitLine("push " + self.curToken.text)
-                
                 self.expression()
                 self.emitter.emitLine("prt")
 

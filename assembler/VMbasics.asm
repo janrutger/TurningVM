@@ -1,5 +1,5 @@
 @basicsys
-    speed 0
+    speed 1
 
     push '+'
     index @plus 
@@ -25,11 +25,12 @@
     push '!='
     index @neq
 
+    #number reverse on the stack,so < and > reversed
     push '>'
-    index @gt
+    index @lt
 
     push '<'
-    index @lt
+    index @gt
 
     speed 1
 

@@ -13,7 +13,7 @@ def main():
 
     # Initialize the lexer, emitter, and parser.
     lexer = Lexer(input)
-    emitter = Emitter("out.c")
+    emitter = Emitter("out.asm")
     parser = Parser(lexer, emitter)
 
     parser.program() # Start the parser.

@@ -1,7 +1,7 @@
 # Emitter object keeps track of the generated code and outputs it.
 class Emitter:
-    def __init__(self, fullPath):
-        self.fullPath = fullPath
+    def __init__(self, out):
+        self.fullPath = "../assembler/out.asm"
         self.header = ""
         self.code = ""
 
