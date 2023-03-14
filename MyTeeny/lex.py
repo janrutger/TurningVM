@@ -57,9 +57,9 @@ class Lexer:
         elif self.curChar == '%':
             token = Token(self.curChar, TokenType.WORD)
         elif self.curChar == '{':
-            token = Token(self.curChar, TokenType.WORD)
+            token = Token(self.curChar, TokenType.OPENC)
         elif self.curChar == '}':
-            token = Token(self.curChar, TokenType.WORD)
+            token = Token(self.curChar, TokenType.CLOSEC)
 
         elif self.curChar == '=':
             # Check whether this token is = or ==

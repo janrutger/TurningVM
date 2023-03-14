@@ -65,6 +65,7 @@ class Parser:
     # statement  ::=  
         # One of the following statements...
     def statement(self):
+        print("STATEMENT")
         # Check the first token to see what kind of statement this is.
         #   "LABEL" ident nl
         if self.checkToken(TokenType.LABEL):
@@ -75,21 +76,43 @@ class Parser:
             if self.curToken.text in self.labelsDeclared:
                 self.abort("Label already exists: " + self.curToken.text)
             self.labelsDeclared.add(self.curToken.text)
-
+            print(self.curToken.text)
             self.match(TokenType.IDENT)
+            self.nl() 
 
         # | "GOTO" ident nl
         elif self.checkToken(TokenType.GOTO):
             print("STATEMENT-GOTO")
             self.nextToken()
             self.labelsGotoed.add(self.curToken.text)
+            print(self.curToken.text)
             self.match(TokenType.IDENT)
+            self.nl() 
 
         # | "DEFINE" nl {statement} nl "AS" ident nl
         elif self.checkToken(TokenType.DEFINE):
             pass
 
-        # | "{" ({expression} | st) "}"   "REPEAT"   nl {statement} nl "END" nl	   
+        # | "{" ({expression} | st) "}"   "REPEAT"   nl {statement} nl "END" nl	
+        elif self.checkToken(TokenType.OPENC):
+            print("STATEMENT-open")
+            self.nextToken()  
+            if self.checkToken(TokenType.DOT) or self.checkToken(TokenType.DDOT):
+                self.st()
+            else:
+                self.expression()
+            
+            self.match(TokenType.CLOSEC)
+
+            self.match(TokenType.REPEAT)
+            print("Repeat")
+            self.nextToken()
+            #self.nl()
+            self.statement()
+            print("End")
+            self.match(TokenType.END)
+            self.nl()
+
         
         
         # | ({expression} | st) ( "PRINT" nl | "PLOT" nl | "AS" ident nl | "DO"   nl {statement} nl "END" nl | "GOTO" ident) nl | nl )
@@ -98,6 +121,38 @@ class Parser:
                 self.st()
             else:
                 self.expression()
+            
+            if self.checkToken(TokenType.PRINT):
+                print("Print")
+                self.nextToken()
+                self.nl()
+            elif self.checkToken(TokenType.PLOT):
+                print("Plot")
+                self.nextToken()
+                self.nl()
+            elif self.checkToken(TokenType.AS):
+                print("As")
+                self.nextToken()
+                print(self.curToken.text)
+                self.match(TokenType.IDENT)  
+                self.nl()
+            elif self.checkToken(TokenType.DO):
+                print("Do")
+                self.nextToken()
+                self.nl()
+                self.statement()
+                print("End")
+                self.match(TokenType.END)
+                self.nl()
+            elif self.checkToken(TokenType.GOTO):
+                print("Goto")
+                self.nextToken()
+                self.labelsGotoed.add(self.curToken.text)
+                print(self.curToken.text)
+                self.match(TokenType.IDENT)  
+                self.nl()   
+            else:
+                self.nl()
 
     # expression ::=	INTEGER | word | ident
     def expression(self):
@@ -105,27 +160,33 @@ class Parser:
         while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.IDENT):
             if self.checkToken(TokenType.NUMBER):
                 print("Number")
+                self.nextToken()
             elif self.checkToken(TokenType.IDENT):
-                print("Ident")
+                self.ident()
             else:  #Must be an word
-                print("Word")
-
-            self.nextToken()
-        self.nl()
+                self.word()
+        
 
 
     # word ::=	 ('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT')
+    def word(self):
+        print("word")
+        self.nextToken()
 
     # ident ::=	STRING
+    def ident(self):
+        print("ident")
+        self.nextToken()
 
     # st ::= ('.'|'..')
     def st(self):
         print("st")
+        self.nextToken()
 
-    # nl ::= '\n'+
+    
     # nl ::= '\n'+
     def nl(self):
-        print("NEWLINE")
+        print("Newline")
 
         # Require at least one newline.
         self.match(TokenType.NEWLINE)
