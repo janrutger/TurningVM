@@ -101,14 +101,15 @@ class Parser:
                 self.st()
             else:
                 self.expression()
-            
             self.match(TokenType.CLOSEC)
 
             self.match(TokenType.REPEAT)
             print("Repeat")
-            self.nextToken()
-            #self.nl()
-            self.statement()
+            #self.nextToken()
+            self.nl()
+            while not self.checkToken(TokenType.END):
+                self.statement()
+                
             print("End")
             self.match(TokenType.END)
             self.nl()
@@ -134,13 +135,16 @@ class Parser:
                 print("As")
                 self.nextToken()
                 print(self.curToken.text)
+                if self.curToken.text not in self.symbols:
+                    self.symbols.add(self.curToken.text)
                 self.match(TokenType.IDENT)  
                 self.nl()
             elif self.checkToken(TokenType.DO):
                 print("Do")
                 self.nextToken()
                 self.nl()
-                self.statement()
+                while not self.checkToken(TokenType.END):
+                    self.statement()
                 print("End")
                 self.match(TokenType.END)
                 self.nl()
@@ -170,17 +174,25 @@ class Parser:
 
     # word ::=	 ('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT')
     def word(self):
-        print("word")
+        print(self.curToken.text)
         self.nextToken()
 
     # ident ::=	STRING
     def ident(self):
-        print("ident")
+        print(self.curToken.text)
+        if self.curToken.text not in self.symbols:
+                self.abort("Referencing variable before assignment: " + self.curToken.text)
+
         self.nextToken()
 
     # st ::= ('.'|'..')
     def st(self):
         print("st")
+        if self.checkToken(TokenType.DDOT):
+            print(self.curToken.text)
+        else:
+            print(self.curToken.text)
+            
         self.nextToken()
 
     

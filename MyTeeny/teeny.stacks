@@ -1,38 +1,23 @@
-
-a
-SWAP
-5 5 + DUP
-..
-. 
-var
-
-5 PRINT
+1
 .. PLOT
+.. PLOT
+. AS previous
 
-5 AS jrk 
+2 AS next
 
-.. AS tmp
+{next 700 !=} REPEAT
+previous next GCD AS cfactor
+1 cfactor == DO
+	previous next 1 + + 
+GOTO nextnumber
+      END
 
-5 5 + AS abc
+previous cfactor / 
 
-5 DO
-    4 5 +
-END
-
-LABEL label1
-5 GOTO label1
-GOTO label1
-
-
-{5 6 ==} REPEAT
-  5 5
-END
-
-{.} REPEAT
-  5 !=
+LABEL nextnumber
+.. PLOT
+. AS previous 
+next 1 + AS next
 END
 
 
-5 DO
-    4 5 +
-END
