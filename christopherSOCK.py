@@ -39,7 +39,7 @@ def load():
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMbasics.asm")))
+        assembler.readASM("./assembler/VMstacks.asm")))
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/out.asm")))
 

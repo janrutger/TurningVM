@@ -1,0 +1,41 @@
+program ::= {statement}
+statement ::= "PRINT" (expression | string) nl
+            | "IF" comparison "THEN" nl {statement} "ENDIF" nl
+            | "WHILE" comparison "REPEAT" nl {statement} "ENDWHILE" nl
+            | "LABEL" ident nl
+            | "GOTO" ident nl
+            | "LET" ident "=" expression nl
+            | "INPUT" ident nl
+comparison ::= expression (("==" | "!=" | ">" | ">=" | "<" | "<=") expression)+
+expression ::= term {( "-" | "+" ) term}
+term ::= unary {( "/" | "*" ) unary}
+unary ::= ["+" | "-"] primary
+primary ::= number | ident
+nl ::= '\n'+
+
+
+
+
+
+program    ::=	{statement}
+statement  ::=  "LABEL" ident nl
+	    |   "GOTO" ident nl
+	    |   "DEFINE" nl {statement} nl "AS" ident nl
+
+	    |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
+ 
+	    |   (expression | st) ( "PRINT" nl
+		      		  | "PLOT" nl
+      				  | "AS" ident nl
+      				  | "DO"   nl {statement} nl "END" nl
+      				  | "GOTO" ident) nl
+      				  | nl )
+
+
+
+expression ::=	(INTEGER | word | ident)+
+word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT')
+ident      ::=	STRING
+
+st         ::=	('.'|'..')
+nl         ::= '\n'+

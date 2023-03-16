@@ -20,4 +20,3 @@ LABEL nextnumber
 next 1 + AS next
 END
 
-

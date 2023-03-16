@@ -3,8 +3,9 @@ from lex import *
 
 # Parser object keeps track of current token and checks if the code matches the grammar.
 class Parser:
-    def __init__(self, lexer):
+    def __init__(self, lexer, emitter):
         self.lexer = lexer
+        self.emitter = emitter
 
         self.symbols = set()    # All variables we have declared so far.
         self.labelsDeclared = set() # Keep track of all labels declared
@@ -12,8 +13,13 @@ class Parser:
 
         self.curToken = None
         self.peekToken = None
+        self.labelnumber = -1 
         self.nextToken()
         self.nextToken()    # Call this twice to initialize current and peek.
+
+    def LabelNum(self):
+        self.labelnumber = self.labelnumber + 1
+        return(str(self.labelnumber))
 
     # Return true if the current token matches.
     def checkToken(self, kind):
@@ -47,7 +53,8 @@ class Parser:
 
     # program    ::=	{statement}
     def program(self):
-        print("PROGRAM")
+        self.emitter.headerLine("@main")
+        self.emitter.headerLine("call @stackssys")
 
         # Since some newlines are required in our grammar, need to skip the excess.
         while self.checkToken(TokenType.NEWLINE):
@@ -56,6 +63,9 @@ class Parser:
         # Parse all the statements in the program.
         while not self.checkToken(TokenType.EOF):
             self.statement()
+
+        # Wrap things up.
+        self.emitter.emitLine("ret")
 
         # Check that each label referenced in a GOTO is declared.
         for label in self.labelsGotoed:
@@ -69,23 +79,21 @@ class Parser:
         # Check the first token to see what kind of statement this is.
         #   "LABEL" ident nl
         if self.checkToken(TokenType.LABEL):
-            print("STATEMENT-LABEL")
             self.nextToken()
 
             # Make sure this label doesn't already exist.
             if self.curToken.text in self.labelsDeclared:
                 self.abort("Label already exists: " + self.curToken.text)
             self.labelsDeclared.add(self.curToken.text)
-            print(self.curToken.text)
+            self.emitter.emitLine(":" + self.curToken.text)
             self.match(TokenType.IDENT)
             self.nl() 
 
         # | "GOTO" ident nl
         elif self.checkToken(TokenType.GOTO):
-            print("STATEMENT-GOTO")
             self.nextToken()
             self.labelsGotoed.add(self.curToken.text)
-            print(self.curToken.text)
+            self.emitter.emitLine("jump " + ":" + self.curToken.text)
             self.match(TokenType.IDENT)
             self.nl() 
 
@@ -95,7 +103,8 @@ class Parser:
 
         # | "{" ({expression} | st) "}"   "REPEAT"   nl {statement} nl "END" nl	
         elif self.checkToken(TokenType.OPENC):
-            print("STATEMENT-open")
+            num = self.LabelNum()
+            self.emitter.emitLine(":_" + num + "_condition_start")
             self.nextToken()  
             if self.checkToken(TokenType.DOT) or self.checkToken(TokenType.DDOT):
                 self.st()
@@ -104,13 +113,17 @@ class Parser:
             self.match(TokenType.CLOSEC)
 
             self.match(TokenType.REPEAT)
-            print("Repeat")
+            self.emitter.emitLine("loada")
+            self.emitter.emitLine("testz")
+            self.emitter.emitLine("jumpf " + ":_" + num + "_repeat_end")
             #self.nextToken()
             self.nl()
             while not self.checkToken(TokenType.END):
                 self.statement()
                 
-            print("End")
+            self.emitter.emitLine("jump " + ":_" + num + "_condition_start")
+            self.emitter.emitLine(":_" + num + "_repeat_end")
+            self.emitter.emitLine("clra")
             self.match(TokenType.END)
             self.nl()
 
@@ -124,35 +137,46 @@ class Parser:
                 self.expression()
             
             if self.checkToken(TokenType.PRINT):
-                print("Print")
+                self.emitter.emitLine("prt")
                 self.nextToken()
                 self.nl()
             elif self.checkToken(TokenType.PLOT):
-                print("Plot")
+                self.emitter.emitLine("call @plot")
                 self.nextToken()
                 self.nl()
             elif self.checkToken(TokenType.AS):
-                print("As")
                 self.nextToken()
-                print(self.curToken.text)
                 if self.curToken.text not in self.symbols:
                     self.symbols.add(self.curToken.text)
+                    self.emitter.headerLine("push " + "'" + self.curToken.text + "'")
+                    self.emitter.headerLine("set $MEM")
+                
+                self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+                self.emitter.emitLine("storei")
                 self.match(TokenType.IDENT)  
                 self.nl()
             elif self.checkToken(TokenType.DO):
-                print("Do")
+                num = self.LabelNum()
                 self.nextToken()
+                self.emitter.emitLine("loada")
+                self.emitter.emitLine("testz")
+                self.emitter.emitLine("jumpf " + ":_" + num + "_do_end")
                 self.nl()
                 while not self.checkToken(TokenType.END):
                     self.statement()
-                print("End")
                 self.match(TokenType.END)
+                self.emitter.emitLine(":_" + num + "_do_end")
+                self.emitter.emitLine("clra")
                 self.nl()
             elif self.checkToken(TokenType.GOTO):
-                print("Goto")
+                num = self.LabelNum()
                 self.nextToken()
-                self.labelsGotoed.add(self.curToken.text)
-                print(self.curToken.text)
+                self.emitter.emitLine("loada")
+                self.emitter.emitLine("testz")
+                self.emitter.emitLine("jumpf " + ":_" + num + "_goto_end")
+                self.emitter.emitLine("jump " + ":" + self.curToken.text)
+                self.emitter.emitLine(":_" + num + "_goto_end")
+                self.emitter.emitLine("clra")
                 self.match(TokenType.IDENT)  
                 self.nl()   
             else:
@@ -160,10 +184,9 @@ class Parser:
 
     # expression ::=	INTEGER | word | ident
     def expression(self):
-        print("EXPRESSION")
         while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.IDENT):
             if self.checkToken(TokenType.NUMBER):
-                print("Number")
+                self.emitter.emitLine("push " + self.curToken.text)
                 self.nextToken()
             elif self.checkToken(TokenType.IDENT):
                 self.ident()
@@ -174,32 +197,31 @@ class Parser:
 
     # word ::=	 ('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT')
     def word(self):
-        print(self.curToken.text)
+        self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+        self.emitter.emitLine("calli")
         self.nextToken()
 
     # ident ::=	STRING
     def ident(self):
-        print(self.curToken.text)
         if self.curToken.text not in self.symbols:
                 self.abort("Referencing variable before assignment: " + self.curToken.text)
+        self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+        self.emitter.emitLine("loadi")
 
         self.nextToken()
 
     # st ::= ('.'|'..')
     def st(self):
-        print("st")
         if self.checkToken(TokenType.DDOT):
-            print(self.curToken.text)
+            self.emitter.emitLine("call @dup") #duplicate Top Off Stack
         else:
-            print(self.curToken.text)
-            
+            pass #use Top Off Stack
+
         self.nextToken()
 
     
     # nl ::= '\n'+
     def nl(self):
-        print("Newline")
-
         # Require at least one newline.
         self.match(TokenType.NEWLINE)
         # But we will allow extra newlines too, of course.

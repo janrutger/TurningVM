@@ -1,62 +1,77 @@
 @main
-call @basicsys
-push 'nums'
+call @stackssys
+push 'previous'
 set $MEM
-push 'a'
+push 'next'
 set $MEM
-push 'c'
+push 'cfactor'
 set $MEM
-push 'nums'
-call @input
-call @swap
-storei
-push 'a'
 push 1
-call @swap
+call @dup
+call @plot
+call @dup
+call @plot
+push 'previous'
 storei
-:_while_start_0
-call :_while_comp_0
+push 2
+push 'next'
+storei
+:_0_condition_start
+push 'next'
+loadi
+push 700
+push '!='
+calli
 loada
 testz
-jumpf :_while_end_0
-jump :_while_action_0
-:_while_comp_0
-push 'nums'
+jumpf :_0_repeat_end
+push 'previous'
 loadi
-push '>'
+push 'next'
+loadi
+push 'GCD'
+calli
+push 'cfactor'
+storei
 push 1
-call @swap
+push 'cfactor'
+loadi
+push '=='
 calli
-ret
-:_while_action_0
-push 'c'
-push 'a'
+loada
+testz
+jumpf :_1_do_end
+push 'previous'
 loadi
-push '*'
-push 'nums'
+push 'next'
 loadi
-call @swap
-calli
-call @swap
-storei
-push 'a'
-push 'c'
-loadi
-call @swap
-storei
-push 'nums'
-push 'nums'
-loadi
-push '-'
 push 1
-call @swap
+push '+'
 calli
-call @swap
-storei
-push 'a'
+push '+'
+calli
+jump :nextnumber
+:_1_do_end
+clra
+push 'previous'
 loadi
-prt
-jump :_while_start_0
-:_while_end_0
+push 'cfactor'
+loadi
+push '/'
+calli
+:nextnumber
+call @dup
+call @plot
+push 'previous'
+storei
+push 'next'
+loadi
+push 1
+push '+'
+calli
+push 'next'
+storei
+jump :_0_condition_start
+:_0_repeat_end
 clra
 ret

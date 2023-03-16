@@ -1,4 +1,5 @@
 from lex import *
+from emit import *
 from parse import *
 import sys
 
@@ -12,11 +13,16 @@ def main():
     with open("teeny.stacks", 'r') as inputFile:
         input = inputFile.read()
 
-    # Initialize the lexer and parser.
+    # Initialize the lexer, emitter, and parser.
     lexer = Lexer(input)
-    parser = Parser(lexer)
+    emitter = Emitter("out.c")
+    parser = Parser(lexer, emitter)
 
     parser.program() # Start the parser.
-    print("Parsing completed.")
+    emitter.writeFile() # Write the output to file.
+    print("Compiling completed.")
 
 main()
+
+
+
