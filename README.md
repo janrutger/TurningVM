@@ -17,3 +17,6 @@ also inspriration from:
 - OEIS A133058 https://oeis.org/A133058 
 - Ben Eater https://youtu.be/TardkN4OGJg
 - MMU https://nl.wikipedia.org/wiki/Memory_management_unit
+
+Specials
+- from @AZHenley https://github.com/AZHenley/teenytinycompiler 

@@ -9,8 +9,8 @@
 previous next GCD AS cfactor
 1 cfactor == DO
 	previous next 1 + + 
-GOTO nextnumber
-      END
+      GOTO nextnumber
+END
 
 previous cfactor / 
 
