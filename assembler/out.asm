@@ -1,76 +1,49 @@
 @main
 call @stackssys
-push 'previous'
-set $MEM
-push 'next'
-set $MEM
-push 'cfactor'
-set $MEM
 push 1
 call @dup
 call @plot
 call @dup
 call @plot
-push 'previous'
-storei
+storem $previous
 push 2
-push 'next'
-storei
+storem $next
 :_0_condition_start
-push 'next'
-loadi
+loadm $next
 push 700
-push '!='
-calli
+call @neq
 loada
 testz
 jumpf :_0_repeat_end
-push 'previous'
-loadi
-push 'next'
-loadi
-push 'GCD'
-calli
-push 'cfactor'
-storei
+loadm $previous
+loadm $next
+call @_gcd
+storem $cfactor
 push 1
-push 'cfactor'
-loadi
-push '=='
-calli
+loadm $cfactor
+call @eq
 loada
 testz
 jumpf :_1_do_end
-push 'previous'
-loadi
-push 'next'
-loadi
+loadm $previous
+loadm $next
 push 1
-push '+'
-calli
-push '+'
-calli
+call @plus
+call @plus
 jump :nextnumber
 :_1_do_end
 clra
-push 'previous'
-loadi
-push 'cfactor'
-loadi
-push '/'
-calli
+loadm $previous
+loadm $cfactor
+call @div
 :nextnumber
 call @dup
 call @plot
-push 'previous'
-storei
-push 'next'
-loadi
+storem $previous
+loadm $next
 push 1
-push '+'
-calli
-push 'next'
-storei
+call @plus
+storem $next
 jump :_0_condition_start
 :_0_repeat_end
 clra

@@ -148,11 +148,12 @@ class Parser:
                 self.nextToken()
                 if self.curToken.text not in self.symbols:
                     self.symbols.add(self.curToken.text)
-                    self.emitter.headerLine("push " + "'" + self.curToken.text + "'")
-                    self.emitter.headerLine("set $MEM")
+                    #self.emitter.headerLine("push " + "'" + self.curToken.text + "'")
+                    #self.emitter.headerLine("set $MEM")
                 
-                self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
-                self.emitter.emitLine("storei")
+                #self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+                #self.emitter.emitLine("storei")
+                self.emitter.emitLine("storem " + "$" + self.curToken.text)
                 self.match(TokenType.IDENT)  
                 self.nl()
             elif self.checkToken(TokenType.DO):
@@ -197,16 +198,33 @@ class Parser:
 
     # word ::=	 ('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT')
     def word(self):
-        self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
-        self.emitter.emitLine("calli")
-        self.nextToken()
+        if self.curToken.text == '+':
+            self.emitter.emitLine("call @plus")
+            self.nextToken()
+        elif self.curToken.text == '/':
+            self.emitter.emitLine("call @div")
+            self.nextToken()
+        elif self.curToken.text == '==':
+            self.emitter.emitLine("call @eq")
+            self.nextToken()
+        elif self.curToken.text == '!=':
+            self.emitter.emitLine("call @neq")
+            self.nextToken()
+        elif self.curToken.text == 'GCD':
+            self.emitter.emitLine("call @_gcd")
+            self.nextToken()
+        else:
+            self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+            self.emitter.emitLine("calli")
+            self.nextToken()
 
     # ident ::=	STRING
     def ident(self):
         if self.curToken.text not in self.symbols:
                 self.abort("Referencing variable before assignment: " + self.curToken.text)
-        self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
-        self.emitter.emitLine("loadi")
+        #self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
+        #self.emitter.emitLine("loadi")
+        self.emitter.emitLine("loadm " + "$" + self.curToken.text)
 
         self.nextToken()
 
