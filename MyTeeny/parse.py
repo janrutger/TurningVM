@@ -201,8 +201,20 @@ class Parser:
         if self.curToken.text == '+':
             self.emitter.emitLine("call @plus")
             self.nextToken()
+        elif self.curToken.text == '-':
+            self.emitter.emitLine("call @minus")
+            self.nextToken()
+        elif self.curToken.text == '*':
+            self.emitter.emitLine("call @mul")
+            self.nextToken()
         elif self.curToken.text == '/':
             self.emitter.emitLine("call @div")
+            self.nextToken()
+        elif self.curToken.text == '%':
+            self.emitter.emitLine("call @mod")
+            self.nextToken()
+        elif self.curToken.text == '!':
+            self.emitter.emitLine("call @factorial")
             self.nextToken()
         elif self.curToken.text == '==':
             self.emitter.emitLine("call @eq")
@@ -210,8 +222,17 @@ class Parser:
         elif self.curToken.text == '!=':
             self.emitter.emitLine("call @neq")
             self.nextToken()
+        elif self.curToken.text == '<':
+            self.emitter.emitLine("call @lt")
+            self.nextToken()
+        elif self.curToken.text == '>':
+            self.emitter.emitLine("call @gt")
+            self.nextToken()
         elif self.curToken.text == 'GCD':
             self.emitter.emitLine("call @_gcd")
+            self.nextToken()
+        elif self.curToken.text == 'DUP':
+            self.emitter.emitLine("call @dup")
             self.nextToken()
         else:
             self.emitter.emitLine("push " + "'" + self.curToken.text + "'")

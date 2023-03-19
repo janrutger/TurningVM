@@ -211,7 +211,7 @@ class Executer:
         while exit_code != "CPUstopped":
             address_value = self.memory.readMem(self.pc)
             #print(self.pc, address_value[0], address_value[1])
-            #step = input(str(address_value[0]) + str(address_value[1]))
+            #step = input()
             exit_code = self.run_commando(address_value[0], address_value[1])
             self.ui.send_status(self.refresh_tapes({"ST", "RA", "RB", "S"}))
 
