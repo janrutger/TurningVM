@@ -1,6 +1,6 @@
 # Websocket demo, from iosoft.blog
  
-import signal, sys, json
+import signal, sys, json, time
 from SimpleWebSocketServer import WebSocket, SimpleWebSocketServer
  
 PORTNUM = 8001
@@ -9,15 +9,21 @@ clients    = []
 class Echo(WebSocket):
  
     def handleMessage(self):
-        #print("Echoing '%s'" % self.data)
-        #input = (json.loads(self.data))
+        timeReceive = time.time()
         for client in clients:
             if client != self:
                 try:
-                    #print(self.data)
-                    client.sendMessage(self.data)
+                    message = self.data.split("|")
+                    client.sendMessage(message[0])
+                    #client.sendMessage(self.data)
+                    timeSend = time.time()
+                    if len(message) > 1:
+                        a = round((timeReceive - float(message[1])) *1000, 2)
+                        b = round((timeSend   - float(timeReceive)) *1000, 2)
+                        print(a,b)
                 except Exception as n:
                     print(n)
+                
 
         
         

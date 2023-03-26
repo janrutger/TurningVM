@@ -15,7 +15,8 @@ class UIconnect:
 
     def send_status(self, tapestate):
         message = {"tapeUpdate": tapestate}
-        self.ws.send(json.dumps(message))
+        timeStamp = time.time()
+        self.ws.send(json.dumps(message) + "|" + str(timeStamp))
         time.sleep(self.speedWaitTime)
         
 
@@ -42,7 +43,7 @@ class UIconnect:
         return (resp)
 
     def setSpeed(self, speed):
-        self.speedWaitTime = 0.1 * speed
+        self.speedWaitTime = 0.01 * speed
 
     def checkRefresh(self):
         if self.speedWaitTime != 0:
