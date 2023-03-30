@@ -8,6 +8,7 @@ class UIconnect:
         self.kbdBuff = []
         self.updateRefreshCount = 0
         self.updateRefreshRate  = 1
+        self.counter = 0
 
     def set(self, ws):
         self.ws = ws
@@ -16,8 +17,10 @@ class UIconnect:
     def send_status(self, tapestate):
         message = {"tapeUpdate": tapestate}
         timeStamp = time.time()
-        self.ws.send(json.dumps(message) + "|" + str(timeStamp))
-        time.sleep(self.speedWaitTime)
+        self.ws.send(json.dumps(message) + "|" + str(timeStamp) + "|" + str(self.counter))
+        print(self.counter, round((time.time() - timeStamp) *1000,2))
+        #time.sleep(self.speedWaitTime)
+        self.counter = self.counter + 1
         
 
     def println(self, text2print):
@@ -43,7 +46,7 @@ class UIconnect:
         return (resp)
 
     def setSpeed(self, speed):
-        self.speedWaitTime = 0.01 * speed
+        self.speedWaitTime = 0.1 * speed
 
     def checkRefresh(self):
         if self.speedWaitTime != 0:

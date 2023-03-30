@@ -21,9 +21,9 @@ class Exec_no_opcode:
             self.tapecommander.do_write(write_set)
         elif switch == "unset":
             self.tapecommander.do_write(write_unset)
-        if self.ui.checkRefresh() == True:
-            self.ui.send_status(
-                self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+        # if self.ui.checkRefresh() == True:
+        #     self.ui.send_status(
+        #         self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
 
 
@@ -33,17 +33,17 @@ class Exec_no_opcode:
         write_bit = {}
         self.tapecommander.do_move(move_left)
         self.tapecommander.do_write(write_separator)
-        if self.ui.checkRefresh() == True:
-            self.ui.send_status(
-                self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+        # if self.ui.checkRefresh() == True:
+        #     self.ui.send_status(
+        #         self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
         for bit in operand:
             write_bit["ST"] = bit
             self.tapecommander.do_move(move_left)
             self.tapecommander.do_write(write_bit)
-            if self.ui.checkRefresh() == True:
-                self.ui.send_status(
-                    self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+            # if self.ui.checkRefresh() == True:
+            #     self.ui.send_status(
+            #         self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
         return "oke"
 
@@ -61,16 +61,16 @@ class Exec_no_opcode:
             self.tapecommander.do_write(writeBlank)
             self.tapecommander.do_move(move)
             bit = self.tapecommander.do_read({"ST"})
-            if self.ui.checkRefresh() == True:
-                self.ui.send_status(
-                    self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+            #if self.ui.checkRefresh() == True:
+                #self.ui.send_status(
+                    #self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
 
         self.tapecommander.do_write(writeBlank)
         self.tapecommander.do_move(move)
-        if self.ui.checkRefresh() == True:
-            self.ui.send_status(
-                self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+        #if self.ui.checkRefresh() == True:
+            #self.ui.send_status(
+                #self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
 
         return (result)

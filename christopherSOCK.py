@@ -2,6 +2,7 @@ import threading
 import time
 import websocket
 import json
+import rel
 
 from assembler.assembler import Assembler
 from cpu.executer import Executer
@@ -14,8 +15,9 @@ memory = mmu.MMU(ui)
 executes = Executer(memory, ui)
 machine = Machine(executes, ui)
 
-def runner():
+counter = 0
 
+def runner():
     print("runner")
     exitcode = machine.repl()
 
@@ -79,10 +81,26 @@ def on_open(wsapp):
     ui.set(wsapp)
 
 
+def SendTapeUpdate():
+    tapeState = executes.refresh_tapes({"ST", "RA", "RB", "S"})
+    message = {"tapeUpdate": tapeState}
+    timeStamp = time.time()
+    wsapp.send(json.dumps(message) + "|" +
+               str(timeStamp))
+    #wsapp.send(json.dumps(message) + "|" +
+    #            str(timeStamp) + "|" + str(counter))
+    #print(counter, round((time.time() - timeStamp) * 1000, 2))
+    # time.sleep(self.speedWaitTime)
+    #counter = counter + 1
+
+    #ui.send_status(executes.refresh_tapes({"ST", "RA", "RB", "S"}))
+    return True
 
 
+rel.timeout(0.1, SendTapeUpdate)
 
-wsapp = websocket.WebSocketApp("ws://localhost:8001/", on_message=on_message,
+wsapp = websocket.WebSocketApp("ws://127.0.0.1:8001/", on_message=on_message,
                                on_open=on_open)
-wsapp.run_forever()
+wsapp.run_forever(dispatcher=rel)
+rel.dispatch()
 

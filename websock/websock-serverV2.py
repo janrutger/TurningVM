@@ -11,6 +11,7 @@ class Echo(WebSocket):
     def handleMessage(self):
         timeReceive = time.time()
         for client in clients:
+
             if client != self:
                 try:
                     message = self.data.split("|")
@@ -20,7 +21,10 @@ class Echo(WebSocket):
                     if len(message) > 1:
                         a = round((timeReceive - float(message[1])) *1000, 2)
                         b = round((timeSend   - float(timeReceive)) *1000, 2)
-                        print(a,b)
+                        #c = message[2]
+                        l = len(message[0])
+                        d = client.address[1]
+                        print(l,a,b, d)
                 except Exception as n:
                     print(n)
                 
