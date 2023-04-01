@@ -154,7 +154,7 @@ class Machine:
         self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        self.exec.run_rpc([('SPEED', 2), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('OUTPUT', '%_plotter'), ('IOBUFF', '%_kbd'),
+        self.exec.run_rpc([('SPEED', 20), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('OUTPUT', '%_plotter'), ('IOBUFF', '%_kbd'),
                            ('LIFO', '%_system'), ('HALT', '')])
 
     def minus(self):

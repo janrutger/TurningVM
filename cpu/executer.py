@@ -14,6 +14,7 @@ class Executer:
         self.execOP = op.Exec_opcode(self.tape_commander, ui)
         self.ui = ui
         self.pc = int(0)
+        self.ControlC = False
 
     def refresh_tapes(self, tapes):
         return self.execNOP.print(tapes)
@@ -182,7 +183,8 @@ class Executer:
         return "HALT"
 
     def speed(self, operand):
-        self.ui.setSpeed(operand)
+        #self.ui.setSpeed(operand)
+        self.tape_commander.CPUspeed = 0.001 * operand
         self.pc = self.pc + 1
         return "HALT"
 
@@ -207,14 +209,13 @@ class Executer:
     def run_memory(self, pc):
         self.pc = pc
         exit_code = "CPUrunning"
+        self.ControlC = False
 
-        while exit_code != "CPUstopped":
+        while exit_code != "CPUstopped" and self.ControlC == False:
             address_value = self.memory.readMem(self.pc)
             #print(self.pc, address_value[0], address_value[1])
             #step = input()
             exit_code = self.run_commando(address_value[0], address_value[1])
-            #self.ui.send_status(self.refresh_tapes({"ST", "RA", "RB", "S"}))
-            #time.sleep(0.01)
          
 
         if exit_code == "CPUstopped":

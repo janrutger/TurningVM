@@ -31,25 +31,25 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMmain.asm")))
 
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMloader.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/A133058.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/main.asm")))
-
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMstacks.asm")))
+        assembler.readASM("./assembler/A133058.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/out.asm")))
+        assembler.readASM("./assembler/main.asm")))
+
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMstacks.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/out.asm")))
 
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/SoManyZeross.asm")))
+    #     assembler.readASM("./assembler/factorial.asm")))
 
 
 
@@ -83,12 +83,12 @@ def on_open(wsapp):
 
 def SendTapeUpdate():
     tapeState = executes.refresh_tapes({"ST", "RA", "RB", "S"})
+    counter =+ 1
     message = {"tapeUpdate": tapeState}
     timeStamp = time.time()
     wsapp.send(json.dumps(message) + "|" +
                str(timeStamp))
-    #wsapp.send(json.dumps(message) + "|" +
-    #            str(timeStamp) + "|" + str(counter))
+    #wsapp.send(json.dumps(message) + "|" + str(timeStamp) + "|" + str(counter))
     #print(counter, round((time.time() - timeStamp) * 1000, 2))
     # time.sleep(self.speedWaitTime)
     #counter = counter + 1
@@ -96,11 +96,16 @@ def SendTapeUpdate():
     #ui.send_status(executes.refresh_tapes({"ST", "RA", "RB", "S"}))
     return True
 
+def ControlC():
+    executes.ControlC = True
+    return True
 
-rel.timeout(0.1, SendTapeUpdate)
+
+rel.timeout(0.01, SendTapeUpdate)
 
 wsapp = websocket.WebSocketApp("ws://127.0.0.1:8001/", on_message=on_message,
                                on_open=on_open)
 wsapp.run_forever(dispatcher=rel)
+rel.signal(2, ControlC)
 rel.dispatch()
 

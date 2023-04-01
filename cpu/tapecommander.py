@@ -8,7 +8,7 @@ class  Tapecommander:
         self.alltapes = {}
         for tape in alltapesnames:
             self.alltapes[tape] = t.Tape(tape, ['_','_','_','_'], 2)
-        #self.CPUspeed = 0
+        self.CPUspeed = 0
 
     def do_read(self, tapeList):
         tapeValues = {}
@@ -20,19 +20,19 @@ class  Tapecommander:
 
     def do_write(self, writeValues):
         tapeList = list(writeValues.keys())
-        #time.sleep(self.CPUspeed/1000)
         for tape in tapeList:
             thisTape = self.alltapes[tape]
             thisTape.write(writeValues[tape])
+        time.sleep(self.CPUspeed)
         
 
     def do_move(self, moveValues):
         tapeList = list(moveValues.keys())
-        #time.sleep(self.CPUspeed/100)
+        #time.sleep(self.CPUspeed/10)
         for tape in tapeList:
             thisTape = self.alltapes[tape]
             thisTape.move(moveValues[tape])
-        #time.sleep(self.CPUspeed/1000)
+        time.sleep(self.CPUspeed)
     
     def get_head(self, tapelist):
         head = {}
