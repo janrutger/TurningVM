@@ -28,13 +28,13 @@ statement  ::=  "LABEL" ident nl
 		      		  | "PLOT" nl
       				  | "AS" ident nl
       				  | "DO"   nl {statement} nl "END" nl
-      				  | "GOTO" ident) nl
+      				  | "GOTO" ident nl
       				  | nl )
 
 
 
 expression ::=	(INTEGER | word | ident)+
-word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT')
+word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DEL'|'INPUT')
 ident      ::=	STRING
 
 st         ::=	('.'|'..')

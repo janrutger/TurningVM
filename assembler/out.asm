@@ -1,50 +1,22 @@
 @main
 call @stackssys
-push 1
+push 75
+storem $aRandom
+push 3
+storem $seed
+push 74
+storem $cRandom
+push 65537
+storem $m
+loadm $aRandom
+loadm $seed
+call @mul
+loadm $cRandom
+call @plus
+loadm $m
+call @mod
+call @dup
+storem $seed
 call @dup
 call @plot
-call @dup
-call @plot
-storem $previous
-push 2
-storem $next
-:_0_condition_start
-loadm $next
-push 700
-call @neq
-loada
-testz
-jumpf :_0_repeat_end
-loadm $previous
-loadm $next
-call @_gcd
-storem $cfactor
-push 1
-loadm $cfactor
-call @eq
-loada
-testz
-jumpf :_1_do_end
-loadm $previous
-loadm $next
-push 1
-call @plus
-call @plus
-jump :nextnumber
-:_1_do_end
-clra
-loadm $previous
-loadm $cfactor
-call @div
-:nextnumber
-call @dup
-call @plot
-storem $previous
-loadm $next
-push 1
-call @plus
-storem $next
-jump :_0_condition_start
-:_0_repeat_end
-clra
 ret

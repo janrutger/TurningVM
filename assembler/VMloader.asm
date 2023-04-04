@@ -9,6 +9,25 @@ nop
 nop
 nop
 
+@init_vmachine
+    speed 10
+    clra
+    clrb
+    iobuff %_plotter
+    output %_plotter
+    iobuff %_kbd
+
+    push 75
+    storem $aRandom
+    push 7
+    storem $seed
+    push 74
+    storem $cRandom
+    push 65537
+    storem $m
+    speed 1
+ret
+
 @plus
     loada
     add
@@ -234,3 +253,17 @@ ret
     :done1
         clra
         ret
+
+
+@rand
+    speed 0
+    loadm $aRandom
+    loadm $seed
+    call @mul
+    loadm $cRandom
+    call @plus
+    loadm $m
+    call @mod
+    call @dup
+    storem $seed
+ret

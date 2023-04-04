@@ -1,5 +1,6 @@
 @stackssys
-    speed 2
+    speed 0
+
 ret
 
 

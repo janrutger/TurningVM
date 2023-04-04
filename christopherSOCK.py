@@ -38,18 +38,18 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/main.asm")))
 
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMloader.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMstacks.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/out.asm")))
-
-
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/factorial.asm")))
+    #     assembler.readASM("./assembler/VMstacks.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/out.asm")))
+
+
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/VMloader.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/test.asm")))
 
 
 
@@ -95,7 +95,7 @@ def ControlC():
     return True
 
 
-rel.timeout(0.01, SendTapeUpdate)
+rel.timeout(0.05, SendTapeUpdate)
 
 wsapp = websocket.WebSocketApp("ws://127.0.0.1:8001/", on_message=on_message,
                                on_open=on_open)

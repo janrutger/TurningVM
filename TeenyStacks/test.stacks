@@ -1,0 +1,10 @@
+75 AS aRandom
+3 AS seed
+74 AS cRandom
+65537 AS m
+
+aRandom seed * cRandom + m % DUP AS seed
+.. PLOT
+
+
+
