@@ -14,13 +14,13 @@ class UIconnect:
         self.ws = ws
 
 
-    def send_status(self, tapestate):
-        message = {"tapeUpdate": tapestate}
-        timeStamp = time.time()
-        self.ws.send(json.dumps(message) + "|" + str(timeStamp) + "|" + str(self.counter))
-        print(self.counter, round((time.time() - timeStamp) *1000,2))
-        #time.sleep(self.speedWaitTime)
-        self.counter = self.counter + 1
+    # def send_status(self, tapestate):
+    #     message = {"tapeUpdate": tapestate}
+    #     timeStamp = time.time()
+    #     self.ws.send(json.dumps(message) + "|" + str(timeStamp) + "|" + str(self.counter))
+    #     print(self.counter, round((time.time() - timeStamp) *1000,2))
+    #     #time.sleep(self.speedWaitTime)
+    #     self.counter = self.counter + 1
         
 
     def println(self, text2print):
@@ -45,19 +45,19 @@ class UIconnect:
         self.println(resp)
         return (resp)
 
-    def setSpeed(self, speed):
-        self.speedWaitTime = 0.1 * speed
+    # def setSpeed(self, speed):
+    #     self.speedWaitTime = 0.1 * speed
 
-    def checkRefresh(self):
-        if self.speedWaitTime != 0:
-            self.updateRefreshCount += 1
-            if self.updateRefreshCount % self.updateRefreshRate == 0:
-                self.updateRefreshCount = 0
-                return(True)
-            else:
-                return(False)
-        else:
-            return(False)
+    # def checkRefresh(self):
+    #     if self.speedWaitTime != 0:
+    #         self.updateRefreshCount += 1
+    #         if self.updateRefreshCount % self.updateRefreshRate == 0:
+    #             self.updateRefreshCount = 0
+    #             return(True)
+    #         else:
+    #             return(False)
+    #     else:
+    #         return(False)
 
 
     def kbdRead(self, stringTable):

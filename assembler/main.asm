@@ -1,5 +1,5 @@
 @main
-speed 100
+speed 60
 
 iobuff %_plotter
 

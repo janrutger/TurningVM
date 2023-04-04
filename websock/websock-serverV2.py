@@ -43,7 +43,7 @@ class Echo(WebSocket):
 # Handle ctrl-C: close server
 def close_server(signal, frame):
     server.close()
-    sys.exit()
+    return True
  
 if __name__ == "__main__":
     print("Websocket server on port %s" % PORTNUM)

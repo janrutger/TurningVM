@@ -31,19 +31,19 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMmain.asm")))
 
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMloader.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/A133058.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/main.asm")))
-
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMstacks.asm")))
+    #     assembler.readASM("./assembler/A133058.asm")))
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/out.asm")))
+    #     assembler.readASM("./assembler/main.asm")))
+
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/VMloader.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/VMstacks.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/out.asm")))
 
 
     # memory.loadMem(assembler.compile(
@@ -83,17 +83,11 @@ def on_open(wsapp):
 
 def SendTapeUpdate():
     tapeState = executes.refresh_tapes({"ST", "RA", "RB", "S"})
-    counter =+ 1
+    #counter += 1
     message = {"tapeUpdate": tapeState}
     timeStamp = time.time()
-    wsapp.send(json.dumps(message) + "|" +
-               str(timeStamp))
-    #wsapp.send(json.dumps(message) + "|" + str(timeStamp) + "|" + str(counter))
-    #print(counter, round((time.time() - timeStamp) * 1000, 2))
-    # time.sleep(self.speedWaitTime)
-    #counter = counter + 1
-
-    #ui.send_status(executes.refresh_tapes({"ST", "RA", "RB", "S"}))
+    wsapp.send(json.dumps(message) + "|" + str(timeStamp))
+    
     return True
 
 def ControlC():

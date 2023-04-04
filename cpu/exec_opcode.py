@@ -24,9 +24,6 @@ class Exec_opcode:
 
             self.tapecommander.do_write(writeValue)
             self.tapecommander.do_move(moveValue)
-            # if self.ui.checkRefresh() == True:
-            #     self.ui.send_status(
-            #         self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
 
             stepCounter = stepCounter + 1
             #tapeprint =self.tapecommander.print_tape({"ST", "RA", "RB", "S"})
@@ -47,9 +44,7 @@ class Exec_opcode:
 
             self.tapecommander.do_write(writeValue)
             self.tapecommander.do_move(moveValue)
-            # if self.ui.checkRefresh() == True:
-            #     self.ui.send_status(
-            #         self.tapecommander.print_tape({"ST", "RA", "RB", "S"}))
+
 
             stepCounter = stepCounter + 1
             # if self.tapecommander.CPUspeed > 0 or nextState == "HALT":

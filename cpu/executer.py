@@ -183,7 +183,6 @@ class Executer:
         return "HALT"
 
     def speed(self, operand):
-        #self.ui.setSpeed(operand)
         self.tape_commander.CPUspeed = 0.001 * operand
         self.pc = self.pc + 1
         return "HALT"
