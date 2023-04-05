@@ -1,10 +1,15 @@
-75 AS aRandom
-3 AS seed
-74 AS cRandom
+75 AS a
+7515 AS x
+74 AS c
 65537 AS m
 
-aRandom seed * cRandom + m % DUP AS seed
-.. PLOT
 
+20 AS counter
 
+{counter 0 !=} REPEAT
+    a x * c + m % DUP AS x
+    655 / PRINT
+    counter 1 - AS counter
+
+END
 

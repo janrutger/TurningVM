@@ -23,7 +23,7 @@ nop
     storem $seed
     push 74
     storem $cRandom
-    push 65537
+    push 65536
     storem $m
     speed 1
 ret
@@ -266,4 +266,6 @@ ret
     call @mod
     call @dup
     storem $seed
+    push 655
+    call @div 
 ret

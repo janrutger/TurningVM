@@ -1,15 +1,12 @@
 @main
 call @rand
 
-push 10000
+push 6
+call @mul
+push 100
 call @div
-
-
 push 1
-loada 
-add
-storea
-clra 
+call @plus
 
 
 storem %_plotter
