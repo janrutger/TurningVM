@@ -1,5 +1,5 @@
 @stackssys
-    speed 0
+    speed 20
 
 ret
 
@@ -15,6 +15,7 @@ ret
         storem $rommel
         jump :_input_loop
     :_input_loop_end
+    clra 
 ret
 
 

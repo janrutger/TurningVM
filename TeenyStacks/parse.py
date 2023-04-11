@@ -234,6 +234,9 @@ class Parser:
         elif self.curToken.text == 'DUP':
             self.emitter.emitLine("call @dup")
             self.nextToken()
+        elif self.curToken.text == 'INPUT':
+            self.emitter.emitLine("call @input")
+            self.nextToken()
         else:
             self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
             self.emitter.emitLine("calli")

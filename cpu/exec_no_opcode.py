@@ -1,7 +1,6 @@
 class Exec_no_opcode:
-    def __init__(self, tapecommander, ui):
+    def __init__(self, tapecommander):
         self.tapecommander = tapecommander
-        self.ui = ui
 
     def returnStatus(self):
         tape_list = {"S"}

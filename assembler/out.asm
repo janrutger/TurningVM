@@ -1,38 +1,49 @@
 @main
 call @stackssys
-push 75
-storem $a
-push 7515
-storem $x
-push 74
-storem $c
-push 65537
-storem $m
-push 20
-storem $counter
+push 1
+call @dup
+call @plot
+call @dup
+call @plot
+storem $previous
+push 2
+storem $next
 :_0_condition_start
-loadm $counter
-push 0
+loadm $next
+push 700
 call @neq
 loada
 testz
 jumpf :_0_repeat_end
-loadm $a
-loadm $x
-call @mul
-loadm $c
-call @plus
-loadm $m
-call @mod
-call @dup
-storem $x
-push 655
-call @div
-prt
-loadm $counter
+loadm $previous
+loadm $next
+call @_gcd
+storem $cfactor
 push 1
-call @minus
-storem $counter
+loadm $cfactor
+call @eq
+loada
+testz
+jumpf :_1_do_end
+loadm $previous
+loadm $next
+push 1
+call @plus
+call @plus
+jump :nextnumber
+:_1_do_end
+clra
+loadm $previous
+loadm $cfactor
+call @div
+:nextnumber
+call @dup
+call @plot
+storem $previous
+loadm $next
+push 1
+call @plus
+storem $next
 jump :_0_condition_start
 :_0_repeat_end
 clra

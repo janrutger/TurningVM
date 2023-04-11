@@ -38,18 +38,18 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/main.asm")))
 
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMloader.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMstacks.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/out.asm")))
-
-
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/test.asm")))
+        assembler.readASM("./assembler/VMstacks.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/out.asm")))
+
+
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/test.asm")))
 
 
 

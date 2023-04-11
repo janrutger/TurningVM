@@ -2,10 +2,9 @@ from cpu import opcodes as oc
 
 
 class Exec_opcode:
-    def __init__(self, tapecommander, ui):
+    def __init__(self, tapecommander):
         self.tapecommander = tapecommander
         self.opcodes = self.opcodes = oc.Opcodes()
-        self.ui = ui
 
     def run(self, opcode):
         tapeList = self.opcodes.get_tapelist(opcode)

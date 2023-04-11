@@ -10,9 +10,9 @@ class Executer:
     def __init__(self, memory, ui):
         self.memory = memory
         self.tape_commander = tc.Tapecommander()
-        self.execNOP = nop.Exec_no_opcode(self.tape_commander, ui)
-        self.execOP = op.Exec_opcode(self.tape_commander, ui)
-        self.ui = ui
+        self.execNOP = nop.Exec_no_opcode(self.tape_commander)
+        self.execOP = op.Exec_opcode(self.tape_commander)
+        self.ui = ui #need this for prt instruction
         self.pc = int(0)
         self.ControlC = False
 
