@@ -107,20 +107,20 @@ class Lexer:
             else:
                 token = Token(self.curChar, TokenType.DOT)
 
-        # elif self.curChar == '\"':
-        #     # Get characters between quotations.
-        #     self.nextChar()
-        #     startPos = self.curPos
+        elif self.curChar == '\"':
+            # Get characters between quotations.
+            self.nextChar()
+            startPos = self.curPos
 
-        #     while self.curChar != '\"':
-        #         # Don't allow special characters in the string. No escape characters, newlines, tabs, or %.
-        #         # We will be using C's printf on this string.
-        #         if self.curChar == '\r' or self.curChar == '\n' or self.curChar == '\t' or self.curChar == '\\' or self.curChar == '%':
-        #             self.abort("Illegal character in string.")
-        #         self.nextChar()
+            while self.curChar != '\"':
+                # Don't allow special characters in the string. No escape characters, newlines, tabs, or %.
+                # We will be using C's printf on this string.
+                if self.curChar == '\r' or self.curChar == '\n' or self.curChar == '\t' or self.curChar == '\\' or self.curChar == '%':
+                    self.abort("Illegal character in string.")
+                self.nextChar()
 
-        #     tokText = self.source[startPos : self.curPos] # Get the substring.
-        #     token = Token(tokText, TokenType.STRING)
+            tokText = self.source[startPos : self.curPos] # Get the substring.
+            token = Token(tokText, TokenType.STRING)
 
         elif self.curChar.isdigit():
             # Leading character is a digit, so this must be a number.
@@ -194,7 +194,7 @@ class TokenType(enum.Enum):
     NUMBER = 1
     IDENT = 2
     STRING = 3
-    # Keywords.
+# Keywords.
     LABEL = 101
     GOTO = 102
     PRINT = 103
@@ -207,12 +207,12 @@ class TokenType(enum.Enum):
     END = 111
     OPENC = 112
     CLOSEC = 113
+# Operators.
     GCD = 114
     DUP = 115
     SWAP = 116
     OVER = 117
     DEL = 118
-	# Operators.
     PLUS = 201
     MINUS = 202
     ASTERISK = 203

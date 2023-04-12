@@ -14,6 +14,7 @@ push 700
 call @neq
 loada
 testz
+clra
 jumpf :_0_repeat_end
 loadm $previous
 loadm $next
@@ -24,6 +25,7 @@ loadm $cfactor
 call @eq
 loada
 testz
+clra
 jumpf :_1_do_end
 loadm $previous
 loadm $next
@@ -32,7 +34,6 @@ call @plus
 call @plus
 jump :nextnumber
 :_1_do_end
-clra
 loadm $previous
 loadm $cfactor
 call @div
@@ -46,5 +47,4 @@ call @plus
 storem $next
 jump :_0_condition_start
 :_0_repeat_end
-clra
 ret

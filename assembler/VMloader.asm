@@ -18,13 +18,13 @@ nop
     iobuff %_kbd
 
     push 75
-    storem $aRandom
+    storem $_aRandom
     push 3586
     storem $seed
     push 74
-    storem $cRandom
+    storem $_cRandom
     push 65536
-    storem $m
+    storem $_mRandom
     speed 25
 ret
 
@@ -257,12 +257,12 @@ ret
 
 @rand
     speed 0
-    loadm $aRandom
+    loadm $_aRandom
     loadm $seed
     call @mul
-    loadm $cRandom
+    loadm $_cRandom
     call @plus
-    loadm $m
+    loadm $_mRandom
     call @mod
     call @dup
     storem $seed

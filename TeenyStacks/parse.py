@@ -115,6 +115,7 @@ class Parser:
             self.match(TokenType.REPEAT)
             self.emitter.emitLine("loada")
             self.emitter.emitLine("testz")
+            self.emitter.emitLine("clra")
             self.emitter.emitLine("jumpf " + ":_" + num + "_repeat_end")
             #self.nextToken()
             self.nl()
@@ -123,7 +124,7 @@ class Parser:
                 
             self.emitter.emitLine("jump " + ":_" + num + "_condition_start")
             self.emitter.emitLine(":_" + num + "_repeat_end")
-            self.emitter.emitLine("clra")
+            #self.emitter.emitLine("clra")
             self.match(TokenType.END)
             self.nl()
 
@@ -161,33 +162,38 @@ class Parser:
                 self.nextToken()
                 self.emitter.emitLine("loada")
                 self.emitter.emitLine("testz")
+                self.emitter.emitLine("clra")
                 self.emitter.emitLine("jumpf " + ":_" + num + "_do_end")
                 self.nl()
                 while not self.checkToken(TokenType.END):
                     self.statement()
                 self.match(TokenType.END)
                 self.emitter.emitLine(":_" + num + "_do_end")
-                self.emitter.emitLine("clra")
+                #self.emitter.emitLine("clra")
                 self.nl()
             elif self.checkToken(TokenType.GOTO):
                 num = self.LabelNum()
                 self.nextToken()
                 self.emitter.emitLine("loada")
                 self.emitter.emitLine("testz")
+                self.emitter.emitLine("clra")
                 self.emitter.emitLine("jumpf " + ":_" + num + "_goto_end")
                 self.emitter.emitLine("jump " + ":" + self.curToken.text)
                 self.emitter.emitLine(":_" + num + "_goto_end")
-                self.emitter.emitLine("clra")
+                #self.emitter.emitLine("clra")
                 self.match(TokenType.IDENT)  
                 self.nl()   
             else:
                 self.nl()
 
-    # expression ::=	INTEGER | word | ident
+    # expression ::=	INTEGER | STRONG | word | ident
     def expression(self):
-        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.IDENT):
+        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.WORD):
             if self.checkToken(TokenType.NUMBER):
                 self.emitter.emitLine("push " + self.curToken.text)
+                self.nextToken()
+            elif self.checkToken(TokenType.STRING):
+                self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
                 self.nextToken()
             elif self.checkToken(TokenType.IDENT):
                 self.ident()
@@ -233,6 +239,9 @@ class Parser:
             self.nextToken()
         elif self.curToken.text == 'DUP':
             self.emitter.emitLine("call @dup")
+            self.nextToken()
+        elif self.curToken.text == 'OVER':
+            self.emitter.emitLine("call @over")
             self.nextToken()
         elif self.curToken.text == 'INPUT':
             self.emitter.emitLine("call @input")

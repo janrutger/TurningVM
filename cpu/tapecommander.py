@@ -16,6 +16,7 @@ class  Tapecommander:
             thisTape = self.alltapes[tape]
             resultValue = thisTape.read()
             tapeValues[tape] = resultValue
+            #print(tapeValues)
         return(tapeValues)
 
     def do_write(self, writeValues):
@@ -28,7 +29,6 @@ class  Tapecommander:
 
     def do_move(self, moveValues):
         tapeList = list(moveValues.keys())
-        #time.sleep(self.CPUspeed/10)
         for tape in tapeList:
             thisTape = self.alltapes[tape]
             thisTape.move(moveValues[tape])
