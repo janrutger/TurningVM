@@ -1,1 +1,39 @@
-INPUT INPUT * PRINT
+
+LABEL loop
+    {RAWIN 1 ==} REPEAT
+        DUP "q" == DO
+            POP
+            GOTO endloop
+            END
+
+
+        DUP "+" == DO
+            POP
+            + 
+            END
+
+        DUP "-" == DO
+            POP
+            - 
+            END
+
+        DUP "*" == DO
+            POP
+            * 
+            END
+
+        DUP "/" == DO
+            POP
+            / 
+            END
+
+        DUP "." == DO
+            POP
+            . PRINT 
+            END
+
+    END   
+GOTO loop
+
+LABEL endloop
+

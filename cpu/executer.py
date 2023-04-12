@@ -215,7 +215,9 @@ class Executer:
             #print(self.pc, address_value[0], address_value[1])
             #step = input()
             exit_code = self.run_commando(address_value[0], address_value[1])
-         
+
+        if self.ControlC == True:
+            self.ui.println("ctrl-C")
 
         if exit_code == "CPUstopped":
             return "HALT"

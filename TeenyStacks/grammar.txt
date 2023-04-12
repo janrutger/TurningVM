@@ -33,7 +33,7 @@ statement  ::=  "LABEL" ident nl
 
 
 
-expression ::=	(INTEGER | word | ident)+
+expression ::=	(INTEGER | STRING | word | ident)+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DEL'|'INPUT')
 ident      ::=	STRING
 

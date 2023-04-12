@@ -128,7 +128,7 @@ class Machine:
 
         while True:
             try:
-                self.ui.println(".>>")
+                self.ui.println("ok")
                 source = self.ui.get_input()
                 #print(source)
                 code = list(self.tokenice(source))
@@ -147,6 +147,7 @@ class Machine:
         self.exec.run_rpc([('CALL', '@plus'), ('HALT', '')])
 
     def halt(self):
+        self.ui.println("HALTED")
         sys.exit(0)
         #exit()
 

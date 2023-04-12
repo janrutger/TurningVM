@@ -154,7 +154,7 @@ class Lexer:
             if keyword == None: # Identifier
                 token = Token(tokText, TokenType.IDENT)
             else:   # Keyword
-                if tokText in ['GCD','DUP','SWAP','OVER','DEL','INPUT']:
+                if tokText in ['GCD','DUP','SWAP','OVER','POP','INPUT','RAWIN']:
                     token = Token(tokText, TokenType.WORD)
                 else:
                     token = Token(tokText, keyword)
@@ -207,12 +207,13 @@ class TokenType(enum.Enum):
     END = 111
     OPENC = 112
     CLOSEC = 113
+    RAWIN = 114
 # Operators.
     GCD = 114
     DUP = 115
     SWAP = 116
     OVER = 117
-    DEL = 118
+    POP = 118
     PLUS = 201
     MINUS = 202
     ASTERISK = 203

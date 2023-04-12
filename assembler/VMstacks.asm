@@ -1,5 +1,5 @@
 @stackssys
-    speed 100
+    speed 10
 
 ret
 
@@ -16,6 +16,11 @@ ret
         jump :_input_loop
     :_input_loop_end
     clra 
+ret
+
+@rawin
+    input %_kbd
+    input %_kbd
 ret
 
 
