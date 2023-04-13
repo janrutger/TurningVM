@@ -201,7 +201,7 @@ class Parser:
                 self.word()
         
 
-    # word ::=	 ('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'POP'|'INPUT' |'RAWIN')
+    # word ::=	 ('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT' |'RAWIN')
     def word(self):
         if self.curToken.text == '+':
             self.emitter.emitLine("call @plus")
@@ -242,7 +242,7 @@ class Parser:
         elif self.curToken.text == 'OVER':
             self.emitter.emitLine("call @over")
             self.nextToken()
-        elif self.curToken.text == 'POP':
+        elif self.curToken.text == 'DROP':
             self.emitter.emitLine("pull")
             self.nextToken()
         elif self.curToken.text == 'INPUT':

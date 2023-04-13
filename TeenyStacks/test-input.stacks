@@ -2,36 +2,36 @@
 LABEL loop
     {RAWIN 1 ==} REPEAT
         DUP "q" == DO
-            POP
+            DROP
             GOTO endloop
             END
         DUP "+" == DO
-            POP
+            DROP
             +
             GOTO done
             END
         DUP "-" == DO
-            POP
+            DROP
             - 
             GOTO done
             END
         DUP "*" == DO
-            POP
+            DROP
             * 
             GOTO done
             END
         DUP "/" == DO
-            POP
+            DROP
             / 
             GOTO done
             END
         DUP "." == DO
-            POP
+            DROP
             . PRINT 
             GOTO done
             END
 
-    POP
+    DROP
     LABEL done
     END   
 GOTO loop
