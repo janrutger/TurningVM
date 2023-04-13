@@ -21,7 +21,8 @@ also inspriration from:
 Specials
 - from @AZHenley https://github.com/AZHenley/teenytinycompiler 
 
-The Grammer of STACKS
+
+The Grammer of TeenySTACKS
 
     program    ::=	{statement}
     statement  ::=  "LABEL" ident nl
@@ -36,7 +37,7 @@ The Grammer of STACKS
                         | "DO"   nl {statement} nl "END" nl
                         | "GOTO" ident nl
                         | nl )
-                        
+
     expression ::=	(INTEGER | STRING | word | ident)+
     word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
     ident      ::=	STRING
