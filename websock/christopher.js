@@ -51,6 +51,11 @@ function start() {
     
 }
 
+function ctrlC() {
+    console.log("ctrl-C")
+    websock.send(JSON.stringify({ "commando": "ctrlc" }));
+}
+
 function println(text2print){
     console.log("print something")
     document.getElementById("printer").value += (text2print + "\r\n")

@@ -209,11 +209,11 @@ class TokenType(enum.Enum):
     CLOSEC = 113
     RAWIN = 114
 # Operators.
-    GCD = 114
     DUP = 115
     SWAP = 116
     OVER = 117
     POP = 118
+    GCD = 119
     PLUS = 201
     MINUS = 202
     ASTERISK = 203

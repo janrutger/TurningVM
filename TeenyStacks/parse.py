@@ -186,7 +186,7 @@ class Parser:
             else:
                 self.nl()
 
-    # expression ::=	INTEGER | STRONG | word | ident
+    # expression ::=	INTEGER | STRING | word | ident
     def expression(self):
         while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.WORD):
             if self.checkToken(TokenType.NUMBER):

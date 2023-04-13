@@ -1,7 +1,5 @@
-
-1 1 == DO
-    3 3 -
+RAWIN POP DUP "q" == DO 
+. PRINT
 END
-
 
 

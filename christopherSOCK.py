@@ -63,6 +63,9 @@ def on_message(wsapp, message):
         #runner()
         job = threading.Thread(target=runner)
         job.start()
+    elif "commando" in input and input["commando"] == "ctrlc":
+        print(input)
+        ControlC()
     elif "keyboard" in input:
         print("palce in buffr")
         ui.writeKbdBuff(input["keyboard"])

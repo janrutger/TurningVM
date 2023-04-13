@@ -5,35 +5,35 @@ LABEL loop
             POP
             GOTO endloop
             END
-
-
         DUP "+" == DO
             POP
-            + 
+            +
+            GOTO done
             END
-
         DUP "-" == DO
             POP
             - 
+            GOTO done
             END
-
         DUP "*" == DO
             POP
             * 
+            GOTO done
             END
-
         DUP "/" == DO
             POP
             / 
+            GOTO done
             END
-
         DUP "." == DO
             POP
             . PRINT 
+            GOTO done
             END
 
+    POP
+    LABEL done
     END   
 GOTO loop
-
 LABEL endloop
 
