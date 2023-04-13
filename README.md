@@ -21,26 +21,25 @@ also inspriration from:
 Specials
 - from @AZHenley https://github.com/AZHenley/teenytinycompiler 
 
+The Grammer of STACKS
 
-program    ::=	{statement}
-statement  ::=  "LABEL" ident nl
-	    |   "GOTO" ident nl
-	    |   "DEFINE" nl {statement} nl "AS" ident nl
+    program    ::=	{statement}
+    statement  ::=  "LABEL" ident nl
+            |   "GOTO" ident nl
+            |   "DEFINE" nl {statement} nl "AS" ident nl
 
-	    |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
- 
-	    |   (expression | st) ( "PRINT" nl
-		      		  | "PLOT" nl
-      				  | "AS" ident nl
-      				  | "DO"   nl {statement} nl "END" nl
-      				  | "GOTO" ident nl
-      				  | nl )
+            |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
+    
+            |   (expression | st) ( "PRINT" nl
+                        | "PLOT" nl
+                        | "AS" ident nl
+                        | "DO"   nl {statement} nl "END" nl
+                        | "GOTO" ident nl
+                        | nl )
+                        
+    expression ::=	(INTEGER | STRING | word | ident)+
+    word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
+    ident      ::=	STRING
 
-
-
-expression ::=	(INTEGER | STRING | word | ident)+
-word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-ident      ::=	STRING
-
-st         ::=	('.'|'..')
-nl         ::= '\n'+
+    st         ::=	('.'|'..')
+    nl         ::= '\n'+
