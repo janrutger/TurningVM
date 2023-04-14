@@ -69,9 +69,9 @@ call @eq
 loada
 testz
 clra
-jumpf :_6_do_end
+jumpf :_6_goto_end
 jump :endloop
-:_6_do_end
+:_6_goto_end
 :done
 jump :_0_condition_start
 :_0_repeat_end
