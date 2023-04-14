@@ -31,7 +31,8 @@ The Grammer of TeenySTACKS
 
             |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
     
-            |   (expression | st) ( "PRINT" nl
+            |   (expression | st) ( 
+                        "PRINT" nl
                         | "PLOT" nl
                         | "AS" ident nl
                         | "DO"   nl {statement} nl "END" nl

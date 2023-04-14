@@ -71,7 +71,7 @@ class MMU:
             memType, memVal = self.memory[self.virtMemAdresses[adres]]
             if memType == "IObuff":
                 if len(memVal) == 0:
-                    self.ui.println("#")
+                    self.ui.println(">")
                     tokens = self.ui.kbdRead(self.stringTable)
                     for token in tokens:
                         self.writeIObuff(adres, token)

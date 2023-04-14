@@ -42,7 +42,7 @@ class UIconnect:
         while len(self.kbdBuff) == 0:
             time.sleep(1)
         resp = self.kbdBuff.pop(0)
-        self.println(resp)
+        self.println("> " + resp)
         return (resp)
 
     # def setSpeed(self, speed):

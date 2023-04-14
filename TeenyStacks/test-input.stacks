@@ -1,10 +1,7 @@
 
 LABEL loop
     {RAWIN 1 ==} REPEAT
-        DUP "q" == DO
-            DROP
-            GOTO endloop
-            END
+        
         DUP "+" == DO
             DROP
             +
@@ -31,7 +28,10 @@ LABEL loop
             GOTO done
             END
 
-    DROP
+        "q" == DO
+            GOTO endloop
+            END
+
     LABEL done
     END   
 GOTO loop
