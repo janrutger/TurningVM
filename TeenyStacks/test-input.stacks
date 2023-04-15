@@ -3,28 +3,23 @@ LABEL loop
     {RAWIN 1 ==} REPEAT
         
         DUP "+" == DO
-            DROP
-            +
+            DROP +
             GOTO done
             END
         DUP "-" == DO
-            DROP
-            - 
+            DROP - 
             GOTO done
             END
         DUP "*" == DO
-            DROP
-            * 
+            DROP * 
             GOTO done
             END
         DUP "/" == DO
-            DROP
-            / 
+            DROP / 
             GOTO done
             END
         DUP "." == DO
-            DROP
-            . PRINT 
+            DROP PRINT 
             GOTO done
             END
 
