@@ -1,5 +1,5 @@
 @stackssys
-    speed 100
+    speed 50
 
 ret
 

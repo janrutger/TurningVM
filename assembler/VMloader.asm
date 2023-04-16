@@ -106,10 +106,10 @@ ret
     teste
     jumpf :settrue_neq
     push 1
-    jump :end_eq
+    jump :end_neq
     :settrue_neq
         push 0
-    :end_eq
+    :end_neq
         call :clearAB
 ret
 
