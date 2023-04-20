@@ -25,14 +25,14 @@ nop
     storem $_cRandom
     push 65536
     storem $_mRandom
-    speed 25
+    speed 0
 ret
 
 @plus
     loada
     add
     storea
-    call :clearAB
+    clra
 ret
 
 @minus

@@ -87,9 +87,10 @@ def on_open(wsapp):
 def SendTapeUpdate():
     tapeState = executes.refresh_tapes({"ST", "RA", "RB", "S"})
     #counter += 1
-    message = {"tapeUpdate": tapeState}
+    message = json.dumps({"tapeUpdate": tapeState})
     timeStamp = time.time()
-    wsapp.send(json.dumps(message) + "|" + str(timeStamp))
+    #wsapp.send(json.dumps(message) + "|" + str(timeStamp))
+    wsapp.send(message+ "|" + str(timeStamp))
     
     return True
 
