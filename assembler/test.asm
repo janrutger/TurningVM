@@ -1,15 +1,56 @@
 @main
-call @rand
+speed 0
 
-push 6
-call @mul
-push 100
-call @div
-push 1
-call @plus
+    array *list0
+    array *list1
+
+    push 'currentlist'
+    index *list0
+
+    push 11
+    storem $maxprimes
 
 
-storem %_plotter
-output %_plotter
+    loadm $maxprimes
+    loadb
+    push 1
+    loada
+    :initlist
+        storeb
+        storem 'currentlist'
+        decb
+        teste
+    jumpf :initlist
+
+    push 0
+    storem $currentPOS
+
+
+    :mainloop
+        clra
+        clrb
+
+        loadm 'currentlist'
+        loadm $currentPOS
+        call @minus
+        storem $cursor
+
+
+        loadm $cursor
+        readelm 'currentlist'
+        call @dup
+        call @mul
+
+        loadb
+        loadm $maxprimes
+        loada
+        testg
+        jumpt :wrapup
+
+        
+        
+
+    
+    :wrapup
 
 ret

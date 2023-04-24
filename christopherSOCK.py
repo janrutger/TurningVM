@@ -38,18 +38,18 @@ def load():
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/main.asm")))
 
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMloader.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMstacks.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/out.asm")))
-
-
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/test.asm")))
+    #     assembler.readASM("./assembler/VMstacks.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/out.asm")))
+
+
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/VMloader.asm")))
+    memory.loadMem(assembler.compile(
+        assembler.readASM("./assembler/test.asm")))
 
 
 
@@ -78,7 +78,7 @@ def on_message(wsapp, message):
         
 
 def on_open(wsapp):
-    text2print = {"printline" : "Backend activated"}
+    text2print = {"printline" : "Bacccckend activated"}
     wsapp.send(json.dumps(text2print))
     print("register websocket")
     ui.set(wsapp)

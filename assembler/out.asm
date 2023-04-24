@@ -1,50 +1,61 @@
 @main
 call @stackssys
-push 1
-call @dup
-call @plot
-call @dup
-call @plot
-storem $previous
-push 2
-storem $next
+push 6
+storem $number
+push 0
+storem $som
 :_0_condition_start
-loadm $next
-push 700
-call @neq
+push 1000
+loadm $som
+call @lt
 loada
 testz
 clra
 jumpf :_0_repeat_end
-loadm $previous
-loadm $next
-call @_gcd
-storem $cfactor
+loadm $som
+loadm $number
+call @plus
+storem $som
+loadm $som
 push 1
-loadm $cfactor
-call @eq
+call @minus
+call @dup
+push 5
+call @mod
+push 0
+call @neq
 loada
 testz
 clra
 jumpf :_1_do_end
-loadm $previous
-loadm $next
-push 1
-call @plus
-call @plus
-jump :nextnumber
+prt
 :_1_do_end
-loadm $previous
-loadm $cfactor
-call @div
-:nextnumber
-call @dup
-call @plot
-storem $previous
-loadm $next
+loadm $som
 push 1
 call @plus
-storem $next
+call @dup
+push 5
+call @mod
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_2_do_end
+prt
+:_2_do_end
+:_3_condition_start
+call @dup
+push 5
+call @neq
+loada
+testz
+clra
+jumpf :_3_repeat_end
+pull
+jump :_3_condition_start
+:_3_repeat_end
 jump :_0_condition_start
 :_0_repeat_end
+prt
 ret
