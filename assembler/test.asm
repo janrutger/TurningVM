@@ -52,11 +52,11 @@ ret
     :checkList
         decb
         storeb
-        loada
+        storeb
         storem $currentPOS
         loada
         testz
-        jumpt :enCheckList
+        jumpt :endCheckList
 
         storeb
         readelm 'currentlist'
@@ -76,7 +76,7 @@ ret
             loadm $currentPOS
 
 
-
+    jump :checkList
     :endCkeckList
     prt
 ret
