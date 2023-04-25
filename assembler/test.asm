@@ -2,8 +2,6 @@
 speed 0
 
     array *list0
-    array *list1
-
     push 'currentlist'
     index *list0
 
@@ -22,9 +20,11 @@ speed 0
         teste
     jumpf :initlist
 
-    push 0
     :mainloop
-        storem $currentPOS
+        array *list1
+        push 'newlist'
+        index *list1
+
         call @setCursor
 
         loadm $cursor
@@ -32,13 +32,6 @@ speed 0
         jumpt :wrapup
 
         call @checkForPrime
-
-        loadm $currentPOS
-        loadb
-        incb 
-        storeb
-
-
 
 
     jump :mainloop
@@ -49,12 +42,42 @@ ret
 @checkForPrime
     loadm $cursor
     readelm 'currentlist'
-    call @dup 
-    storem $current
-
     
+    call @dup
+    storem $currentVal
+
+    loadm 'currentlist'
+    storeb
+
+    :checkList
+        decb
+        storeb
+        loada
+        storem $currentPOS
+        loada
+        testz
+        jumpt :enCheckList
+
+        storeb
+        readelm 'currentlist'
+        call $dup
+        loadm $currentVal
+        call @mod
+
+        loada
+        testz
+        jumpt :didCkeck
 
 
+
+
+        :didCkeck
+            pop
+            loadm $currentPOS
+
+
+
+    :endCkeckList
     prt
 ret
 
@@ -62,6 +85,7 @@ ret
 @checkForDone
     readelm 'currentlist'
     call @dup
+    clrb
     call @mul
     loada
     loadm $maxprimes
@@ -70,10 +94,6 @@ ret
 ret
 
 @setCursor
-    clra
-    clrb
     loadm 'currentlist'
-    loadm $currentPOS
-    call @minus
     storem $cursor
 ret
