@@ -23,34 +23,57 @@ speed 0
     jumpf :initlist
 
     push 0
-    storem $currentPOS
-
-
     :mainloop
-        clra
-        clrb
-
-        loadm 'currentlist'
-        loadm $currentPOS
-        call @minus
-        storem $cursor
-
+        storem $currentPOS
+        call @setCursor
 
         loadm $cursor
-        readelm 'currentlist'
-        call @dup
-        call @mul
-
-        loadb
-        loadm $maxprimes
-        loada
-        testg
+        call @checkForDone
         jumpt :wrapup
 
-        
-        
+        call @checkForPrime
 
-    
+        loadm $currentPOS
+        loadb
+        incb 
+        storeb
+
+
+
+
+    jump :mainloop
     :wrapup
 
+ret
+
+@checkForPrime
+    loadm $cursor
+    readelm 'currentlist'
+    call @dup 
+    storem $current
+
+    
+
+
+    prt
+ret
+
+    
+@checkForDone
+    readelm 'currentlist'
+    call @dup
+    call @mul
+    loada
+    loadm $maxprimes
+    loadb
+    testg
+ret
+
+@setCursor
+    clra
+    clrb
+    loadm 'currentlist'
+    loadm $currentPOS
+    call @minus
+    storem $cursor
 ret
