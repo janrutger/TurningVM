@@ -16,10 +16,11 @@ speed 0
     :initlist
         storeb
         storem 'currentlist'
-        decb
-        teste
-halt
+        incb 
+        testg
     jumpf :initlist
+
+halt
 
     :mainloop
         array *list1
