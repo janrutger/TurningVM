@@ -6,6 +6,8 @@ speed 0
     index *list0
 
     push 11
+    push 1
+    call @plus
     storem $maxprimes
 
 
@@ -17,10 +19,8 @@ speed 0
         storeb
         storem 'currentlist'
         incb 
-        testg
+        teste
     jumpf :initlist
-
-halt
 
     :mainloop
         array *list1
@@ -42,7 +42,6 @@ halt
         call @setCursor
         loadm $cursor
         call @checkForDone
-halt
         jumpt :wrapup
         call @checkForPrime
 
@@ -111,6 +110,6 @@ ret
 ret
 
 @setCursor
-    loadm 'currentlist'
+    push 1
     storem $cursor
 ret
