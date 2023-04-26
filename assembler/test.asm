@@ -10,14 +10,15 @@ speed 0
 
 
     loadm $maxprimes
-    loadb
-    push 1
     loada
+    push 2
+    loadb
     :initlist
         storeb
         storem 'currentlist'
         decb
         teste
+halt
     jumpf :initlist
 
     :mainloop
