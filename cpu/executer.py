@@ -215,6 +215,7 @@ class Executer:
             print(self.pc, address_value[0], address_value[1])
             #step = input()
             exit_code = self.run_commando(address_value[0], address_value[1])
+            #time.sleep(0.01)
 
         if self.ControlC == True:
             self.ui.println("ctrl-C")

@@ -26,12 +26,26 @@ speed 0
         index *list1
 
         call @setCursor
-
         loadm $cursor
         call @checkForDone
         jumpt :wrapup
-
         call @checkForPrime
+
+        push 'currentlist'
+        index *list1
+        array *list0
+        push 'newlist'
+        index *list0
+
+        call @setCursor
+        loadm $cursor
+        call @checkForDone
+halt
+        jumpt :wrapup
+        call @checkForPrime
+
+        push 'currentlist'
+        index *list0
 
 
     jump :mainloop
@@ -47,7 +61,7 @@ ret
     storem $currentVal
 
     loadm 'currentlist'
-    storeb
+    loadb
 
     :checkList
         decb
@@ -60,24 +74,25 @@ ret
 
         storeb
         readelm 'currentlist'
-        call $dup
+        call @dup
         loadm $currentVal
         call @mod
 
         loada
         testz
         jumpt :didCkeck
-
-
-
+            storem 'newlist'
+            loadm $currentPOS
+            loadb
+        jump :checkList
 
         :didCkeck
-            pop
+            pull
             loadm $currentPOS
+            loadb
+        jump :checkList
 
-
-    jump :checkList
-    :endCkeckList
+    :endCheckList
     prt
 ret
 

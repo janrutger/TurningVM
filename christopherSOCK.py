@@ -67,7 +67,7 @@ def on_message(wsapp, message):
         print(input)
         ControlC()
     elif "keyboard" in input:
-        print("palce in buffr")
+        print("Place in buffer")
         ui.writeKbdBuff(input["keyboard"])
     elif "request" in input:
         #print("Tapereq")
@@ -78,7 +78,7 @@ def on_message(wsapp, message):
         
 
 def on_open(wsapp):
-    text2print = {"printline" : "Bacccckend activated"}
+    text2print = {"printline" : "Backend activated"}
     wsapp.send(json.dumps(text2print))
     print("register websocket")
     ui.set(wsapp)
