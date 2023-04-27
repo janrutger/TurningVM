@@ -100,6 +100,7 @@ ret
     loadm $cursor
     readelm 'currentlist'
     prt
+halt
 ret
 
     
