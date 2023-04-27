@@ -68,7 +68,7 @@ ret
     :checkList
         incb
         storeb
-        storeb
+        #storeb
         storem $currentPOS
         loadm $maxprimes
         loada
@@ -77,7 +77,7 @@ ret
 
         storeb
         readelm 'currentlist'
-        #call @dup
+        call @dup
         loadm $currentVal
         
         call @mod
@@ -94,12 +94,12 @@ ret
             pull
             loadm $currentPOS
             loadb
-halt
         jump :checkList
 
     :endCheckList
+    loadm $cursor
+    readelm 'currentlist'
     prt
-halt
 ret
 
     
