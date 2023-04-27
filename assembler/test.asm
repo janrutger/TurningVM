@@ -32,6 +32,7 @@ speed 0
         call @checkForDone
         jumpt :wrapup
         call @checkForPrime
+halt
 
         push 'currentlist'
         index *list1
@@ -61,22 +62,24 @@ ret
     call @dup
     storem $currentVal
 
-    loadm 'currentlist'
+    loadm $cursor
     loadb
 
     :checkList
-        decb
+        incb
         storeb
         storeb
         storem $currentPOS
+        loadm $maxprimes
         loada
-        testz
+        teste
         jumpt :endCheckList
 
         storeb
         readelm 'currentlist'
-        call @dup
+        #call @dup
         loadm $currentVal
+        
         call @mod
 
         loada
@@ -91,10 +94,12 @@ ret
             pull
             loadm $currentPOS
             loadb
+halt
         jump :checkList
 
     :endCheckList
     prt
+halt
 ret
 
     
