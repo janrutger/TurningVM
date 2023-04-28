@@ -5,7 +5,7 @@ speed 0
     push 'currentlist'
     index *list0
 
-    push 11
+    push 1000
     push 1
     call @plus
     storem $maxprimes
@@ -32,7 +32,6 @@ speed 0
         call @checkForDone
         jumpt :wrapup
         call @checkForPrime
-halt
 
         push 'currentlist'
         index *list1
@@ -49,10 +48,21 @@ halt
         push 'currentlist'
         index *list0
 
-
     jump :mainloop
     :wrapup
-
+        loadm $cursor
+        :lus
+            loadb
+            storeb
+            readelm 'currentlist'
+            jumpf :done
+                prt
+                incb
+                storeb
+        jump :lus
+    :done
+    clra
+    clrb
 ret
 
 @checkForPrime
@@ -70,12 +80,13 @@ ret
         storeb
         #storeb
         storem $currentPOS
-        loadm $maxprimes
+        loadm 'currentlist'
         loada
-        teste
+        ex
+        testg
         jumpt :endCheckList
 
-        storeb
+        loadm $currentPOS
         readelm 'currentlist'
         call @dup
         loadm $currentVal
@@ -97,10 +108,7 @@ ret
         jump :checkList
 
     :endCheckList
-    loadm $cursor
-    readelm 'currentlist'
     prt
-halt
 ret
 
     

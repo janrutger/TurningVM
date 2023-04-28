@@ -212,7 +212,7 @@ class Executer:
 
         while exit_code != "CPUstopped" and self.ControlC == False:
             address_value = self.memory.readMem(self.pc)
-            print(self.pc, address_value[0], address_value[1])
+            #print(self.pc, address_value[0], address_value[1])
             #step = input()
             exit_code = self.run_commando(address_value[0], address_value[1])
             #time.sleep(0.01)
