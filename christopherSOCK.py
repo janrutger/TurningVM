@@ -99,7 +99,7 @@ def ControlC():
     return True
 
 
-rel.timeout(0.05, SendTapeUpdate)
+rel.timeout(0.05, SendTapeUpdate) #0.05
 
 wsapp = websocket.WebSocketApp("ws://127.0.0.1:8001/", on_message=on_message,
                                on_open=on_open)
