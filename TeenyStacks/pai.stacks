@@ -1,0 +1,16 @@
+100000 AS max
+3 AS n 
+
+max AS a
+
+{n max >} REPEAT
+    a max n / - AS a
+    n 2 + AS n
+a 4 * PLOT
+    a max n / + AS a
+    n 2 + AS n
+
+
+END
+
+a 4 * PRINT

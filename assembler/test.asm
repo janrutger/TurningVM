@@ -5,7 +5,7 @@ speed 0
     push 'currentlist'
     index *list0
 
-    push 99
+    push 299
     push 1
     call @plus
     storem $maxprimes
