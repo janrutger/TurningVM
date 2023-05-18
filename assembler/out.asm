@@ -1,6 +1,6 @@
 @main
 call @stackssys
-push 100000
+push 10000000
 storem $max
 push 3
 storem $n
@@ -21,13 +21,15 @@ call @div
 call @minus
 storem $a
 loadm $n
-push 2
-call @plus
-storem $n
+prt
 loadm $a
 push 4
 call @mul
-call @plot
+prt
+loadm $n
+push 2
+call @plus
+storem $n
 loadm $a
 loadm $max
 loadm $n
