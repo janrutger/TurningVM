@@ -8,9 +8,11 @@ from cpu       import executer  as ex
 from machine   import vmachine  as vm
 from machine   import plotter   as plt
 from machine   import keyboard  as kbd
+from websock   import UIconnect as UI
 
 memory    = MMU.MMU()
-executer  = ex.Executer(memory)
+ui        = UI.UIconnect()
+executer  = ex.Executer(memory, ui)
 plotter   = plt.Plotter(memory) 
 keyboard  = kbd.Keyboard(memory)
 machine   = vm.Machine(executer, plotter, keyboard)

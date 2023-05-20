@@ -35,6 +35,7 @@ def loadSchema():
     schema["loadi"]     = ("LDI", None)
 
     schema["input"]     = ("INPUT", "s")
+    schema["output"]    = ("OUTPUT", "s")
     schema["set"]       = ("SET", "s")
     schema["readelm"]   = ("READELM", "s")
     schema["readelmi"]  = ("READELMI", None) 

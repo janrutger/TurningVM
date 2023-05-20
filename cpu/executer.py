@@ -1,19 +1,20 @@
 # import threading
 import time
 
-# from christopherUI import tapeLayout
 from cpu import tapecommander as tc
 from cpu import exec_no_opcode as nop
 from cpu import exec_opcode as op
 
 
 class Executer:
-    def __init__(self, memory):
+    def __init__(self, memory, ui):
         self.memory = memory
         self.tape_commander = tc.Tapecommander()
         self.execNOP = nop.Exec_no_opcode(self.tape_commander)
         self.execOP = op.Exec_opcode(self.tape_commander)
+        self.ui = ui #need this for prt instruction
         self.pc = int(0)
+        self.ControlC = False
 
     def refresh_tapes(self, tapes):
         return self.execNOP.print(tapes)
@@ -35,6 +36,11 @@ class Executer:
     def input(self, operand):
         val = self.memory.input(operand)
         self.execNOP.push(val)
+        self.pc = self.pc + 1
+        return "HALT"
+    
+    def output(self, operand):
+        val = self.memory.output(operand)
         self.pc = self.pc + 1
         return "HALT"
 
@@ -120,7 +126,9 @@ class Executer:
 
     def prt(self, operand):
         val = self.execNOP.pull()
-        print("-->", int(val, 2))
+        text2print = int(val, 2)
+        self.ui.println(text2print)
+        #print("-->", int(val, 2))
         self.pc = self.pc + 1
         return "HALT"
 
@@ -175,7 +183,7 @@ class Executer:
         return "HALT"
 
     def speed(self, operand):
-        self.tape_commander.CPUspeed = operand
+        self.tape_commander.CPUspeed = 0.001 * operand
         self.pc = self.pc + 1
         return "HALT"
 
@@ -200,12 +208,17 @@ class Executer:
     def run_memory(self, pc):
         self.pc = pc
         exit_code = "CPUrunning"
+        self.ControlC = False
 
-        while exit_code != "CPUstopped":
+        while exit_code != "CPUstopped" and self.ControlC == False:
             address_value = self.memory.readMem(self.pc)
-            # print(self.pc, address_value[0], address_value[1])
-
+            #print(self.pc, address_value[0], address_value[1])
+            #step = input()
             exit_code = self.run_commando(address_value[0], address_value[1])
+            #time.sleep(0.01)
+
+        if self.ControlC == True:
+            self.ui.println("ctrl-C")
 
         if exit_code == "CPUstopped":
             return "HALT"

@@ -1,0 +1,32 @@
+
+LABEL loop
+    {RAWIN 1 ==} REPEAT
+        
+        DUP "+" == DO
+            DROP +
+            GOTO done
+            END
+        DUP "-" == DO
+            DROP - 
+            GOTO done
+            END
+        DUP "*" == DO
+            DROP * 
+            GOTO done
+            END
+        DUP "/" == DO
+            DROP / 
+            GOTO done
+            END
+        DUP "." == DO
+            DROP PRINT 
+            GOTO done
+            END
+
+        "q" == GOTO endloop
+
+    LABEL done
+    END   
+GOTO loop
+LABEL endloop
+

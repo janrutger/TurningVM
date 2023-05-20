@@ -1,0 +1,49 @@
+#LET teller = 1
+#LET som = 0
+
+
+#LABEL lus
+#    INPUT getal
+#    LET som = som + getal
+#    PRINT som / teller
+#    LET teller = teller + 1
+#    GOTO lus
+
+
+
+
+#LET a = 1
+#WHILE a != 5  REPEAT
+#    LET b = 1
+##    WHILE b != 5 REPEAT
+#        PRINT a * b
+#        LET b = b + 1
+#    ENDWHILE
+#    LET a = a + 1      
+#ENDWHILE    
+
+
+INPUT nums
+LET a = 1
+WHILE nums > 1 REPEAT
+    LET c = a * nums
+    LET a = c
+    LET nums = nums - 1
+    PRINT a
+ENDWHILE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -28,10 +28,14 @@ class Exec_no_opcode:
         write_bit = {}
         self.tapecommander.do_move(move_left)
         self.tapecommander.do_write(write_separator)
+        
+
         for bit in operand:
             write_bit["ST"] = bit
             self.tapecommander.do_move(move_left)
             self.tapecommander.do_write(write_bit)
+        
+
         return "oke"
 
     def print(self, tapeList):
@@ -48,8 +52,11 @@ class Exec_no_opcode:
             self.tapecommander.do_write(writeBlank)
             self.tapecommander.do_move(move)
             bit = self.tapecommander.do_read({"ST"})
+            
 
         self.tapecommander.do_write(writeBlank)
         self.tapecommander.do_move(move)
+        
+
 
         return (result)

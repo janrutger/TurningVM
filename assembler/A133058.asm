@@ -1,10 +1,12 @@
 @oeis
     push 1 
     push 1
-    storem %_plotter     
+    storem %_plotter
+    output %_plotter     
     push 1  
     push 1
-    storem %_plotter    
+    storem %_plotter 
+    output %_plotter   
 
     push 2      
     storem $n
@@ -34,7 +36,8 @@
 
     storea 
     storea
-    storem %_plotter     
+    storem %_plotter 
+    output %_plotter    
     jump :incn  
 
 :no-cf          
@@ -49,7 +52,8 @@
 
     storea  
     storea
-    storem %_plotter   
+    storem %_plotter 
+    output %_plotter  
     jump :incn  
 
 :incn
@@ -59,7 +63,6 @@
     add         
     storea      
     storem $n  
-
     push 700
     loadb
     teste      
@@ -67,6 +70,7 @@
 
     clra
     clrb
+    
     jump :loop
 
 :done   

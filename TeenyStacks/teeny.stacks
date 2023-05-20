@@ -1,0 +1,22 @@
+1
+.. PLOT
+.. PLOT
+. AS previous
+
+2 AS next
+
+{next 700 !=} REPEAT
+      previous next GCD AS cfactor
+      1 cfactor == DO
+            previous next 1 + + 
+            GOTO nextnumber
+      END
+
+      previous cfactor / 
+
+      LABEL nextnumber
+      .. PLOT
+      . AS previous 
+      next 1 + AS next
+END
+

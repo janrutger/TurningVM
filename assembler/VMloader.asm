@@ -9,11 +9,30 @@ nop
 nop
 nop
 
+@init_vmachine
+    speed 10
+    clra
+    clrb
+    iobuff %_plotter
+    output %_plotter
+    iobuff %_kbd
+
+    push 75
+    storem $_aRandom
+    push 3586
+    storem $seed
+    push 74
+    storem $_cRandom
+    push 65536
+    storem $_mRandom
+    speed 500
+ret
+
 @plus
     loada
     add
     storea
-    call :clearAB
+    clra
 ret
 
 @minus
@@ -87,10 +106,36 @@ ret
     teste
     jumpf :settrue_neq
     push 1
-    jump :end_eq
+    jump :end_neq
     :settrue_neq
         push 0
-    :end_eq
+    :end_neq
+        call :clearAB
+ret
+
+@gt
+    loada
+    loadb
+    testg
+    jumpt :settrue_gt
+    push 1
+    jump :end_gt
+    :settrue_gt
+        push 0
+    :end_gt
+        call :clearAB
+ret
+
+@lt
+    loadb
+    loada
+    testg
+    jumpt :settrue_lt
+    push 1
+    jump :end_lt
+    :settrue_lt
+        push 0
+    :end_lt
         call :clearAB
 ret
 
@@ -208,3 +253,19 @@ ret
     :done1
         clra
         ret
+
+
+@rand
+    speed 0
+    loadm $_aRandom
+    loadm $seed
+    call @mul
+    loadm $_cRandom
+    call @plus
+    loadm $_mRandom
+    call @mod
+    call @dup
+    storem $seed
+    push 655
+    call @div 
+ret

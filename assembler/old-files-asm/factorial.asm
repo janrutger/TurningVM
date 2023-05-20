@@ -1,10 +1,11 @@
-speed 1
+@main
+speed 2
 
 :factorial
 push 1
 
 #get here the input value
-push 4
+push 999
 
 multi
 

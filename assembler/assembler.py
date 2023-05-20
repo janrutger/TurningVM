@@ -22,7 +22,7 @@ class Assembler:
         stringTable = str(self.compiler.stringTable)
 
         BINprogram.insert(0, str(stringTable))
-        print(BINprogram)
+        #print(BINprogram)
 
         return (BINprogram)
 

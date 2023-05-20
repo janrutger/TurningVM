@@ -1,0 +1,24 @@
+6 AS number
+0 AS som
+
+
+{1000 som <} REPEAT
+    som number + AS som
+
+
+    som 1 - DUP 5 % 0 != DO
+        . PRINT
+    END 
+
+
+    som 1 + DUP 5 % 0 != DO
+        . PRINT
+    END
+
+{ DUP 5 !=} REPEAT
+    DROP
+END
+
+END
+
+. PRINT

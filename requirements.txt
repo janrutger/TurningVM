@@ -1,3 +1,5 @@
-matplotlib==3.6.2
-PySimpleGUI==4.60.4
-tk
+#matplotlib==3.6.2
+#PySimpleGUI==4.60.4
+websocket-client==1.4.2
+SimpleWebSocketServer==0.1.2
+rel==0.4.8

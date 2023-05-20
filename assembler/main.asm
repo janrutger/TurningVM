@@ -1,9 +1,9 @@
 @main
-speed 0
+speed 60
+
 iobuff %_plotter
 
 call @oeis
 
-#stop plotter 
-speed 40
+speed 2
 ret

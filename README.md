@@ -17,3 +17,31 @@ also inspriration from:
 - OEIS A133058 https://oeis.org/A133058 
 - Ben Eater https://youtu.be/TardkN4OGJg
 - MMU https://nl.wikipedia.org/wiki/Memory_management_unit
+
+Specials
+- from @AZHenley https://github.com/AZHenley/teenytinycompiler 
+
+
+The Grammer of TeenySTACKS
+
+    program    ::=	{statement}
+    statement  ::=  "LABEL" ident nl
+            |   "GOTO" ident nl
+            |   "DEFINE" nl {statement} nl "AS" ident nl
+
+            |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
+    
+            |   (expression | st) ( 
+                        "PRINT" nl
+                        | "PLOT" nl
+                        | "AS" ident nl
+                        | "DO"   nl {statement} nl "END" nl
+                        | "GOTO" ident nl
+                        | nl )
+
+    expression ::=	(INTEGER | STRING | word | ident)+
+    word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
+    ident      ::=	STRING
+
+    st         ::=	('.'|'..')
+    nl         ::= '\n'+

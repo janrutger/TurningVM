@@ -1,8 +1,129 @@
 @main
+speed 0
 
-push 0
-push 10
+    array *list0
+    push 'currentlist'
+    index *list0
 
-call @modulo
+    push 299
+    push 1
+    call @plus
+    storem $maxprimes
 
-halt
+
+    loadm $maxprimes
+    loada
+    push 2
+    loadb
+    :initlist
+        storeb
+        storem 'currentlist'
+        incb 
+        teste
+    jumpf :initlist
+
+    :mainloop
+        array *list1
+        push 'newlist'
+        index *list1
+
+        call @setCursor
+        loadm $cursor
+        call @checkForDone
+        jumpt :wrapup
+        call @checkForPrime
+
+        push 'currentlist'
+        index *list1
+        array *list0
+        push 'newlist'
+        index *list0
+
+        call @setCursor
+        loadm $cursor
+        call @checkForDone
+        jumpt :wrapup
+        call @checkForPrime
+
+        push 'currentlist'
+        index *list0
+
+    jump :mainloop
+    :wrapup
+speed 25
+        clra
+        loadm $cursor
+        loadb
+        :lus       
+            storeb
+            readelm 'currentlist'
+            jumpf :done
+                prt
+                incb             
+        jump :lus
+    :done    
+    clrb
+ret
+
+@checkForPrime
+    loadm $cursor
+    readelm 'currentlist'
+    
+    call @dup
+    storem $currentVal
+
+    loadm $cursor
+    loadb
+
+    :checkList
+        incb
+        storeb
+        #storeb
+        storem $currentPOS
+        loadm 'currentlist'
+        loada
+        ex
+        testg
+        jumpt :endCheckList
+
+        loadm $currentPOS
+        readelm 'currentlist'
+        call @dup
+        loadm $currentVal
+   
+        call @mod
+
+        loada
+        testz
+        jumpt :didCkeck
+            storem 'newlist'
+            loadm $currentPOS
+            loadb
+        jump :checkList
+
+        :didCkeck
+            pull
+            loadm $currentPOS
+            loadb
+        jump :checkList
+
+    :endCheckList
+    prt
+ret
+
+    
+@checkForDone
+    readelm 'currentlist'
+    call @dup
+    clrb
+    call @mul
+    loada
+    loadm $maxprimes
+    loadb
+    testg
+ret
+
+@setCursor
+    push 1
+    storem $cursor
+ret
