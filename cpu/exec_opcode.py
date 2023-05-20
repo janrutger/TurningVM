@@ -27,6 +27,7 @@ class Exec_opcode:
 
             stepCounter = stepCounter + 1
             tapeprint =self.tapecommander.print_tape({"ST", "RA", "RB", "S"})
+            print(tapeprint)
             #print(stepCounter,opcode, state, tapeprint, nextState) #JRK hier worden de tape in de console geprint, nog geen UI
 
         while nextState != "HALT" and nextState != "ERROR":
