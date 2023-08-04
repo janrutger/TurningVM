@@ -1,14 +1,14 @@
 75 AS a
 7515 AS x
 74 AS c
-65537 AS m
+65536 AS m
 
 
-20 AS counter
+200 AS counter
 
 {counter 0 !=} REPEAT
     a x * c + m % DUP AS x
-    655 / PRINT
+    655 / PLOT
     counter 1 - AS counter
 
 END

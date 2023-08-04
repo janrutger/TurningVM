@@ -115,7 +115,9 @@ class Lexer:
             while self.curChar != '\"':
                 # Don't allow special characters in the string. No escape characters, newlines, tabs, or %.
                 # We will be using C's printf on this string.
-                if self.curChar == '\r' or self.curChar == '\n' or self.curChar == '\t' or self.curChar == '\\' or self.curChar == '%':
+                # if self.curChar == '\r' or self.curChar == '\n' or self.curChar == '\t' or self.curChar == '\\' or self.curChar == '%':
+                # JRK: I Allow % for modulo by JRK
+                if self.curChar == '\r' or self.curChar == '\n' or self.curChar == '\t' or self.curChar == '\\':
                     self.abort("Illegal character in string.")
                 self.nextChar()
 

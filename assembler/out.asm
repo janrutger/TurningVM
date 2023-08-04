@@ -1,49 +1,73 @@
 @main
 call @stackssys
-push 10000000
-storem $max
-push 3
-storem $n
-loadm $max
-storem $a
+push 1000
+storem $offset
+push 1
+storem $x
+loadm $offset
+call @plot
 :_0_condition_start
-loadm $n
-loadm $max
-call @gt
+loadm $x
+push 180
+call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-loadm $a
-loadm $max
-loadm $n
-call @div
+push 180
+loadm $x
 call @minus
-storem $a
-loadm $n
-prt
-loadm $a
-push 4
+loadm $x
 call @mul
-prt
-loadm $n
-push 2
-call @plus
-storem $n
-loadm $a
-loadm $max
-loadm $n
+storem $u
+loadm $offset
+push 4000
+loadm $u
+call @mul
+push 40500
+loadm $u
+call @minus
 call @div
 call @plus
-storem $a
-loadm $n
-push 2
+call @plot
+loadm $x
+push 1
 call @plus
-storem $n
+storem $x
 jump :_0_condition_start
 :_0_repeat_end
-loadm $a
-push 4
+push 1
+storem $x
+loadm $offset
+call @plot
+:_1_condition_start
+loadm $x
+push 180
+call @neq
+loada
+testz
+clra
+jumpf :_1_repeat_end
+push 180
+loadm $x
+call @minus
+loadm $x
 call @mul
-prt
+storem $u
+loadm $offset
+push 4000
+loadm $u
+call @mul
+push 40500
+loadm $u
+call @minus
+call @div
+call @minus
+call @plot
+loadm $x
+push 1
+call @plus
+storem $x
+jump :_1_condition_start
+:_1_repeat_end
 ret

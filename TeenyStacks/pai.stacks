@@ -1,9 +1,14 @@
-10000000 AS max
+25000 AS c
+c 4 * AS a
+
+a AS max
+a PRINT
+
+
 3 AS n 
 
-max AS a
 
-{n max >} REPEAT
+{n c >} REPEAT
     a max n / - AS a
 
 n PRINT 

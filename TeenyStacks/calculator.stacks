@@ -18,6 +18,10 @@ LABEL loop
             DROP / 
             GOTO done
             END
+        DUP "%" == DO
+            DROP % 
+            GOTO done
+            END
         DUP "." == DO
             DROP PRINT 
             GOTO done

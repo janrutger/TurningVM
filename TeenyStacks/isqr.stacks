@@ -1,0 +1,13 @@
+1 AS number
+
+{number 2000 !=} REPEAT
+
+    number 2 / 
+    { DUP DUP * number < } REPEAT
+        1 - 
+    END
+    . PLOT
+
+number 1 + AS number
+END
+

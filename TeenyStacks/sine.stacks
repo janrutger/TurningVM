@@ -1,0 +1,27 @@
+
+1000 AS offset
+
+
+1 AS x
+offset PLOT
+{x 180 !=} REPEAT
+    180 x - x * AS u
+    offset 4000 u * 40500 u - / + PLOT
+
+    x 1 + AS x
+END
+
+1 AS x
+offset PLOT
+{x 180 !=} REPEAT
+    180 x - x * AS u
+    offset 4000 u * 40500 u - / - PLOT
+
+    x 1 + AS x
+END
+
+
+
+
+
+

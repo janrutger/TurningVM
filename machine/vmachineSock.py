@@ -4,6 +4,10 @@
 """
 Deze code is gebaseerd op http://csl.name/post/vm/
 waarvoor veel dank.
+
+Example:
+: fact dup 1 != if dup 1 - fact * then ;
+
 """
 from __future__ import print_function
 import threading

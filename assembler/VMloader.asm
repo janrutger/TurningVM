@@ -19,13 +19,13 @@ nop
 
     push 75
     storem $_aRandom
-    push 3586
+    push 35
     storem $seed
     push 74
     storem $_cRandom
     push 65536
     storem $_mRandom
-    speed 500
+    speed 300
 ret
 
 @plus

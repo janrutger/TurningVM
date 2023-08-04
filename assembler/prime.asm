@@ -5,7 +5,7 @@ speed 0
     push 'currentlist'
     index *list0
 
-    push 299
+    push 750
     push 1
     call @plus
     storem $maxprimes
@@ -50,7 +50,7 @@ speed 0
 
     jump :mainloop
     :wrapup
-speed 25
+speed 5
         clra
         loadm $cursor
         loadb

@@ -1,6 +1,6 @@
 function connect()
   {
-    var url = "ws://camera:8001/";
+    var url = "ws://localhost:8001/";
     console.log("Opening websocket " + url + "\n");
     websock = new WebSocket(url);
     websock.onopen    = function(evt) {sock_open(evt)};
