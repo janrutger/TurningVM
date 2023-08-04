@@ -1,0 +1,18 @@
+4 AS n
+
+{n 1000 !=} REPEAT
+    n PRINT
+    n 2 / 
+    { DUP DUP * n < } REPEAT
+        1 - 
+    END
+    . AS i 
+
+    i 1 - ! i % i 1 - == DO
+        n PLOT
+        
+    END
+
+n 1 + AS n
+END
+
