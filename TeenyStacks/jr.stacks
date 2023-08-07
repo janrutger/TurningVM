@@ -1,24 +1,15 @@
-6 AS number
-0 AS som
+4 AS number
+INPUT AS end
 
-
-{1000 som <} REPEAT
-    som number + AS som
-
-
-    som 1 - DUP 5 % 0 != DO
-        . PRINT
-    END 
-
-
-    som 1 + DUP 5 % 0 != DO
-        . PRINT
+{number end !=} REPEAT
+    number
+    number 2 / 
+    { DUP DUP * number < } REPEAT
+        1 - 
     END
+    DUP * - DUP PLOT
+    . PRINT
 
-{ DUP 5 !=} REPEAT
-    DROP
+
+number 1 + AS number
 END
-
-END
-
-. PRINT
