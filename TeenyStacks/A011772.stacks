@@ -1,0 +1,19 @@
+4 AS n
+INPUT AS end
+
+{n end !=} REPEAT
+    
+    1 8 n * + 4 / 
+
+    { DUP DUP * n < } REPEAT
+        1 - 
+    END
+    . AS m 
+
+    {1 m + m * 2 n * % 0 !=} REPEAT
+        m 1 + AS m 
+    END
+     m PLOT
+
+n 1 + AS n
+END

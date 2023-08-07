@@ -2,14 +2,11 @@
 INPUT AS end
 
 {number end !=} REPEAT
-    number
-    number 2 / 
+    number number 2 / 
     { DUP DUP * number < } REPEAT
         1 - 
     END
-    DUP * - DUP PLOT
-    . PRINT
-
+    DUP * - PLOT
 
 number 1 + AS number
 END

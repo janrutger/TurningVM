@@ -1,26 +1,29 @@
 @main
 call @stackssys
 push 4
-storem $number
+storem $n
 call @input
 storem $end
 :_0_condition_start
-loadm $number
+loadm $n
 loadm $end
 call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-loadm $number
-loadm $number
-push 2
+push 1
+push 8
+loadm $n
+call @mul
+call @plus
+push 4
 call @div
 :_1_condition_start
 call @dup
 call @dup
 call @mul
-loadm $number
+loadm $n
 call @lt
 loada
 testz
@@ -30,16 +33,35 @@ push 1
 call @minus
 jump :_1_condition_start
 :_1_repeat_end
-call @dup
+storem $m
+:_2_condition_start
+push 1
+loadm $m
+call @plus
+loadm $m
 call @mul
-call @minus
-call @dup
-call @plot
-prt
-loadm $number
+push 2
+loadm $n
+call @mul
+call @mod
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_2_repeat_end
+loadm $m
 push 1
 call @plus
-storem $number
+storem $m
+jump :_2_condition_start
+:_2_repeat_end
+loadm $m
+call @plot
+loadm $n
+push 1
+call @plus
+storem $n
 jump :_0_condition_start
 :_0_repeat_end
 ret
