@@ -17,13 +17,15 @@ push 8
 loadm $n
 call @mul
 call @plus
-push 4
+storem $n1
+loadm $n1
+push 2
 call @div
 :_1_condition_start
 call @dup
 call @dup
 call @mul
-loadm $n
+loadm $n1
 call @lt
 loada
 testz
@@ -33,6 +35,10 @@ push 1
 call @minus
 jump :_1_condition_start
 :_1_repeat_end
+push 1
+call @minus
+push 2
+call @div
 storem $m
 :_2_condition_start
 push 1

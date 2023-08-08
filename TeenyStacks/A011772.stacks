@@ -3,17 +3,18 @@ INPUT AS end
 
 {n end !=} REPEAT
     
-    1 8 n * + 4 / 
+    1 8 n * + AS n1
 
-    { DUP DUP * n < } REPEAT
+    n1 2 /
+    { DUP DUP * n1 < } REPEAT
         1 - 
     END
-    . AS m 
+    1 - 2 / AS m 
 
     {1 m + m * 2 n * % 0 !=} REPEAT
         m 1 + AS m 
     END
-     m PLOT
+    m PLOT
 
 n 1 + AS n
 END
