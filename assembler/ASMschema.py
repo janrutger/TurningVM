@@ -51,6 +51,8 @@ def loadSchema():
     schema["multi"]     = ("MULTI", None)
     schema["sub"]       = ("SUB", None)
 
+    schema["ssr"]       = ("SSR", None)
+
     schema["ex"]        = ("EX", None)
     schema["testz"]     = ("TSTZ", None)
     schema["teste"]     = ("TSTE", None)

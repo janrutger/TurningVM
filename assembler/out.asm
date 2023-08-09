@@ -19,8 +19,7 @@ call @mul
 call @plus
 storem $n1
 loadm $n1
-push 2
-call @div
+ssr
 :_1_condition_start
 call @dup
 call @dup
@@ -37,8 +36,7 @@ jump :_1_condition_start
 :_1_repeat_end
 push 1
 call @minus
-push 2
-call @div
+ssr
 storem $m
 :_2_condition_start
 push 1
