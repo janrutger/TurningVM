@@ -1,71 +1,73 @@
 @main
 call @stackssys
-push 4
-storem $n
-call @input
-storem $end
+push 1000
+storem $offset
+push 1
+storem $x
+loadm $offset
+call @plot
 :_0_condition_start
-loadm $n
-loadm $end
+loadm $x
+push 180
 call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-push 1
-push 8
-loadm $n
+push 180
+loadm $x
+call @minus
+loadm $x
 call @mul
+storem $u
+loadm $offset
+push 4000
+loadm $u
+call @mul
+push 40500
+loadm $u
+call @minus
+call @div
 call @plus
-storem $n1
-loadm $n1
-ssr
+call @plot
+loadm $x
+push 1
+call @plus
+storem $x
+jump :_0_condition_start
+:_0_repeat_end
+push 1
+storem $x
+loadm $offset
+call @plot
 :_1_condition_start
-call @dup
-call @dup
-call @mul
-loadm $n1
-call @lt
-loada
-testz
-clra
-jumpf :_1_repeat_end
-push 1
-call @minus
-jump :_1_condition_start
-:_1_repeat_end
-push 1
-call @minus
-ssr
-storem $m
-:_2_condition_start
-push 1
-loadm $m
-call @plus
-loadm $m
-call @mul
-push 2
-loadm $n
-call @mul
-call @mod
-push 0
+loadm $x
+push 180
 call @neq
 loada
 testz
 clra
-jumpf :_2_repeat_end
-loadm $m
-push 1
-call @plus
-storem $m
-jump :_2_condition_start
-:_2_repeat_end
-loadm $m
+jumpf :_1_repeat_end
+push 180
+loadm $x
+call @minus
+loadm $x
+call @mul
+storem $u
+loadm $offset
+push 4000
+loadm $u
+call @mul
+push 40500
+loadm $u
+call @minus
+call @div
+call @minus
 call @plot
-loadm $n
+loadm $x
 push 1
 call @plus
-storem $n
-jump :_0_condition_start
-:_0_repeat_end
+storem $x
+jump :_1_condition_start
+:_1_repeat_end
 ret

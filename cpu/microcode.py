@@ -377,6 +377,23 @@ def loadlibrary():
         ("write", {"ST":"_", "RA":"_"}, ({"ST":"_", "RA":"_"}, {"ST":"R", "RA":"R"}, "HALT")),
     )
 
+    library["MVA"] =    (
+        ("START", {"ST":"1", "RA":"1"}, ({"ST":"1", "RA":"1"}, {"ST":"L", "RA":"S"}, "toend")),
+        ("START", {"ST":"0", "RA":"1"}, ({"ST":"0", "RA":"1"}, {"ST":"L", "RA":"S"}, "toend")),
+        ("START", {"ST":"1", "RA":"0"}, ({"ST":"1", "RA":"0"}, {"ST":"L", "RA":"S"}, "toend")),
+        ("START", {"ST":"0", "RA":"0"}, ({"ST":"0", "RA":"0"}, {"ST":"L", "RA":"S"}, "toend")),
+        ("START", {"ST":"_", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"L", "RA":"S"}, "toend")),
+        ("START", {"ST":"_", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"L", "RA":"S"}, "toend")),
+
+        ("toend", {"ST":"_", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"R"}, "toend")),
+        ("toend", {"ST":"_", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"S", "RA":"R"}, "toend")),        
+        ("toend", {"ST":"_", "RA":"_"}, ({"ST":"#", "RA":"_"}, {"ST":"L", "RA":"L"}, "write")),
+
+        ("write", {"ST":"_", "RA":"1"}, ({"ST":"1", "RA":"_"}, {"ST":"L", "RA":"L"}, "write")),
+        ("write", {"ST":"_", "RA":"0"}, ({"ST":"0", "RA":"_"}, {"ST":"L", "RA":"L"}, "write")),
+        ("write", {"ST":"_", "RA":"_"}, ({"ST":"_", "RA":"_"}, {"ST":"R", "RA":"R"}, "HALT")),
+    )
+
     # library["STB"] =    (
     #     ("START", {"ST":"1", "RB":"1"}, ({"ST":"1", "RB":"1"}, {"ST":"L", "RB":"S"}, "START")),
     #     ("START", {"ST":"0", "RB":"1"}, ({"ST":"0", "RB":"1"}, {"ST":"L", "RB":"S"}, "START")),
@@ -408,6 +425,23 @@ def loadlibrary():
 
         ("write", {"ST":"_", "RB":"1"}, ({"ST":"1", "RB":"1"}, {"ST":"L", "RB":"L"}, "write")),
         ("write", {"ST":"_", "RB":"0"}, ({"ST":"0", "RB":"0"}, {"ST":"L", "RB":"L"}, "write")),
+        ("write", {"ST":"_", "RB":"_"}, ({"ST":"_", "RB":"_"}, {"ST":"R", "RB":"R"}, "HALT")),
+    )
+
+    library["MVB"] =    (
+        ("START", {"ST":"1", "RB":"1"}, ({"ST":"1", "RB":"1"}, {"ST":"L", "RB":"S"}, "toend")),
+        ("START", {"ST":"0", "RB":"1"}, ({"ST":"0", "RB":"1"}, {"ST":"L", "RB":"S"}, "toend")),
+        ("START", {"ST":"1", "RB":"0"}, ({"ST":"1", "RB":"0"}, {"ST":"L", "RB":"S"}, "toend")),
+        ("START", {"ST":"0", "RB":"0"}, ({"ST":"0", "RB":"0"}, {"ST":"L", "RB":"S"}, "toend")),
+        ("START", {"ST":"_", "RB":"1"}, ({"ST":"_", "RB":"1"}, {"ST":"L", "RB":"S"}, "toend")),
+        ("START", {"ST":"_", "RB":"0"}, ({"ST":"_", "RB":"0"}, {"ST":"L", "RB":"S"}, "toend")),
+
+        ("toend", {"ST":"_", "RB":"0"}, ({"ST":"_", "RB":"0"}, {"ST":"S", "RB":"R"}, "toend")),
+        ("toend", {"ST":"_", "RB":"1"}, ({"ST":"_", "RB":"1"}, {"ST":"S", "RB":"R"}, "toend")),        
+        ("toend", {"ST":"_", "RB":"_"}, ({"ST":"#", "RB":"_"}, {"ST":"L", "RB":"L"}, "write")),
+
+        ("write", {"ST":"_", "RB":"1"}, ({"ST":"1", "RB":"_"}, {"ST":"L", "RB":"L"}, "write")),
+        ("write", {"ST":"_", "RB":"0"}, ({"ST":"0", "RB":"_"}, {"ST":"L", "RB":"L"}, "write")),
         ("write", {"ST":"_", "RB":"_"}, ({"ST":"_", "RB":"_"}, {"ST":"R", "RB":"R"}, "HALT")),
     )
 
