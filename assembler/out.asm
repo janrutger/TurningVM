@@ -1,59 +1,100 @@
 @main
 call @stackssys
-push 1
-storem $i
-push 100
+push 4
+storem $n
+call @input
 storem $end
-push 1
-storem $s
 :_0_condition_start
-loadm $i
+loadm $n
 loadm $end
 call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-loadm $i
-loadm $i
-call @mul
-loadm $s
-loadm $s
+push 1
+push 8
+loadm $n
 call @mul
 call @plus
-storem $j
-loadm $j
+storem $s
 push 2
-call @div
-:_1_condition_start
-call @dup
-call @dup
-call @mul
-loadm $j
+loadm $s
 call @lt
 loada
 testz
 clra
-jumpf :_1_repeat_end
+jumpf :_1_do_end
+push 1
+jump :einde
+:_1_do_end
+loadm $s
+push 2
+call @div
+storem $x0
+loadm $s
+loadm $x0
+call @div
+loadm $x0
+call @plus
+push 2
+call @div
+storem $x1
+:_2_condition_start
+loadm $x0
+loadm $x1
+call @lt
+loada
+testz
+clra
+jumpf :_2_repeat_end
+loadm $x1
+storem $x0
+loadm $s
+loadm $x0
+call @div
+loadm $x0
+call @plus
+push 2
+call @div
+storem $x1
+jump :_2_condition_start
+:_2_repeat_end
+loadm $x0
+:einde
 push 1
 call @minus
-jump :_1_condition_start
-:_1_repeat_end
+push 2
+call @div
+storem $m
+:_3_condition_start
 push 1
+loadm $m
 call @plus
-storem $k
-loadm $k
-call @plot
-loadm $k
-loadm $k
+loadm $m
 call @mul
-loadm $j
-call @minus
-storem $s
-loadm $i
+push 2
+loadm $n
+call @mul
+call @mod
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_3_repeat_end
+loadm $m
 push 1
 call @plus
-storem $i
+storem $m
+jump :_3_condition_start
+:_3_repeat_end
+loadm $m
+call @plot
+loadm $n
+push 1
+call @plus
+storem $n
 jump :_0_condition_start
 :_0_repeat_end
 ret

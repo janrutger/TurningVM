@@ -1,12 +1,9 @@
-4 AS n
-INPUT AS end
-
-{n end !=} REPEAT
-    
-    1 8 n * + AS s
+1 AS s
+{s 2000 !=} REPEAT
 
     2 s < DO 
         1
+        . PLOT 
         GOTO einde
     END
 
@@ -16,19 +13,8 @@ INPUT AS end
         x1 AS x0
         s x0 / x0 + 2 / AS x1
     END 
-    x0
+    x0 PLOT
     LABEL einde
 
-    1 - 2 / AS m 
-
-    {1 m + m * 2 n * % 0 !=} REPEAT
-        m 1 + AS m 
-    END
-    m PLOT
-
-n 1 + AS n
+s 1 + AS s 
 END
-
-
-
-   
