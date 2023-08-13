@@ -66,6 +66,11 @@ function println(text2print){
 
 function plotter(values){
     console.log("Plot something")
+
+    if (myChart) {
+        myChart.destroy();
+    }
+
     var ctx = document.getElementById("plotter");
 
     xyValues =[]
@@ -79,7 +84,8 @@ function plotter(values){
         responsive: false, // Instruct chart js to respond nicely.
         //maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
         legend: { display: false},
-        animation: false
+        animation: false,
+        events: []
         
     };
 

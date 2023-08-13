@@ -3,17 +3,21 @@
 
     2 s < DO 
         1
-        . PLOT 
+        . PLOT
         GOTO einde
     END
 
     s 2 / AS x0
     s x0 / x0 + 2 / AS x1
+
+
     {x0 x1 <} REPEAT 
         x1 AS x0
         s x0 / x0 + 2 / AS x1
     END 
+
     x0 PLOT
+
     LABEL einde
 
 s 1 + AS s 
