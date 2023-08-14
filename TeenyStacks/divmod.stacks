@@ -1,24 +1,21 @@
 0 AS quotient
-0 AS remainder
+0 AS counter
 . AS divisor 
 . AS number
 
 divisor 2 > GOTO uitzonderingen
 
-{divisor remainder <} REPEAT
-    remainder divisor + AS remainder 
+{number counter <} REPEAT
+    counter divisor + AS counter 
     quotient 1 + AS quotient
 END
-remainder divisor == DO
-    remainder divisor + AS remainder 
-    quotient 1 + AS quotient
-END
+
 GOTO einde
 
 LABEL uitzonderingen
     1 divisor == DO
         divisor AS quotient
-        0 AS remainder
+        divisor AS counter
     END
 
     2 divisor == DO
@@ -28,4 +25,4 @@ LABEL uitzonderingen
     END 
 
 LABEL einde
-    quotient number remainder -
+    quotient counter number  -
