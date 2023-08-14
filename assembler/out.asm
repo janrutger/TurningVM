@@ -1,65 +1,87 @@
 @main
 call @stackssys
-push 1
-storem $s
-:_0_condition_start
-loadm $s
-push 2000
-call @neq
+push 0
+storem $quotient
+push 0
+storem $remainder
+storem $divisor
+storem $number
+loadm $divisor
+push 2
+call @gt
 loada
 testz
 clra
-jumpf :_0_repeat_end
-push 2
-loadm $s
+jumpf :_0_goto_end
+jump :uitzonderingen
+:_0_goto_end
+:_1_condition_start
+loadm $divisor
+loadm $remainder
 call @lt
 loada
 testz
 clra
-jumpf :_1_do_end
+jumpf :_1_repeat_end
+loadm $remainder
+loadm $divisor
+call @plus
+storem $remainder
+loadm $quotient
 push 1
-call @plot
+call @plus
+storem $quotient
+jump :_1_condition_start
+:_1_repeat_end
+loadm $remainder
+loadm $divisor
+call @eq
+loada
+testz
+clra
+jumpf :_2_do_end
+loadm $remainder
+loadm $divisor
+call @plus
+storem $remainder
+loadm $quotient
+push 1
+call @plus
+storem $quotient
+:_2_do_end
 jump :einde
-:_1_do_end
-loadm $s
-push 2
-call @div
-storem $x0
-loadm $s
-loadm $x0
-call @div
-loadm $x0
-call @plus
-push 2
-call @div
-storem $x1
-:_2_condition_start
-loadm $x0
-loadm $x1
-call @lt
+:uitzonderingen
+push 1
+loadm $divisor
+call @eq
 loada
 testz
 clra
-jumpf :_2_repeat_end
-loadm $x1
-storem $x0
-loadm $s
-loadm $x0
-call @div
-loadm $x0
-call @plus
+jumpf :_3_do_end
+loadm $divisor
+storem $quotient
+push 0
+storem $remainder
+:_3_do_end
 push 2
-call @div
-storem $x1
-jump :_2_condition_start
-:_2_repeat_end
-loadm $x0
-call @plot
+loadm $divisor
+call @eq
+loada
+testz
+clra
+jumpf :_4_do_end
+:_4_do_end
+push 0
+loadm $divisor
+call @eq
+loada
+testz
+clra
+jumpf :_5_do_end
+:_5_do_end
 :einde
-loadm $s
-push 1
-call @plus
-storem $s
-jump :_0_condition_start
-:_0_repeat_end
+loadm $quotient
+loadm $number
+loadm $remainder
+call @minus
 ret
