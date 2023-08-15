@@ -27,12 +27,13 @@ def load():
     assembler = Assembler()
 
     # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMloader.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMmain.asm")))
+    #     assembler.readASM("./assembler/VMloader_2308.asm")))
+    # memory.loadMem(assembler.compile(assembler.readASM("./assembler/divmod.asm")))
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/divmod.asm")))
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/A133058.asm")))
     # memory.loadMem(assembler.compile(
@@ -41,6 +42,7 @@ def load():
     
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader_2308.asm")))
+    memory.loadMem(assembler.compile(assembler.readASM("./assembler/divmod.asm")))
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMstacks.asm")))
     memory.loadMem(assembler.compile(

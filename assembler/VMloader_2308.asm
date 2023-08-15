@@ -25,7 +25,7 @@ nop
     storem $_cRandom
     push 65536
     storem $_mRandom
-    speed 300
+    speed 0
 ret
 
 @plus
@@ -218,11 +218,11 @@ ret
     :DivBy2
         ssr
         loada
-        jumpt :_reminder1
+        jumpt :_remainder1
         push 0
         loadb
         ret 
-    :_reminder1
+    :_remainder1
         push 1
         loadb
         ret

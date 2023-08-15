@@ -9,20 +9,27 @@ divisor 2 > GOTO uitzonderingen
     counter divisor + AS counter 
     quotient 1 + AS quotient
 END
+number counter > DO
+    counter divisor - AS counter
+    quotient 1 - AS quotient
+END
+number counter - AS remainder
 
 GOTO einde
 
 LABEL uitzonderingen
     1 divisor == DO
-        divisor AS quotient
-        divisor AS counter
+        number AS quotient
+        number AS remainder
+        GOTO einde
     END
 
     2 divisor == DO
+        GOTO einde
     END
 
     0 divisor == DO
     END 
 
 LABEL einde
-    quotient counter number  -
+    quotient number counter -
