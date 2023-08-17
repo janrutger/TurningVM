@@ -1,4 +1,4 @@
-@divmod 
+@_divmod 
     push 0
     storem $quotient_divmod
 
@@ -30,10 +30,12 @@
             loadm $divisor_divmod
             call @plus
             storem $counter_divmod
+
             loadm $quotient_divmod
             push 1
             call @plus
             storem $quotient_divmod
+
     jump :_1_condition_start_divmod
     :_1_repeat_end_divmod
 
@@ -47,10 +49,12 @@
         loadm $counter_divmod
         loadm $divisor_divmod
         call @minus
+
         storem $counter_divmod
         loadm $quotient_divmod
         push 1
         call @minus
+
         storem $quotient_divmod
     :_2_do_end_divmod
 
@@ -89,8 +93,10 @@
                 jumpt :_remainder1_divmod
                 push 0
                 jump :_next1_divmod
+
                 :_remainder1_divmod
                 push 1
+
                 :_next1_divmod
                 storem $_remainder_divmod
                 storem $quotient_divmod
@@ -109,21 +115,21 @@
         :_5_do_end_divmod
 
     :einde_divmod
-    loadm $quotient_divmod
-    loadm $_remainder_divmod
-
 ret
 
 
 
 @div 
-    call @divmod
-    pull
+    call @_divmod
+    loadm $quotient_divmod
 ret
 
 @mod
-    call @divmod
-    call @swap
-    pull
-    clra
+    call @_divmod
+    loadm $_remainder_divmod
 ret
+
+@divmod 
+    call @_divmod
+    loadm $quotient_divmod
+    loadm $_remainder_divmod
