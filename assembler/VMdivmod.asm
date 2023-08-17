@@ -12,19 +12,20 @@
     push 3
     loada
     loadb
-    testg
-    
-    jumpt :_0_goto_end_divmod
+    testg    
+    jumpf :_0_goto_end_divmod
     jump :uitzonderingen_divmod
     :_0_goto_end_divmod
 
     :_1_condition_start_divmod
-        loadm $number_divmod
+        
         loadm $counter_divmod
-        call @lt
+        loadm $number_divmod
         loada
-        testz
+        loadb
+        testg  
         clra
+        clrb
         jumpf :_1_repeat_end_divmod
             loadm $counter_divmod
             loadm $divisor_divmod
@@ -41,10 +42,11 @@
 
     loadm $number_divmod
     loadm $counter_divmod
-    call @gt
     loada
-    testz
+    loadb
+    testg  
     clra
+    clrb
     jumpf :_2_do_end_divmod
         loadm $counter_divmod
         loadm $divisor_divmod
@@ -67,10 +69,11 @@
     :uitzonderingen_divmod
         push 1
         loadm $divisor_divmod
-        call @eq
         loada
-        testz
+        loadb
+        teste
         clra
+        clrb
             jumpf :_3_do_end_divmod
                 loadm $number_divmod
                 storem $quotient_divmod
@@ -83,10 +86,11 @@
 
         push 2
         loadm $divisor_divmod
-        call @eq
         loada
-        testz
+        loadb
+        teste
         clra
+        clrb
             jumpf :_4_do_end_divmod
                 loadm $number_divmod
                 ssr
@@ -105,12 +109,13 @@
 
         push 0
         loadm $divisor_divmod
-        call @eq
         loada
-        testz
+        loadb
+        teste
         clra
+        clrb
         jumpf :_5_do_end_divmod
-            push $number_divmod
+            push $FATAL
             halt
         :_5_do_end_divmod
 

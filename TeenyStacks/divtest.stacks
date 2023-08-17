@@ -1,0 +1,9 @@
+1 AS start
+INPUT AS end
+
+
+{start end !=} REPEAT
+    end start % PLOT
+
+start 1 + AS start
+END
