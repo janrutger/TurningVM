@@ -17,7 +17,6 @@ class  Tapecommander:
             thisTape = self.alltapes[tape]
             resultValue = thisTape.read()
             tapeValues[tape] = resultValue
-            self.TapeCounterAll = self.TapeCounterAll + 1
         self.TapeCounterAll = self.TapeCounterAll + 1
         return(tapeValues)
 
