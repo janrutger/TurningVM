@@ -40,18 +40,19 @@ def load():
     #     assembler.readASM("./assembler/main.asm")))
 
     
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMloader_2308.asm")))
+    # memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMdivmod.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/VMstacks.asm")))
+    # memory.loadMem(assembler.compile(
+    #     assembler.readASM("./assembler/out.asm")))
+
     memory.loadMem(assembler.compile(
         assembler.readASM("./assembler/VMloader_2308.asm")))
     memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMdivmod.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMstacks.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/out.asm")))
-
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/VMloader_2308.asm")))
-    # memory.loadMem(assembler.compile(
-    #     assembler.readASM("./assembler/move.asm")))
+        assembler.readASM("./assembler/prime.asm")))
 
 
 
