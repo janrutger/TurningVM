@@ -54,6 +54,7 @@ class Parser:
     # program    ::=	{statement}
     def program(self):
         self.emitter.headerLine("@main")
+        self.emitter.headerLine("settimer 0")
         self.emitter.headerLine("call @stackssys")
 
         # Since some newlines are required in our grammar, need to skip the excess.
@@ -65,6 +66,7 @@ class Parser:
             self.statement()
 
         # Wrap things up.
+        self.emitter.emitLine("prttimer 0")
         self.emitter.emitLine("ret")
 
         # Check that each label referenced in a GOTO is declared.

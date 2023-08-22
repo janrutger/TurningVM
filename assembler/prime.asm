@@ -1,11 +1,12 @@
 @main
 speed 0
+settimer 0
 
     array *list0
     push 'currentlist'
     index *list0
 
-    push 10000
+    push 1500
     push 1
     call @plus
     storem $maxprimes
@@ -50,7 +51,7 @@ speed 0
 
     jump :mainloop
     :wrapup
-speed 5
+speed 0
         clra
         loadm $cursor
         loadb
@@ -63,9 +64,11 @@ speed 5
         jump :lus
     :done    
     clrb
+prttimer 0
 ret
 
 @checkForPrime
+    settimer 1
     loadm $cursor
     readelm 'currentlist'
     
@@ -109,6 +112,7 @@ ret
 
     :endCheckList
     prt
+    prttimer 1
 ret
 
     

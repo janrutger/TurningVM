@@ -10,7 +10,6 @@ def loadSchema():
     schema["rwd"]       = ("RWD", None)
     schema["abs"]       = ("ABS", None)
     schema["bc"]        = ("BC", None)
-    schema["speed"]     = ("SPEED", "n")
 
     schema["push"]      = ("PUSH", "b")
     schema["pull"]      = ("PULL", None)
@@ -66,6 +65,10 @@ def loadSchema():
 
     schema["prt"]       = ("PRT", None)
     schema["nop"]       = ("NOP", None)
+
+    schema["speed"]     = ("SPEED", "n")
+    schema["settimer"]  = ("SETTIMER", "n")
+    schema["prttimer"]  = ("PRTTIMER", "n")
 
     return(schema)
 

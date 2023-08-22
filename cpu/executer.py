@@ -4,6 +4,7 @@ import time
 from cpu import tapecommander as tc
 from cpu import exec_no_opcode as nop
 from cpu import exec_opcode as op
+from cpu import timers as ti
 
 
 class Executer:
@@ -12,6 +13,7 @@ class Executer:
         self.tape_commander = tc.Tapecommander()
         self.execNOP = nop.Exec_no_opcode(self.tape_commander)
         self.execOP = op.Exec_opcode(self.tape_commander)
+        self.timers = ti.Timers(self.tape_commander)
         self.ui = ui #need this for prt instruction
         self.pc = int(0)
         self.ControlC = False
@@ -191,10 +193,18 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
-    def clra(self, operand):
-        exit_code = self.execOP.run("CLRA")
+    def settimer(self, operand):
+        self.timers.set(operand)
         self.pc = self.pc + 1
-        return exit_code
+        return "HALT"
+    
+    def prttimer(self, operand):
+        val = self.timers.print(operand)
+        text2print = str(val)
+        self.ui.println(text2print)
+        # print("-->", int(val, 2))
+        self.pc = self.pc + 1
+        return "HALT"
 
     def run_rpc(self, program):
         pc = 0
