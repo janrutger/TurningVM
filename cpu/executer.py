@@ -202,9 +202,14 @@ class Executer:
         val = self.timers.print(operand)
         text2print = str(val)
         self.ui.println(text2print)
-        # print("-->", int(val, 2))
         self.pc = self.pc + 1
         return "HALT"
+
+    def gettimer(self, operand):
+        val = self.timers.gettime(operand)
+        exit_code = self.execNOP.push(bin(val)[2:])
+        self.pc = self.pc + 1
+        return exit_code
 
     def run_rpc(self, program):
         pc = 0

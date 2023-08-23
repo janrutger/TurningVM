@@ -1,103 +1,51 @@
 @main
 settimer 0
 call @stackssys
-push 4
-storem $n
-call @input
-storem $end
+push 1
+call @dup
+call @plot
+call @dup
+call @plot
+storem $previous
+push 2
+storem $next
 :_0_condition_start
-loadm $n
-loadm $end
+loadm $next
+push 700
 call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-settimer 1
+loadm $previous
+loadm $next
+call @_gcd
+storem $cfactor
 push 1
-push 8
-loadm $n
-call @mul
-call @plus
-storem $s
-push 2
-loadm $s
-call @lt
+loadm $cfactor
+call @eq
 loada
 testz
 clra
 jumpf :_1_do_end
+loadm $previous
+loadm $next
 push 1
-jump :einde
+call @plus
+call @plus
+jump :nextnumber
 :_1_do_end
-loadm $s
-push 2
+loadm $previous
+loadm $cfactor
 call @div
-storem $x0
-loadm $s
-loadm $x0
-call @div
-loadm $x0
-call @plus
-push 2
-call @div
-storem $x1
-:_2_condition_start
-loadm $x0
-loadm $x1
-call @lt
-loada
-testz
-clra
-jumpf :_2_repeat_end
-loadm $x1
-storem $x0
-loadm $s
-loadm $x0
-call @div
-loadm $x0
-call @plus
-push 2
-call @div
-storem $x1
-jump :_2_condition_start
-:_2_repeat_end
-loadm $x0
-:einde
-push 1
-call @minus
-push 2
-call @div
-storem $m
-:_3_condition_start
-push 1
-loadm $m
-call @plus
-loadm $m
-call @mul
-push 2
-loadm $n
-call @mul
-call @mod
-push 0
-call @neq
-loada
-testz
-clra
-jumpf :_3_repeat_end
-loadm $m
-push 1
-call @plus
-storem $m
-jump :_3_condition_start
-:_3_repeat_end
-loadm $m
+:nextnumber
+call @dup
 call @plot
-loadm $n
+storem $previous
+loadm $next
 push 1
 call @plus
-storem $n
-prttimer 1
+storem $next
 jump :_0_condition_start
 :_0_repeat_end
 prttimer 0

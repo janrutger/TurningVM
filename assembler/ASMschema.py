@@ -69,6 +69,7 @@ def loadSchema():
     schema["speed"]     = ("SPEED", "n")
     schema["settimer"]  = ("SETTIMER", "n")
     schema["prttimer"]  = ("PRTTIMER", "n")
+    schema["gettimer"]  = ("GETTIMER", "n")
 
     return(schema)
 

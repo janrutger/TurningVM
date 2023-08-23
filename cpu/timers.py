@@ -17,3 +17,7 @@ class Timers:
         freq = round((1 / (spentTime/cycles)) / 1000, 3)
         result = "> " + str(spentTime) + " seconden, " + str(cycles) + " cycles, " + str(freq) + " KHz"
         return result
+    
+    def gettime(self, number):
+        spentTime = int((time.time() - self.timers[number][0]))
+        return spentTime
