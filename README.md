@@ -15,9 +15,8 @@ Inspired by:
 
 also inspriration from:
 - OEIS A133058 https://oeis.org/A133058 
-- Ben Eater 
-    https://youtu.be/TardkN4OGJg
-    https://youtu.be/g_koa00MBLg
+- Ben Eater https://youtu.be/TardkN4OGJg
+- Bens sleep https://youtu.be/g_koa00MBLg
 - MMU https://nl.wikipedia.org/wiki/Memory_management_unit
 
 Specials
