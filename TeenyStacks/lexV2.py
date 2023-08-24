@@ -224,6 +224,9 @@ class TokenType(enum.Enum):
     OVER = 120
     DROP = 121
     GCD = 122
+    TIMER = 123
+    SET = 124
+    GET = 125
     PLUS = 201
     MINUS = 202
     ASTERISK = 203

@@ -2,6 +2,9 @@
 program    ::=	{statement}
 statement  ::=  "LABEL" ident nl
 	    |   "GOTO" ident nl
+		
+		|	"TIMER" INTEGER ("SET" | "PRINT" | "GET")
+
 	    |   "DEFINE" ident nl {statement} nl "END" nl
 
 	    |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   

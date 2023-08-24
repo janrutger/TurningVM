@@ -99,6 +99,22 @@ class Parser:
             self.match(TokenType.IDENT)
             self.nl() 
 
+        # | "TIMER" INTEGER("SET" | "PRINT" | "GET")
+        elif self.checkToken(TokenType.TIMER):
+            self.nextToken()
+            var = self.curToken.text
+            self.match(TokenType.NUMBER)
+            if int(var) < 16:
+                self.abort("User defined timers starts at number 16, not " + var)
+            if self.checkToken(TokenType.SET):
+                self.emitter.emitLine("settimer " + var)
+            elif self.checkToken(TokenType.PRINT):
+                self.emitter.emitLine("prttimer " + var)
+            elif self.checkToken(TokenType.GET):
+                self.emitter.emitLine("gettimer " + var)
+            self.nextToken()
+            self.nl()
+
         # | "DEFINE" nl {statement} nl "AS" ident nl
         elif self.checkToken(TokenType.DEFINE):
             pass
@@ -256,12 +272,17 @@ class Parser:
         elif self.curToken.text == 'DROP':
             self.emitter.emitLine("pull")
             self.nextToken()
+        elif self.curToken.text == 'SWAP':
+            self.emitter.emitLine("call @swap")
+            self.nextToken()
         elif self.curToken.text == 'INPUT':
             self.emitter.emitLine("call @input")
             self.nextToken()
         elif self.curToken.text == 'RAWIN':
             self.emitter.emitLine("call @rawin")
             self.nextToken()
+        else:
+            self.abort("UNKOWN Operator word: " + self.curToken.text)
 
 
     # ident ::=	STRING
