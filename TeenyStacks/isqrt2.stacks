@@ -1,6 +1,6 @@
 1 AS s
 {s 2000 !=} REPEAT
-
+    TIMER 16 SET
     2 s < DO 
         1
         . PLOT
@@ -17,8 +17,8 @@
     END 
 
     x0 PLOT
-
+    
     LABEL einde
-
+    TIMER 16 PRINT
 s 1 + AS s 
 END

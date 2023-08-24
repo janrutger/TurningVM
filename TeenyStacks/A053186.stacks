@@ -1,7 +1,9 @@
 4 AS number
 INPUT AS end
 
+
 {number end !=} REPEAT
+    TIMER 16 SET
     number number 2 / 
     { DUP DUP * number < } REPEAT
         1 - 
@@ -9,4 +11,5 @@ INPUT AS end
     DUP * - PLOT
 
 number 1 + AS number
+TIMER 16 PRINT
 END

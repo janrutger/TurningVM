@@ -6,6 +6,7 @@
 2 AS next
 
 {next 700 !=} REPEAT
+      TIMER 16 SET
       previous next GCD AS cfactor
       1 cfactor == DO
             previous next 1 + + 
@@ -18,5 +19,6 @@
       .. PLOT
       . AS previous 
       next 1 + AS next
+      TIMER 16 PRINT
 END
 

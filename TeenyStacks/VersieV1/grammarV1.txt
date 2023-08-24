@@ -2,7 +2,6 @@
 program    ::=	{statement}
 statement  ::=  "LABEL" ident nl
 	    |   "GOTO" ident nl
-	    |   "DEFINE" nl {statement} nl "AS" ident nl
 
 	    |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
  
