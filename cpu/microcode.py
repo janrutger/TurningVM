@@ -223,9 +223,9 @@ def loadlibrary():
 
     library["BC"] = (
         ("START", {"ST":"_", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"S", "RA":"S"}, "HALT")),
-        ("START", {"ST":"_", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"S"}, "HALT")),
-        ("START", {"ST":"#", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"S", "RA":"S"}, "HALT")),
-        ("START", {"ST":"#", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"S"}, "HALT")),
+        ("START", {"ST":"_", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"S"}, "HALT")),  
+        ("START", {"ST":"#", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"R", "RA":"S"}, "HALT")),#ST was S
+        ("START", {"ST":"#", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"R", "RA":"S"}, "HALT")),#ST was S
 
         #("START", {"ST":"0", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"R", "RA":"S"}, "START")),
         #("START", {"ST":"0", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"R", "RA":"S"}, "START")),
@@ -249,8 +249,8 @@ def loadlibrary():
     library["ABS"] = (
         ("START", {"ST":"_", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"S", "RA":"S"}, "HALT")),
         ("START", {"ST":"_", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"S"}, "HALT")),
-        ("START", {"ST":"#", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"S", "RA":"S"}, "HALT")),
-        ("START", {"ST":"#", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"S"}, "HALT")),
+        ("START", {"ST":"#", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"R", "RA":"S"}, "HALT")),
+        ("START", {"ST":"#", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"R", "RA":"S"}, "HALT")),
 
         ("START", {"ST":"0", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"R", "RA":"S"}, "START")),
         ("START", {"ST":"0", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"R", "RA":"S"}, "START")),
@@ -269,7 +269,7 @@ def loadlibrary():
 
         ("REWIND", {"ST":"_", "RA":"0"}, ({"ST":"_", "RA":"0"}, {"ST":"S", "RA":"L"}, "REWIND")),
         ("REWIND", {"ST":"_", "RA":"1"}, ({"ST":"_", "RA":"1"}, {"ST":"S", "RA":"L"}, "REWIND")),
-        ("REWIND", {"ST":"_", "RA":"_"}, ({"ST":"_", "RA":"_"}, {"ST":"R", "RA":"R"}, "START")),
+        ("REWIND", {"ST":"_", "RA":"_"}, ({"ST":"_", "RA":"_"}, {"ST":"R", "RA":"R"}, "START")), 
     )
 
     library["2S-BB"] = (

@@ -8,9 +8,7 @@ def loadSchema():
     schema["5s-bbv2"]   = ("5S-BBv2", None)
 
     schema["rwd"]       = ("RWD", None)
-    schema["abs"]       = ("ABS", None)
-    schema["bc"]        = ("BC", None)
-
+    
     schema["push"]      = ("PUSH", "b")
     schema["pull"]      = ("PULL", None)
     schema["halt"]      = ("HALT", None)
@@ -54,6 +52,8 @@ def loadSchema():
     schema["sub"]       = ("SUB", None)
 
     schema["ssr"]       = ("SSR", None)
+    schema["abs"]       = ("ABS", None)
+    schema["bc"]        = ("BC", None)
 
     schema["ex"]        = ("EX", None)
     schema["testz"]     = ("TSTZ", None)

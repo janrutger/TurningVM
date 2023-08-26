@@ -1,9 +1,10 @@
 
-TIMER 16 SET
-TIMER 16 GET
-23 WAIT
-TIMER 16 GET
-TIMER 16 PRINT
+1 AS n
+INPUT AS einde
 
-[swap] -  PRINT
+{n einde !=} REPEAT
+    n [abs] PLOT
+
+n 1 + AS n 
+END
 
