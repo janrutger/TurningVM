@@ -17,8 +17,6 @@ clra
 jumpf :_0_repeat_end
 call @abs
 call @plot
-push 1
-call @sleep
 jump :_0_condition_start
 :_0_repeat_end
 pull
