@@ -1,10 +1,6 @@
 
-1 AS n
-INPUT AS einde
-
-{n einde !=} REPEAT
-    n [abs] PLOT
-
-n 1 + AS n 
+0 INPUT AS einde
+{ 1 + DUP DUP einde !=} REPEAT
+    [abs] PLOT
 END
-
+DROP DROP
