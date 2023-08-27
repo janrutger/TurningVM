@@ -1,10 +1,12 @@
-DEFINE dubbel
-    DUP * PRINT
+
+## : fact dup 1 != if dup 1 - fact * then ;
+
+DEFINE fact
+    DUP 1 != DO
+        DUP 1 -
+        fact
+        *
+    END
 END
 
-
-1 AS n
-{n 10 !=} REPEAT
-    n dubbel
-n 1 + AS n
-END
+INPUT fact PRINT

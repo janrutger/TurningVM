@@ -1,28 +1,23 @@
 @main
 settimer 0
 call @stackssys
+call @input
+call @~fact
+prt
+prttimer 0
+ret
+@~fact
+call @dup
 push 1
-storem $n
-:_0_condition_start
-loadm $n
-push 10
 call @neq
 loada
 testz
 clra
-jumpf :_0_repeat_end
-loadm $n
-call @~dubbel
-loadm $n
-push 1
-call @plus
-storem $n
-jump :_0_condition_start
-:_0_repeat_end
-prttimer 0
-ret
-@~dubbel
+jumpf :_0_do_end
 call @dup
+push 1
+call @minus
+call @~fact
 call @mul
-prt
+:_0_do_end
 ret
