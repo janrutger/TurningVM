@@ -1,0 +1,10 @@
+DEFINE dubbel
+    DUP * PRINT
+END
+
+
+1 AS n
+{n 10 !=} REPEAT
+    n dubbel
+n 1 + AS n
+END

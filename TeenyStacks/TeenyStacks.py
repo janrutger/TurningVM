@@ -1,5 +1,5 @@
 from lexV2 import *
-from emit import *
+from emitV2 import *
 from parseV2 import *
 import sys
 
