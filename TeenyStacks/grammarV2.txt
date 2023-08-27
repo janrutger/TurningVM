@@ -1,21 +1,21 @@
 
 program    ::=	{statement}
 statement  ::=  "LABEL" ident nl
-	    |   "GOTO" ident nl
-		
-        |	"TIMER" INTEGER ("SET" | "PRINT" | "GET")
+			|   "GOTO" ident nl
 
-	    |   "DEFINE" ident nl {statement} nl "END" nl
+			|	"TIMER" INTEGER ("SET" | "PRINT" | "GET")
 
-	    |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
- 
-	    |   (expression | st) ( "PRINT" nl
-		      		  | "PLOT" nl
-					  | ¨WAIT¨ nl
-      				  | "AS" ident nl
-      				  | "DO"   nl {statement} nl "END" nl
-      				  | "GOTO" ident nl
-      				  | nl )
+			|   "DEFINE" ident nl {statement} nl "END" nl
+
+			|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
+
+			|   (expression | st) ( "PRINT" nl
+									| "PLOT" nl
+									| ¨WAIT¨ nl
+									| "AS" ident nl
+									| "DO"   nl {statement} nl "END" nl
+									| "GOTO" ident nl
+									| nl )
 
 
 
