@@ -3,7 +3,7 @@ program    ::=	{statement}
 statement  ::=  "LABEL" ident nl
 	    |   "GOTO" ident nl
 		
-		|	"TIMER" INTEGER ("SET" | "PRINT" | "GET")
+        |	"TIMER" INTEGER ("SET" | "PRINT" | "GET")
 
 	    |   "DEFINE" ident nl {statement} nl "END" nl
 
@@ -21,7 +21,7 @@ statement  ::=  "LABEL" ident nl
 
 expression ::=	(INTEGER | STRING | "[" ident "]" | ident | word )+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-ident      ::=	STRING
+ident      ::=	(variable | function | STRING)
 
 st         ::=	('.'|'..')
 nl         ::= '\n'+

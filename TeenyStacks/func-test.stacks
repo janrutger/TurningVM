@@ -3,9 +3,7 @@
 
 DEFINE fact
     DUP 1 != DO
-        DUP 1 -
-        fact
-        *
+        DUP 1 - fact *
     END
 END
 
