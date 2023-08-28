@@ -19,7 +19,7 @@ nop
 
     push 75
     storem $_aRandom
-    push 35
+    push 587
     storem $seed
     push 74
     storem $_cRandom

@@ -15,6 +15,7 @@
     index *list1
 
     call @initlist
+    prttimer 0
     call @plot_unsorted
 
     :start_sort
@@ -22,7 +23,7 @@
         storem $gesorteerd
 
         call @sort
-
+        
         push 'unsorted'
         index *list1
         array *list0
@@ -43,8 +44,9 @@
         loadm $gesorteerd
         loada
         testz
+        clra
     jumpf :start_sort
-
+prttimer 0
 ret
 
 @sort
@@ -60,9 +62,13 @@ speed 0
     :next_elm
         loadm $pp
         readelm 'unsorted'
+        jumpf :last_elm
         loadm $p 
         readelm 'unsorted'
-        call @gt 
+        #call @gt 
+        loada
+        loadb
+        testg
         jumpt :store_pp
             loadm $p
             readelm 'unsorted'
