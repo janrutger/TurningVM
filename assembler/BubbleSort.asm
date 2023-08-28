@@ -63,7 +63,6 @@ speed 0
         loadm $p 
         readelm 'unsorted'
         call @gt 
-
         jumpt :store_pp
             loadm $p
             readelm 'unsorted'
@@ -76,7 +75,6 @@ speed 0
             incb
             moveb
             storem $pp
-
         jump :next_elm
         :store_pp
             loadm $pp
