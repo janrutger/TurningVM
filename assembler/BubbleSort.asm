@@ -14,15 +14,18 @@
     push 'sorted'
     index *list1
 
-    call @initlist
+    call :initlist
     prttimer 0
-    call @plot_unsorted
+    call :plot_unsorted
 
+    push 3
+    call @sleep
+    settimer 0
     :start_sort
         push 0
         storem $gesorteerd
 
-        call @sort
+        call :sort
         
         push 'unsorted'
         index *list1
@@ -30,8 +33,8 @@
         push 'sorted'
         index *list0
 
-        call @plot_unsorted
-        call @sort
+        call :plot_unsorted
+        call :sort
 
         push 'unsorted'
         index *list0
@@ -39,7 +42,7 @@
         push 'sorted'
         index *list1
 
-        call @plot_unsorted
+        call :plot_unsorted
 
         loadm $gesorteerd
         loada
@@ -49,7 +52,7 @@
 prttimer 0
 ret
 
-@sort
+:sort
 speed 0
     push 1
     storem $p
@@ -107,7 +110,7 @@ ret
 
 
 
-@initlist
+:initlist
     :filllist
         call @rand
         storem 'unsorted'
@@ -122,7 +125,7 @@ ret
 ret
 
 
-@plot_unsorted
+:plot_unsorted
     iobuff %_plotter
     push 1
     loadb
