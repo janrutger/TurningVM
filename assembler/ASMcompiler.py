@@ -1,4 +1,5 @@
 from assembler import ASMschema as schema
+import sys
 
 
 class Compiler:
@@ -24,6 +25,9 @@ class Compiler:
 
     def stringTable(self):
         return str(self.stringTable())
+    
+    def abort(self, message):
+        sys.exit("Error. " + message)
 
     def checkOperand(self, operandType, operand_, progLen):
         if operand_[0] == ":":                      # operand is a mem label
@@ -59,9 +63,11 @@ class Compiler:
             if operandType == "n":
                 return(int(operand_, 2))
         else:                                       # input is string (dit lijkt niet te werken)
-            if operandType == "b":                     #THIS NEEDS ATTENTION, old code
+            if operandType == "b":    
+                self.abort("Unkown operand: " + operand_)
                 return("error")
             if operandType == "n":
+                self.abort("Unkown operand: " + operand_)
                 return("error")
             
         
@@ -106,6 +112,7 @@ class Compiler:
                     operand_ = None
                 
                 if opcode_ not in self.ASMschema.keys():
+                    self.abort("Unkown instruction: " + opcode_)
                     return("error")
                 else:
                     opcode = self.ASMschema[opcode_][0]
