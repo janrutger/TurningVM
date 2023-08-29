@@ -1,0 +1,80 @@
+INPUT AS seed1
+INPUT AS seed2
+0 PLOT
+0 AS acount
+0 AS bcount
+0 AS abcount
+
+
+DEFINE dice1
+    seed1 AS seed
+    [rand] 6 * 100 / 1 + 
+    seed AS seed1
+END
+
+DEFINE dice2
+    seed2 AS seed
+    [rand] 6 * 100 / 1 + 
+    seed AS seed2
+END
+
+DEFINE winner
+    dice1 AS a
+    dice2 AS b
+    a b < DO
+        1 PLOT
+        #b a PRINT
+        #. PRINT
+        acount 1 + AS acount
+        END
+    a b > DO
+        #b a PRINT
+        #. PRINT
+        2 PLOT
+        bcount 1 + AS bcount
+        END
+    a b == DO
+        #a PRINT
+        #b PRINT
+        3 PLOT
+        abcount 1 + AS abcount
+        END
+END
+
+LABEL loop
+    RAWIN 1 == DO
+        DUP "winner" == DO
+            DROP winner
+            GOTO loop
+        END
+        DUP "runner" == DO
+            DROP
+            INPUT AS max
+            0 AS n
+            {n max !=} REPEAT
+                winner
+            n 1 + AS n
+            END
+            GOTO loop
+            END
+        "q" == GOTO endloop
+        GOTO loop
+    END
+    
+    DUP 1 == DO
+        DROP dice1 PRINT
+        GOTO loop
+        END
+    DUP 2 == DO
+        DROP dice2 PRINT
+        GOTO loop
+        END
+    
+    DROP
+GOTO loop
+LABEL endloop
+
+
+acount PRINT
+bcount PRINT
+abcount PRINT

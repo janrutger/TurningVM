@@ -25,7 +25,7 @@ nop
     storem $_cRandom
     push 65536
     storem $_mRandom
-    speed 0
+    speed 300
 ret
 
 @plus

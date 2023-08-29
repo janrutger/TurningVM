@@ -1,7 +1,5 @@
 @main
     settimer 0
-    call @stackssys
-
 
     call @input
     storem $numbers
@@ -53,7 +51,6 @@ prttimer 0
 ret
 
 :sort
-speed 0
     push 1
     storem $p
     loadm $p
@@ -105,8 +102,6 @@ speed 0
                 readelm 'unsorted'
                 storem 'sorted'
 ret
-
-
 
 
 
