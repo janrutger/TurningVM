@@ -223,20 +223,20 @@ class Parser:
             else:
                 self.nl()
 
-    # expression ::=	INTEGER | STRING | word | ident
+    # expression ::= INTEGER | STRING | "`" ident "`" | ident | word
     def expression(self):
-        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.WORD):
+        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD):
             if self.checkToken(TokenType.NUMBER):
                 self.emitter.emitLine("push " + self.curToken.text)
                 self.nextToken()
             elif self.checkToken(TokenType.STRING):
                 self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
                 self.nextToken()
-            elif self.checkToken(TokenType.OPENBL):
+            elif self.checkToken(TokenType.BT):
                 self.nextToken()
                 self.emitter.emitLine("call " + "@" + self.curToken.text)
                 self.match(TokenType.IDENT)
-                self.match(TokenType.CLOSEBL)
+                self.match(TokenType.BT)
             elif self.checkToken(TokenType.IDENT):
                 self.ident()
             else:  #Must be an word

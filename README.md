@@ -41,7 +41,7 @@ The Grammer of TeenySTACKS
 
 
 
-    expression ::=	(INTEGER | STRING | "[" ident "]" | ident | word )+
+    expression ::=	(INTEGER | STRING | "`" ident "`" | ident | word )+
     word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
     ident      ::=	(variable | function | STRING)
 
