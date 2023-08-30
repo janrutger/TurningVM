@@ -8,13 +8,13 @@ INPUT AS seed2
 
 DEFINE dice1
     seed1 AS seed
-    `rand` 6 * 100 / 1 + 
+    `rand 6 * 100 / 1 + 
     seed AS seed1
 END
 
 DEFINE dice2
     seed2 AS seed
-    `rand` 6 * 100 / 1 + 
+    `rand 6 * 100 / 1 + 
     seed AS seed2
 END
 

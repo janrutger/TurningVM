@@ -236,7 +236,7 @@ class Parser:
                 self.nextToken()
                 self.emitter.emitLine("call " + "@" + self.curToken.text)
                 self.match(TokenType.IDENT)
-                self.match(TokenType.BT)
+                #self.match(TokenType.BT)
             elif self.checkToken(TokenType.IDENT):
                 self.ident()
             else:  #Must be an word
