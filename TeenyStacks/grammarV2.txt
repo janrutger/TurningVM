@@ -17,7 +17,23 @@ statement  ::=  "LABEL" ident nl
 
 expression ::=	(INTEGER | STRING | "`" ident | ident | word )+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-ident      ::=	(variable | function | STRING)
+ident      ::=	(variable | function )
 
 st         ::=	('.'|'..')
 nl         ::= '\n'+
+
+
+
+
+
+array      ::= "[" none | {values} "]" 	( CREATE ident nl 
+										| APPEND indent nl
+										| PRINT nl
+										)
+			|  "[" none | {index}  "]" 	( VALEUS ident nl
+										| TYPED ident nl
+										| PRINT ident nl
+										)
+
+values      ::= (INTEGERS | STRINGS | "`" ident | indent | RAWIN)+ 
+index       ::= (INTEGERS | "`" ident | indent | INPUT)+ 
