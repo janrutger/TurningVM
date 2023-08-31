@@ -56,7 +56,17 @@ LABEL loop
             n 1 + AS n
             END
             GOTO loop
-            END
+        END
+        DUP "show" == DO
+            DROP 
+            acount PRINT
+            bcount PRINT
+            abcount PRINT
+            0 AS acount
+            0 AS bcount
+            0 AS abcount
+            GOTO loop
+        END
         "q" == GOTO endloop
         GOTO loop
     END
@@ -75,6 +85,4 @@ GOTO loop
 LABEL endloop
 
 
-acount PRINT
-bcount PRINT
-abcount PRINT
+

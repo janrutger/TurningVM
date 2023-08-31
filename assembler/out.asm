@@ -61,14 +61,36 @@ jump :_6_condition_start
 :_6_repeat_end
 jump :loop
 :_5_do_end
+call @dup
+push 'show'
+call @eq
+loada
+testz
+clra
+jumpf :_7_do_end
+pull
+loadm $acount
+prt
+loadm $bcount
+prt
+loadm $abcount
+prt
+push 0
+storem $acount
+push 0
+storem $bcount
+push 0
+storem $abcount
+jump :loop
+:_7_do_end
 push 'q'
 call @eq
 loada
 testz
 clra
-jumpf :_7_goto_end
+jumpf :_8_goto_end
 jump :endloop
-:_7_goto_end
+:_8_goto_end
 jump :loop
 :_3_do_end
 call @dup
@@ -77,33 +99,27 @@ call @eq
 loada
 testz
 clra
-jumpf :_8_do_end
+jumpf :_9_do_end
 pull
 call @~dice1
 prt
 jump :loop
-:_8_do_end
+:_9_do_end
 call @dup
 push 2
 call @eq
 loada
 testz
 clra
-jumpf :_9_do_end
+jumpf :_10_do_end
 pull
 call @~dice2
 prt
 jump :loop
-:_9_do_end
+:_10_do_end
 pull
 jump :loop
 :endloop
-loadm $acount
-prt
-loadm $bcount
-prt
-loadm $abcount
-prt
 prttimer 0
 ret
 @~dice1
