@@ -29,6 +29,23 @@ ret
     output %_plotter
 ret
 
+@char2prtbuff
+    storem %_display
+    push 1
+    storem %_display
+ret
+
+@num2prtbuff
+    storem %_display
+    push 0
+    storem %_display
+ret
+
+@printbuff
+    output %_display
+    iobuff %_display
+ret
+
 @_gcd
     call @gcd
     storeb

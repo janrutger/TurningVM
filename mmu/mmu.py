@@ -47,13 +47,16 @@ class MMU:
         if adres in self.virtMemAdresses.keys():
             memType, memVal = self.memory[self.virtMemAdresses[adres]]
             if memType == "IObuff":
-                #return (memVal)
-                self.ui.output(adres, memVal)
+                if adres == '%_plotter':
+                    self.ui.output(adres, memVal)
+                elif adres == '%_display':
+                    self.ui.display(self.stringTable, memVal)
+                else:
+                    self.panic("FATAL: output [unknown device]")
             else:
-                self.panic("FATAL: readIObuff [unknown memtype]")
-
+                self.panic("FATAL: output [unknown memtype]")
         else:
-            self.panic("FATAL: readIObuff [unknown mem adress]")
+            self.panic("FATAL: output [unknown mem adress]")
 
     def writeIObuff(self, adres, value):
         if adres in self.virtMemAdresses.keys():
