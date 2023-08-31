@@ -236,6 +236,7 @@ class Executer:
             self.ui.println("ctrl-C")
 
         if exit_code == "CPUstopped":
+            #step = input()
             return "HALT"
         else:
             return "error"

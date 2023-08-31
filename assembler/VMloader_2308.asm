@@ -16,6 +16,7 @@ nop
     iobuff %_plotter
     output %_plotter
     iobuff %_kbd
+    iobuff %_display
 
     push 75
     storem $_aRandom
