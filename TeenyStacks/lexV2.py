@@ -64,6 +64,8 @@ class Lexer:
             token = Token(self.curChar, TokenType.OPENBL)
         elif self.curChar == ']':
             token = Token(self.curChar, TokenType.CLOSEBL)
+        elif self.curChar == '`':
+            token = Token(self.curChar, TokenType.BT)
 
         elif self.curChar == '=':
             # Check whether this token is = or ==
@@ -227,6 +229,7 @@ class TokenType(enum.Enum):
     TIMER = 123
     SET = 124
     GET = 125
+    BT = 126
     PLUS = 201
     MINUS = 202
     ASTERISK = 203

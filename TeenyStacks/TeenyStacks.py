@@ -1,5 +1,5 @@
 from lexV2 import *
-from emit import *
+from emitV2 import *
 from parseV2 import *
 import sys
 
@@ -8,7 +8,7 @@ def main():
 
     if len(sys.argv) != 2:
         #sys.exit("Error: Compiler needs source file as argument.")
-        with open("/home/janrutger/git/TurningVM/TeenyStacks/sine.stacks", 'r') as inputFile:
+        with open("/home/janrutger/git/TurningVM/TeenyStacks/test2.stacks", 'r') as inputFile:
             input = inputFile.read()
     else:
         with open(sys.argv[1], 'r') as inputFile:

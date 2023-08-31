@@ -8,6 +8,7 @@ class Parser:
         self.emitter = emitter
 
         self.symbols = set()    # All variables we have declared so far.
+        self.functions = set()  #jrk: All functions we have declared so far.
         self.labelsDeclared = set() # Keep track of all labels declared
         self.labelsGotoed = set() # All labels goto'ed, so we know if they exist or not.
 
@@ -115,9 +116,25 @@ class Parser:
             self.nextToken()
             self.nl()
 
-        # | "DEFINE" nl {statement} nl "AS" ident nl
+        # | "DEFINE" ident nl {statement} nl "END" nl
         elif self.checkToken(TokenType.DEFINE):
-            pass
+            self.nextToken()
+            if self.curToken.text not in self.symbols and self.curToken.text not in self.functions:
+                self.functions.add(self.curToken.text)
+            if self.curToken.text in self.functions:
+                self.emitter.context = "functions"
+                self.emitter.emitLine("@~" + self.curToken.text)
+                self.match(TokenType.IDENT)
+                self.nl()
+                while not self.checkToken(TokenType.END):
+                    self.statement()
+                self.match(TokenType.END)
+                self.emitter.emitLine("ret")
+                self.emitter.context = "program"
+                self.nl()
+            else:
+                self.abort("Already in use as a Variable " + self.curToken.text)
+
 
         # | "{" ({expression} | st) "}"   "REPEAT"   nl {statement} nl "END" nl	
         elif self.checkToken(TokenType.OPENC):
@@ -169,16 +186,14 @@ class Parser:
                 self.nl()
             elif self.checkToken(TokenType.AS):
                 self.nextToken()
-                if self.curToken.text not in self.symbols:
+                if self.curToken.text not in self.symbols and self.curToken.text not in self.functions:
                     self.symbols.add(self.curToken.text)
-                    #self.emitter.headerLine("push " + "'" + self.curToken.text + "'")
-                    #self.emitter.headerLine("set $MEM")
-                
-                #self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
-                #self.emitter.emitLine("storei")
-                self.emitter.emitLine("storem " + "$" + self.curToken.text)
-                self.match(TokenType.IDENT)  
-                self.nl()
+                if self.curToken.text in self.symbols:
+                    self.emitter.emitLine("storem " + "$" + self.curToken.text)
+                    self.match(TokenType.IDENT)  
+                    self.nl()
+                else:
+                    self.abort("Already in use as a Function " + self.curToken.text)
             elif self.checkToken(TokenType.DO):
                 num = self.LabelNum()
                 self.nextToken()
@@ -208,20 +223,20 @@ class Parser:
             else:
                 self.nl()
 
-    # expression ::=	INTEGER | STRING | word | ident
+    # expression ::= INTEGER | STRING | "`" ident "`" | ident | word
     def expression(self):
-        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.WORD):
+        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD):
             if self.checkToken(TokenType.NUMBER):
                 self.emitter.emitLine("push " + self.curToken.text)
                 self.nextToken()
             elif self.checkToken(TokenType.STRING):
                 self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
                 self.nextToken()
-            elif self.checkToken(TokenType.OPENBL):
+            elif self.checkToken(TokenType.BT):
                 self.nextToken()
                 self.emitter.emitLine("call " + "@" + self.curToken.text)
                 self.match(TokenType.IDENT)
-                self.match(TokenType.CLOSEBL)
+                #self.match(TokenType.BT)
             elif self.checkToken(TokenType.IDENT):
                 self.ident()
             else:  #Must be an word
@@ -287,11 +302,14 @@ class Parser:
 
     # ident ::=	STRING
     def ident(self):
-        if self.curToken.text not in self.symbols:
-                self.abort("Referencing variable before assignment: " + self.curToken.text)
-        #self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
-        #self.emitter.emitLine("loadi")
-        self.emitter.emitLine("loadm " + "$" + self.curToken.text)
+        if self.curToken.text in self.symbols:
+            self.emitter.emitLine("loadm " + "$" + self.curToken.text)
+        elif self.curToken.text in self.functions:
+            self.emitter.emitLine("call " + "@~" + self.curToken.text)
+        else:
+            self.abort("Referencing variable before assignment: " + self.curToken.text)
+
+        
 
         self.nextToken()
 
