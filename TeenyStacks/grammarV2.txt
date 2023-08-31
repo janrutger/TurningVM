@@ -25,15 +25,13 @@ nl         ::= '\n'+
 
 
 
+array      ::= 	( CREATE | APPEND ) 		ident ( "[" "]" | "[" (values)+ "]" ) |
+				( VALUES | TYPED | PRINT)	ident ( "[" "]" | "[" (index)+  "]" ) |
+				  PRINT								"[" (values)+ "]"	|
+				  LEN						ident						|
 
-array      ::= "[" none | {values} "]" 	( CREATE ident nl 
-										| APPEND indent nl
-										| PRINT nl
-										)
-			|  "[" none | {index}  "]" 	( VALEUS ident nl
-										| TYPED ident nl
-										| PRINT ident nl
-										)
+values     ::= 	(. | INTEGERS | STRINGS | "`" ident | indent )+ )
+index      ::= 	(. | INTEGERS | "`" ident | indent )+ )
 
-values      ::= (INTEGERS | STRINGS | "`" ident | indent | RAWIN)+ 
-index       ::= (INTEGERS | "`" ident | indent | INPUT)+ 
+
+
