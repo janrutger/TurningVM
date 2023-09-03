@@ -65,11 +65,13 @@ class UIconnect:
             typed = data.pop()
             if typed == 0:
                 text = data.pop()
-                result = str(text) + " " + result
+                result = str(text) + result
             if typed == 1:
                 lookup = data.pop()
                 for lookfor, index in stringTable.items():
                     if index == lookup:
-                        result = lookfor + " " + result
-        self.println(result)
+                        result = lookfor + result
+
+        result1 = result.replace("\_", " ")
+        self.println(result1)
         return

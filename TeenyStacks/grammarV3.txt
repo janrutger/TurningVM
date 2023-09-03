@@ -15,12 +15,22 @@ statement  ::=  "LABEL" ident nl
 
 
 
-expression ::=	(INTEGER | STRING | "`" ident | ident | word )+
+expression ::=	(INTEGER | STRING | "`" ident | ident | "[" struct "]" | word )+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-ident      ::=	(variable | function )
+
+
+struct     ::= 	( CREATE | APPEND ) 		ident ( | "[" (values)+ "]") |
+				( VALUES | TYPED | PRINT)	ident ( | "[" (index)+  "]") |
+				  LEN						ident					     |
+				  PRINT								  "[" (values)+ "]" 			  
+
+values     ::= 	(. | INTEGERS | STRINGS | "`" ident | indent )
+index      ::= 	(. | INTEGERS | "`" ident | indent )
+
+
+ident      ::=	(variable | function | struct)
 
 st         ::=	('.'|'..')
 nl         ::= '\n'+
-
 
 
