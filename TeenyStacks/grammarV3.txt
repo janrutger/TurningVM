@@ -24,10 +24,10 @@ struct     ::= 	( CREATE | APPEND ) ident "[" [(values)+         ] "]" |
                   PRINT             ident "[" [(index | STRING)+ ] "]" |
                   function 	        ident "[" [(index)+          ] "]" |
                   LEN				ident "["                      "]" |
-				  PRINT					  "["  (values)+           "]" 	             		  
+				  PRINT					  "["  (values)+           "]" 
 
-values     ::= 	(. | INTEGERS | STRINGS | variable | function )
-index      ::= 	(    INTEGERS |           variable | function )
+values     ::= 	(. | INTEGERS | STRINGS | variable | function )        
+index      ::= 	(    INTEGERS |           variable | function )         
 
 
 ident      ::=	(variable | function )

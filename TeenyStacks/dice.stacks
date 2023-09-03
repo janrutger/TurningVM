@@ -1,4 +1,10 @@
+DEFINE prints
+    `char2prtbuff `printbuff
+END
+
+"Seed voor steen 1" prints
 INPUT AS seed1
+"Seed voor steen 2" prints
 INPUT AS seed2
 0 PLOT
 0 AS acount
@@ -23,25 +29,28 @@ DEFINE winner
     dice2 AS b
     a b < DO
         1 PLOT
-        #b a PRINT
-        #. PRINT
+        "WINAAR: Steen 1" prints
         acount 1 + AS acount
         END
     a b > DO
-        #b a PRINT
-        #. PRINT
         2 PLOT
+        "WINAAR: Steen 2" prints
         bcount 1 + AS bcount
         END
     a b == DO
-        #a PRINT
-        #b PRINT
         3 PLOT
+        "GEEN WINAAR" prints
         abcount 1 + AS abcount
         END
 END
 
+"voor het gooien van een steen type 1 of 2" prints
+"type winner voor wie de hoogste steen gooit" prints
+"type runner om een Nx de winner te bepalen" prints
+"met show zie je wie de winnaar van runner" prints
+"type een q om te stoppen." prints
 LABEL loop
+    "Opties: 1 2 winner runner of show, gebruik q om te stoppen" prints
     RAWIN 1 == DO
         DUP "winner" == DO
             DROP winner
@@ -49,18 +58,23 @@ LABEL loop
         END
         DUP "runner" == DO
             DROP
+            "aantal worpen:" prints
             INPUT AS max
             0 AS n
             {n max !=} REPEAT
                 winner
             n 1 + AS n
             END
+            "met show zie je wie de winnaar van runner" prints
             GOTO loop
         END
         DUP "show" == DO
             DROP 
+            "Steen 1 was winnaar" prints
             acount PRINT
+             "Steen 2 was winnaar" prints
             bcount PRINT
+             "Geen winnaar" prints
             abcount PRINT
             0 AS acount
             0 AS bcount
@@ -72,10 +86,12 @@ LABEL loop
     END
     
     DUP 1 == DO
+        "steen 1:" prints
         DROP dice1 PRINT
         GOTO loop
         END
     DUP 2 == DO
+        "steen 2:" prints
         DROP dice2 PRINT
         GOTO loop
         END
@@ -83,6 +99,7 @@ LABEL loop
     DROP
 GOTO loop
 LABEL endloop
+ "DANK JE!" prints
 
 
 
