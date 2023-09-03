@@ -19,16 +19,18 @@ expression ::=	(INTEGER | STRING | "`" ident | ident | "[" struct "]" | word )+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
 
 
-struct     ::= 	( CREATE | APPEND ) 		ident ( | "[" (values)+ "]") |
-				( VALUES | TYPED | PRINT)	ident ( | "[" (index)+  "]") |
-				  LEN						ident					     |
-				  PRINT								  "[" (values)+ "]" 			  
+struct     ::= 	( CREATE | APPEND ) ident "[" [(values)+         ] "]" |
+				( VALUES | TYPED  ) ident "[" [(index)+          ] "]" |
+                  PRINT             ident "[" [(index | STRING)+ ] "]" |
+                  function 	        ident "[" [(index)+          ] "]" |
+                  LEN				ident "["                      "]" |
+				  PRINT					  "["  (values)+           "]" 	             		  
 
-values     ::= 	(. | INTEGERS | STRINGS | "`" ident | indent )
-index      ::= 	(. | INTEGERS | "`" ident | indent )
+values     ::= 	(. | INTEGERS | STRINGS | variable | function )
+index      ::= 	(    INTEGERS |           variable | function )
 
 
-ident      ::=	(variable | function | struct)
+ident      ::=	(variable | function )
 
 st         ::=	('.'|'..')
 nl         ::= '\n'+
