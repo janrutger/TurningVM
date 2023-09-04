@@ -1,6 +1,6 @@
 @main
 settimer 0
-call @stackssys
+speed 0
 push 'Seed\_voor\_steen\_1'
 call @~prints
 call @input

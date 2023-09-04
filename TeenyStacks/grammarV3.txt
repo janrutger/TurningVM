@@ -1,38 +1,36 @@
-
 program    ::=	{statement}
 statement  ::=  "LABEL" ident nl
-			|   "GOTO" ident nl
+			|   "GOTO"  ident nl
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
 			|   "DEFINE" ident nl {statement} nl "END" nl
-			|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
-			|   (expression | st) ( "PRINT" nl
-								| "PLOT" nl
-								| ¨WAIT¨ nl
-								| "AS" ident nl
-								| "DO"   nl {statement} nl "END" nl
-								| "GOTO" ident nl
-								|  nl )
+			|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	
+
+			|   (expression | st) ( "PRINT" [ "{"(values)+"}" ] nl
+								  | "PLOT" nl
+								  | ¨WAIT¨ nl
+								  | "AS" ident nl
+							      | "DO"   nl {statement} nl "END" nl
+								  | "GOTO" ident nl
+								  |  nl )
 
 
-
-expression ::=	(INTEGER | STRING | "`" ident | ident | "[" struct "]" | word )+
+expression ::=	(INTEGER | STRING | ident | ident "`" | ident struct | word )+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
 
 
-struct     ::= 	( CREATE | APPEND ) ident "[" [(values)+         ] "]" |
-				( VALUES | TYPED  ) ident "[" [(index)+          ] "]" |
-                  PRINT             ident "[" [(index | STRING)+ ] "]" |
-                  function 	        ident "[" [(index)+          ] "]" |
-                  LEN				ident "["                      "]" |
-				  PRINT					  "["  (values)+           "]" 
+ident      ::=	(variable | function )
 
-values     ::= 	(. | INTEGERS | STRINGS | variable | function )        
-index      ::= 	(    INTEGERS |           variable | function )         
+struct     ::=  ( CREATE | APPEND ) "[" [(values)+         ] "]" |
+				( VALUES | TYPED  ) "[" [(index)+          ] "]" |
+                  PRINT             "[" [(index | STRING)+ ] "]" |
+                  LEN	     	             		  
+
+values     ::= 	(. | INTEGERS | STRINGS | ident  )
+index      ::= 	(    INTEGERS |           ident  )      
 
 
 ident      ::=	(variable | function )
 
 st         ::=	('.'|'..')
 nl         ::= '\n'+
-
 
