@@ -1,34 +1,69 @@
+
 program    ::=	{statement}
-statement  ::=  "LABEL" ident nl
-			|   "GOTO"  ident nl
+statement  ::=  "LABEL" label nl
+			|   "GOTO"  label nl
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
-			|   "DEFINE" ident nl {statement} nl "END" nl
+			|   "DEFINE" function nl {statement} nl "END" nl
 			|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	
 
-			|   (expression | st) ( "PRINT" [ "{"(values)+"}" ] nl
+			|   (expression | st) ( "PRINT" [ "["(value)+"]" ] nl
 								  | "PLOT" nl
 								  | ¨WAIT¨ nl
-								  | "AS" ident nl
+								  | "AS" variable nl
 							      | "DO"   nl {statement} nl "END" nl
-								  | "GOTO" ident nl
+								  | "GOTO" label nl
 								  |  nl )
 
 
-expression ::=	(INTEGER | STRING | ident | ident "`" | ident struct | word )+
+expression ::=	(INTEGER | STRING | function | "`"function | struct'.'method | variable | word)+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
 
 
-ident      ::=	(variable | function )
-
-struct     ::=  ( CREATE | APPEND ) "[" [(values)+         ] "]" |
+method     ::=  ( CREATE | APPEND ) "[" [(value)+          ] "]" |
 				( VALUES | TYPED  ) "[" [(index)+          ] "]" |
+                  LOOKUP            "["   index            ] "]" |
                   PRINT             "[" [(index | STRING)+ ] "]" |
                   LEN	     	             		  
 
-values     ::= 	(. | INTEGERS | STRINGS | ident  )
-index      ::= 	(    INTEGERS |           ident  )      
+value      ::= 	('.' | INTEGER | STRING | variable | function | struct.LOOKUP)
+index      ::= 	(      INTEGER |          variable | function | struct.LOOKUP)  
+
+label      ::=  STRING
+function   ::=  ident
+variable   ::=  ident
+struct     ::=  ident
+
+st         ::=	('.'|'..')
+nl         ::= '\n'+
 
 
+
+
+
+
+
+
+===V2======================================================================================================
+
+
+program    ::=	{statement}
+statement  ::=  "LABEL" ident nl
+			|   "GOTO" ident nl
+			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
+			|   "DEFINE" ident nl {statement} nl "END" nl
+			|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
+			|   (expression | st) ( "PRINT" nl
+								| "PLOT" nl
+								| ¨WAIT¨ nl
+								| "AS" ident nl
+								| "DO"   nl {statement} nl "END" nl
+								| "GOTO" ident nl
+								|  nl )
+
+
+
+expression ::=	(INTEGER | STRING | "`" ident | ident | word )+
+word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
 ident      ::=	(variable | function )
 
 st         ::=	('.'|'..')

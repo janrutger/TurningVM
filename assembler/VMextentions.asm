@@ -56,3 +56,20 @@ ret
     storeb
     clrb
 ret
+
+
+@sleep
+    speed 0
+    settimer 1
+    loadb
+    decb
+    :lus_sleep
+        gettimer 1
+        loada 
+        testg 
+        jumpt :eind_sleep
+        jump :lus_sleep
+    :eind_sleep
+    clra
+    clrb
+ret
