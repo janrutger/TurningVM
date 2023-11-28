@@ -242,7 +242,7 @@ class Executer:
             return "error"
         
 
-    def start_mpu(self, jobQueue, jobResults):
+    def enable_mpu(self, jobQueue, jobResults):
         self.mpu = True
         self.jobQueue   = jobQueue
         self.jobResults = jobResults

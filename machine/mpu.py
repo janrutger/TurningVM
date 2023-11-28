@@ -15,10 +15,10 @@ class MPU:
     
     def enable(self, cpu0):
         self.memPage0 = cpu0.memPage()
-        cpu0.start_mpu(self.jobQueue, self.jobResults)
+        cpu0.enable_mpu(self.jobQueue, self.jobResults)
     
         self.cpu1 = Executer(self.memPage0, None)
-        self.cpu1.start_mpu(self.jobQueue, self.jobResults)
+        self.cpu1.enable_mpu(self.jobQueue, self.jobResults)
 
         CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
 

@@ -20,9 +20,6 @@ class Machine:
         self.cpu0 = executer
         self.ui = ui 
         self.mpu = MPU()
-        #mpu.enable(self.cpu0)
-        #self.jobQueue, self.jobResults = mpu.queues()
-        #self.cpu0.start_mpu(self.jobQueue, self.jobResults)
 
 
         self.word_map = {}
@@ -128,8 +125,9 @@ class Machine:
 
 
     def repl(self):
-        self.ui.println('Type "halt" to quit.')
         self.mpu.enable(self.cpu0)
+        self.ui.println('Type "halt" to quit.')
+
 
         while True:
             try:
