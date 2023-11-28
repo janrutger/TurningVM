@@ -15,7 +15,7 @@ class Timers:
         spentTime = round((time.time() - self.timers[number][0]), 3)
         cycles = self.tapecommander.TapeCounterAll - self.timers[number][1]
         freq = round((1 / (spentTime/cycles)) / 1000, 3)
-        result = "> " + str(spentTime) + " seconden, " + str(cycles) + " cycles, " + str(freq) + " KHz"
+        result = str(spentTime) + " seconden, " + str(cycles) + " cycles, " + str(freq) + " KHz"
         return result
     
     def gettime(self, number):

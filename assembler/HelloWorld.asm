@@ -1,5 +1,8 @@
-@main
-    push 'hello\_world:\_'
+@main 
+    
+    push 'hello'
+    call @char2prtbuff
+    push 'world?'
     call @char2prtbuff
 
     push 42

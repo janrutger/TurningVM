@@ -128,6 +128,7 @@ class Lexer:
                 self.nextChar()
 
             tokText = self.source[startPos : self.curPos] # Get the substring.
+            tokText = tokText.replace(' ', '\_')          #JRK replace spaces for   "\_"
             token = Token(tokText, TokenType.STRING)
 
         elif self.curChar.isdigit():

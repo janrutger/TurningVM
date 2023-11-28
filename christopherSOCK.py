@@ -40,13 +40,11 @@ def load():
     #     assembler.readASM("./assembler/main.asm")))
 
     
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMloader_2308.asm")))
+    memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMloader_2308.asm")))
     memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMextentions.asm")))
+    #memory.loadMem(assembler.compile(assembler.readASM("./assembler/VMstacks.asm")))
     memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/VMstacks.asm")))
-    memory.loadMem(assembler.compile(
-        assembler.readASM("./assembler/test.asm")))
+        assembler.readASM("./assembler/out.asm")))
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader_2308.asm")))
@@ -107,6 +105,6 @@ rel.timeout(0.05, SendTapeUpdate) #0.05
 wsapp = websocket.WebSocketApp("ws://127.0.0.1:8001/", on_message=on_message,
                                on_open=on_open)
 wsapp.run_forever(dispatcher=rel)
-rel.signal(2, ControlC)
+#rel.signal(2, ControlC)
 rel.dispatch()
 

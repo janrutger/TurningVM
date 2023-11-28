@@ -1,5 +1,10 @@
 @main
+    speed 0
     settimer 0
+
+    push 'Geef\_het\_aantal\_nummers:'
+    call @char2prtbuff
+    call @printbuff
 
     call @input
     storem $numbers

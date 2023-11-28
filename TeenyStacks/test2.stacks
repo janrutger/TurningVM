@@ -1,2 +1,1 @@
-
-6 `rand`  + PRINT
+"hello world " `char2prtbuff `printbuff

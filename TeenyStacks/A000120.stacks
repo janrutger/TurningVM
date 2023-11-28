@@ -1,7 +1,7 @@
 
 0 INPUT AS einde
 { 1 + DUP DUP einde !=} REPEAT
-    [abs] PLOT
+    `abs PLOT
     1 WAIT
 END
 DROP DROP

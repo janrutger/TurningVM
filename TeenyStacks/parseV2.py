@@ -56,7 +56,7 @@ class Parser:
     def program(self):
         self.emitter.headerLine("@main")
         self.emitter.headerLine("settimer 0")
-        self.emitter.headerLine("call @stackssys")
+        self.emitter.headerLine("speed 0")
 
         # Since some newlines are required in our grammar, need to skip the excess.
         while self.checkToken(TokenType.NEWLINE):
