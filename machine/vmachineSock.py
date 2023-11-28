@@ -2,27 +2,27 @@
 # coding: utf-8
 
 """
-Deze code is gebaseerd op http://csl.name/post/vm/
-waarvoor veel dank.
-
 Example:
 : fact dup 1 != if dup 1 - fact * then ;
 
 """
 from __future__ import print_function
-import threading
-import time
 import sys
 import copy
 
+from machine.mpu import MPU
 
 
 
 
 class Machine:
     def __init__(self, executer, ui):
-        self.exec = executer
+        self.cpu0 = executer
         self.ui = ui 
+        self.mpu = MPU()
+        #mpu.enable(self.cpu0)
+        #self.jobQueue, self.jobResults = mpu.queues()
+        #self.cpu0.start_mpu(self.jobQueue, self.jobResults)
 
 
         self.word_map = {}
@@ -47,13 +47,13 @@ class Machine:
 
 
     def pop(self):
-        val = self.exec.run_commando('PULL', None)
+        val = self.cpu0.run_commando('PULL', None)
         value = int(val, 2)
         return value
 
     def push(self, value):
         value = (bin(value)[2:])
-        self.exec.run_commando('PUSH', value)
+        self.cpu0.run_commando('PUSH', value)
 
     def top(self):
         value = self.pop()
@@ -129,6 +129,7 @@ class Machine:
 
     def repl(self):
         self.ui.println('Type "halt" to quit.')
+        self.mpu.enable(self.cpu0)
 
         while True:
             try:
@@ -138,7 +139,7 @@ class Machine:
                 code = list(self.tokenice(source))
                 self.parse(code)
                 # self.ui.send_status(
-                #     self.exec.refresh_tapes({"ST", "RA", "RB", "S"}))
+                #     self.cpu0.refresh_tapes({"ST", "RA", "RB", "S"}))
             except (RuntimeError, IndexError) as e:
                 print("IndexError: %s" % e)
             except KeyboardInterrupt:
@@ -148,7 +149,7 @@ class Machine:
 
     def plus(self):
         # self.push(self.pop() + self.pop())
-        self.exec.run_rpc([('CALL', '@plus'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@plus'), ('HALT', '')])
 
     def halt(self):
         self.ui.println("HALTED")
@@ -156,46 +157,46 @@ class Machine:
         #exit()
 
     def main(self):
-        self.exec.run_rpc([('CALL', '@main'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@main'), ('HALT', '')])
 
     def init(self):
-        # self.exec.run_rpc([('SPEED', 1), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('OUTPUT', '%_plotter'), ('IOBUFF', '%_kbd'),
+        # self.cpu0.run_rpc([('SPEED', 1), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('OUTPUT', '%_plotter'), ('IOBUFF', '%_kbd'),
         #                    ('LIFO', '%_system'), ('HALT', '')])
-        self.exec.run_rpc([('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('HALT', '')])
+        self.cpu0.run_rpc([('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('HALT', '')])
 
     def minus(self):
-        self.exec.run_rpc([('CALL', '@minus'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@minus'), ('HALT', '')])
 
     def mul(self):
-        self.exec.run_rpc([('CALL', '@mul'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@mul'), ('HALT', '')])
 
     def fac(self):
-        self.exec.run_rpc([('CALL', '@factorial'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@factorial'), ('HALT', '')])
 
     def div(self):
-        self.exec.run_rpc([('CALL', '@div'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@div'), ('HALT', '')])
 
     def mod(self):
-        self.exec.run_rpc([('CALL', '@mod'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@mod'), ('HALT', '')])
 
     def eq(self):
-        self.exec.run_rpc([('CALL', '@eq'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@eq'), ('HALT', '')])
 
     def neq(self):
-        self.exec.run_rpc([('CALL', '@neq'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@neq'), ('HALT', '')])
 
     def dup(self):
-        self.exec.run_rpc([('CALL', '@dup'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@dup'), ('HALT', '')])
         #self.push(self.top())
 
     def over(self):
-        self.exec.run_rpc([('CALL', '@over'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@over'), ('HALT', '')])
 
     def drop(self):
         self.pop()
 
     def swap(self):
-        self.exec.run_rpc([('CALL', '@swap'), ('HALT', '')])
+        self.cpu0.run_rpc([('CALL', '@swap'), ('HALT', '')])
 
     def println(self):
         val = str(self.pop())

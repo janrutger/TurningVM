@@ -240,3 +240,12 @@ class Executer:
             return "HALT"
         else:
             return "error"
+        
+
+    def start_mpu(self, jobQueue, jobResults):
+        self.mpu = True
+        self.jobQueue   = jobQueue
+        self.jobResults = jobResults
+
+    def memPage(self):
+        return self.memory
