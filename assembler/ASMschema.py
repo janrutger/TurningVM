@@ -21,6 +21,9 @@ def loadSchema():
     schema["calli"]     = ("CALLI", None)
     schema["ret"]       = ("RET", None)
 
+    schema["job"]       = ("JOB", "n")
+    schema["result"]    = ("RESULT", None)
+
     schema["movea"]     = ("MVA", None)
     schema["moveb"]     = ("MVB", None)
 

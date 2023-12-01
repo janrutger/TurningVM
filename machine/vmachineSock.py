@@ -10,7 +10,10 @@ from __future__ import print_function
 import sys
 import copy
 
-from machine.mpu import MPU
+#from machine.mpu import MPU
+
+from multiprocessing import Process, Manager
+from cpu.executer import Executer
 
 
 
@@ -19,7 +22,10 @@ class Machine:
     def __init__(self, executer, ui):
         self.cpu0 = executer
         self.ui = ui 
-        self.mpu = MPU()
+        manager = Manager()
+        self.jobQueue = manager.list()
+        self.jobResults = manager.list()
+        #self.mpu = MPU()
 
 
         self.word_map = {}
@@ -123,9 +129,19 @@ class Machine:
             raise RuntimeError("Unknown opcode: '%s'" % op)
 
 
+    def mpuEnable(self):
+        self.initCode = [('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('CALL', '@resulttest'), ('HALT', '')]
+        self.memPage0 = self.cpu0.memPage()
+        self.cpu0.enable_mpu(self.jobQueue, self.jobResults, 0)
+
+        self.cpu1 = Executer(self.memPage0, None)
+        self.cpu1.enable_mpu(self.jobQueue, self.jobResults, 1)
+        CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
+        CPU1.start()
+        #CPU1.join()
 
     def repl(self):
-        self.mpu.enable(self.cpu0)
+        self.mpuEnable()
         self.ui.println('Type "halt" to quit.')
 
 

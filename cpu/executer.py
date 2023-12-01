@@ -183,6 +183,24 @@ class Executer:
         adres = self.memory.readMem("%_system")
         self.pc = adres + 1
         return "HALT"
+    
+    def job(self, operand):
+        index  = self.execNOP.pull()        #get adrespointer from stack
+        #memVal = self.memory.peek(index)    #peek geheugen
+        memVal = ('$n', 5)
+        self.jobID = self.jobID + 1
+        jobID  = str(self.cpuID) + str(self.jobID)
+        self.jobQueue.append((jobID, memVal, operand))
+        self.jobsPending.append(jobID)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def result(self, operand):
+        while len(self.jobQueue) == 0:
+            time.sleep(0.01)
+        print(self.jobQueue.pop())
+        self.pc = self.pc + 1
+        return "HALT"
 
     def speed(self, operand):
         self.tape_commander.CPUspeed = 0.001 * operand
@@ -242,8 +260,10 @@ class Executer:
             return "error"
         
 
-    def enable_mpu(self, jobQueue, jobResults):
-        self.mpu = True
+    def enable_mpu(self, jobQueue, jobResults, cpuID):
+        self.cpuID = cpuID
+        self.jobID = 0
+        self.jobsPending = []
         self.jobQueue   = jobQueue
         self.jobResults = jobResults
 
