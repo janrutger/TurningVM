@@ -22,7 +22,7 @@ def loadSchema():
     schema["ret"]       = ("RET", None)
 
     schema["job"]       = ("JOB", "n")
-    schema["result"]    = ("RESULT", None)
+    schema["start"]    = ("START", None)
 
     schema["movea"]     = ("MVA", None)
     schema["moveb"]     = ("MVB", None)

@@ -9,10 +9,15 @@
     job @twice
 
 
+
 ret
 
-@resulttest
-    result
+@core 
+    :loop
+        start
+        push 2
+        call @sleep
+    jump :loop
 ret
 
 

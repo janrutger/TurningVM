@@ -195,10 +195,13 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
-    def result(self, operand):
-        while len(self.jobQueue) == 0:
-            time.sleep(0.01)
-        print(self.jobQueue.pop())
+    def start(self, operand):
+        if len(self.jobQueue) == 0:
+            self.execNOP.status("unset")
+            print("no job")
+        else:
+            self.execNOP.status("set")
+            print(self.jobQueue.pop())
         self.pc = self.pc + 1
         return "HALT"
 
