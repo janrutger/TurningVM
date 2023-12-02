@@ -1,31 +1,46 @@
 @main
-
-    push 5
+    speed 1
+    push 0
     storem $n 
     push 'inputpointer'
     index $n 
 
-    push 'inputpointer'
-    job @twice
+    push 50
+    loada 
 
-    push 'inputpointer'
-    job @twice
+    push 1
+    loadb
+
+    :makejob
+        storeb
+        storem $n
+        push 'inputpointer'
+        job @job
+
+        incb 
+        testg
+        jumpt :makejob
 
 
-    :lus
+    :getresult
         result
-    jumpf :lus
+    jumpf :getresult
 
     loadm $result
-    call @plot
+    #call @plot
+    prt
 
     pending 
     loada
     testz
     clra
-    jumpf :lus
+    jumpf :getresult
+    clrb 
 
 
+    push 'DONE'
+    call @char2prtbuff
+    call @printbuff
 ret
 
 
@@ -40,12 +55,9 @@ ret
 
 
 
-@twice
-    push 1
-    call @sleep
+@job
     loadm $n 
-    push 2
-    call @mul
+    #loadm $n
+    call @factorial
     storem $result 
-
 done $result

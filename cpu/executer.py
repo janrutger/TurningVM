@@ -267,16 +267,16 @@ class Executer:
     def join(self, operand):
         if len(self.jobQueue) == 0:
             self.execNOP.status("unset")
-            print("no job")
+            #print("no job")
             self.pc = self.pc + 1
         else:
+            print("job found")
             self.execNOP.status("set")
-            currentJob = self.jobQueue.pop()
+            currentJob = self.jobQueue.pop(0)
             self.currentJobID = currentJob[0]
             self.memory.writeMem(currentJob[1][0], currentJob[1][1])
             self.memory.writeMem("%_system", self.pc)
             self.pc = currentJob[2] 
-            print("job found")
         return "HALT"
     
     def done(self, operand):
@@ -307,6 +307,6 @@ class Executer:
                 print("result found")
             else:
                 self.execNOP.status("unset")
-                print("no result found")
+                #print("no result found")
         self.pc = self.pc + 1
         return "HALT"
