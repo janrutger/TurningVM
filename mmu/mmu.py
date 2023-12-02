@@ -245,3 +245,24 @@ class MMU:
             self.index(index, adres)
         else:
             self.panic("FATAL: set [unknown memtype]")
+
+    def peek(self, adres):
+        if isinstance(adres, int):
+            self.panic("FATAL: peek [illegal adress]")
+        else:
+            if adres in self.virtMemAdresses.keys():
+                memType, memVal = self.memory[self.virtMemAdresses[adres]]
+                if memType == "INDEX":  # stores a adress
+                    if isinstance(memVal, int):
+                        self.panic("FATAL: peek [illegal adress]")
+                    elif memVal in self.virtMemAdresses.keys():
+                        return (self.peek(memVal))
+                    else:
+                        self.panic("FATAL: peek [unknown index]")
+
+                elif memType == "MEM":  # stores a value
+                    return ((adres, memVal))
+                else:
+                    self.panic("FATAL: peek [unknown memtype]")
+            else:
+                self.panic("FATAL: peek [unknown adress]")

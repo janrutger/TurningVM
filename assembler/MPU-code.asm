@@ -22,6 +22,7 @@
     pending 
     loada
     testz
+    clra
     jumpf :lus
 
 

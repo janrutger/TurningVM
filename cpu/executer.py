@@ -255,8 +255,8 @@ class Executer:
     
     def job(self, operand):
         index  = self.execNOP.pull()        #get adrespointer from stack
-        #memVal = self.memory.peek(index)    #peek geheugen
-        memVal = ('$n', '101')
+        memVal = self.memory.peek(index)    #peek geheugen
+        #memVal = ('$n', '101')
         self.jobID = self.jobID + 1
         jobID  = str(self.cpuID) + str(self.jobID)
         self.jobQueue.append((jobID, memVal, operand + self.pc))
