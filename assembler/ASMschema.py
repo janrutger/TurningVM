@@ -25,6 +25,7 @@ def loadSchema():
     schema["join"]      = ("JOIN", None)
     schema["done"]      = ("DONE", "s")
     schema["result"]    = ("RESULT", None)
+    schema["pending"]   = ("PENDING", None)
 
     schema["movea"]     = ("MVA", None)
     schema["moveb"]     = ("MVB", None)

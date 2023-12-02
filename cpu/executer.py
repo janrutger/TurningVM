@@ -183,57 +183,6 @@ class Executer:
         adres = self.memory.readMem("%_system")
         self.pc = adres + 1
         return "HALT"
-    
-    def job(self, operand):
-        index  = self.execNOP.pull()        #get adrespointer from stack
-        #memVal = self.memory.peek(index)    #peek geheugen
-        memVal = ('$n', '101')
-        self.jobID = self.jobID + 1
-        jobID  = str(self.cpuID) + str(self.jobID)
-        self.jobQueue.append((jobID, memVal, operand + self.pc))
-        self.jobsPending.append(jobID)
-        self.pc = self.pc + 1
-        return "HALT"
-
-    def join(self, operand):
-        if len(self.jobQueue) == 0:
-            self.execNOP.status("unset")
-            print("no job")
-            self.pc = self.pc + 1
-        else:
-            self.execNOP.status("set")
-            currentJob = self.jobQueue.pop()
-            self.currentJobID = currentJob[0]
-            self.memory.writeMem(currentJob[1][0], currentJob[1][1])
-            self.memory.writeMem("%_system", self.pc)
-            self.pc = currentJob[2] 
-        return "HALT"
-    
-    def done(self, operand):
-        val = self.memory.readMem(operand)
-        self.jobResults[self.currentJobID] = (operand, val)
-
-        adres = self.memory.readMem("%_system")
-        self.pc = adres + 1
-        return "HALT"
-    
-    def result(self, operand):
-        if len(self.jobsPending) == 0:
-            self.execNOP.status("unset")
-            print("no result expected")
-        else:
-            if self.jobsPending[0] in self.jobResults.keys():
-                self.execNOP.status("set")
-                result = self.jobResults[self.jobsPending[0]]
-                self.memory.writeMem(result[0], result[1])
-                self.jobResults.pop(self.jobsPending[0])
-                self.jobsPending.pop(0)
-                print("result found")
-            else:
-                self.execNOP.status("unset")
-                print("no result found")
-        self.pc = self.pc + 1
-        return "HALT"
 
 
     def speed(self, operand):
@@ -303,3 +252,61 @@ class Executer:
 
     def memPage(self):
         return self.memory
+    
+    def job(self, operand):
+        index  = self.execNOP.pull()        #get adrespointer from stack
+        #memVal = self.memory.peek(index)    #peek geheugen
+        memVal = ('$n', '101')
+        self.jobID = self.jobID + 1
+        jobID  = str(self.cpuID) + str(self.jobID)
+        self.jobQueue.append((jobID, memVal, operand + self.pc))
+        self.jobsPending.append(jobID)
+        self.pc = self.pc + 1
+        return "HALT"
+
+    def join(self, operand):
+        if len(self.jobQueue) == 0:
+            self.execNOP.status("unset")
+            print("no job")
+            self.pc = self.pc + 1
+        else:
+            self.execNOP.status("set")
+            currentJob = self.jobQueue.pop()
+            self.currentJobID = currentJob[0]
+            self.memory.writeMem(currentJob[1][0], currentJob[1][1])
+            self.memory.writeMem("%_system", self.pc)
+            self.pc = currentJob[2] 
+            print("job found")
+        return "HALT"
+    
+    def done(self, operand):
+        val = self.memory.readMem(operand)
+        self.jobResults[self.currentJobID] = (operand, val)
+
+        adres = self.memory.readMem("%_system")
+        self.pc = adres + 1
+        return "HALT"
+    
+    def pending(self, operand):
+        val = len(self.jobsPending)
+        exit_code = self.execNOP.push(bin(val)[2:])
+        self.pc = self.pc + 1
+        return exit_code
+    
+    def result(self, operand):
+        if len(self.jobsPending) == 0:
+            self.execNOP.status("unset")
+            print("no result expected")
+        else:
+            if self.jobsPending[0] in self.jobResults.keys():
+                self.execNOP.status("set")
+                result = self.jobResults[self.jobsPending[0]]
+                self.memory.writeMem(result[0], result[1])
+                self.jobResults.pop(self.jobsPending[0])
+                self.jobsPending.pop(0)
+                print("result found")
+            else:
+                self.execNOP.status("unset")
+                print("no result found")
+        self.pc = self.pc + 1
+        return "HALT"

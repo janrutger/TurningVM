@@ -8,12 +8,23 @@
     push 'inputpointer'
     job @twice
 
+    push 'inputpointer'
+    job @twice
+
+
     :lus
         result
     jumpf :lus
 
     loadm $result
     call @plot
+
+    pending 
+    loada
+    testz
+    jumpf :lus
+
+
 ret
 
 
