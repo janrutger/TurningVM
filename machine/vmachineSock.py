@@ -10,8 +10,6 @@ from __future__ import print_function
 import sys
 import copy
 
-#from machine.mpu import MPU
-
 from multiprocessing import Process, Manager
 from cpu.executer import Executer
 
@@ -25,7 +23,6 @@ class Machine:
         manager = Manager()
         self.jobQueue = manager.list()
         self.jobResults = manager.dict()
-        #self.mpu = MPU()
 
 
         self.word_map = {}
@@ -140,6 +137,12 @@ class Machine:
         CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
         self.CPUS.append(CPU1)
         CPU1.start()
+
+        self.cpu2 = Executer(self.memPage0, None)
+        self.cpu2.enable_mpu(self.jobQueue, self.jobResults, 2)
+        CPU2 = Process(target=self.cpu2.run_rpc, args=(self.initCode, ))
+        self.CPUS.append(CPU2)
+        CPU2.start()
         
 
     def repl(self):

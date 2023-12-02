@@ -22,6 +22,7 @@
     pending 
     loada
     testz
+    clra
     jumpf :lus
 
 
@@ -40,7 +41,8 @@ ret
 
 
 @twice
-    nop
+    push 1
+    call @sleep
     loadm $n 
     push 2
     call @mul
