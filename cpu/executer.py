@@ -190,7 +190,7 @@ class Executer:
         memVal = ('$n', '101')
         self.jobID = self.jobID + 1
         jobID  = str(self.cpuID) + str(self.jobID)
-        self.jobQueue.append((jobID, memVal, operand))
+        self.jobQueue.append((jobID, memVal, operand + self.pc))
         self.jobsPending.append(jobID)
         self.pc = self.pc + 1
         return "HALT"
@@ -206,8 +206,35 @@ class Executer:
             self.currentJobID = currentJob[0]
             self.memory.writeMem(currentJob[1][0], currentJob[1][1])
             self.memory.writeMem("%_system", self.pc)
-            self.pc = currentJob[2] + self.pc
+            self.pc = currentJob[2] 
         return "HALT"
+    
+    def done(self, operand):
+        val = self.memory.readMem(operand)
+        self.jobResults[self.currentJobID] = (operand, val)
+
+        adres = self.memory.readMem("%_system")
+        self.pc = adres + 1
+        return "HALT"
+    
+    def result(self, operand):
+        if len(self.jobsPending) == 0:
+            self.execNOP.status("unset")
+            print("no result expected")
+        else:
+            if self.jobsPending[0] in self.jobResults.keys():
+                self.execNOP.status("set")
+                result = self.jobResults[self.jobsPending[0]]
+                self.memory.writeMem(result[0], result[1])
+                self.jobResults.pop(self.jobsPending[0])
+                self.jobsPending.pop(0)
+                print("result found")
+            else:
+                self.execNOP.status("unset")
+                print("no result found")
+        self.pc = self.pc + 1
+        return "HALT"
+
 
     def speed(self, operand):
         self.tape_commander.CPUspeed = 0.001 * operand

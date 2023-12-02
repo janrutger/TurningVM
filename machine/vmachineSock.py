@@ -24,7 +24,7 @@ class Machine:
         self.ui = ui 
         manager = Manager()
         self.jobQueue = manager.list()
-        self.jobResults = manager.list()
+        self.jobResults = manager.dict()
         #self.mpu = MPU()
 
 
@@ -139,8 +139,8 @@ class Machine:
         self.cpu1.enable_mpu(self.jobQueue, self.jobResults, 1)
         CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
         self.CPUS.append(CPU1)
-        #CPU1.start()
-        #CPU1.join()
+        CPU1.start()
+        
 
     def repl(self):
         self.mpuEnable()

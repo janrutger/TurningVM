@@ -8,8 +8,12 @@
     push 'inputpointer'
     job @twice
 
-    join
+    :lus
+        result
+    jumpf :lus
 
+    loadm $result
+    call @plot
 ret
 
 
@@ -29,4 +33,6 @@ ret
     loadm $n 
     push 2
     call @mul
-ret
+    storem $result 
+
+done $result
