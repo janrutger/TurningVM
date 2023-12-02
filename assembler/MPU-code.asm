@@ -1,11 +1,12 @@
 @main
-    speed 1
+    speed 0
+    settimer 0
     push 0
     storem $n 
     push 'inputpointer'
     index $n 
 
-    push 50
+    push 100
     loada 
 
     push 1
@@ -41,6 +42,7 @@
     push 'DONE'
     call @char2prtbuff
     call @printbuff
+    prttimer 0
 ret
 
 

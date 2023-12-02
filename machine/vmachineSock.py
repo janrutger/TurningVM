@@ -143,6 +143,12 @@ class Machine:
         CPU2 = Process(target=self.cpu2.run_rpc, args=(self.initCode, ))
         self.CPUS.append(CPU2)
         CPU2.start()
+
+        self.cpu3 = Executer(self.memPage0, None)
+        self.cpu3.enable_mpu(self.jobQueue, self.jobResults, 3)
+        CPU3 = Process(target=self.cpu3.run_rpc, args=(self.initCode, ))
+        self.CPUS.append(CPU3)
+        CPU3.start()
         
 
     def repl(self):
