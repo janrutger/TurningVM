@@ -6,7 +6,7 @@
     push 'inputpointer'
     index $n 
 
-    push 100
+    push 1500
     loada 
 
     push 1
@@ -16,7 +16,7 @@
         storeb
         storem $n
         push 'inputpointer'
-        job @job
+        job @job2
 
         incb 
         testg
@@ -27,9 +27,9 @@
         result
     jumpf :getresult
 
-    loadm $result
-    #call @plot
-    prt
+    loadm $m 
+    call @plot
+    #prt
 
     pending 
     loada
@@ -63,3 +63,86 @@ ret
     call @factorial
     storem $result 
 done $result
+
+
+@job2
+    loadm $n 
+    storem $n
+    push 1
+    push 8
+    loadm $n
+    call @mul
+    call @plus
+    storem $s
+    push 2
+    loadm $s
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_0_do_end
+    push 1
+    jump :einde
+    :_0_do_end
+    loadm $s
+    push 2
+    call @div
+    storem $x0
+    loadm $s
+    loadm $x0
+    call @div
+    loadm $x0
+    call @plus
+    push 2
+    call @div
+    storem $x1
+    :_1_condition_start
+    loadm $x0
+    loadm $x1
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_1_repeat_end
+    loadm $x1
+    storem $x0
+    loadm $s
+    loadm $x0
+    call @div
+    loadm $x0
+    call @plus
+    push 2
+    call @div
+    storem $x1
+    jump :_1_condition_start
+    :_1_repeat_end
+    loadm $x0
+    :einde
+    push 1
+    call @minus
+    push 2
+    call @div
+    storem $m
+    :_2_condition_start
+    push 1
+    loadm $m
+    call @plus
+    loadm $m
+    call @mul
+    push 2
+    loadm $n
+    call @mul
+    call @mod
+    push 0
+    call @neq
+    loada
+    testz
+    clra
+    jumpf :_2_repeat_end
+    loadm $m
+    push 1
+    call @plus
+    storem $m
+    jump :_2_condition_start
+    :_2_repeat_end
+done $m
