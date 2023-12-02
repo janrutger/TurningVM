@@ -139,7 +139,7 @@ class Machine:
         self.cpu1.enable_mpu(self.jobQueue, self.jobResults, 1)
         CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
         self.CPUS.append(CPU1)
-        CPU1.start()
+        #CPU1.start()
         #CPU1.join()
 
     def repl(self):

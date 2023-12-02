@@ -8,14 +8,16 @@
     push 'inputpointer'
     job @twice
 
+    join
+
 ret
 
 
 
 @core 
     :loop
-        start
-        push 2
+        join
+        push 1
         call @sleep
     jump :loop
 ret
@@ -23,5 +25,8 @@ ret
 
 
 @twice
- nop
+    nop
+    loadm $n 
+    push 2
+    call @mul
 ret

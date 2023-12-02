@@ -187,7 +187,7 @@ class Executer:
     def job(self, operand):
         index  = self.execNOP.pull()        #get adrespointer from stack
         #memVal = self.memory.peek(index)    #peek geheugen
-        memVal = ('$n', 5)
+        memVal = ('$n', '101')
         self.jobID = self.jobID + 1
         jobID  = str(self.cpuID) + str(self.jobID)
         self.jobQueue.append((jobID, memVal, operand))
@@ -195,14 +195,18 @@ class Executer:
         self.pc = self.pc + 1
         return "HALT"
 
-    def start(self, operand):
+    def join(self, operand):
         if len(self.jobQueue) == 0:
             self.execNOP.status("unset")
             print("no job")
+            self.pc = self.pc + 1
         else:
             self.execNOP.status("set")
-            print(self.jobQueue.pop())
-        self.pc = self.pc + 1
+            currentJob = self.jobQueue.pop()
+            self.currentJobID = currentJob[0]
+            self.memory.writeMem(currentJob[1][0], currentJob[1][1])
+            self.memory.writeMem("%_system", self.pc)
+            self.pc = currentJob[2] + self.pc
         return "HALT"
 
     def speed(self, operand):
