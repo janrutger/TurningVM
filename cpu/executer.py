@@ -302,6 +302,7 @@ class Executer:
                 self.execNOP.status("set")
                 result = self.jobResults[self.jobsPending[0]]
                 self.memory.writeMem(result[0], result[1])
+                self.execNOP.push(result[1])
                 self.jobResults.pop(self.jobsPending[0])
                 self.jobsPending.pop(0)
                 print("result found")

@@ -1,12 +1,12 @@
 @main
-    speed 0
+    speed 1
     settimer 0
     push 0
     storem $n 
     push 'inputpointer'
     index $n 
 
-    push 1500
+    push 500
     loada 
 
     push 1
@@ -22,19 +22,23 @@
         testg
         jumpt :makejob
 
-
+   
     :getresult
+        speed 5
         result
-    jumpf :getresult
+    jumpt :result
+        speed 0
+        join
+    jump :getresult
 
-    loadm $m 
-    call @plot
-    #prt
+    :result
+        call @plot
+        #prt
 
-    pending 
-    loada
-    testz
-    clra
+        pending 
+        loada
+        testz
+        clra
     jumpf :getresult
     clrb 
 
@@ -66,8 +70,6 @@ done $result
 
 
 @job2
-    loadm $n 
-    storem $n
     push 1
     push 8
     loadm $n
