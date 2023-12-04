@@ -6,7 +6,7 @@
     push 'inputpointer'
     index $n 
 
-    push 500
+    push 750
     loada 
 
     push 1
@@ -21,6 +21,7 @@
         incb 
         testg
         jumpt :makejob
+        clrb 
 
    
     :getresult
@@ -40,7 +41,7 @@
         testz
         clra
     jumpf :getresult
-    clrb 
+
 
 
     push 'DONE'
@@ -52,6 +53,7 @@ ret
 
 
 @core 
+    speed 0
     :loop
         join
         push 1

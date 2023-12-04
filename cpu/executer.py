@@ -269,11 +269,11 @@ class Executer:
             self.execNOP.status("unset")
             #print("no job")
             self.pc = self.pc + 1
-        else:
-            print("job found")
+        else: 
             self.execNOP.status("set")
             currentJob = self.jobQueue.pop(0)
             self.currentJobID = currentJob[0]
+            print(str(self.cpuID) + " job found...... "  + str(currentJob[0])) 
             self.memory.writeMem(currentJob[1][0], currentJob[1][1])
             self.memory.writeMem("%_system", self.pc)
             self.pc = currentJob[2] 
@@ -301,11 +301,11 @@ class Executer:
             if self.jobsPending[0] in self.jobResults.keys():
                 self.execNOP.status("set")
                 result = self.jobResults[self.jobsPending[0]]
+                print(str(self.cpuID) + " result found... "  + str(self.jobsPending[0])) 
                 self.memory.writeMem(result[0], result[1])
                 self.execNOP.push(result[1])
                 self.jobResults.pop(self.jobsPending[0])
                 self.jobsPending.pop(0)
-                print("result found")
             else:
                 self.execNOP.status("unset")
                 #print("no result found")
