@@ -6,11 +6,26 @@
     push 'inputpointer'
     index $n 
 
-    push 750
-    loada 
+    #push 3000
+    #loada 
 
-    push 1
-    loadb
+    #push 1
+    #loadb
+
+    #:makejob
+    #    storeb
+    #    storem $n
+    #    push 'inputpointer'
+    #    job @job2
+
+    #   incb 
+    #   testg
+    #   jumpt :makejob
+    #   clrb 
+    #   clra
+
+    push 1500
+    loadb 
 
     :makejob
         storeb
@@ -18,10 +33,13 @@
         push 'inputpointer'
         job @job2
 
-        incb 
-        testg
-        jumpt :makejob
+        decb
+        storeb
+        loada 
+        testz
+        jumpf :makejob
         clrb 
+        clra
 
    
     :getresult
