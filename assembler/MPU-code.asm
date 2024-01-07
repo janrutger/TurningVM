@@ -12,6 +12,7 @@
     #push 1
     #loadb
 
+
     #:makejob
     #    storeb
     #    storem $n
@@ -43,14 +44,16 @@
 
    
     :getresult
-        speed 5
+        speed 50
         result
     jumpt :result
-        speed 0
-        join
+        #speed 0
+        #join
+        nop
     jump :getresult
 
     :result
+        loadm $m
         call @plot
         #prt
 

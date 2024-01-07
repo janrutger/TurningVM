@@ -272,16 +272,18 @@ class Executer:
         else: 
             self.execNOP.status("set")
             currentJob = self.jobQueue.pop(0)
-            self.currentJobID = currentJob[0]
+            currentJobID = currentJob[0]
             print(str(self.cpuID) + " found job...... "  + str(currentJob[0])) 
             self.memory.writeMem(currentJob[1][0], currentJob[1][1])
             self.memory.writeMem("%_system", self.pc)
+            self.memory.writeMem("%_system", currentJobID)
             self.pc = currentJob[2] 
         return "HALT"
     
     def done(self, operand):
+        currentJobID = self.memory.readMem("%_system")
         val = self.memory.readMem(operand)
-        self.jobResults[self.currentJobID] = (operand, val)
+        self.jobResults[currentJobID] = (operand, val)
 
         adres = self.memory.readMem("%_system")
         self.pc = adres + 1
@@ -303,7 +305,7 @@ class Executer:
                 result = self.jobResults[self.jobsPending[0]]
                 print(str(self.cpuID) + " found Result... "  + str(self.jobsPending[0])) 
                 self.memory.writeMem(result[0], result[1])
-                self.execNOP.push(result[1])
+                #self.execNOP.push(result[1])
                 self.jobResults.pop(self.jobsPending[0])
                 self.jobsPending.pop(0)
             else:

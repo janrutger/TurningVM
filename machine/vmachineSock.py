@@ -20,6 +20,8 @@ class Machine:
     def __init__(self, executer, ui):
         self.cpu0 = executer
         self.ui = ui 
+
+        self.CPUS = []
         manager = Manager()
         self.jobQueue = manager.list()
         self.jobResults = manager.dict()

@@ -6,26 +6,12 @@
     push 'inputpointer'
     index $n 
 
-    #push 3000
-    #loada 
+    push 31
+    loada 
 
-    #push 1
-    #loadb
+    push 1
+    loadb
 
-    #:makejob
-    #    storeb
-    #    storem $n
-    #    push 'inputpointer'
-    #    job @job2
-
-    #   incb 
-    #   testg
-    #   jumpt :makejob
-    #   clrb 
-    #   clra
-
-    push 1500
-    loadb 
 
     :makejob
         storeb
@@ -33,24 +19,41 @@
         push 'inputpointer'
         job @job2
 
-        decb
-        storeb
-        loada 
-        testz
-        jumpf :makejob
-        clrb 
-        clra
+      incb 
+      testg
+      jumpt :makejob
+      clrb 
+      clra
+
+    #push 500
+    #loadb 
+
+    #:makejob
+    #    storeb
+    #    storem $n
+    #    push 'inputpointer'
+    #    job @job2
+
+    #   decb
+    #   storeb
+    #   loada 
+    #   testz
+    #   jumpf :makejob
+    #   clrb 
+    #   clra
 
    
     :getresult
-        speed 5
+        speed 1
         result
     jumpt :result
         speed 0
         join
+        #nop
     jump :getresult
 
     :result
+        loadm $m
         call @plot
         #prt
 
@@ -74,7 +77,7 @@ ret
     speed 0
     :loop
         join
-        push 1
+        push 0
         call @sleep
     jump :loop
 ret
