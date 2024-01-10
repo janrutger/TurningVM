@@ -6,7 +6,7 @@
     push 'inputpointer'
     index $n 
 
-    push 31
+    push 76
     loada 
 
     push 1

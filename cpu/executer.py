@@ -255,11 +255,10 @@ class Executer:
     
     def job(self, operand):
         index  = self.execNOP.pull()        #get adrespointer from stack
-        memVal = self.memory.peek(index)    #peek geheugen #PEEK
-        #memVal = ('$n', '101')
+        peekVal = self.memory.peek(index)    #peek geheugen #PEEK
         self.jobID = self.jobID + 1
         jobID  = str(self.cpuID) + str(self.jobID)
-        self.jobQueue.append((jobID, memVal, operand + self.pc))
+        self.jobQueue.append((jobID, peekVal, operand + self.pc))
         self.jobsPending.append(jobID)
         self.pc = self.pc + 1
         return "HALT"
@@ -274,7 +273,8 @@ class Executer:
             currentJob = self.jobQueue.pop(0)
             currentJobID = currentJob[0]
             print(str(self.cpuID) + " found job...... "  + str(currentJob[0])) 
-            self.memory.writeMem(currentJob[1][0], currentJob[1][1]) #POKE
+            #self.memory.writeMem(currentJob[1][0], currentJob[1][1]) #POKE
+            self.memory.poke(currentJob[1])
             self.memory.writeMem("%_system", self.pc)
             self.memory.writeMem("%_system", currentJobID)
             self.pc = currentJob[2] 
@@ -282,8 +282,9 @@ class Executer:
     
     def done(self, operand):
         currentJobID = self.memory.readMem("%_system")
-        val = self.memory.readMem(operand) #PEEK
-        self.jobResults[currentJobID] = (operand, val)
+        #val = self.memory.readMem(operand) #PEEK
+        peekVal = self.memory.peek(operand)
+        self.jobResults[currentJobID] = (peekVal)
 
         adres = self.memory.readMem("%_system")
         self.pc = adres + 1
@@ -296,20 +297,22 @@ class Executer:
         return exit_code
     
     def result(self, operand):
+        self.execNOP.status("unset")
         if len(self.jobsPending) == 0:
-            self.execNOP.status("unset")
+            #self.execNOP.status("unset")
             print("no result expected")
         else:
             if self.jobsPending[0] in self.jobResults.keys():
                 self.execNOP.status("set")
-                result = self.jobResults[self.jobsPending[0]]
+                pokeVal = self.jobResults[self.jobsPending[0]]
                 print(str(self.cpuID) + " found Result... "  + str(self.jobsPending[0])) 
-                self.memory.writeMem(result[0], result[1]) #POKE
+                self.memory.poke(pokeVal)
+                #self.memory.writeMem(result[0], result[1]) #POKE
                 #self.execNOP.push(result[1])
                 self.jobResults.pop(self.jobsPending[0])
                 self.jobsPending.pop(0)
-            else:
-                self.execNOP.status("unset")
+            #else:
+                #self.execNOP.status("unset")
                 #print("no result found")
         self.pc = self.pc + 1
         return "HALT"

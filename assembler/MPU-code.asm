@@ -25,7 +25,7 @@
     #   clrb 
     #   clra
 
-    push 1500
+    push 1
     loadb 
 
     :makejob
