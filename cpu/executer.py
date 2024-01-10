@@ -255,7 +255,7 @@ class Executer:
     
     def job(self, operand):
         index  = self.execNOP.pull()        #get adrespointer from stack
-        memVal = self.memory.peek(index)    #peek geheugen
+        memVal = self.memory.peek(index)    #peek geheugen #PEEK
         #memVal = ('$n', '101')
         self.jobID = self.jobID + 1
         jobID  = str(self.cpuID) + str(self.jobID)
@@ -274,7 +274,7 @@ class Executer:
             currentJob = self.jobQueue.pop(0)
             currentJobID = currentJob[0]
             print(str(self.cpuID) + " found job...... "  + str(currentJob[0])) 
-            self.memory.writeMem(currentJob[1][0], currentJob[1][1])
+            self.memory.writeMem(currentJob[1][0], currentJob[1][1]) #POKE
             self.memory.writeMem("%_system", self.pc)
             self.memory.writeMem("%_system", currentJobID)
             self.pc = currentJob[2] 
@@ -282,7 +282,7 @@ class Executer:
     
     def done(self, operand):
         currentJobID = self.memory.readMem("%_system")
-        val = self.memory.readMem(operand)
+        val = self.memory.readMem(operand) #PEEK
         self.jobResults[currentJobID] = (operand, val)
 
         adres = self.memory.readMem("%_system")
@@ -304,7 +304,7 @@ class Executer:
                 self.execNOP.status("set")
                 result = self.jobResults[self.jobsPending[0]]
                 print(str(self.cpuID) + " found Result... "  + str(self.jobsPending[0])) 
-                self.memory.writeMem(result[0], result[1])
+                self.memory.writeMem(result[0], result[1]) #POKE
                 #self.execNOP.push(result[1])
                 self.jobResults.pop(self.jobsPending[0])
                 self.jobsPending.pop(0)
