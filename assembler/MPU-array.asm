@@ -5,7 +5,7 @@
 
     push 845325
     storem *vars
-    push 9562387
+    Push 9562387
     storem *vars 
     push 'inputpointer'
     index *vars
@@ -19,9 +19,9 @@
         speed 50
         result
     jumpt :result
-        #speed 0
-        #join
-        nop
+        speed 0
+        join
+        #nop
     jump :getresult
 
     :result
