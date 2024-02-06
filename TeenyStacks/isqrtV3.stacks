@@ -1,0 +1,25 @@
+
+
+1 AS y
+{y 2000 !=} REPEAT
+
+    0 AS L 
+    y 1 + AS R 
+
+
+    {L R 1 - !=} REPEAT 
+        L R + 2 / AS M 
+
+        M M * y < DO
+            M AS R 
+            GOTO done
+            END
+
+            M AS L 
+
+            LABEL done 
+        END
+
+    L PLOT
+    y 1 + AS y
+    END 

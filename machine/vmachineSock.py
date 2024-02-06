@@ -154,7 +154,7 @@ class Machine:
         
 
     def repl(self):
-        self.mpuEnable()
+        #self.mpuEnable()
         self.ui.println('Type "halt" to quit.')
 
 
