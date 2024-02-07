@@ -1,0 +1,36 @@
+DEFINE isqrt
+
+    . AS y
+    0 AS L 
+    y 1 + AS R 
+
+    {L R 1 - !=} REPEAT 
+        L R + 2 / AS M 
+
+        M M * y < DO
+            M AS R 
+            GOTO done
+            END
+            M AS L 
+            LABEL done 
+        END
+
+    L 
+END
+
+4 AS n
+INPUT AS end
+
+{n end !=} REPEAT
+    
+    1 8 n * + isqrt
+    
+    1 - 2 / AS m 
+
+    {1 m + m * 2 n * % 0 !=} REPEAT
+        m 1 + AS m 
+    END
+    m PLOT
+
+n 1 + AS n
+END

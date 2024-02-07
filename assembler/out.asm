@@ -3,36 +3,51 @@ settimer 0
 speed 0
 push 4
 storem $n
+call @input
+storem $end
 :_2_condition_start
 loadm $n
-push 1000
+loadm $end
 call @neq
 loada
 testz
 clra
 jumpf :_2_repeat_end
-settimer 16
+push 1
+push 8
 loadm $n
+call @mul
+call @plus
 call @~isqrt
-storem $i
-loadm $i
 push 1
 call @minus
-call @factorial
-loadm $i
+push 2
+call @div
+storem $m
+:_3_condition_start
+push 1
+loadm $m
+call @plus
+loadm $m
+call @mul
+push 2
+loadm $n
+call @mul
 call @mod
-loadm $i
-push 1
-call @minus
-call @eq
+push 0
+call @neq
 loada
 testz
 clra
-jumpf :_3_do_end
-loadm $n
+jumpf :_3_repeat_end
+loadm $m
+push 1
+call @plus
+storem $m
+jump :_3_condition_start
+:_3_repeat_end
+loadm $m
 call @plot
-:_3_do_end
-prttimer 16
 loadm $n
 push 1
 call @plus
