@@ -73,3 +73,48 @@ ret
     clra
     clrb
 ret
+
+@isqrt
+    storem $y_isqrt
+    push 0
+    storem $L_isqrt
+    loadm $y_isqrt
+    push 1
+    call @plus
+    storem $R_isqrt
+    :_0_condition_start_isqrt
+    loadm $L_isqrt
+    loadm $R_isqrt
+    push 1
+    call @minus
+    call @neq
+    loada
+    testz
+    clra
+    jumpf :_0_repeat_end_isqrt
+    loadm $L_isqrt
+    loadm $R_isqrt
+    call @plus
+    push 2
+    call @div
+    storem $M_isqrt
+    loadm $M_isqrt
+    loadm $M_isqrt
+    call @mul
+    loadm $y_isqrt
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_1_do_end_isqrt
+    loadm $M_isqrt
+    storem $R_isqrt
+    jump :done
+    :_1_do_end_isqrt
+    loadm $M_isqrt
+    storem $L_isqrt
+    :done
+    jump :_0_condition_start_isqrt
+    :_0_repeat_end_isqrt
+    loadm $L_isqrt
+ret

@@ -98,51 +98,9 @@ done $result
     loadm $n
     call @mul
     call @plus
-    storem $s
-    push 2
-    loadm $s
-    call @lt
-    loada
-    testz
-    clra
-    jumpf :_0_do_end
-    push 1
-    jump :einde
-    :_0_do_end
-    loadm $s
-    push 2
-    call @div
-    storem $x0
-    loadm $s
-    loadm $x0
-    call @div
-    loadm $x0
-    call @plus
-    push 2
-    call @div
-    storem $x1
-    :_1_condition_start
-    loadm $x0
-    loadm $x1
-    call @lt
-    loada
-    testz
-    clra
-    jumpf :_1_repeat_end
-    loadm $x1
-    storem $x0
-    loadm $s
-    loadm $x0
-    call @div
-    loadm $x0
-    call @plus
-    push 2
-    call @div
-    storem $x1
-    jump :_1_condition_start
-    :_1_repeat_end
-    loadm $x0
-    :einde
+
+    call @~isqrt
+
     push 1
     call @minus
     push 2
@@ -171,3 +129,48 @@ done $result
     jump :_2_condition_start
     :_2_repeat_end
 done $m
+
+@~isqrt
+    storem $y
+    push 0
+    storem $L
+    loadm $y
+    push 1
+    call @plus
+    storem $R
+    :_0_condition_start
+    loadm $L
+    loadm $R
+    push 1
+    call @minus
+    call @neq
+    loada
+    testz
+    clra
+    jumpf :_0_repeat_end
+    loadm $L
+    loadm $R
+    call @plus
+    push 2
+    call @div
+    storem $M
+    loadm $M
+    loadm $M
+    call @mul
+    loadm $y
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_1_do_end
+    loadm $M
+    storem $R
+    jump :done
+    :_1_do_end
+    loadm $M
+    storem $L
+    :done
+    jump :_0_condition_start
+    :_0_repeat_end
+    loadm $L
+ret
