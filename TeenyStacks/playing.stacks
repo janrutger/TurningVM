@@ -1,0 +1,17 @@
+1000 AS base
+1 AS deler
+0 AS sum
+
+
+{ deler base >} REPEAT
+    sum 10 / PLOT
+    base deler / sum + AS sum
+    deler 2 + AS deler
+
+    sum 10 / PLOT
+    sum base deler / - AS sum
+    deler 2 + AS deler
+END
+    
+
+

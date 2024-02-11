@@ -1,37 +1,13 @@
-DEFINE isqrt
-
-    . AS y
-    0 AS L 
-    y 1 + AS R 
-
-    {L R 1 - !=} REPEAT 
-        L R + 2 / AS M 
-
-        M M * y < DO
-            M AS R 
-            GOTO done
-            END
-            M AS L 
-            LABEL done 
-        END
-
-    L 
-END
-
-
-
 4 AS n
 
 {n 1000 !=} REPEAT
     TIMER 16 SET
 
-    n isqrt AS i
-
-    #n 2 / 
-    #{ DUP DUP * n < } REPEAT
-    #    1 - 
-    #END
-    #. AS i 
+    n 2 / 
+    { DUP DUP * n < } REPEAT
+        1 - 
+    END
+    . AS i 
 
     i 1 - ! i % i 1 - == DO
         n PLOT  

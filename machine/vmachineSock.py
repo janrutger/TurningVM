@@ -44,7 +44,8 @@ class Machine:
             ".": self.println,
             "init": self.init,
             "main": self.main,
-            "halt": self.halt
+            "halt": self.halt,
+            "mpu": self.mpu
         }
 
 
@@ -154,7 +155,7 @@ class Machine:
         
 
     def repl(self):
-        self.mpuEnable()
+        #self.mpuEnable()
         self.ui.println('Type "halt" to quit.')
 
 
@@ -233,4 +234,7 @@ class Machine:
     def println(self):
         val = str(self.pop())
         self.ui.println(val)
+
+    def mpu(self):
+        self.mpuEnable()
         

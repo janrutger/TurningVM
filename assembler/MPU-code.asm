@@ -6,27 +6,12 @@
     push 'inputpointer'
     index $n 
 
-    #push 3000
-    #loada 
-
-    #push 1
-    #loadb
-
-
-    #:makejob
-    #    storeb
-    #    storem $n
-    #    push 'inputpointer'
-    #    job @job2
-
-    #   incb 
-    #   testg
-    #   jumpt :makejob
-    #   clrb 
-    #   clra
+    push 3000
+    loada 
 
     push 1
-    loadb 
+    loadb
+
 
     :makejob
         storeb
@@ -34,22 +19,37 @@
         push 'inputpointer'
         job @job2
 
-        decb
-        storeb
-        loada 
-        testz
-        jumpf :makejob
-        clrb 
-        clra
+       incb 
+       testg
+       jumpt :makejob
+       clrb 
+       clra
+
+    #push 1500
+    #loadb 
+
+    #:makejob
+    #    storeb
+    #   storem $n
+    #   push 'inputpointer'
+    #   job @job2
+
+    #   decb
+    #   storeb
+    #   loada 
+    #   testz
+    #   jumpf :makejob
+    #   clrb 
+    #   clra
 
    
     :getresult
-        speed 50
+        speed 1
         result
     jumpt :result
-        #speed 0
-        #join
-        nop
+        speed 0
+        join
+        #nop
     jump :getresult
 
     :result
@@ -99,7 +99,7 @@ done $result
     call @mul
     call @plus
 
-    call @~isqrt
+    call @isqrt
 
     push 1
     call @minus
@@ -130,47 +130,4 @@ done $result
     :_2_repeat_end
 done $m
 
-@~isqrt
-    storem $y
-    push 0
-    storem $L
-    loadm $y
-    push 1
-    call @plus
-    storem $R
-    :_0_condition_start
-    loadm $L
-    loadm $R
-    push 1
-    call @minus
-    call @neq
-    loada
-    testz
-    clra
-    jumpf :_0_repeat_end
-    loadm $L
-    loadm $R
-    call @plus
-    push 2
-    call @div
-    storem $M
-    loadm $M
-    loadm $M
-    call @mul
-    loadm $y
-    call @lt
-    loada
-    testz
-    clra
-    jumpf :_1_do_end
-    loadm $M
-    storem $R
-    jump :done
-    :_1_do_end
-    loadm $M
-    storem $L
-    :done
-    jump :_0_condition_start
-    :_0_repeat_end
-    loadm $L
-ret
+

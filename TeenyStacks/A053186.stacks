@@ -4,10 +4,7 @@ INPUT AS end
 
 {number end !=} REPEAT
     TIMER 16 SET
-    number number 2 / 
-    { DUP DUP * number < } REPEAT
-        1 - 
-    END
+    number number `isqrt 
     DUP * - PLOT
 
 number 1 + AS number

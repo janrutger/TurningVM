@@ -18,14 +18,12 @@ DEFINE isqrt
     L 
 END
 
-2500 AS n
-5000 AS end
+1 AS n
+INPUT AS end
 
 {n end !=} REPEAT
     
-    1 8 n * + isqrt
-
-    1 - 2 / AS m 
+    1 8 n * + `isqrt 1 - 2 / AS m 
 
     {1 m + m * 2 n * % 0 !=} REPEAT
         m 1 + AS m 
