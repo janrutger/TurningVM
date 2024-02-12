@@ -2,10 +2,10 @@
 program    ::=	[(define)] {statement}
 
 define     ::= "DEFINE" nl
-				[ (("VALUE" [INTEGER] variable nl) )+ ]
-				[ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
-				[ ("JOB" job "USE" (variable) nl {statement} <nl> "RETURN" (variable) nl)+ ]
-			   "END" nl
+			[ (("VALUE" [INTEGER] variable nl) )+ ]
+			[ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
+			[ ("JOB" job "USE" (variable) nl {statement} <nl> "RETURN" (variable) nl)+ ]
+			"END" nl
 
 
 statement  ::=  "LABEL" label nl
@@ -20,12 +20,12 @@ statement  ::=  "LABEL" label nl
 
 
 			|   (expression | st) ( "PRINT" nl
-								  | "PLOT"  nl
-								  | ¨WAIT¨  nl
-								  | "AS" variable nl
-							      | "DO" nl {statement} nl "END" nl
-								  | "GOTO" label nl
-								  |  nl )
+			| "PLOT"  nl
+			| ¨WAIT¨  nl
+			| "AS" variable nl
+			| "DO" nl {statement} nl "END" nl
+			| "GOTO" label nl
+			|  nl )
 
 
 expression ::=	(INTEGER | STRING | function | "`"function | variable | word)+
