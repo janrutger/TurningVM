@@ -20,12 +20,12 @@ statement  ::=  "LABEL" label nl
 
 
 			|   (expression | st) ( "PRINT" nl
-				| "PLOT"  nl
-				| ¨WAIT¨  nl
-				| "AS" variable nl
-				| "DO" nl {statement} nl "END" nl
-				| "GOTO" label nl
-				|  nl )
+					| "PLOT"  nl
+					| ¨WAIT¨  nl
+					| "AS" variable nl
+					| "DO" nl {statement} nl "END" nl
+					| "GOTO" label nl
+					|  nl )
 
 
 expression ::=	(INTEGER | STRING | function | "`"function | variable | word)+
