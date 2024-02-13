@@ -31,7 +31,7 @@ statement  ::=  "LABEL" label nl
 expression ::=	(INTEGER | STRING | function | "`"function | variable | word)+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'| 'DEPTH' | 'INPUT'|'RAWIN')
      	             		  
-label      ::=  STRING
+label      ::=  ident
 job        ::=  ident
 function   ::=  ident
 variable   ::=  ident
