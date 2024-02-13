@@ -16,7 +16,7 @@ statement  ::=  "LABEL" label nl
 
 		|   “QUEUE” <job> <nl>
 		|   “JOIN” <nl> 
-		|   “RESULT” <do> <nl>
+		|   “RESULT”  nl {statement} nl "END" nl
 
 
 		|   (expression | st) ( "PRINT" nl
