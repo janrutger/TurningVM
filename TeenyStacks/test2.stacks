@@ -1,1 +1,18 @@
+DEFINE
+    VALUE 15 eerste
+    VALUE 3 tweede
+
+    FUNCTION multi
+        eerste tweede *
+    END
+
+    FUNCTION mod
+        eerste tweede %
+    END
+
+END
+
+multi PRINT
+mod PRINT
 "hello world " `char2prtbuff `printbuff
+
