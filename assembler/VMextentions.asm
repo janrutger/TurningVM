@@ -118,3 +118,13 @@ ret
     :_0_repeat_end_isqrt
     loadm $L_isqrt
 ret
+
+
+@core 
+    speed 0
+    :loop_core
+        join
+        push 1
+        call @sleep
+    jump :loop_core
+ret

@@ -1,6 +1,6 @@
 @main
 settimer 0
-speed 50
+speed 10
 push 1
 storem $n
 push 'jobinput_job1'
@@ -49,5 +49,9 @@ ret
 @~job1
 loadm $n
 call @~twice
+storem $m
+loadm $m
+loadm $m
+call @mul
 storem $m
 done $m

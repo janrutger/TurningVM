@@ -7,6 +7,7 @@ DEFINE
 
     JOB job1 USE n
         n twice AS m
+        m m * AS m
     RETURN m
 END
 
@@ -21,6 +22,7 @@ END
     RESULT
         m PRINT 
     END
+    1 WAIT
 END
 
 "hello world " `char2prtbuff `printbuff
