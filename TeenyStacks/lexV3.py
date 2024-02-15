@@ -163,7 +163,7 @@ class Lexer:
             if keyword == None: # Identifier
                 token = Token(tokText, TokenType.IDENT)
             else:   # Keyword
-                if tokText in ['GCD','DUP','SWAP','OVER','DROP','INPUT','RAWIN']:
+                if tokText in ['GCD', 'DUP', 'SWAP', 'OVER', 'DROP', 'INPUT', 'RAWIN', 'DEPTH']:
                     token = Token(tokText, TokenType.WORD)
                 else:
                     token = Token(tokText, keyword)

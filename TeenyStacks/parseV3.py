@@ -147,16 +147,13 @@ class Parser:
                 while not self.checkToken(TokenType.RETURN):
                     self.statement()
                 self.match(TokenType.RETURN)
-                       
-                
-
-
-
+                if self.curToken.text in self.symbols:
+                    self.emitter.emitLine("done " + "$" + self.curToken.text)
+                    self.match(TokenType.IDENT)
+                else:
+                    self.abort("Referencing variable before assignment: " + self.curToken.text)
                 self.emitter.context = "program"
                 self.nl()
-
-
-
         if self.checkToken(TokenType.END):
             self.match(TokenType.END)
             self.nl()
@@ -222,6 +219,34 @@ class Parser:
                 self.nl()
             else:
                 self.abort("Already in use as a Variable " + self.curToken.text)
+        
+        # |   “QUEUE” <job> <nl>
+        elif self.checkToken(TokenType.QUEUE):
+            self.match(TokenType.QUEUE)
+            if self.curToken.text in self.jobs:
+                self.emitter.emitLine("push " + "'jobinput_" + self.curToken.text + "'")
+                self.emitter.emitLine("job " + "@~" + self.curToken.text)
+                self.match(TokenType.IDENT)
+                self.nl()
+
+		# |   “JOIN” <nl> 
+        elif self.checkToken(TokenType.JOIN):
+            self.emitter.emitLine("join")
+            self.match(TokenType.JOIN)
+            self.nl()
+
+		# |   “RESULT”  nl {statement} nl "END" nl
+        elif self.checkToken(TokenType.RESULT):
+            num = self.LabelNum()
+            self.match(TokenType.RESULT)
+            self.emitter.emitLine("result")
+            self.emitter.emitLine("jumpf " + ":_" + num + "_no_result")
+            self.nl()
+            while not self.checkToken(TokenType.END):
+                self.statement()
+            self.match(TokenType.END)
+            self.emitter.emitLine(":_" + num + "_no_result")
+            self.nl()
 
 
         # | "{" ({expression} | st) "}"   "REPEAT"   nl {statement} nl "END" nl	
@@ -383,6 +408,9 @@ class Parser:
             self.nextToken()
         elif self.curToken.text == 'RAWIN':
             self.emitter.emitLine("call @rawin")
+            self.nextToken()
+        elif self.curToken.text == 'DEPTH':
+            self.emitter.emitLine("pending")
             self.nextToken()
         else:
             self.abort("UNKOWN Operator word: " + self.curToken.text)

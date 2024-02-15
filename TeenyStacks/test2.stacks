@@ -1,27 +1,27 @@
 DEFINE
-    VALUE 15 eerste
-    VALUE 3 tweede
-    VALUE 4 n
+    VALUE 1 n
 
-    FUNCTION multi
-        eerste tweede *
-    END
-
-    FUNCTION mod
-        eerste tweede %
-    END
-
-    FUNCTION drie
-        1 AS eerste
-        2 AS tweede
+    FUNCTION twice
+        2 *
     END
 
     JOB job1 USE n
-
-
+        n twice AS m
+    RETURN m
 END
 
-multi PRINT
-mod PRINT
+
+{n 5 !=} REPEAT
+    QUEUE job1
+    n 1 + AS n
+END
+
+{DEPTH 0 !=} REPEAT
+    JOIN
+    RESULT
+        m PRINT 
+    END
+END
+
 "hello world " `char2prtbuff `printbuff
 

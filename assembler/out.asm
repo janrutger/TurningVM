@@ -1,49 +1,53 @@
 @main
 settimer 0
-speed 0
-push 1000
-storem $base
+speed 50
 push 1
-storem $deler
-push 0
-storem $sum
+storem $n
+push 'jobinput_job1'
+index $n
 :_0_condition_start
-loadm $deler
-loadm $base
-call @gt
+loadm $n
+push 5
+call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-loadm $sum
-push 10
-call @div
-call @plot
-loadm $base
-loadm $deler
-call @div
-loadm $sum
+push 'jobinput_job1'
+job @~job1
+loadm $n
+push 1
 call @plus
-storem $sum
-loadm $deler
-push 2
-call @plus
-storem $deler
-loadm $sum
-push 10
-call @div
-call @plot
-loadm $sum
-loadm $base
-loadm $deler
-call @div
-call @minus
-storem $sum
-loadm $deler
-push 2
-call @plus
-storem $deler
+storem $n
 jump :_0_condition_start
 :_0_repeat_end
+:_1_condition_start
+pending
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_1_repeat_end
+join
+result
+jumpf :_2_no_result
+loadm $m
+prt
+:_2_no_result
+jump :_1_condition_start
+:_1_repeat_end
+push 'hello\_world\_'
+call @char2prtbuff
+call @printbuff
 prttimer 0
 ret
+@~twice
+push 2
+call @mul
+ret
+@~job1
+loadm $n
+call @~twice
+storem $m
+done $m
