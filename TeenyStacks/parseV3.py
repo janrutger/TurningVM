@@ -8,7 +8,9 @@ class Parser:
         self.emitter = emitter
 
         self.symbols = set()    # All variables we have declared so far.
-        self.functions = set()  #jrk: All functions we have declared so far.
+        self.functions = set()  # jrk: All functions we have declared so far.
+        self.jobs = set()       # jrk: All jobs we have declared
+
         self.labelsDeclared = set() # Keep track of all labels declared
         self.labelsGotoed = set() # All labels goto'ed, so we know if they exist or not.
 
@@ -46,6 +48,10 @@ class Parser:
     def isComparisonOperator(self):
         return self.checkToken(TokenType.GT) or self.checkToken(TokenType.GTEQ) or self.checkToken(TokenType.LT) or self.checkToken(TokenType.LTEQ) or self.checkToken(TokenType.EQEQ) or self.checkToken(TokenType.NOTEQ)
 
+    # Returns true if symbol is not used yet
+    def isFreeSymbol(self):
+        return self.curToken.text not in self.symbols and self.curToken.text not in self.functions and self.curToken.text not in self.jobs
+
     def abort(self, message):
         sys.exit("Error. " + message)
 
@@ -64,7 +70,7 @@ class Parser:
 
         # Check is the source starts with the optional difinition block (DEFINE)
         # define     ::= "DEFINE" nl
-        if self.checkToken(TokenType.DEFINE):
+        if self.checkToken(TokenType.DEFINE) and self.checkPeek(TokenType.NEWLINE):
             self.match(TokenType.DEFINE)
             self.nl()
             self.defineBlock()
@@ -93,8 +99,8 @@ class Parser:
                 self.match(TokenType.VALUE)
                 self.emitter.headerLine("push " + str(0))
             # assign to
-            if self.curToken.text not in self.symbols and self.curToken.text not in self.functions:
-                    self.symbols.add(self.curToken.text)
+            if self.isFreeSymbol():
+                self.symbols.add(self.curToken.text)
             if self.curToken.text in self.symbols:
                 self.emitter.headerLine("storem " + "$" + self.curToken.text)
                 self.match(TokenType.IDENT)  
@@ -104,7 +110,7 @@ class Parser:
         # [ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
         while self.checkToken(TokenType.FUNCTION):
             self.match(TokenType.FUNCTION)
-            if self.curToken.text not in self.symbols and self.curToken.text not in self.functions:
+            if self.isFreeSymbol():
                 self.functions.add(self.curToken.text)
             if self.curToken.text in self.functions:
                 self.emitter.context = "functions"
@@ -120,6 +126,34 @@ class Parser:
             else:
                 self.abort("Already in use as a Variable: " + self.curToken.text)
         # [ ("JOB" job "USE" (variable) nl {statement} <nl> "RETURN" (variable) nl)+ ]
+        while self.checkToken(TokenType.JOB):
+            self.match(TokenType.JOB)
+            if self.isFreeSymbol():
+                self.jobs.add(self.curToken.text)
+            if self.curToken.text in self.jobs:
+                jobName = self.curToken.text
+                self.emitter.context = "functions"
+                self.emitter.emitLine("@~" + self.curToken.text)
+                self.match(TokenType.IDENT)
+                self.emitter.headerLine("push " + "'jobinput_" + jobName + "'")
+                self.match(TokenType.USE)
+                if self.curToken.text in self.symbols:
+                    self.emitter.headerLine("index " + "$" + self.curToken.text)
+                    self.match(TokenType.IDENT)
+                else:
+                    self.abort(
+                        "Referencing variable before assignment: " + self.curToken.text)
+                self.nl()
+                while not self.checkToken(TokenType.RETURN):
+                    self.statement()
+                self.match(TokenType.RETURN)
+                       
+                
+
+
+
+                self.emitter.context = "program"
+                self.nl()
 
 
 
@@ -173,7 +207,7 @@ class Parser:
         # | "DEFINE" ident nl {statement} nl "END" nl
         elif self.checkToken(TokenType.DEFINE):
             self.nextToken()
-            if self.curToken.text not in self.symbols and self.curToken.text not in self.functions:
+            if self.isFreeSymbol():
                 self.functions.add(self.curToken.text)
             if self.curToken.text in self.functions:
                 self.emitter.context = "functions"
@@ -240,7 +274,7 @@ class Parser:
                 self.nl()
             elif self.checkToken(TokenType.AS):
                 self.nextToken()
-                if self.curToken.text not in self.symbols and self.curToken.text not in self.functions:
+                if self.isFreeSymbol():
                     self.symbols.add(self.curToken.text)
                 if self.curToken.text in self.symbols:
                     self.emitter.emitLine("storem " + "$" + self.curToken.text)

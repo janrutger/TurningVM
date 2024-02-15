@@ -1,6 +1,7 @@
 DEFINE
     VALUE 15 eerste
     VALUE 3 tweede
+    VALUE 4 n
 
     FUNCTION multi
         eerste tweede *
@@ -9,6 +10,14 @@ DEFINE
     FUNCTION mod
         eerste tweede %
     END
+
+    FUNCTION drie
+        1 AS eerste
+        2 AS tweede
+    END
+
+    JOB job1 USE n
+
 
 END
 
