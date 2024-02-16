@@ -3,8 +3,8 @@ program    ::=	[(define)] {statement}
 
 define     ::= "DEFINE" nl
 		[ (("VALUE" [INTEGER] variable nl) )+ ]
-		[ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
-		[ ("JOB" job "USE" (variable) nl {statement} <nl> "RETURN" (variable) nl)+ ]
+		[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+		[ ("JOB" job "USE" (variable) nl {statement} nl "RETURN" (variable) nl)+ ]
 	"END" nl
 
 
@@ -14,8 +14,8 @@ statement  ::=  "LABEL" label nl
 		|   "DEFINE" function nl {statement} nl "END" nl
 		|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	
 
-		|   “QUEUE” <job> <nl>
-		|   “JOIN” <nl> 
+		|   “QUEUE” job nl
+		|   “JOIN” nl 
 		|   “RESULT”  nl {statement} nl "END" nl
 
 

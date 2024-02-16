@@ -12,16 +12,18 @@ DEFINE
 END
 
 
-{n 5 !=} REPEAT
+{n 50 !=} REPEAT
     QUEUE job1
     n 1 + AS n
 END
 
 {DEPTH 0 !=} REPEAT
-    JOIN
     RESULT
         m PRINT 
+        GOTO lus
     END
+    JOIN
+    LABEL lus
     1 WAIT
 END
 

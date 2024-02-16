@@ -1,13 +1,13 @@
 @main
 settimer 0
-speed 10
+speed 0
 push 1
 storem $n
 push 'jobinput_job1'
 index $n
 :_0_condition_start
 loadm $n
-push 5
+push 50
 call @neq
 loada
 testz
@@ -29,12 +29,16 @@ loada
 testz
 clra
 jumpf :_1_repeat_end
-join
 result
 jumpf :_2_no_result
 loadm $m
 prt
+jump :lus
 :_2_no_result
+join
+:lus
+push 1
+call @sleep
 jump :_1_condition_start
 :_1_repeat_end
 push 'hello\_world\_'
