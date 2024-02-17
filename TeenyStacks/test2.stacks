@@ -12,12 +12,23 @@ DEFINE
 END
 
 
-{n 50 !=} REPEAT
+
+FUNCTION hello
+    "hello world " `char2prtbuff `printbuff
+END
+
+
+
+{n 5 >} DO
     QUEUE job1
     n 1 + AS n
 END
+n 50 == DO 
+ QUEUE job1
+END
 
-{DEPTH 0 !=} REPEAT
+
+{DEPTH 0 !=} DO
     RESULT
         m PRINT 
         GOTO lus
@@ -27,5 +38,7 @@ END
     1 WAIT
 END
 
-"hello world " `char2prtbuff `printbuff
+hello
+
+
 

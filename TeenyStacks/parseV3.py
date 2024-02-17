@@ -201,8 +201,8 @@ class Parser:
             self.nextToken()
             self.nl()
 
-        # | "DEFINE" ident nl {statement} nl "END" nl
-        elif self.checkToken(TokenType.DEFINE):
+        # | ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl 
+        elif self.checkToken(TokenType.DEFINE) or self.checkToken(TokenType.FUNCTION): 
             self.nextToken()
             if self.isFreeSymbol():
                 self.functions.add(self.curToken.text)
@@ -248,8 +248,7 @@ class Parser:
             self.emitter.emitLine(":_" + num + "_no_result")
             self.nl()
 
-
-        # | "{" ({expression} | st) "}"   "REPEAT"   nl {statement} nl "END" nl	
+        # | "{" (expression | st) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl
         elif self.checkToken(TokenType.OPENC):
             num = self.LabelNum()
             self.emitter.emitLine(":_" + num + "_condition_start")
@@ -260,21 +259,23 @@ class Parser:
                 self.expression()
             self.match(TokenType.CLOSEC)
 
-            self.match(TokenType.REPEAT)
-            self.emitter.emitLine("loada")
-            self.emitter.emitLine("testz")
-            self.emitter.emitLine("clra")
-            self.emitter.emitLine("jumpf " + ":_" + num + "_repeat_end")
-            #self.nextToken()
-            self.nl()
-            while not self.checkToken(TokenType.END):
-                self.statement()
-                
-            self.emitter.emitLine("jump " + ":_" + num + "_condition_start")
-            self.emitter.emitLine(":_" + num + "_repeat_end")
-            #self.emitter.emitLine("clra")
-            self.match(TokenType.END)
-            self.nl()
+            #self.match(TokenType.REPEAT)
+            if self.checkToken(TokenType.REPEAT) or self.checkToken(TokenType.DO):
+                self.nextToken()
+                self.emitter.emitLine("loada")
+                self.emitter.emitLine("testz")
+                self.emitter.emitLine("clra")
+                self.emitter.emitLine("jumpf " + ":_" + num + "_repeat_end")
+                #self.nextToken()
+                self.nl()
+                while not self.checkToken(TokenType.END):
+                    self.statement()
+                    
+                self.emitter.emitLine("jump " + ":_" + num + "_condition_start")
+                self.emitter.emitLine(":_" + num + "_repeat_end")
+                #self.emitter.emitLine("clra")
+                self.match(TokenType.END)
+                self.nl()
 
         
         
