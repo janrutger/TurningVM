@@ -1,0 +1,44 @@
+DEFINE
+    VALUE 1000 offset
+    VALUE 1 x
+
+
+    JOB sine USE x 
+        180 x - x * AS u
+        4000 u * 40500 u - / AS y
+    RETURN y
+END
+
+FUNCTION QueJobs 
+	{x 180 !=} REPEAT
+        x PRINT
+
+        LABEL lus
+        RESULT
+            offset y + PLOT
+            GOTO lus
+        END
+        QUEUE sine
+        x 1 + AS x
+        
+    END
+END
+
+
+
+QueJobs
+{DEPTH 0 !=} DO
+    LABEL lus2
+    RESULT
+        offset y + PLOT
+        GOTO lus2
+    END
+END
+
+
+
+
+
+
+
+
