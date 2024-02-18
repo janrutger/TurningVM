@@ -19,13 +19,12 @@ END
 
 
 
-{n 5 >} DO
+{n 25 >} DO
     QUEUE job1
     n 1 + AS n
 END
-n 50 == DO 
- QUEUE job1
-END
+QUEUE job1
+
 
 
 {DEPTH 0 !=} DO

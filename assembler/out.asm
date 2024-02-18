@@ -5,70 +5,88 @@ push 1
 storem $n
 push 'jobinput_job1'
 index $n
-:_0_condition_start
+call @input
+storem $end
+:_1_condition_start
 loadm $n
-push 5
-call @gt
+loadm $end
+call @neq
 loada
 testz
 clra
-jumpf :_0_repeat_end
+jumpf :_1_repeat_end
 push 'jobinput_job1'
 job @~job1
+:lus
+result
+jumpf :_2_no_result
+loadm $m
+call @plot
+jump :lus
+:_2_no_result
 loadm $n
 push 1
 call @plus
 storem $n
-jump :_0_condition_start
-:_0_repeat_end
 loadm $n
-push 50
-call @eq
-loada
-testz
-clra
-jumpf :_1_do_end
-push 'jobinput_job1'
-job @~job1
-:_1_do_end
-:_2_condition_start
+prt
+jump :_1_condition_start
+:_1_repeat_end
+:_3_condition_start
 pending
 push 0
 call @neq
 loada
 testz
 clra
-jumpf :_2_repeat_end
+jumpf :_3_repeat_end
 result
-jumpf :_3_no_result
+jumpf :_4_no_result
 loadm $m
-prt
-jump :lus
-:_3_no_result
-join
-:lus
-push 1
-call @sleep
-jump :_2_condition_start
-:_2_repeat_end
-call @~hello
+call @plot
+:_4_no_result
+jump :_3_condition_start
+:_3_repeat_end
 prttimer 0
 ret
-@~twice
-push 2
+@~calc
+push 1
+push 8
+loadm $n
 call @mul
+call @plus
+call @isqrt
+push 1
+call @minus
+push 2
+call @div
+storem $m
+ret
+@~voorwaarde
+push 1
+loadm $m
+call @plus
+loadm $m
+call @mul
+push 2
+loadm $n
+call @mul
+call @mod
+push 0
+call @neq
 ret
 @~job1
-loadm $n
-call @~twice
-storem $m
+call @~calc
+:_0_condition_start
+call @~voorwaarde
+loada
+testz
+clra
+jumpf :_0_repeat_end
 loadm $m
-loadm $m
-call @mul
+push 1
+call @plus
 storem $m
+jump :_0_condition_start
+:_0_repeat_end
 done $m
-@~hello
-push 'hello\_world\_'
-call @char2prtbuff
-call @printbuff
-ret
