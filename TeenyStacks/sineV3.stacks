@@ -11,29 +11,45 @@ END
 
 FUNCTION QueJobs 
 	{x 180 !=} REPEAT
-        x PRINT
-
-        LABEL lus
-        RESULT
-            offset y + PLOT
-            GOTO lus
-        END
         QUEUE sine
         x 1 + AS x
-        
     END
 END
 
+FUNCTION AddResult
+    {DEPTH 0 !=} DO
+        LABEL lus2
+        RESULT
+            offset y + PLOT
+            GOTO lus2
+        END
+    JOIN
+    END
+    0 PLOT
+END
 
+FUNCTION SubResult
+    {DEPTH 0 !=} DO
+        LABEL lus1
+        RESULT
+            offset y - PLOT
+            GOTO lus1
+        END
+    JOIN
+    END  
+    0 PLOT 
+END
+
+
+0 PLOT
 
 QueJobs
-{DEPTH 0 !=} DO
-    LABEL lus2
-    RESULT
-        offset y + PLOT
-        GOTO lus2
-    END
-END
+AddResult
+
+1 AS x
+QueJobs
+SubResult
+
 
 
 

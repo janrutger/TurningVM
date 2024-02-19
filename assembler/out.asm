@@ -7,24 +7,14 @@ push 1
 storem $x
 push 'jobinput_sine'
 index $x
-call @~QueJobs
-:_2_condition_start
-pending
 push 0
-call @neq
-loada
-testz
-clra
-jumpf :_2_repeat_end
-result
-jumpf :_3_no_result
-loadm $offset
-loadm $y
-call @plus
 call @plot
-:_3_no_result
-jump :_2_condition_start
-:_2_repeat_end
+call @~QueJobs
+call @~AddResult
+push 1
+storem $x
+call @~QueJobs
+call @~SubResult
 prttimer 0
 ret
 @~sine
@@ -52,17 +42,6 @@ loada
 testz
 clra
 jumpf :_0_repeat_end
-loadm $x
-prt
-:lus
-result
-jumpf :_1_no_result
-loadm $offset
-loadm $y
-call @plus
-call @plot
-jump :lus
-:_1_no_result
 push 'jobinput_sine'
 job @~sine
 loadm $x
@@ -71,4 +50,52 @@ call @plus
 storem $x
 jump :_0_condition_start
 :_0_repeat_end
+ret
+@~AddResult
+:_1_condition_start
+pending
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_1_repeat_end
+:lus2
+result
+jumpf :_2_no_result
+loadm $offset
+loadm $y
+call @plus
+call @plot
+jump :lus2
+:_2_no_result
+join
+jump :_1_condition_start
+:_1_repeat_end
+push 0
+call @plot
+ret
+@~SubResult
+:_3_condition_start
+pending
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_3_repeat_end
+:lus1
+result
+jumpf :_4_no_result
+loadm $offset
+loadm $y
+call @minus
+call @plot
+jump :lus1
+:_4_no_result
+join
+jump :_3_condition_start
+:_3_repeat_end
+push 0
+call @plot
 ret
