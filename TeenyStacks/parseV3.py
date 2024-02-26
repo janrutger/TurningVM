@@ -273,6 +273,42 @@ class Parser:
             self.match(TokenType.END)
             self.emitter.emitLine(":_" + num + "_no_result")
             self.nl()
+        
+        # |   “WITH” array ("CLEAR" | (“EACH” | "COUNT") nl {statement} nl "END") nl
+        elif self.checkToken(TokenType.WITH):
+            self.match(TokenType.WITH)
+            if self.curToken.text not in self.arrays:
+                self.abort("Referencing variable before assignment: " + self.curToken.text)
+            array = self.curToken.text
+            self.match(TokenType.IDENT)
+            if self.checkToken(TokenType.CLEAR):
+                self.emitter.emitLine("array " + "*" + array)
+                self.match(TokenType.CLEAR)
+                self.nl()
+            if self.checkToken(TokenType.EACH):
+                num = self.LabelNum()
+                self.emitter.emitLine("push " + str(1))
+                self.emitter.emitLine("storem " + "$" + "_" + num + "_" + array)
+
+                self.emitter.emitLine(":_" + num + "_start_each")
+                self.emitter.emitLine("loadm " + "$" + "_" + num + "_" + array)
+                self.emitter.emitLine("readelm *" + array)
+                self.emitter.emitLine("jumpf " + ":_" + num + "_end_each")
+                self.match(TokenType.EACH)
+                self.nl()
+                while not self.checkToken(TokenType.END):
+                    self.statement()
+
+                self.emitter.emitLine("loadm " + "$" + "_" + num + "_" + array)
+                self.emitter.emitLine("loadb")
+                self.emitter.emitLine("incb")
+                self.emitter.emitLine("storeb")
+                self.emitter.emitLine("storem " + "$" + "_" + num + "_" + array)
+
+                self.emitter.emitLine("jump " + ":_" + num + "_start_each")
+                self.emitter.emitLine(":_" + num + "_end_each")
+                self.match(TokenType.END)
+                self.nl()
 
         # | "{" (expression | st) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl
         elif self.checkToken(TokenType.OPENC):
@@ -293,14 +329,12 @@ class Parser:
                 self.emitter.emitLine("testz")
                 self.emitter.emitLine("clra")
                 self.emitter.emitLine("jumpf " + ":_" + num + "_repeat_end")
-                #self.nextToken()
                 self.nl()
                 while not self.checkToken(TokenType.END):
                     self.statement()
                     
                 self.emitter.emitLine("jump " + ":_" + num + "_condition_start")
                 self.emitter.emitLine(":_" + num + "_repeat_end")
-                #self.emitter.emitLine("clra")
                 self.match(TokenType.END)
                 self.nl()
 

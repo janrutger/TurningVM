@@ -2,107 +2,82 @@
 settimer 0
 speed 0
 push 0
-storem $offset
-push 1000
-storem $offset
+storem $n
 push 0
 storem $x
-push 1
+push 2
 storem $x
-push 'jobinput_sine'
-index $x
-push 0
-call @plot
-call @~QueJobs
-call @~AddResult
+array *A1
+push 3
+storem *A1
+push 5
+storem *A1
+push 6
+storem *A1
+array *A2
+array *A3
+loadm $n
+prt
+loadm $x
+prt
+loadm *A1
+prt
+loadm *A2
+prt
 push 1
-storem $x
-call @~QueJobs
-call @~SubResult
-prttimer 0
-ret
-@~stepX
-loadm $x
+prt
 push 1
-call @plus
-storem $x
-loadm $x
-ret
-@~sine
-push 180
-loadm $x
-call @minus
-loadm $x
-call @mul
-storem $u
-push 4000
-loadm $u
-call @mul
-push 40500
-loadm $u
-call @minus
-call @div
+readelm *A1
+jumpt :_0_readelm_done
+call @__illegal_Array_Index
+:_0_readelm_done
+prt
+push 2
+readelm *A1
+jumpt :_1_readelm_done
+call @__illegal_Array_Index
+:_1_readelm_done
+prt
+push 3
+readelm *A1
+jumpt :_2_readelm_done
+call @__illegal_Array_Index
+:_2_readelm_done
+prt
+push 55
 storem $y
-done $y
-@~QueJobs
-:_0_condition_start
-call @~stepX
-push 180
-call @neq
-loada
-testz
-clra
-jumpf :_0_repeat_end
-push 'jobinput_sine'
-job @~sine
-jump :_0_condition_start
-:_0_repeat_end
-ret
-@~AddResult
-:_1_condition_start
-pending
-push 0
-call @neq
-loada
-testz
-clra
-jumpf :_1_repeat_end
-:lus2
-result
-jumpf :_2_no_result
-loadm $offset
 loadm $y
-call @plus
-call @plot
-jump :lus2
-:_2_no_result
-join
-jump :_1_condition_start
-:_1_repeat_end
-push 0
-call @plot
-ret
-@~SubResult
-:_3_condition_start
-pending
-push 0
-call @neq
-loada
-testz
-clra
-jumpf :_3_repeat_end
-:lus1
-result
-jumpf :_4_no_result
-loadm $offset
-loadm $y
-call @minus
-call @plot
-jump :lus1
-:_4_no_result
-join
-jump :_3_condition_start
-:_3_repeat_end
-push 0
-call @plot
+prt
+push 22
+storem *A2
+loadm *A2
+prt
+push 33
+storem *A3
+loadm *A3
+readelm *A3
+jumpt :_3_readelm_done
+call @__illegal_Array_Index
+:_3_readelm_done
+prt
+array *A2
+loadm *A2
+prt
+push 1
+storem $_4_A1
+:_4_start_each
+loadm $_4_A1
+readelm *A1
+jumpf :_4_end_each
+call @dup
+call @mul
+prt
+loadm $_4_A1
+loadb
+incb
+storeb
+storem $_4_A1
+jump :_4_start_each
+:_4_end_each
+prttimer 0
 ret

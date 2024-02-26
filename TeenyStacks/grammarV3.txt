@@ -3,7 +3,8 @@ program    ::=	[(define)] {statement}
 
 
 define     ::= "DEFINE" nl
-				[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+				[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+				[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
 				[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
 				"END" nl
 

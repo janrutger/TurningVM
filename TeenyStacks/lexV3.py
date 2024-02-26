@@ -240,6 +240,11 @@ class TokenType(enum.Enum):
     RESULT = 133
     DEPTH = 134
     ARRAY = 135
+    WITH = 136
+    CLEAR = 137
+    EACH = 138
+    COUNT = 139
+    IN = 140
 
     #
     PLUS = 201
