@@ -2,6 +2,10 @@ DEFINE
     VALUE 1000 offset
     VALUE 1 x
 
+    FUNCTION stepX
+        x 1 + AS x 
+        x 
+    END
 
     JOB sine USE x 
         180 x - x * AS u
@@ -10,9 +14,8 @@ DEFINE
 END
 
 FUNCTION QueJobs 
-	{x 180 !=} REPEAT
+	{stepX 180 !=} REPEAT
         QUEUE sine
-        x 1 + AS x
     END
 END
 
@@ -23,7 +26,7 @@ FUNCTION AddResult
             offset y + PLOT
             GOTO lus2
         END
-    JOIN
+        JOIN
     END
     0 PLOT
 END
@@ -35,7 +38,7 @@ FUNCTION SubResult
             offset y - PLOT
             GOTO lus1
         END
-    JOIN
+        JOIN
     END  
     0 PLOT 
 END

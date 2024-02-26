@@ -17,6 +17,13 @@ call @~QueJobs
 call @~SubResult
 prttimer 0
 ret
+@~stepX
+loadm $x
+push 1
+call @plus
+storem $x
+loadm $x
+ret
 @~sine
 push 180
 loadm $x
@@ -35,7 +42,7 @@ storem $y
 done $y
 @~QueJobs
 :_0_condition_start
-loadm $x
+call @~stepX
 push 180
 call @neq
 loada
@@ -44,10 +51,6 @@ clra
 jumpf :_0_repeat_end
 push 'jobinput_sine'
 job @~sine
-loadm $x
-push 1
-call @plus
-storem $x
 jump :_0_condition_start
 :_0_repeat_end
 ret
