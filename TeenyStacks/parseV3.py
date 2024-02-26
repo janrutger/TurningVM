@@ -302,7 +302,7 @@ class Parser:
                 self.emitter.emitLine("loadm " + "$" + "_" + num + "_" + array)
                 self.emitter.emitLine("loadb")
                 self.emitter.emitLine("incb")
-                self.emitter.emitLine("storeb")
+                self.emitter.emitLine("moveb")
                 self.emitter.emitLine("storem " + "$" + "_" + num + "_" + array)
 
                 self.emitter.emitLine("jump " + ":_" + num + "_start_each")

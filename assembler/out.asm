@@ -75,7 +75,7 @@ prt
 loadm $_4_A1
 loadb
 incb
-storeb
+moveb
 storem $_4_A1
 jump :_4_start_each
 :_4_end_each
