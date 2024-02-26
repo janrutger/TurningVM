@@ -1,0 +1,17 @@
+DEFINE
+    ARRAY array [3 5 9]
+END
+
+
+INPUT AS zoek
+
+WITH array EACH
+    DUP zoek == GOTO found
+    DROP
+END
+GOTO notfound
+
+LABEL found
+. PRINT
+
+LABEL notfound

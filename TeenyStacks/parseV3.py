@@ -187,7 +187,7 @@ class Parser:
             self.abort("Wrong keyword VALUE/FUNCTION/JOB allowd or missing END statement: " + self.curToken.text)
 
     # statement  ::=  
-        # One of the following statements...
+    # One of the following statements...
     def statement(self):
         print("STATEMENT")
         # Check the first token to see what kind of statement this is.
@@ -274,7 +274,7 @@ class Parser:
             self.emitter.emitLine(":_" + num + "_no_result")
             self.nl()
         
-        # |   “WITH” array ("CLEAR" | (“EACH” | "COUNT") nl {statement} nl "END") nl
+        # |   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END") nl
         elif self.checkToken(TokenType.WITH):
             self.match(TokenType.WITH)
             if self.curToken.text not in self.arrays:
@@ -397,6 +397,9 @@ class Parser:
                 self.match(TokenType.END)
                 self.emitter.emitLine(":_" + num + "_do_end")
                 self.nl()
+
+            
+
             elif self.checkToken(TokenType.GOTO):
                 num = self.LabelNum()
                 self.nextToken()
