@@ -1,43 +1,31 @@
 DEFINE
-    VALUE 1 n
+    VALUE n 
+    VALUE x 2
 
-    FUNCTION twice
-        2 *
-    END
+    ARRAY A1 [3 5 6]
+    ARRAY A2
 
-    JOB job1 USE n
-        n twice AS m
-        m m * AS m
-    RETURN m
 END
 
+n PRINT
+x PRINT
+
+A1 PRINT
+A2 PRINT
+
+1 PRINT
+
+1 [A1] PRINT
+2 [A1] PRINT
+3 [A1] PRINT
+
+55 AS y
+y PRINT
+
+22 AS [A2]
+A2 PRINT
 
 
-FUNCTION hello
-    "hello world " `char2prtbuff `printbuff
-END
-
-
-
-{n 25 >} DO
-    QUEUE job1
-    n 1 + AS n
-END
-QUEUE job1
-
-
-
-{DEPTH 0 !=} DO
-    RESULT
-        m PRINT 
-        GOTO lus
-    END
-    JOIN
-    LABEL lus
-    1 WAIT
-END
-
-hello
-
-
+33 AS [A3]
+A3 [A3] PRINT
 

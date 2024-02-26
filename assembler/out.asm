@@ -1,8 +1,12 @@
 @main
 settimer 0
 speed 0
+push 0
+storem $offset
 push 1000
 storem $offset
+push 0
+storem $x
 push 1
 storem $x
 push 'jobinput_sine'

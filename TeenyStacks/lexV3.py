@@ -239,6 +239,7 @@ class TokenType(enum.Enum):
     JOIN = 132
     RESULT = 133
     DEPTH = 134
+    ARRAY = 135
 
     #
     PLUS = 201

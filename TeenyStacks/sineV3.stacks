@@ -1,6 +1,6 @@
 DEFINE
-    VALUE 1000 offset
-    VALUE 1 x
+    VALUE offset 1000
+    VALUE x 1
 
     FUNCTION stepX
         x 1 + AS x 

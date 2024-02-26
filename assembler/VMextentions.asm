@@ -128,3 +128,11 @@ ret
         call @sleep
     jump :loop_core
 ret
+
+
+
+@__illegal_Array_Index
+    push 'Illegal\_INDEX\_error\_'
+    call @char2prtbuff
+    call @printbuff
+halt

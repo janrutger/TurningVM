@@ -8,6 +8,7 @@ class Parser:
         self.emitter = emitter
 
         self.symbols = set()    # All variables we have declared so far.
+        self.arrays = set()     # jrk: All arrayes we have declared so far.
         self.functions = set()  # jrk: All functions we have declared so far.
         self.jobs = set()       # jrk: All jobs we have declared
 
@@ -50,7 +51,7 @@ class Parser:
 
     # Returns true if symbol is not used yet
     def isFreeSymbol(self):
-        return self.curToken.text not in self.symbols and self.curToken.text not in self.functions and self.curToken.text not in self.jobs
+        return self.curToken.text not in self.symbols and self.curToken.text not in self.functions and self.curToken.text not in self.jobs and self.curToken.text not in self.arrays
 
     def abort(self, message):
         sys.exit("Error. " + message)
@@ -89,24 +90,48 @@ class Parser:
                 self.abort("Attempting to GOTO to undeclared label: " + label)
 
     def defineBlock(self):
-        # [ (("VALUE" [INTEGER] variable nl) )+ ]
-        while self.checkToken(TokenType.VALUE):
-            if self.checkPeek(TokenType.NUMBER): #init with number
+        # [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
+        while self.checkToken(TokenType.VALUE) or self.checkToken(TokenType.ARRAY):
+
+            if self.checkToken(TokenType.VALUE):
                 self.match(TokenType.VALUE)
-                self.emitter.headerLine("push " + self.curToken.text)
-                self.match(TokenType.NUMBER)
-            else: #init with 0
-                self.match(TokenType.VALUE)
-                self.emitter.headerLine("push " + str(0))
-            # assign to
-            if self.isFreeSymbol():
-                self.symbols.add(self.curToken.text)
-            if self.curToken.text in self.symbols:
-                self.emitter.headerLine("storem " + "$" + self.curToken.text)
-                self.match(TokenType.IDENT)  
+                if self.isFreeSymbol():
+                    self.symbols.add(self.curToken.text)
+                if self.curToken.text in self.symbols:
+                    self.emitter.headerLine("push " + str(0))
+                    self.emitter.headerLine("storem " + "$" + self.curToken.text)
+                    var = self.curToken.text
+                    self.match(TokenType.IDENT)
+                else:
+                    self.abort("Already in use as Function: " + self.curToken.text)
+
+                if self.checkToken(TokenType.NUMBER):
+                    self.emitter.headerLine("push " + self.curToken.text)
+                    self.emitter.headerLine("storem " + "$" + var)
+                    self.match(TokenType.NUMBER)
                 self.nl()
-            else:
-                self.abort("Already in use, but this is verry strange at this point: " + self.curToken.text)
+
+            elif self.checkToken(TokenType.ARRAY):
+                self.match(TokenType.ARRAY)
+                if self.isFreeSymbol():
+                    self.arrays.add(self.curToken.text)
+                if self.curToken.text in self.arrays:
+                    self.emitter.headerLine("array " + "*" + self.curToken.text)
+                    arr = self.curToken.text
+                    self.match(TokenType.IDENT)
+                else:
+                    self.abort("Already in use as Variable: " + self.curToken.text)
+                
+                if self.checkToken(TokenType.OPENBL):
+                    self.match(TokenType.OPENBL)
+                    while self.checkToken(TokenType.NUMBER):
+                        self.emitter.headerLine("push " + self.curToken.text)
+                        self.emitter.headerLine("storem " + "*" + arr)
+                        self.match(TokenType.NUMBER)
+                    self.match(TokenType.CLOSEBL)
+                self.nl()
+
+
         # [ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
         while self.checkToken(TokenType.FUNCTION):
             self.match(TokenType.FUNCTION)
@@ -125,6 +150,7 @@ class Parser:
                 self.nl()
             else:
                 self.abort("Already in use as a Variable: " + self.curToken.text)
+
         # [ ("JOB" job "USE" (variable) nl {statement} <nl> "RETURN" (variable) nl)+ ]
         while self.checkToken(TokenType.JOB):
             self.match(TokenType.JOB)
@@ -229,13 +255,13 @@ class Parser:
                 self.match(TokenType.IDENT)
                 self.nl()
 
-		# |   “JOIN” <nl> 
+        # |  “JOIN” <nl> 
         elif self.checkToken(TokenType.JOIN):
             self.emitter.emitLine("join")
             self.match(TokenType.JOIN)
             self.nl()
 
-		# |   “RESULT”  nl {statement} nl "END" nl
+        # |   “RESULT”  nl {statement} nl "END" nl
         elif self.checkToken(TokenType.RESULT):
             num = self.LabelNum()
             self.match(TokenType.RESULT)
@@ -252,11 +278,12 @@ class Parser:
         elif self.checkToken(TokenType.OPENC):
             num = self.LabelNum()
             self.emitter.emitLine(":_" + num + "_condition_start")
-            self.nextToken()  
-            if self.checkToken(TokenType.DOT) or self.checkToken(TokenType.DDOT):
-                self.st()
-            else:
-                self.expression()
+            self.nextToken()  #(removing dot and double dot functions V3)
+            # if self.checkToken(TokenType.DOT) or self.checkToken(TokenType.DDOT):
+            #     self.st()
+            # else:
+            #     self.expression()
+            self.expression()
             self.match(TokenType.CLOSEC)
 
             #self.match(TokenType.REPEAT)
@@ -298,16 +325,31 @@ class Parser:
                 self.emitter.emitLine("call @sleep")
                 self.nextToken()
                 self.nl()
+            # | "AS" (variable | '['array']') nl
             elif self.checkToken(TokenType.AS):
                 self.nextToken()
-                if self.isFreeSymbol():
-                    self.symbols.add(self.curToken.text)
-                if self.curToken.text in self.symbols:
-                    self.emitter.emitLine("storem " + "$" + self.curToken.text)
-                    self.match(TokenType.IDENT)  
-                    self.nl()
+                if self.checkToken(TokenType.IDENT):
+                    if self.isFreeSymbol():
+                        self.symbols.add(self.curToken.text)
+                    if self.curToken.text in self.symbols:
+                        self.emitter.emitLine("storem " + "$" + self.curToken.text)
+                        self.match(TokenType.IDENT)  
+                        self.nl()
+                    else:
+                        self.abort("Already in use as a Function " + self.curToken.text)
                 else:
-                    self.abort("Already in use as a Function " + self.curToken.text)
+                    self.match(TokenType.OPENBL)
+                    if self.isFreeSymbol():
+                        self.arrays.add(self.curToken.text)
+                        self.emitter.headerLine("array " + "*" + self.curToken.text)
+                    if self.curToken.text in self.arrays:
+                        self.emitter.emitLine("storem " + "*" + self.curToken.text)
+                        self.match(TokenType.IDENT)  
+                        self.match(TokenType.CLOSEBL)
+                        self.nl()
+                    else:
+                        self.abort("Already in use as a Variable " + self.curToken.text)
+
             elif self.checkToken(TokenType.DO):
                 num = self.LabelNum()
                 self.nextToken()
@@ -320,7 +362,6 @@ class Parser:
                     self.statement()
                 self.match(TokenType.END)
                 self.emitter.emitLine(":_" + num + "_do_end")
-                #self.emitter.emitLine("clra")
                 self.nl()
             elif self.checkToken(TokenType.GOTO):
                 num = self.LabelNum()
@@ -331,15 +372,14 @@ class Parser:
                 self.emitter.emitLine("jumpf " + ":_" + num + "_goto_end")
                 self.emitter.emitLine("jump " + ":" + self.curToken.text)
                 self.emitter.emitLine(":_" + num + "_goto_end")
-                #self.emitter.emitLine("clra")
                 self.match(TokenType.IDENT)  
                 self.nl()   
             else:
                 self.nl()
 
-    # expression ::= INTEGER | STRING | "`" ident "`" | ident | word
+    # expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
     def expression(self):
-        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD):
+        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL):
             if self.checkToken(TokenType.NUMBER):
                 self.emitter.emitLine("push " + self.curToken.text)
                 self.nextToken()
@@ -350,7 +390,18 @@ class Parser:
                 self.nextToken()
                 self.emitter.emitLine("call " + "@" + self.curToken.text)
                 self.match(TokenType.IDENT)
-                #self.match(TokenType.BT)
+            elif self.checkToken(TokenType.OPENBL):
+                self.nextToken()
+                num = self.LabelNum()
+                if self.curToken.text in self.arrays:
+                    self.emitter.emitLine("readelm " + "*" + self.curToken.text)
+                    self.emitter.emitLine("jumpt " + ":_" + num + "_readelm_done")
+                    self.emitter.emitLine("call " + "@__illegal_Array_Index")
+                    self.emitter.emitLine(":_" + num + "_readelm_done")
+                    self.match(TokenType.IDENT)
+                    self.match(TokenType.CLOSEBL)
+                else:
+                    self.abort("Referencing variable before assignment: " + self.curToken.text)
             elif self.checkToken(TokenType.IDENT):
                 self.ident()
             else:  #Must be an word
@@ -421,13 +472,12 @@ class Parser:
     def ident(self):
         if self.curToken.text in self.symbols:
             self.emitter.emitLine("loadm " + "$" + self.curToken.text)
+        elif self.curToken.text in self.arrays:
+            self.emitter.emitLine("loadm " + "*" + self.curToken.text)
         elif self.curToken.text in self.functions:
             self.emitter.emitLine("call " + "@~" + self.curToken.text)
         else:
             self.abort("Referencing variable before assignment: " + self.curToken.text)
-
-        
-
         self.nextToken()
 
     # st ::= ('.'|'..')
@@ -436,7 +486,6 @@ class Parser:
             self.emitter.emitLine("call @dup") #duplicate Top Off Stack
         else:
             pass #use Top Off Stack
-
         self.nextToken()
 
     
