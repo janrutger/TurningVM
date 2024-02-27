@@ -1,41 +1,27 @@
 DEFINE
-    VALUE n 
-    VALUE x 2
-
     ARRAY A1 [3 5 6]
-    ARRAY A2
+
+
+    JOB test USE A1
+        ARRAY A2
+        WITH A1 EACH
+            DUP * AS [A2]
+        END
+    RETURN A2
 
 END
 
-n PRINT
-x PRINT
-
-A1 PRINT
-A2 PRINT
-
-1 PRINT
-
-1 [A1] PRINT
-2 [A1] PRINT
-3 [A1] PRINT
-
-55 AS y
-y PRINT
-
-22 AS [A2]
-A2 PRINT
+QUEUE test
 
 
-33 AS [A3]
-A3 [A3] PRINT
 
-WITH A2 CLEAR
-A2 PRINT
-
-WITH A1 EACH
-    DUP * PRINT
+LABEL getResult
+RESULT 
+    WITH A2 EACH
+        . PRINT
     END
+    GOTO klaar
+END
+GOTO getResult
 
-    
-
-
+LABEL klaar

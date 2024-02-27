@@ -197,7 +197,7 @@ class MMU:
                 self.virtMemAdresses[adres] = len(self.memory)
                 self.memory.append(("MEM", memVal))
             else:
-                self.panic("FATAL: WriteMem [unknown adres/invalid memtype]")
+                self.panic("FATAL: WriteMem [unknown adres/invalid memtype]" + adres)
 
 
     def makeStack(self, memType, adres):

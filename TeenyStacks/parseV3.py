@@ -151,7 +151,7 @@ class Parser:
             else:
                 self.abort("Already in use as a Variable: " + self.curToken.text)
 
-        # [ ("JOB" job "USE" (variable) nl {statement} <nl> "RETURN" (variable) nl)+ ]
+        # [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
         while self.checkToken(TokenType.JOB):
             self.match(TokenType.JOB)
             if self.isFreeSymbol():
@@ -166,6 +166,9 @@ class Parser:
                 if self.curToken.text in self.symbols:
                     self.emitter.headerLine("index " + "$" + self.curToken.text)
                     self.match(TokenType.IDENT)
+                elif self.curToken.text in self.arrays:
+                    self.emitter.headerLine("index " + "*" + self.curToken.text)
+                    self.match(TokenType.IDENT)            
                 else:
                     self.abort(
                         "Referencing variable before assignment: " + self.curToken.text)
@@ -176,6 +179,9 @@ class Parser:
                 if self.curToken.text in self.symbols:
                     self.emitter.emitLine("done " + "$" + self.curToken.text)
                     self.match(TokenType.IDENT)
+                elif self.curToken.text in self.arrays:
+                    self.emitter.emitLine("done " + "*" + self.curToken.text)
+                    self.match(TokenType.IDENT)  
                 else:
                     self.abort("Referencing variable before assignment: " + self.curToken.text)
                 self.emitter.context = "program"
@@ -245,6 +251,28 @@ class Parser:
                 self.nl()
             else:
                 self.abort("Already in use as a Variable " + self.curToken.text)
+
+       	# |   "ARRAY" array['['(INTEGER)+']'] nl
+        elif self.checkToken(TokenType.ARRAY):
+            self.match(TokenType.ARRAY)
+            if self.isFreeSymbol():
+                self.arrays.add(self.curToken.text)
+            if self.curToken.text in self.arrays:
+                self.emitter.emitLine(
+                    "array " + "*" + self.curToken.text)
+                arr = self.curToken.text
+                self.match(TokenType.IDENT)
+            else:
+                self.abort("Already in use as Variable: " + self.curToken.text)
+
+            if self.checkToken(TokenType.OPENBL):
+                self.match(TokenType.OPENBL)
+                while self.checkToken(TokenType.NUMBER):
+                    self.emitter.emitLine("push " + self.curToken.text)
+                    self.emitter.emitLine("storem " + "*" + arr)
+                    self.match(TokenType.NUMBER)
+                self.match(TokenType.CLOSEBL)
+            self.nl()
         
         # |   “QUEUE” <job> <nl>
         elif self.checkToken(TokenType.QUEUE):
@@ -398,7 +426,7 @@ class Parser:
                 self.emitter.emitLine(":_" + num + "_do_end")
                 self.nl()
 
-            
+
 
             elif self.checkToken(TokenType.GOTO):
                 num = self.LabelNum()

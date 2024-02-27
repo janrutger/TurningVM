@@ -13,16 +13,15 @@ statement  ::=  "LABEL" label nl
 			|   "GOTO"  label nl
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
 			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
-			|   "{" (expression | st) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
+			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
 			|   “QUEUE” job nl
 			|   “JOIN” nl 
 			|   “RESULT”  nl {statement} nl "END" nl
-			|   “WITH” array ("CLEAR" | (“EACH” | "COUNT") nl {statement} nl "END") nl
+			|   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END") nl
 			|   (expression | st) ( "PRINT" nl
 									| "PLOT"  nl
 									| ¨WAIT¨  nl
 									| "AS" (variable | '['array']') nl
-									| "IN" array nl {statement} nl "END" nl
 									| "DO" nl {statement} nl "END" nl
 									| "GOTO" label nl
 									|  nl )
