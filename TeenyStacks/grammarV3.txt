@@ -13,6 +13,7 @@ statement  ::=  "LABEL" label nl
 			|   "GOTO"  label nl
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
 			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
+			|   "ARRAY" array ['['(INTEGER)+']'] nl
 			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
 			|   “QUEUE” job nl
 			|   “JOIN” nl 
