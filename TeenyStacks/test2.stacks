@@ -1,14 +1,12 @@
 DEFINE
     ARRAY A1 [3 5 6]
 
-
     JOB test USE A1
         ARRAY A2
         WITH A1 EACH
             DUP * AS [A2]
         END
     RETURN A2
-
 END
 
 QUEUE test

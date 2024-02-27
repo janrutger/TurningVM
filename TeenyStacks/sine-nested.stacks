@@ -1,0 +1,40 @@
+DEFINE
+    VALUE offset 1000
+    VALUE x 1
+    VALUE y 
+
+    FUNCTION stepX
+        x 1 + AS x 
+        x
+    END
+
+    JOB sine USE x 
+        180 x - x * AS u
+        4000 u * 40500 u - / AS y
+    RETURN y
+
+    JOB makeTable USE x 
+        {stepX 180 !=} REPEAT
+            QUEUE sine
+        END
+
+        ARRAY table [0]
+
+        {DEPTH 0 !=} DO
+            RESULT
+                y AS [table]
+            END
+        END
+    RETURN table
+END
+
+
+QUEUE makeTable
+
+{DEPTH 1 ==} DO
+    RESULT
+        table PRINT
+    END
+END
+
+table PRINT

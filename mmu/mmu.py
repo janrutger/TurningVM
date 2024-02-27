@@ -264,7 +264,7 @@ class MMU:
                 else:
                     self.panic("FATAL: peek [unknown memtype]")
             else:
-                self.panic("FATAL: peek [unknown adress]")
+                self.panic("FATAL: peek [unknown adress] " + adres)
 
     def poke(self, pokeVal):
         if pokeVal[0] not in self.virtMemAdresses.keys():

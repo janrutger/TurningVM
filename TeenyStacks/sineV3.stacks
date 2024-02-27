@@ -4,7 +4,7 @@ DEFINE
 
     FUNCTION stepX
         x 1 + AS x 
-        x 
+        x
     END
 
     JOB sine USE x 

@@ -1,5 +1,5 @@
 DEFINE 
-    VALUE 1 n
+    VALUE  n 1
 
     FUNCTION calc
         1 8 n * + `isqrt 1 - 2 / AS m 
