@@ -13,7 +13,7 @@ END
 
 QUEUE test
 
-
+JOIN
 
 LABEL getResult
 RESULT 
@@ -25,3 +25,20 @@ END
 GOTO getResult
 
 LABEL klaar
+
+
+
+
+0 AS n
+
+FUNCTION step
+    n
+    n 1 + AS n 
+END
+
+ARRAY A3 [4 8 16]
+ARRAY A4 [3 6 9]
+
+{A3 step <} DO
+    n [A3] n [A4] * PRINT
+END
