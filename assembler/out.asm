@@ -1,15 +1,26 @@
 @main
 settimer 0
-speed 100
+speed 0
 push 'jobinput_makeTable'
 job @~makeTable
+push 1
+call @sleep
+:_3_condition_start
 pending
-prt
-join
-pending
-prt
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_3_repeat_end
+result
+jumpf :_4_no_result
 loadm *table
 prt
+:_4_no_result
+join
+jump :_3_condition_start
+:_3_repeat_end
 prttimer 0
 ret
 @~stepX
@@ -38,7 +49,7 @@ done $y
 @~makeTable
 :_0_condition_start
 call @~stepX
-push 5
+push 18
 call @neq
 loada
 testz
@@ -71,7 +82,7 @@ push 1000
 storem $offset
 push 0
 storem $x
-push 1
+push 0
 storem $x
 push 0
 storem $y

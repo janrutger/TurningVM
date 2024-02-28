@@ -124,8 +124,8 @@ ret
     speed 0
     :loop_core
         join
-        #push 1
-        #call @sleep
+        push 1
+        call @sleep
     jump :loop_core
 ret
 

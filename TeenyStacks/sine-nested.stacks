@@ -1,6 +1,6 @@
 DEFINE
     VALUE offset 1000
-    VALUE x 1
+    VALUE x 0
     VALUE y 
     ARRAY table [0]
 
@@ -29,14 +29,12 @@ END
 
 
 QUEUE makeTable
-DEPTH PRINT 
-JOIN
-DEPTH PRINT 
+1 WAIT
 
-#{DEPTH 1 ==} DO
-#    RESULT
-#        table PRINT
-#    END
-#END
+{DEPTH 0 !=} DO
+    RESULT
+        table PRINT
+    END
+    JOIN
+END
 
-table PRINT
