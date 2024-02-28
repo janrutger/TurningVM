@@ -17,6 +17,7 @@ nop
     output %_plotter
     iobuff %_kbd
     iobuff %_display
+    call @__MemAllocGlobels
 
     push 75
     storem $_aRandom

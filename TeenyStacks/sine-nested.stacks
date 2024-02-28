@@ -2,6 +2,7 @@ DEFINE
     VALUE offset 1000
     VALUE x 1
     VALUE y 
+    ARRAY table [0]
 
     FUNCTION stepX
         x 1 + AS x 
@@ -14,11 +15,9 @@ DEFINE
     RETURN y
 
     JOB makeTable USE x 
-        {stepX 180 !=} REPEAT
+        {stepX 18 !=} REPEAT
             QUEUE sine
         END
-
-        ARRAY table [0]
 
         {DEPTH 0 !=} DO
             RESULT
@@ -30,11 +29,14 @@ END
 
 
 QUEUE makeTable
+DEPTH PRINT 
+JOIN
+DEPTH PRINT 
 
-{DEPTH 1 ==} DO
-    RESULT
-        table PRINT
-    END
-END
+#{DEPTH 1 ==} DO
+#    RESULT
+#        table PRINT
+#    END
+#END
 
 table PRINT

@@ -124,8 +124,8 @@ ret
     speed 0
     :loop_core
         join
-        push 1
-        call @sleep
+        #push 1
+        #call @sleep
     jump :loop_core
 ret
 
@@ -133,6 +133,12 @@ ret
 
 @__illegal_Array_Index
     push 'Illegal\_INDEX\_error\_'
+    call @char2prtbuff
+    call @printbuff
+halt
+
+@__MemAllocGlobels
+    push 'No\_globel\_mem\_config\_found'
     call @char2prtbuff
     call @printbuff
 halt

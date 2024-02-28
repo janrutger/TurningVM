@@ -91,23 +91,23 @@ class Parser:
 
     def defineBlock(self):
         # [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
+        self.emitter.memLine("@__MemAllocGlobels")
         while self.checkToken(TokenType.VALUE) or self.checkToken(TokenType.ARRAY):
-
             if self.checkToken(TokenType.VALUE):
                 self.match(TokenType.VALUE)
                 if self.isFreeSymbol():
                     self.symbols.add(self.curToken.text)
                 if self.curToken.text in self.symbols:
-                    self.emitter.headerLine("push " + str(0))
-                    self.emitter.headerLine("storem " + "$" + self.curToken.text)
+                    self.emitter.memLine("push " + str(0))
+                    self.emitter.memLine("storem " + "$" + self.curToken.text)
                     var = self.curToken.text
                     self.match(TokenType.IDENT)
                 else:
                     self.abort("Already in use as Function: " + self.curToken.text)
 
                 if self.checkToken(TokenType.NUMBER):
-                    self.emitter.headerLine("push " + self.curToken.text)
-                    self.emitter.headerLine("storem " + "$" + var)
+                    self.emitter.memLine("push " + self.curToken.text)
+                    self.emitter.memLine("storem " + "$" + var)
                     self.match(TokenType.NUMBER)
                 self.nl()
 
@@ -116,7 +116,7 @@ class Parser:
                 if self.isFreeSymbol():
                     self.arrays.add(self.curToken.text)
                 if self.curToken.text in self.arrays:
-                    self.emitter.headerLine("array " + "*" + self.curToken.text)
+                    self.emitter.memLine("array " + "*" + self.curToken.text)
                     arr = self.curToken.text
                     self.match(TokenType.IDENT)
                 else:
@@ -125,8 +125,8 @@ class Parser:
                 if self.checkToken(TokenType.OPENBL):
                     self.match(TokenType.OPENBL)
                     while self.checkToken(TokenType.NUMBER):
-                        self.emitter.headerLine("push " + self.curToken.text)
-                        self.emitter.headerLine("storem " + "*" + arr)
+                        self.emitter.memLine("push " + self.curToken.text)
+                        self.emitter.memLine("storem " + "*" + arr)
                         self.match(TokenType.NUMBER)
                     self.match(TokenType.CLOSEBL)
                 self.nl()
@@ -161,13 +161,13 @@ class Parser:
                 self.emitter.context = "functions"
                 self.emitter.emitLine("@~" + self.curToken.text)
                 self.match(TokenType.IDENT)
-                self.emitter.headerLine("push " + "'jobinput_" + jobName + "'")
+                self.emitter.memLine("push " + "'jobinput_" + jobName + "'")
                 self.match(TokenType.USE)
                 if self.curToken.text in self.symbols:
-                    self.emitter.headerLine("index " + "$" + self.curToken.text)
+                    self.emitter.memLine("index " + "$" + self.curToken.text)
                     self.match(TokenType.IDENT)
                 elif self.curToken.text in self.arrays:
-                    self.emitter.headerLine("index " + "*" + self.curToken.text)
+                    self.emitter.memLine("index " + "*" + self.curToken.text)
                     self.match(TokenType.IDENT)            
                 else:
                     self.abort(
@@ -188,6 +188,7 @@ class Parser:
                 self.nl()
         if self.checkToken(TokenType.END):
             self.match(TokenType.END)
+            self.emitter.memLine("ret")
             self.nl()
         else:
             self.abort("Wrong keyword VALUE/FUNCTION/JOB allowd or missing END statement: " + self.curToken.text)
@@ -401,16 +402,13 @@ class Parser:
                         self.abort("Already in use as a Function " + self.curToken.text)
                 else:
                     self.match(TokenType.OPENBL)
-                    if self.isFreeSymbol():
-                        self.arrays.add(self.curToken.text)
-                        self.emitter.headerLine("array " + "*" + self.curToken.text)
                     if self.curToken.text in self.arrays:
                         self.emitter.emitLine("storem " + "*" + self.curToken.text)
                         self.match(TokenType.IDENT)  
                         self.match(TokenType.CLOSEBL)
                         self.nl()
                     else:
-                        self.abort("Already in use as a Variable " + self.curToken.text)
+                        self.abort("Referencing variable before assignment: " + self.curToken.text)
 
             elif self.checkToken(TokenType.DO):
                 num = self.LabelNum()

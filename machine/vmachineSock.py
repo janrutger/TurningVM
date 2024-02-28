@@ -131,7 +131,8 @@ class Machine:
 
     def mpuEnable(self):
         self.CPUS = []
-        self.initCode = [('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('CALL', '@core'), ('HALT', '')]
+        #self.initCode = [('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('CALL', '@core'), ('HALT', '')]
+        self.initCode = [('LIFO', '%_system'), ('CALL', '@core'), ('HALT', '')]
         self.memPage0 = self.cpu0.memPage()
         self.cpu0.enable_mpu(self.jobQueue, self.jobResults, 0)
 
@@ -144,8 +145,8 @@ class Machine:
         self.cpu2 = Executer(self.memPage0, None)
         self.cpu2.enable_mpu(self.jobQueue, self.jobResults, 2)
         CPU2 = Process(target=self.cpu2.run_rpc, args=(self.initCode, ))
-        self.CPUS.append(CPU2)
-        CPU2.start()
+        #self.CPUS.append(CPU2)
+        #CPU2.start()
 
         self.cpu3 = Executer(self.memPage0, None)
         self.cpu3.enable_mpu(self.jobQueue, self.jobResults, 3)
