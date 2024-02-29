@@ -1,10 +1,13 @@
 # TurningVM
 An virtual machine using a 4 tape Turing machine as ALU
-Support (only):
-- positive intergers
+
+Supports:
+- positive intergers (only)
 - support for Array and String datatype
 - timers
 - Small instruction set < 70
+- An Console and an Y-plotter
+- The ALU monitor shows the register values
 
 
 STACKS: An RPN-based Language for the VMturing Machine
@@ -17,7 +20,7 @@ The Grammer of TeenySTACKS V3
 
     Version 3: Including Array datatype and a-sync Jobs
     Version 2: Includes Functions
-    Version    Initial
+    Version    Initial (thanks for AZHenley)
     ----------------------------------------------------
 
     program    ::=	[(define)] {statement}
