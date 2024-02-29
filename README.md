@@ -1,5 +1,10 @@
 # TurningVM
-A Forth like virtual machine using a 4 tape Turing compatible ALU
+An virtual machine using a 4 tape Turing machine as ALU
+Support (only):
+- positive intergers
+- support for Array and String datatype
+- timers
+- Small instruction set < 70
 
 
 STACKS: An RPN-based Language for the VMturing Machine
