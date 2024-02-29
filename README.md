@@ -23,11 +23,12 @@ Specials
 - from @AZHenley https://github.com/AZHenley/teenytinycompiler 
 
 
-The Grammer of TeenySTACKS
+The Grammer of TeenySTACKS V3
 
     Version 3: Including Array datatype and a-sync Jobs
     Version 2: Includes Functions
     Version    Initial
+    ----------------------------------------------------
 
     program    ::=	[(define)] {statement}
 
