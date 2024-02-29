@@ -15,7 +15,7 @@ DEFINE
     RETURN y
 
     JOB makeTable USE x 
-        {stepX 18 !=} REPEAT
+        {stepX 180 !=} REPEAT
             QUEUE sine
         END
 
@@ -24,6 +24,7 @@ DEFINE
                 y AS [table]
             END
         END
+
     RETURN table
 END
 
@@ -38,3 +39,10 @@ QUEUE makeTable
     JOIN
 END
 
+WITH table EACH
+    offset + PLOT
+END
+
+WITH table EACH
+    offset SWAP - PLOT
+END

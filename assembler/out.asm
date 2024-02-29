@@ -21,6 +21,39 @@ prt
 join
 jump :_3_condition_start
 :_3_repeat_end
+push 1
+storem $_5_table
+:_5_start_each
+loadm $_5_table
+readelm *table
+jumpf :_5_end_each
+loadm $offset
+call @plus
+call @plot
+loadm $_5_table
+loadb
+incb
+moveb
+storem $_5_table
+jump :_5_start_each
+:_5_end_each
+push 1
+storem $_6_table
+:_6_start_each
+loadm $_6_table
+readelm *table
+jumpf :_6_end_each
+loadm $offset
+call @swap
+call @minus
+call @plot
+loadm $_6_table
+loadb
+incb
+moveb
+storem $_6_table
+jump :_6_start_each
+:_6_end_each
 prttimer 0
 ret
 @~stepX
@@ -49,7 +82,7 @@ done $y
 @~makeTable
 :_0_condition_start
 call @~stepX
-push 18
+push 180
 call @neq
 loada
 testz
