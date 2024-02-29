@@ -139,14 +139,14 @@ class Machine:
         self.cpu1 = Executer(self.memPage0, None)
         self.cpu1.enable_mpu(self.jobQueue, self.jobResults, 1)
         CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
-        self.CPUS.append(CPU1)
-        CPU1.start()
+        #self.CPUS.append(CPU1)
+        #CPU1.start()
 
         self.cpu2 = Executer(self.memPage0, None)
         self.cpu2.enable_mpu(self.jobQueue, self.jobResults, 2)
         CPU2 = Process(target=self.cpu2.run_rpc, args=(self.initCode, ))
-        self.CPUS.append(CPU2)
-        CPU2.start()
+        #self.CPUS.append(CPU2)
+        #CPU2.start()
 
         self.cpu3 = Executer(self.memPage0, None)
         self.cpu3.enable_mpu(self.jobQueue, self.jobResults, 3)

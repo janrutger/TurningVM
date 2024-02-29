@@ -47,3 +47,44 @@ The Grammer of TeenySTACKS
 
     st         ::=	('.'|'..')
     nl         ::= '\n'+
+
+    program    ::=	[(define)] {statement}
+
+
+    define     ::= "DEFINE" nl
+                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
+                    [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+                    [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+                "END" nl
+
+
+    statement  ::=  "LABEL" label nl
+                |   "GOTO"  label nl
+                |   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
+                |   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
+                |   "ARRAY" array ['['(INTEGER)+']'] nl
+                |   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
+                |   “QUEUE” job nl
+                |   “JOIN” nl 
+                |   “RESULT”  nl {statement} nl "END" nl
+                |   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END") nl
+                |   (expression | st) ( "PRINT" nl
+                                    | "PLOT"  nl
+                                    | ¨WAIT¨  nl
+                                    | "AS" (variable | '['array']') nl
+                                    | "DO" nl {statement} nl "END" nl
+                                    | "GOTO" label nl
+                                    |  nl )
+    expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
+    word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'| 'DEPTH' | 'INPUT'|'RAWIN')
+                                
+    label      ::=  ident
+    job        ::=  ident
+    array	   ::=  ident
+    function   ::=  ident
+    variable   ::=  ident
+
+
+    st         ::=	('.'|'..')
+    nl         ::= '\n'+
+    ident      ::= [a-zA-Z][a-zA-Z0-9]*

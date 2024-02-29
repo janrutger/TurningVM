@@ -1,42 +1,34 @@
 @main
 settimer 0
 speed 0
+loadm *table
+push 1
+call @eq
+loada
+testz
+clra
+jumpf :_3_do_end
 push 'jobinput_makeTable'
 job @~makeTable
 push 1
 call @sleep
-:_3_condition_start
+:_3_do_end
+:_4_condition_start
 pending
 push 0
 call @neq
 loada
 testz
 clra
-jumpf :_3_repeat_end
+jumpf :_4_repeat_end
 result
-jumpf :_4_no_result
+jumpf :_5_no_result
 loadm *table
 prt
-:_4_no_result
+:_5_no_result
 join
-jump :_3_condition_start
-:_3_repeat_end
-push 1
-storem $_5_table
-:_5_start_each
-loadm $_5_table
-readelm *table
-jumpf :_5_end_each
-loadm $offset
-call @plus
-call @plot
-loadm $_5_table
-loadb
-incb
-moveb
-storem $_5_table
-jump :_5_start_each
-:_5_end_each
+jump :_4_condition_start
+:_4_repeat_end
 push 1
 storem $_6_table
 :_6_start_each
@@ -44,8 +36,7 @@ loadm $_6_table
 readelm *table
 jumpf :_6_end_each
 loadm $offset
-call @swap
-call @minus
+call @plus
 call @plot
 loadm $_6_table
 loadb
@@ -54,6 +45,23 @@ moveb
 storem $_6_table
 jump :_6_start_each
 :_6_end_each
+push 1
+storem $_7_table
+:_7_start_each
+loadm $_7_table
+readelm *table
+jumpf :_7_end_each
+loadm $offset
+call @swap
+call @minus
+call @plot
+loadm $_7_table
+loadb
+incb
+moveb
+storem $_7_table
+jump :_7_start_each
+:_7_end_each
 prttimer 0
 ret
 @~stepX

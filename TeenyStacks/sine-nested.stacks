@@ -22,15 +22,17 @@ DEFINE
         {DEPTH 0 !=} DO
             RESULT
                 y AS [table]
+
             END
         END
 
     RETURN table
 END
 
-
-QUEUE makeTable
-1 WAIT
+table 1 == DO
+    QUEUE makeTable
+    1 WAIT
+END
 
 {DEPTH 0 !=} DO
     RESULT
