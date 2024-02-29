@@ -25,28 +25,9 @@ Specials
 
 The Grammer of TeenySTACKS
 
-    program    ::=	{statement}
-    statement  ::=  "LABEL" ident nl
-                |   "GOTO" ident nl
-                |   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
-                |   "DEFINE" ident nl {statement} nl "END" nl
-                |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
-                |   (expression | st) ( "PRINT" nl
-                                    | "PLOT" nl
-                                    | "WAIT" nl
-                                    | "AS" ident nl
-                                    | "DO"   nl {statement} nl "END" nl
-                                    | "GOTO" ident nl
-                                    |  nl )
-
-
-
-    expression ::=	(INTEGER | STRING | "`" ident | ident | word )+
-    word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-    ident      ::=	(variable | function | STRING)
-
-    st         ::=	('.'|'..')
-    nl         ::= '\n'+
+    Version 3: Including Array datatype and a-sync Jobs
+    Version 2: Includes Functions
+    Version    Initial
 
     program    ::=	[(define)] {statement}
 
