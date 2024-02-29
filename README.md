@@ -1,18 +1,21 @@
 # TurningVM
-An virtual machine using a 4 tape Turing machine as ALU
+An virtual machine using a 4 Tape Turing Machine as ALU
 
 Supports:
 - positive intergers (only)
+- Small instruction set < 70
+- All ALU operations are done by Turing State Machines
+- The ALU monitor shows the register values
+- integrated Memory and I/O management
+- An Console and an Y-plotter output
 - support for Array and String datatype
 - timers
-- Small instruction set < 70
-- An Console and an Y-plotter
-- The ALU monitor shows the register values
+- a-sync jobs
 
 
-STACKS: An RPN-based Language for the VMturing Machine
+STACKS: An RPN-based Language for the TuringVM Machine
 
-- STACKS is a programming language inspired by Forth, a powerful stack-based language. It uses Reverse Polish Notation (RPN), where operands are placed before the operator, making it concise and efficient. STACKS is designed to generate code specifically for the VMturing virtual machine, which utilizes Turing State Machines for its ALU operations.
+- STACKS is a programming language inspired by Forth, a powerful stack-based language. It uses Reverse Polish Notation (RPN), where operands are placed before the operator, making it concise and efficient. STACKS is designed to generate code specifically for the TuringVM virtual machine, which utilizes Turing State Machines for its ALU operations.
 
 
 
