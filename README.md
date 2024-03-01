@@ -9,8 +9,8 @@ Supports:
 - integrated Memory and I/O management
 - An Console and an Y-plotter output
 - support for Array and String datatype
-- timers
-- a-sync jobs
+- support for timers eg performance
+- support for a-sync jobs
 
 
 STACKS: An RPN-based Language for the TuringVM Machine
