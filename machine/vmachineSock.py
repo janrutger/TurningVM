@@ -133,10 +133,11 @@ class Machine:
         self.CPUS = []
         #self.initCode = [('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('CALL', '@core'), ('HALT', '')]
         self.initCode = [('LIFO', '%_system'), ('CALL', '@core'), ('HALT', '')]
-        self.cpu0.run_rpc([('CALL', '@__MemAllocGlobels'), ('HALT', '')])
+        self.cpu0.run_rpc([('LIFO', '%_system'), ('IOBUFF', '%_display'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
         self.memPage0 = self.cpu0.memPage()
         self.cpu0.enable_mpu(self.jobQueue, self.jobResults, 0)
 
+    def mpuStart(self):
         self.cpu1 = Executer(self.memPage0, None)
         self.cpu1.enable_mpu(self.jobQueue, self.jobResults, 1)
         CPU1 = Process(target=self.cpu1.run_rpc, args=(self.initCode, ))
@@ -157,7 +158,7 @@ class Machine:
         
 
     def repl(self):
-        #self.mpuEnable()
+        self.mpuEnable()
         self.ui.println('Type "halt" to quit.')
 
 
@@ -238,5 +239,6 @@ class Machine:
         self.ui.println(val)
 
     def mpu(self):
-        self.mpuEnable()
+        #self.mpuEnable()
+        self.mpuStart()
         
