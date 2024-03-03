@@ -243,8 +243,9 @@ class TokenType(enum.Enum):
     WITH = 136
     CLEAR = 137
     EACH = 138
-    COUNT = 139
-    IN = 140
+    #COUNT = 139
+    #IN = 140
+    COPY = 141
 
     #
     PLUS = 201

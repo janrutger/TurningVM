@@ -259,8 +259,7 @@ class Parser:
             if self.isFreeSymbol():
                 self.arrays.add(self.curToken.text)
             if self.curToken.text in self.arrays:
-                self.emitter.emitLine(
-                    "array " + "*" + self.curToken.text)
+                self.emitter.emitLine("array " + "*" + self.curToken.text)
                 arr = self.curToken.text
                 self.match(TokenType.IDENT)
             else:
@@ -303,7 +302,7 @@ class Parser:
             self.emitter.emitLine(":_" + num + "_no_result")
             self.nl()
         
-        # |   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END") nl
+        # |   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END" | “COPY” array ) nl
         elif self.checkToken(TokenType.WITH):
             self.match(TokenType.WITH)
             if self.curToken.text not in self.arrays:
@@ -336,6 +335,34 @@ class Parser:
 
                 self.emitter.emitLine("jump " + ":_" + num + "_start_each")
                 self.emitter.emitLine(":_" + num + "_end_each")
+                self.match(TokenType.END)
+                self.nl()
+
+            if self.checkToken(TokenType.COPY):
+                num = self.LabelNum()
+                self.emitter.emitLine("push " + str(1))
+                self.emitter.emitLine("storem " + "$" + "_" + num + "_" + array)
+
+                self.emitter.emitLine(":_" + num + "_start_copy")
+                self.emitter.emitLine("loadm " + "$" + "_" + num + "_" + array)
+                self.emitter.emitLine("readelm *" + array)
+                self.emitter.emitLine("jumpf " + ":_" + num + "_end_copy")
+                self.match(TokenType.COPY)
+                if self.curToken.text not in self.arrays:
+                    self.abort("Referencing variable before assignment: " + self.curToken.text)
+                else:
+                    self.emitter.emitLine("array " + "*" + self.curToken.text)
+
+
+                self.emitter.emitLine("loadm " + "$" + "_" + num + "_" + array)
+                self.emitter.emitLine("loadb")
+                self.emitter.emitLine("incb")
+                self.emitter.emitLine("moveb")
+                self.emitter.emitLine(
+                    "storem " + "$" + "_" + num + "_" + array)
+
+                self.emitter.emitLine("jump " + ":_" + num + "_start_copy")
+                self.emitter.emitLine(":_" + num + "_end_copy")
                 self.match(TokenType.END)
                 self.nl()
 
