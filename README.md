@@ -30,9 +30,9 @@ The Grammer of TeenySTACKS V3
 
 
     define     ::= "DEFINE" nl
-                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
-                    [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
-                    [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+                        [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+                        [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+                        [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
                     "END" nl
 
 
@@ -45,7 +45,10 @@ The Grammer of TeenySTACKS V3
                 |   “QUEUE” job nl
                 |   “JOIN” nl 
                 |   “RESULT”  nl {statement} nl "END" nl
-                |   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END" | “COPY” array ) nl
+                |   “WITH” array ("CLEAR" 
+                                | “EACH” nl {statement} nl "END" 
+                                | “COPY” array ) 
+                                nl
                 |   (expression | st) ( "PRINT" nl
                                         | "PLOT"  nl
                                         | ¨WAIT¨  nl
