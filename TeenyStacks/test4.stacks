@@ -1,0 +1,15 @@
+ARRAY org 
+ARRAY dest 
+0 AS n
+
+{n 2500 !=} DO
+    n AS [org]
+    n 1 + AS n
+END
+
+TIMER 17 SET
+
+WITH org COPY dest 
+
+TIMER 17 PRINT
+

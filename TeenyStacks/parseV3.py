@@ -351,7 +351,7 @@ class Parser:
                 if self.curToken.text not in self.arrays:
                     self.abort("Referencing variable before assignment: " + self.curToken.text)
                 else:
-                    self.emitter.emitLine("array " + "*" + self.curToken.text)
+                    self.emitter.emitLine("storem " + "*" + self.curToken.text)
 
 
                 self.emitter.emitLine("loadm " + "$" + "_" + num + "_" + array)
@@ -363,7 +363,7 @@ class Parser:
 
                 self.emitter.emitLine("jump " + ":_" + num + "_start_copy")
                 self.emitter.emitLine(":_" + num + "_end_copy")
-                self.match(TokenType.END)
+                self.match(TokenType.IDENT)
                 self.nl()
 
         # | "{" (expression | st) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl
