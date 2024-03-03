@@ -241,7 +241,7 @@ class TokenType(enum.Enum):
     DEPTH = 134
     ARRAY = 135
     WITH = 136
-    CLEAR = 137
+    #CLEAR = 137
     EACH = 138
     #COUNT = 139
     #IN = 140

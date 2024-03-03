@@ -302,17 +302,17 @@ class Parser:
             self.emitter.emitLine(":_" + num + "_no_result")
             self.nl()
         
-        # |   “WITH” array ("CLEAR" | “EACH” nl {statement} nl "END" | “COPY” array ) nl
+        # |   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array ) nl
         elif self.checkToken(TokenType.WITH):
             self.match(TokenType.WITH)
             if self.curToken.text not in self.arrays:
                 self.abort("Referencing variable before assignment: " + self.curToken.text)
             array = self.curToken.text
             self.match(TokenType.IDENT)
-            if self.checkToken(TokenType.CLEAR):
-                self.emitter.emitLine("array " + "*" + array)
-                self.match(TokenType.CLEAR)
-                self.nl()
+            # if self.checkToken(TokenType.CLEAR):
+            #     self.emitter.emitLine("array " + "*" + array)
+            #     self.match(TokenType.CLEAR)
+            #     self.nl()
             if self.checkToken(TokenType.EACH):
                 num = self.LabelNum()
                 self.emitter.emitLine("push " + str(1))

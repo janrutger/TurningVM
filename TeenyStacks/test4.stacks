@@ -13,3 +13,6 @@ WITH org COPY dest
 
 TIMER 17 PRINT
 
+org PRINT
+dest PRINT
+

@@ -3,14 +3,14 @@ An virtual machine using a 4 Tape Turing Machine as ALU
 
 Supports:
 - positive intergers (only)
-- Small instruction set < 70
 - All ALU operations are done by Turing State Machines
 - The ALU monitor shows the register values
 - integrated Memory and I/O management
-- An Console and an Y-plotter output
+- An Console printing and an Y-plotter output
 - support for Array and String datatype
 - support for timers eg performance
 - support for a-sync jobs
+- Small instruction set < 70
 
 
 STACKS: An RPN-based Language for the TuringVM Machine
