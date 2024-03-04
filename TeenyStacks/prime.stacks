@@ -20,7 +20,7 @@ FUNCTION check4prime
             . AS i
 
             i n != DO
-                    i n % 0 != DO
+                i n % 0 != DO
                     i AS [tmp]
                 END 
             END     
