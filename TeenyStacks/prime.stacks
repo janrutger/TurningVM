@@ -2,7 +2,7 @@ ARRAY workingList
 ARRAY tmp 
 ARRAY primeList 
 
-5000 AS max
+INPUT AS max
 2 AS start
 
 {start max !=} DO
@@ -41,6 +41,8 @@ END
 
 
 check4prime
+
+
 #WITH primeList EACH
 #    . PLOT
 #END

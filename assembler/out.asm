@@ -4,7 +4,7 @@ speed 0
 array *workingList
 array *tmp
 array *primeList
-push 5000
+call @input
 storem $max
 push 2
 storem $start
