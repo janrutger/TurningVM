@@ -273,7 +273,7 @@ class Executer:
             currentJob = self.jobQueue.pop(0)
             currentJobID = currentJob[0]
             print(str(self.cpuID) + " found job...... "  + str(currentJob[0])) 
-            #self.memory.writeMem(currentJob[1][0], currentJob[1][1]) #POKE
+            #print(str(self.cpuID) + " found job...... " + str(currentJob))
             self.memory.poke(currentJob[1])
             self.memory.writeMem("%_system", self.pc)
             self.memory.writeMem("%_system", currentJobID)
@@ -306,6 +306,7 @@ class Executer:
                 self.execNOP.status("set")
                 pokeVal = self.jobResults[self.jobsPending[0]]
                 print(str(self.cpuID) + " found Result... "  + str(self.jobsPending[0])) 
+                #print(str(self.cpuID) + " found Result... "  + str(self.jobsPending)) 
                 self.memory.poke(pokeVal)
                 #self.memory.writeMem(result[0], result[1]) #POKE
                 #self.execNOP.push(result[1])

@@ -5,7 +5,7 @@ DEFINE
     ARRAY arg
     
 
-    VALUE max 75
+    VALUE max 2500
     VALUE start 2
     VALUE i
     VALUE n
@@ -16,7 +16,6 @@ DEFINE
         1 [arg] 2 [arg]  % 0 != DO
             1 [arg] AS res
         END 
-       
     RETURN res
 END
 
@@ -35,20 +34,24 @@ FUNCTION check4prime
                 n AS [arg]
                 QUEUE calc
                 ARRAY arg
-            END   
+            END  
         END 
 
         {DEPTH 0 !=} DO
+            LABEL lus
             RESULT
                 res 0 != DO 
                     res AS [tmp]
+                    GOTO lus
                 END
             END
+        JOIN
         END
 
         ARRAY workingList
         WITH tmp COPY workingList
         ARRAY tmp
+        ARRAY arg
 
     max 1 [workingList] DUP * < GOTO startrun 
 
@@ -69,5 +72,5 @@ check4prime
 
 
 WITH primeList EACH
-    . PRINT
+    . PLOT
 END
