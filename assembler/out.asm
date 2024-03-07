@@ -19,19 +19,39 @@ jump :_14_condition_start
 :_14_repeat_end
 call @~check4prime
 push 1
-storem $_15_primeList
-:_15_start_each
-loadm $_15_primeList
+storem $n
+loadm *primeList
+storem $end
+:_15_condition_start
+loadm $n
+loadm $end
+call @gt
+loada
+testz
+clra
+jumpf :_15_repeat_end
+loadm $n
+push 1
+call @plus
 readelm *primeList
-jumpf :_15_end_each
+jumpt :_16_readelm_done
+call @__illegal_Array_Index
+:_16_readelm_done
+loadm $n
+readelm *primeList
+jumpt :_17_readelm_done
+call @__illegal_Array_Index
+:_17_readelm_done
+call @minus
+call @dup
 call @plot
-loadm $_15_primeList
-loadb
-incb
-moveb
-storem $_15_primeList
-jump :_15_start_each
-:_15_end_each
+prt
+loadm $n
+push 1
+call @plus
+storem $n
+jump :_15_condition_start
+:_15_repeat_end
 prttimer 0
 ret
 @~calc
@@ -72,8 +92,6 @@ call @__illegal_Array_Index
 storem $n
 loadm $n
 storem *primeList
-loadm $n
-call @plot
 push 1
 storem $_5_workingList
 :_5_start_each
@@ -166,9 +184,7 @@ storem $_13_workingList
 loadm $_13_workingList
 readelm *workingList
 jumpf :_13_end_each
-call @dup
 storem *primeList
-call @plot
 loadm $_13_workingList
 loadb
 incb

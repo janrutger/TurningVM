@@ -25,7 +25,7 @@ FUNCTION check4prime
     LABEL startrun
         1 [workingList] AS n 
         n AS [primeList]
-        n PLOT
+#       n PLOT
 
         WITH workingList EACH
             . AS i
@@ -56,8 +56,8 @@ FUNCTION check4prime
     max 1 [workingList] DUP * < GOTO startrun 
 
     WITH workingList EACH
-        .. AS [primeList]
-        . PLOT
+        . AS [primeList]
+#       . PLOT
     END  
 END 
 
@@ -71,6 +71,17 @@ END
 check4prime
 
 
-WITH primeList EACH
-    . PLOT
+#WITH primeList EACH
+#    . PLOT
+#END
+
+
+1 AS n
+primeList AS end
+
+{n end >} DO
+    n 1 + [primeList] n [primeList] - 
+    .. PLOT
+    . PRINT
+    n 1 + AS n
 END
