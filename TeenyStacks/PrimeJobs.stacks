@@ -30,10 +30,10 @@ FUNCTION check4prime
         WITH workingList EACH
             . AS i
             i n != DO
+                ARRAY arg
                 i AS [arg]
                 n AS [arg]
                 QUEUE calc
-                ARRAY arg
             END  
         END 
 
@@ -51,7 +51,7 @@ FUNCTION check4prime
         ARRAY workingList
         WITH tmp COPY workingList
         ARRAY tmp
-        ARRAY arg
+        
 
     max 1 [workingList] DUP * < GOTO startrun 
 

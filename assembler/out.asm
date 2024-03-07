@@ -88,13 +88,13 @@ loada
 testz
 clra
 jumpf :_6_do_end
+array *arg
 loadm $i
 storem *arg
 loadm $n
 storem *arg
 push 'jobinput_calc'
 job @~calc
-array *arg
 :_6_do_end
 loadm $_5_workingList
 loadb
@@ -145,7 +145,6 @@ storem $_10_tmp
 jump :_10_start_copy
 :_10_end_copy
 array *tmp
-array *arg
 loadm $max
 push 1
 readelm *workingList
