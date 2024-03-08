@@ -1,15 +1,5 @@
 DEFINE
-    ARRAY workingList 
-    ARRAY primeList 
-    ARRAY tmp 
     ARRAY arg
-    
-
-    VALUE max 2500
-    VALUE start 2
-    VALUE i
-    VALUE n
-    VALUE res
 
     JOB calc USE arg 
         0 AS res
@@ -19,13 +9,17 @@ DEFINE
     RETURN res
 END
 
+ARRAY workingList 
+ARRAY primeList 
+ARRAY tmp 
 
+75 AS max
+2 AS start
 
-FUNCTION check4prime
+FUNCTION check4primes
     LABEL startrun
         1 [workingList] AS n 
         n AS [primeList]
-#       n PLOT
 
         WITH workingList EACH
             . AS i
@@ -42,8 +36,8 @@ FUNCTION check4prime
             RESULT
                 res 0 != DO 
                     res AS [tmp]
-                    GOTO lus
                 END
+            GOTO lus
             END
         JOIN
         END
@@ -51,13 +45,10 @@ FUNCTION check4prime
         ARRAY workingList
         WITH tmp COPY workingList
         ARRAY tmp
-        
-
     max 1 [workingList] DUP * < GOTO startrun 
 
     WITH workingList EACH
         . AS [primeList]
-#       . PLOT
     END  
 END 
 
@@ -68,13 +59,7 @@ END
     start 1 + AS start
 END
 
-check4prime
-
-
-#WITH primeList EACH
-#    . PLOT
-#END
-
+check4primes
 
 1 AS n
 primeList AS end

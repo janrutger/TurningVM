@@ -1,6 +1,13 @@
 @main
 settimer 0
 speed 0
+array *workingList
+array *primeList
+array *tmp
+push 75
+storem $max
+push 2
+storem $start
 :_14_condition_start
 loadm $start
 loadm $max
@@ -17,7 +24,7 @@ call @plus
 storem $start
 jump :_14_condition_start
 :_14_repeat_end
-call @~check4prime
+call @~check4primes
 push 1
 storem $n
 loadm *primeList
@@ -82,7 +89,7 @@ call @__illegal_Array_Index
 storem $res
 :_2_do_end
 done $res
-@~check4prime
+@~check4primes
 :startrun
 push 1
 readelm *workingList
@@ -141,8 +148,8 @@ clra
 jumpf :_9_do_end
 loadm $res
 storem *tmp
-jump :lus
 :_9_do_end
+jump :lus
 :_8_no_result
 join
 jump :_7_condition_start
@@ -194,24 +201,7 @@ jump :_13_start_each
 :_13_end_each
 ret
 @__MemAllocGlobels
-array *workingList
-array *primeList
-array *tmp
 array *arg
-push 0
-storem $max
-push 2500
-storem $max
-push 0
-storem $start
-push 2
-storem $start
-push 0
-storem $i
-push 0
-storem $n
-push 0
-storem $res
 push 'jobinput_calc'
 index *arg
 ret
