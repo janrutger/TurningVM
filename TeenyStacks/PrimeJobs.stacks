@@ -13,7 +13,7 @@ ARRAY workingList
 ARRAY primeList 
 ARRAY tmp 
 
-75 AS max
+500 AS max
 2 AS start
 
 FUNCTION check4primes
@@ -37,7 +37,7 @@ FUNCTION check4primes
                 res 0 != DO 
                     res AS [tmp]
                 END
-            GOTO lus
+                GOTO lus
             END
         JOIN
         END
