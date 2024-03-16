@@ -3,22 +3,22 @@ settimer 0
 speed 0
 push 1
 storem $n
-push 750
+push 1000
 storem $end
 push 1
 storem $n
 :_0_condition_start
 loadm $n
 loadm $end
-call @neq
+call @gt
 loada
 testz
 clra
 jumpf :_0_repeat_end
 call @~A002024
+call @dup
 call @plot
 loadm $n
-push 1
 call @plus
 storem $n
 jump :_0_condition_start
@@ -28,15 +28,15 @@ storem $n
 :_1_condition_start
 loadm $n
 loadm $end
-call @gt
+call @neq
 loada
 testz
 clra
 jumpf :_1_repeat_end
 call @~A002024
-call @dup
 call @plot
 loadm $n
+push 1
 call @plus
 storem $n
 jump :_1_condition_start
