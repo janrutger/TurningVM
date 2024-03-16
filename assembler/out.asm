@@ -3,7 +3,7 @@ settimer 0
 speed 0
 push 1
 storem $n
-push 1000
+push 50
 storem $end
 push 1
 storem $n

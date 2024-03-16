@@ -12,7 +12,7 @@ END
 
 
 1 AS n
-1000 AS end
+500 AS end
 
 {n end >} DO
     QUEUE calc
@@ -26,13 +26,10 @@ END
     n  + AS n
 END
 
-JOIN
 
 {DEPTH 0 !=} DO
-    LABEL lus
     RESULT  
         r PLOT
-        GOTO lus
     END
     JOIN
 END

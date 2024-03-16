@@ -1,5 +1,5 @@
 1 AS n
-1000 AS end
+50 AS end
 
 FUNCTION A002024
     n 8 * `isqrt 1 + 2 /
