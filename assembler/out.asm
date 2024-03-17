@@ -1,71 +1,73 @@
 @main
 settimer 0
 speed 0
-array *block
-push 1
-storem *block
-push 99
-storem *block
-push 'jobinput_batch'
-job @~batch
-array *block
-push 100
-storem *block
-push 199
-storem *block
-push 'jobinput_batch'
-job @~batch
-array *block
-push 200
-storem *block
-push 299
-storem *block
-push 'jobinput_batch'
-job @~batch
-array *block
-push 300
-storem *block
-push 399
-storem *block
-push 'jobinput_batch'
-job @~batch
-array *block
-push 400
-storem *block
-push 499
-storem *block
-push 'jobinput_batch'
-job @~batch
+push 0
+storem $start
+push 11
+storem $size
+loadm $size
+storem $end
+push 90
+storem $count
 :_4_condition_start
-pending
+loadm $count
 push 0
 call @neq
 loada
 testz
 clra
 jumpf :_4_repeat_end
+array *block
+loadm $start
+storem *block
+loadm $end
+storem *block
+push 'jobinput_batch'
+job @~batch
+loadm $start
+loadm $size
+call @plus
+storem $start
+loadm $start
+loadm $size
+call @plus
+storem $end
+loadm $count
+push 1
+call @minus
+storem $count
+jump :_4_condition_start
+:_4_repeat_end
+:_5_condition_start
+pending
+push 0
+call @neq
+loada
+testz
+clra
+jumpf :_5_repeat_end
 :lus
 result
-jumpf :_5_no_result
+jumpf :_6_no_result
 push 1
-storem $_6_result
-:_6_start_each
-loadm $_6_result
+storem $_7_result
+:_7_start_each
+loadm $_7_result
 readelm *result
-jumpf :_6_end_each
+jumpf :_7_end_each
 call @plot
-loadm $_6_result
+loadm $_7_result
 loadb
 incb
 moveb
-storem $_6_result
-jump :_6_start_each
-:_6_end_each
+storem $_7_result
+jump :_7_start_each
+:_7_end_each
 jump :lus
-:_5_no_result
+:_6_no_result
 join
-jump :_4_condition_start
-:_4_repeat_end
+jump :_5_condition_start
+:_5_repeat_end
 prttimer 0
 ret
 @~calc

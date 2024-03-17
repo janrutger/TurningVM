@@ -26,20 +26,24 @@ DEFINE
 END
 
 
-ARRAY block [1 99]
-QUEUE batch
 
-ARRAY block [100 199]
-QUEUE batch
+0 AS start 
+11 AS size
+size AS end
+90 AS count
 
-ARRAY block [200 299]
-QUEUE batch
+{count 0 !=} DO
+    ARRAY block
+    start AS [block]
+    end AS [block]
+    
+    QUEUE batch
 
-ARRAY block [300 399]
-QUEUE batch
+    start size + AS start
+    start size + AS end
 
-ARRAY block [400 499]
-QUEUE batch
+    count 1 - AS count
+END
 
 
 
