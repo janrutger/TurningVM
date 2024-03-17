@@ -7,7 +7,7 @@ push 11
 storem $size
 loadm $size
 storem $end
-push 90
+push 7
 storem $count
 :_4_condition_start
 loadm $count
@@ -55,7 +55,7 @@ storem $_7_result
 loadm $_7_result
 readelm *result
 jumpf :_7_end_each
-call @plot
+prt
 loadm $_7_result
 loadb
 incb

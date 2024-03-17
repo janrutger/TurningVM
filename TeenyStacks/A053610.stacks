@@ -1,6 +1,6 @@
 
 1 AS n
-8000 AS end
+999 AS end
 
 FUNCTION calc
     . AS n
