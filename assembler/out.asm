@@ -3,11 +3,11 @@ settimer 0
 speed 0
 push 0
 storem $start
-push 11
+push 10
 storem $size
 loadm $size
 storem $end
-push 7
+push 400
 storem $count
 :_4_condition_start
 loadm $count
@@ -55,7 +55,7 @@ storem $_7_result
 loadm $_7_result
 readelm *result
 jumpf :_7_end_each
-prt
+call @plot
 loadm $_7_result
 loadb
 incb

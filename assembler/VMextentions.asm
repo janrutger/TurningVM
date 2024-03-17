@@ -30,8 +30,10 @@ ret
 
 
 @plot
+    speed 27
     storem %_plotter
     output %_plotter
+    speed 0
 ret
 
 @char2prtbuff
