@@ -12,7 +12,7 @@ END
 
 
 1 AS n
-500 AS end
+1500 AS end
 
 {n end >} DO
     QUEUE calc
