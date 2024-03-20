@@ -1,17 +1,19 @@
 ARRAY data
 ARRAY tmp
 
-200 AS max
+140 AS max
 
+TIMER 17 SET
 {max 0 !=} DO
     `rand AS [data]
     max 1 - AS max
+    WITH data PLOT NEW
 END
+TIMER 17 PRINT
+
 
 FUNCTION plot
-    WITH data EACH
-        . PLOT
-    END
+    WITH data PLOT NEW
 END
 
 FUNCTION sort
@@ -40,11 +42,14 @@ FUNCTION sort
 
         ARRAY data
         WITH tmp COPY data
-        ARRAY tmp      
+        ARRAY tmp     
+        plot 
     END
 END
 
 
 plot
+TIMER 17 SET
 sort
+TIMER 17 PRINT
 plot

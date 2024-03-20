@@ -45,9 +45,9 @@ The Grammer of TeenySTACKS V3
                 |   “QUEUE” job nl
                 |   “JOIN” nl 
                 |   “RESULT”  nl {statement} nl "END" nl
-                |   “WITH” array ("CLEAR" 
-                                | “EACH” nl {statement} nl "END" 
-                                | “COPY” array ) 
+                |   "WITH” array (“EACH” nl {statement} nl "END" 
+                                | “COPY” array 
+                                | "PLOT" ["NEW"]) 
                                 nl
                 |   (expression | st) ( "PRINT" nl
                                         | "PLOT"  nl

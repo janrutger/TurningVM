@@ -18,7 +18,7 @@ statement  ::=  "LABEL" label nl
 			|   “QUEUE” job nl
 			|   “JOIN” nl 
 			|   “RESULT”  nl {statement} nl "END" nl
-			|   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array ) nl
+			|   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
 			|   (expression | st) ( "PRINT" nl
 									| "PLOT"  nl
 									| ¨WAIT¨  nl
