@@ -30,10 +30,27 @@ ret
 
 
 @plot
-    speed 27
     storem %_plotter
     output %_plotter
-    speed 0
+ret
+
+@plotnew
+    iobuff %_plotter
+ret
+
+@plotarray
+    push 1
+    loadb
+    :lus_plotarray 
+        storeb
+        readelm '_input_plotarray'
+        jumpf :klaar_plotarray
+        storem %_plotter
+        incb
+    jump :lus_plotarray
+    :klaar_plotarray
+    output %_plotter
+    clrb
 ret
 
 @char2prtbuff

@@ -303,6 +303,7 @@ class Parser:
             self.nl()
         
         # |   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array ) nl
+        # |   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
         elif self.checkToken(TokenType.WITH):
             self.match(TokenType.WITH)
             if self.curToken.text not in self.arrays:
@@ -365,6 +366,18 @@ class Parser:
                 self.emitter.emitLine(":_" + num + "_end_copy")
                 self.match(TokenType.IDENT)
                 self.nl()
+            
+            if self.checkToken(TokenType.PLOT):
+                self.match(TokenType.PLOT)
+                if self.checkToken(TokenType.NEW):
+                    self.emitter.emitLine("call @plotnew")
+                    self.match(TokenType.NEW)
+                self.emitter.emitLine("push '_input_plotarray'")
+                self.emitter.emitLine("index  *" + array)
+                self.emitter.emitLine("call @plotarray")
+                self.nl()
+                
+                
 
         # | "{" (expression | st) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl
         elif self.checkToken(TokenType.OPENC):

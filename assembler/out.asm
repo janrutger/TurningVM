@@ -3,11 +3,11 @@ settimer 0
 speed 0
 push 0
 storem $start
-push 10
+push 20
 storem $size
 loadm $size
 storem $end
-push 400
+push 200
 storem $count
 :_4_condition_start
 loadm $count
@@ -49,20 +49,9 @@ jumpf :_5_repeat_end
 :lus
 result
 jumpf :_6_no_result
-push 1
-storem $_7_result
-:_7_start_each
-loadm $_7_result
-readelm *result
-jumpf :_7_end_each
-call @plot
-loadm $_7_result
-loadb
-incb
-moveb
-storem $_7_result
-jump :_7_start_each
-:_7_end_each
+push '_input_plotarray'
+index  *result
+call @plotarray
 jump :lus
 :_6_no_result
 join

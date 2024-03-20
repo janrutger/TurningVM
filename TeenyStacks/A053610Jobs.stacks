@@ -26,11 +26,10 @@ DEFINE
 END
 
 
-
 0 AS start 
-10 AS size
+20 AS size
 size AS end
-400 AS count
+200 AS count
 
 {count 0 !=} DO
     ARRAY block
@@ -46,13 +45,13 @@ size AS end
 END
 
 
-
 {DEPTH 0 !=} DO
     LABEL lus
     RESULT 
-        WITH result EACH
-            . PLOT       
-        END
+        #WITH result EACH
+        #    . PLOT       
+        #END
+        WITH result PLOT
         GOTO lus
     END
     JOIN

@@ -246,6 +246,7 @@ class TokenType(enum.Enum):
     #COUNT = 139
     #IN = 140
     COPY = 141
+    NEW = 143
 
     #
     PLUS = 201
