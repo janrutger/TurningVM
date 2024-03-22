@@ -26,7 +26,7 @@ statement  ::=  "LABEL" label nl
 									| "DO" nl {statement} nl "END" nl
 									| "GOTO" label nl
 									|  nl )
-expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
+expression ::=	(INTEGER | STRING | function | "`"function | variable | array |'['array']'| word)+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'| 'DEPTH' | 'INPUT'|'RAWIN')
      	             		  
 label      ::=  ident
