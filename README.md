@@ -30,10 +30,10 @@ The Grammer of TeenySTACKS V3
 
 
     define     ::= "DEFINE" nl
-                        [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
-                        [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
-                        [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
-                    "END" nl
+                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+                    [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+                    [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+                "END" nl
 
 
     statement  ::=  "LABEL" label nl
@@ -50,12 +50,12 @@ The Grammer of TeenySTACKS V3
                                 | "PLOT" ["NEW"]) 
                                 nl
                 |   (expression | st) ( "PRINT" nl
-                                        | "PLOT"  nl
-                                        | ¨WAIT¨  nl
-                                        | "AS" (variable | '['array']') nl
-                                        | "DO" nl {statement} nl "END" nl
-                                        | "GOTO" label nl
-                                        |  nl )
+                                    | "PLOT"  nl
+                                    | ¨WAIT¨  nl
+                                    | "AS" (variable | '['array']') nl
+                                    | "DO" nl {statement} nl "END" nl
+                                    | "GOTO" label nl
+                                    |  nl )
     expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
     word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'| 'DEPTH' | 'INPUT'|'RAWIN')
                                 

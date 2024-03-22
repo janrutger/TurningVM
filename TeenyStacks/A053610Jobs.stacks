@@ -27,9 +27,9 @@ END
 
 
 0 AS start 
-20 AS size
+30 AS size
 size AS end
-200 AS count
+300 AS count
 
 {count 0 !=} DO
     ARRAY block
@@ -48,9 +48,6 @@ END
 {DEPTH 0 !=} DO
     LABEL lus
     RESULT 
-        #WITH result EACH
-        #    . PLOT       
-        #END
         WITH result PLOT
         GOTO lus
     END

@@ -1,7 +1,7 @@
 ARRAY data
 ARRAY tmp
 
-140 AS max
+500 AS max
 
 TIMER 17 SET
 {max 0 !=} DO
