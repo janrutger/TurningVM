@@ -1,137 +1,138 @@
 @main
 settimer 0
 speed 0
-loadm *table
-push 1
-call @eq
-loada
-testz
-clra
-jumpf :_3_do_end
-push 'jobinput_makeTable'
-job @~makeTable
-push 1
-call @sleep
-:_3_do_end
-:_4_condition_start
-pending
-push 0
-call @neq
-loada
-testz
-clra
-jumpf :_4_repeat_end
-result
-jumpf :_5_no_result
-loadm *table
-prt
-:_5_no_result
-join
-jump :_4_condition_start
-:_4_repeat_end
-push 1
-storem $_6_table
-:_6_start_each
-loadm $_6_table
-readelm *table
-jumpf :_6_end_each
-loadm $offset
-call @plus
-call @plot
-loadm $_6_table
-loadb
-incb
-moveb
-storem $_6_table
-jump :_6_start_each
-:_6_end_each
-push 1
-storem $_7_table
-:_7_start_each
-loadm $_7_table
-readelm *table
-jumpf :_7_end_each
-loadm $offset
-call @swap
-call @minus
-call @plot
-loadm $_7_table
-loadb
-incb
-moveb
-storem $_7_table
-jump :_7_start_each
-:_7_end_each
-prttimer 0
-ret
-@~stepX
-loadm $x
-push 1
-call @plus
-storem $x
-loadm $x
-ret
-@~sine
-push 180
-loadm $x
-call @minus
-loadm $x
-call @mul
-storem $u
-push 4000
-loadm $u
-call @mul
-push 40500
-loadm $u
-call @minus
-call @div
-storem $y
-done $y
-@~makeTable
+array *data
+array *tmp
+push 100
+storem $max
+settimer 17
 :_0_condition_start
-call @~stepX
-push 180
+loadm $max
+push 0
 call @neq
 loada
 testz
 clra
 jumpf :_0_repeat_end
-push 'jobinput_sine'
-job @~sine
+call @rand
+storem *data
+loadm $max
+push 1
+call @minus
+storem $max
+call @plotnew
+push '_input_plotarray'
+index  *data
+call @plotarray
 jump :_0_condition_start
 :_0_repeat_end
-:_1_condition_start
-pending
+prttimer 17
+call @~plot
+settimer 17
+call @~sort
+prttimer 17
+call @~plot
+prttimer 0
+ret
+@~plot
+call @plotnew
+push '_input_plotarray'
+index  *data
+call @plotarray
+ret
+@~sort
 push 0
-call @neq
+storem $sorting
+:_1_condition_start
+loadm $sorting
 loada
 testz
 clra
 jumpf :_1_repeat_end
-result
-jumpf :_2_no_result
-loadm $y
-storem *table
-:_2_no_result
+push 1
+storem $sorting
+push 1
+storem $n
+push 2
+storem $nn
+:lus
+loadm $nn
+loadm *data
+push 1
+call @plus
+call @eq
+loada
+testz
+clra
+jumpf :_2_goto_end
+jump :done
+:_2_goto_end
+loadm $n
+readelm *data
+jumpt :_3_readelm_done
+call @__illegal_Array_Index
+:_3_readelm_done
+loadm $nn
+readelm *data
+jumpt :_4_readelm_done
+call @__illegal_Array_Index
+:_4_readelm_done
+call @lt
+loada
+testz
+clra
+jumpf :_5_do_end
+loadm $nn
+readelm *data
+jumpt :_6_readelm_done
+call @__illegal_Array_Index
+:_6_readelm_done
+storem *tmp
+loadm $nn
+push 1
+call @plus
+storem $nn
+push 0
+storem $sorting
+jump :lus
+:_5_do_end
+loadm $n
+readelm *data
+jumpt :_7_readelm_done
+call @__illegal_Array_Index
+:_7_readelm_done
+storem *tmp
+loadm $nn
+storem $n
+loadm $nn
+push 1
+call @plus
+storem $nn
+jump :lus
+:done
+loadm $n
+readelm *data
+jumpt :_8_readelm_done
+call @__illegal_Array_Index
+:_8_readelm_done
+storem *tmp
+array *data
+push 1
+storem $_9_tmp
+:_9_start_copy
+loadm $_9_tmp
+readelm *tmp
+jumpf :_9_end_copy
+storem *data
+loadm $_9_tmp
+loadb
+incb
+moveb
+storem $_9_tmp
+jump :_9_start_copy
+:_9_end_copy
+array *tmp
+call @~plot
 jump :_1_condition_start
 :_1_repeat_end
-done *table
-@__MemAllocGlobels
-push 0
-storem $offset
-push 1000
-storem $offset
-push 0
-storem $x
-push 0
-storem $x
-push 0
-storem $y
-array *table
-push 0
-storem *table
-push 'jobinput_sine'
-index $x
-push 'jobinput_makeTable'
-index $x
 ret
