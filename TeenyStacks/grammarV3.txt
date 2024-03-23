@@ -1,7 +1,6 @@
 
 program    ::=	[(define)] {statement}
 
-
 define     ::= "DEFINE" nl
 					[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
 					[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
