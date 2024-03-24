@@ -13,6 +13,6 @@ push '_input_plotarray'
 index *test
 
 call @plotnew
-call @plotarray
+call @_plotarray
 
 ret

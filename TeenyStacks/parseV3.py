@@ -374,7 +374,7 @@ class Parser:
                     self.match(TokenType.NEW)
                 self.emitter.emitLine("push '_input_plotarray'")
                 self.emitter.emitLine("index  *" + array)
-                self.emitter.emitLine("call @plotarray")
+                self.emitter.emitLine("call @_plotarray")
                 self.nl()
                 
                 

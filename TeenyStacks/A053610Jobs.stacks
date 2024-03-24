@@ -29,7 +29,7 @@ END
 0 AS start 
 30 AS size
 size AS end
-300 AS count
+10 AS count
 
 {count 0 !=} DO
     ARRAY block

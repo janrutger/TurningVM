@@ -38,7 +38,7 @@ ret
     iobuff %_plotter
 ret
 
-@plotarray
+@_plotarray
     push 1
     loadb
     :lus_plotarray 
