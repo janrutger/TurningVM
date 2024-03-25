@@ -76,6 +76,18 @@ ret
     clrb
 ret
 
+@lcm
+    storem $b_lcm
+    storem $a_lcm
+    loadm $a_lcm
+    loadm $b_lcm
+    loadm $a_lcm
+    loadm $b_lcm
+    call @_gcd
+    call @div
+    call @mul
+ret
+
 
 @sleep
     speed 0

@@ -1,0 +1,12 @@
+INPUT INPUT OVER OVER
+
+FUNCTION lcm
+    . AS b
+    . AS a 
+    a b a b GCD / * 
+END
+
+lcm PRINT 
+
+`lcm PRINT
+
