@@ -1,4 +1,5 @@
-INPUT INPUT OVER OVER
+INPUT AS i1 
+INPUT AS i2
 
 FUNCTION lcm
     . AS b
@@ -6,7 +7,17 @@ FUNCTION lcm
     a b a b GCD / * 
 END
 
-lcm PRINT 
+TIMER 17 SET
+i1 i2
+lcm  
+TIMER 17 PRINT
 
-`lcm PRINT
+TIMER 17 SET
+i1 i2
+`lcm 
+TIMER 17 PRINT
 
+. PRINT 
+.. PRINT
+
+i1 GCD PRINT

@@ -1,11 +1,12 @@
 
 program    ::=	[(define)] {statement}
 
-define     ::= "DEFINE" nl
-					[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
-					[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
-					[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
-				"END" nl
+
+define	::= "DEFINE" nl
+				[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+				[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+				[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+			"END" nl
 
 
 statement  ::=  "LABEL" label nl
@@ -26,7 +27,7 @@ statement  ::=  "LABEL" label nl
 									| "GOTO" label nl
 									|  nl )
 expression ::=	(INTEGER | STRING | function | "`"function | variable | array |'['array']'| word)+
-word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'| 'DEPTH' | 'INPUT'|'RAWIN')
+word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
      	             		  
 label      ::=  ident
 job        ::=  ident
