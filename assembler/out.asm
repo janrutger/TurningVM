@@ -1,13 +1,13 @@
 @main
 settimer 0
 speed 0
-push 1500
+push 0
 storem $start
 push 30
 storem $size
 loadm $size
 storem $end
-push 5
+push 10
 storem $count
 :_4_condition_start
 loadm $count
@@ -54,9 +54,7 @@ index  *result
 call @_plotarray
 jump :lus
 :_6_no_result
-settimer 21
 join
-prttimer 21
 jump :_5_condition_start
 :_5_repeat_end
 prttimer 0
