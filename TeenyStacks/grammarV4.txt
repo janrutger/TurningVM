@@ -2,7 +2,7 @@
 program    ::=	[(define)] {statement}
 
 
-define	::= "DEFINE" nl
+define	::=	"DEFINE" nl
 				[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
 				[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
 				[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
@@ -24,10 +24,10 @@ statement  ::=  "LABEL" label nl
 									| ¨WAIT¨  nl
 									| "AS" (variable | '['array']') nl
 									| “MATCH” nl 
-											"ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl 
-											[("ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl)+]
-											[ "NO" nl {statement} nl "END" nl]
-										"END" nl
+										"ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl 
+										[("ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl)+]
+										[ "NO" nl {statement} nl "END" nl]
+									"END" nl
 									| "DO" nl {statement} nl "END" nl
 									| "GOTO" label nl
 									|  nl )
