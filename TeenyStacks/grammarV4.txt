@@ -20,17 +20,17 @@ statement  ::=  "LABEL" label nl
 			|   “RESULT”  nl {statement} nl "END" nl
 			|   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
 			|   (expression | st) ( "PRINT" nl
-									| "PLOT"  nl
-									| ¨WAIT¨  nl
-									| "AS" (variable | '['array']') nl
-									| “MATCH” nl 
-										"ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl 
-										[("ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl)+]
-										[ "NO" nl {statement} nl "END" nl]
-									"END" nl
-									| "DO" nl {statement} nl "END" nl
-									| "GOTO" label nl
-									|  nl )
+								| "PLOT"  nl
+								| ¨WAIT¨  nl
+								| "AS" (variable | '['array']') nl
+								| “MATCH” nl 
+									"ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl 
+									[("ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl)+]
+									[ "NO" nl {statement} nl "END" nl]
+								"END" nl
+								| "DO" nl {statement} nl "END" nl
+								| "GOTO" label nl
+								|  nl )
 expression ::=	(INTEGER | STRING | function | "`"function | variable | array |'['array']'| word)+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
      	             		  
