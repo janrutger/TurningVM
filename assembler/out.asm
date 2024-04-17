@@ -3,11 +3,11 @@ settimer 0
 speed 0
 push 0
 storem $start
-push 30
+push 10
 storem $size
 loadm $size
 storem $end
-push 10
+push 30
 storem $count
 :_4_condition_start
 loadm $count

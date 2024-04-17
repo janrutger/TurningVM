@@ -57,8 +57,8 @@ print("OR({}, {}) = {}".format(1, 0, OR_logicFunction(test4)))
 # NOT Logic Function
 # wNOT = -1, bNOT = 0.5
 def NOT_logicFunction(x): # scale 10, shift by 100
-    wNOT = np.array([90])
-    bNOT = 5
+    wNOT = np.array([190])
+    bNOT = 105
     return perceptronModel(x, wNOT, bNOT)
 
 print("NOT({}) = {}".format(0, NOT_logicFunction(test5)))

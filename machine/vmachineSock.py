@@ -21,12 +21,6 @@ class Machine:
         self.cpu0 = executer
         self.ui = ui 
 
-        self.CPUS = []
-        manager = Manager()
-        self.jobQueue = manager.list()
-        self.jobResults = manager.dict()
-
-
         self.word_map = {}
         self.dispatch_map = {
             "%": self.mod,
@@ -131,8 +125,12 @@ class Machine:
 
     def mpuEnable(self):
         self.CPUS = []
-        #self.initCode = [('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('CALL', '@core'), ('HALT', '')]
+        manager = Manager()
+        self.jobQueue = manager.list()
+        self.jobResults = manager.dict()
+
         self.initCode = [('LIFO', '%_system'), ('CALL', '@core'), ('HALT', '')]
+
         self.cpu0.run_rpc([('LIFO', '%_system'), ('IOBUFF', '%_display'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
         self.memPage0 = self.cpu0.memPage()
         self.cpu0.enable_mpu(self.jobQueue, self.jobResults, 0)
