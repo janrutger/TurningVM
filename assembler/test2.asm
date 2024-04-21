@@ -1,18 +1,29 @@
 @main
-array *test
+push 0
+push 0
+storem %_xygraph
+storem %_xygraph
 
+push 10
+push 10
+storem %_xygraph
+storem %_xygraph
 
-push 3
-push 8
-push 5
-storem *test
-storem *test
-storem *test
+push 15
+push 10
+storem %_xygraph
+storem %_xygraph
 
-push '_input_plotarray'
-index *test
+push 15
+push 15
+storem %_xygraph
+storem %_xygraph
 
-call @plotnew
-call @_plotarray
+push 10
+push 15
+storem %_xygraph
+storem %_xygraph
+
+output %_xygraph
 
 ret

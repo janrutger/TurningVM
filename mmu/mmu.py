@@ -49,6 +49,8 @@ class MMU:
             if memType == "IObuff":
                 if adres == '%_plotter':
                     self.ui.output(adres, memVal)
+                elif adres == '%_xygraph':
+                    self.ui.output(adres, memVal)
                 elif adres == '%_display':
                     self.ui.display(self.stringTable, memVal)
                 else:

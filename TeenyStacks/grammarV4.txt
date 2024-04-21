@@ -19,7 +19,7 @@ statement  ::=  "LABEL" label nl
 			|   “JOIN” nl 
 			|   “RESULT”  nl {statement} nl "END" nl
 			|   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
-			|   (expression | st) ( "PRINT" nl
+			|   (expression | tos) ( "PRINT" nl
 						| "PLOT"  nl
 						| ¨WAIT¨  nl
 						| "AS" (variable | '['array']') nl
@@ -41,7 +41,7 @@ function   ::=  ident
 variable   ::=  ident
 
 
-st         ::=	('.'|'..')
+tos        ::=	('.'|'..')
 nl         ::= '\n'+
 ident      ::= [a-zA-Z][a-zA-Z0-9]*
 

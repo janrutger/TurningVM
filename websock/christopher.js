@@ -66,29 +66,23 @@ function println(text2print){
 
 function plotter(values){
     console.log("Plot something")
-
     if (myChart) {
         myChart.destroy();
     }
-
     var ctx = document.getElementById("plotter");
-
     xyValues =[]
     for (let i = 0; i < values.length; i++) {
         var x;
         var y;
         xyValues[i] = { x: i, y: values[i] };
     }
-
     var options = {
         responsive: false, // Instruct chart js to respond nicely.
         //maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
         legend: { display: false},
         animation: false,
-        events: []
-        
+        events: []  
     };
-
     // End Defining data
     var myChart = new Chart(ctx, {
         type: 'scatter',
@@ -102,9 +96,42 @@ function plotter(values){
         },
         options: options
     });
-
-    
     }
+
+
+function xyGraphics(values) {
+    console.log("Plot something")
+    if (myChart) {
+        myChart.destroy();
+    }
+    var ctx = document.getElementById("plotter");
+    xyValues = []
+    for (let i = 0; i < values.length; i += 2) {
+        var x;
+        var y;
+        xyValues[i] = { x: values[i], y: values[i+1] };
+    }
+    var options = {
+        responsive: false, // Instruct chart js to respond nicely.
+        //maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+        legend: { display: false },
+        animation: false,
+        events: []
+    };
+    // End Defining data
+    var myChart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'PLOTTER', // Name the series
+                data: xyValues, // Specify the data values array
+                borderColor: '#2196f3', // Add custom color border            
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            }]
+        },
+        options: options
+    });
+}
 
 
 
@@ -143,6 +170,8 @@ function sock_message(evt)
         } else if ("output" in input) {
             if (input["output"] == '%_plotter') {     
                 plotter(input["values"])
+            } else if (input["output"] == '%_xygraph') {
+                xyGraphics(input["values"])
             }
             
 
