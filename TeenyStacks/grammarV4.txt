@@ -5,6 +5,13 @@ program    ::=	[(define)] {statement}
 define	::=	"DEFINE" nl
 			[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
 			[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+			
+			[ ("THING" thing nl 
+					"INIT" {statement} nl "END" nl
+					"THIS" function nl {statement} nl "END" nl
+				   ["THIS" function nl {statement} nl "END" nl]+ 
+			   "END" nl)+]
+
 			[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
 		"END" nl
 
@@ -13,12 +20,12 @@ statement  ::=  "LABEL" label nl
 			|   "GOTO"  label nl
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
 			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
-			|   "ARRAY" array ['['(INTEGER)+']'] nl
-			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
+			|   "ARRAY" [“THIS”] array ['['(INTEGER)+']'] nl
 			|   “QUEUE” job nl
 			|   “JOIN” nl 
 			|   “RESULT”  nl {statement} nl "END" nl
-			|   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
+			|   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
+			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
 			|   (expression | tos) ( "PRINT" nl
 						| "PLOT"  nl
 						| ¨WAIT¨  nl
@@ -31,7 +38,8 @@ statement  ::=  "LABEL" label nl
 						| "DO" nl {statement} nl "END" nl
 						| "GOTO" label nl
 						|  nl )
-expression ::=	(INTEGER | STRING | function | "`"function | variable | array |'['array']'| word)+
+
+expression ::=	(INTEGER | STRING | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
 word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
      	             		  
 label      ::=  ident
@@ -39,6 +47,7 @@ job        ::=  ident
 array	   ::=  ident
 function   ::=  ident
 variable   ::=  ident
+thing      ::=  ident
 
 
 tos        ::=	('.'|'..')
