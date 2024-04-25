@@ -1,0 +1,56 @@
+DEFINE
+    ARRAY result 
+    ARRAY block
+
+    FUNCTION calc
+        . AS n
+        0 AS c
+        {0 n >} DO
+            n n `isqrt DUP * - AS n
+            c 1 + AS c
+        END
+        c
+    END
+
+
+    JOB batch USE block
+        ARRAY result
+        1 [block] AS m 
+        2 [block] AS end
+
+        {m end !=} DO
+            m calc AS [result]
+            m 1 + AS m
+        END
+    RETURN result 
+END
+
+
+0 AS start 
+10 AS size
+size AS end
+30 AS count
+
+{count 0 !=} DO
+    ARRAY block
+    start AS [block]
+    end AS [block]
+    
+    QUEUE batch
+
+    start size + AS start
+    start size + AS end
+
+    count 1 - AS count
+END
+
+
+{DEPTH 0 !=} DO
+    LABEL lus
+    RESULT 
+        WITH result PLOT
+        GOTO lus
+    END
+    JOIN
+END
+

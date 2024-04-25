@@ -1,0 +1,72 @@
+DEFINE
+    ARRAY arg
+
+    JOB calc USE arg 
+        0 AS res
+        1 [arg] 2 [arg]  % 0 != DO
+            1 [arg] AS res
+        END 
+    RETURN res
+END
+
+ARRAY workingList 
+ARRAY primeList 
+ARRAY tmp 
+
+500 AS max
+2 AS start
+
+FUNCTION check4primes
+    LABEL startrun
+        1 [workingList] AS n 
+        n AS [primeList]
+
+        WITH workingList EACH
+            . AS i
+            i n != DO
+                ARRAY arg
+                i AS [arg]
+                n AS [arg]
+                QUEUE calc
+            END  
+        END 
+
+        {DEPTH 0 !=} DO
+            LABEL lus
+            RESULT
+                res 0 != DO 
+                    res AS [tmp]
+                END
+                GOTO lus
+            END
+        JOIN
+        END
+
+        ARRAY workingList
+        WITH tmp COPY workingList
+        ARRAY tmp
+    max 1 [workingList] DUP * < GOTO startrun 
+
+    WITH workingList EACH
+        . AS [primeList]
+    END  
+END 
+
+
+
+{start max !=} DO
+    start AS [workingList]
+    start 1 + AS start
+END
+
+check4primes
+
+1 AS n
+primeList AS end
+
+{n end >} DO
+    n 1 + [primeList] n [primeList] - 
+    .. PLOT
+    . PRINT
+    n 1 + AS n
+END

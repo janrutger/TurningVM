@@ -1,0 +1,40 @@
+DEFINE 
+    VALUE  n 1
+
+    FUNCTION calc
+        1 8 n * + `isqrt 1 - 2 / AS m 
+    END
+
+    FUNCTION voorwaarde
+        1 m + m * 2 n * % 0 !=
+    END 
+
+    JOB job1 USE n
+        calc
+        {voorwaarde} REPEAT
+            m 1 + AS m 
+        END
+    RETURN m
+
+END
+
+
+INPUT AS end
+
+{n end !=} REPEAT
+    QUEUE job1
+
+    LABEL lus
+    RESULT
+        m PLOT
+        GOTO lus
+    END
+    n 1 + AS n
+    n PRINT
+END
+
+{DEPTH 0 !=} DO
+    RESULT
+        m PLOT
+    END
+END

@@ -1,5 +1,74 @@
 # TurningVM
-A Forth like virtual machine using a 4 tape Turing compatible ALU
+An virtual machine using a 4 Tape Turing Machine as ALU
+
+Supports:
+- positive intergers (only)
+- All ALU operations are done by Turing State Machines
+- The ALU monitor shows the register values
+- integrated Memory and I/O management
+- An Console printing and an Y-plotter output
+- support for Array and String datatype
+- support for timers eg performance
+- support for a-sync jobs
+- Small instruction set < 70
+
+
+STACKS: An RPN-based Language for the TuringVM Machine
+
+- STACKS is a programming language inspired by Forth, a powerful stack-based language. It uses Reverse Polish Notation (RPN), where operands are placed before the operator, making it concise and efficient. STACKS is designed to generate code specifically for the TuringVM virtual machine, which utilizes Turing State Machines for its ALU operations.
+
+
+
+The Grammer of TeenySTACKS V3
+
+    Version 3: Including Array datatype and a-sync Jobs
+    Version 2: Includes Functions
+    Version    Initial (thanks for AZHenley)
+    ----------------------------------------------------
+
+    program    ::=	[(define)] {statement}
+
+
+    define     ::= "DEFINE" nl
+                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+                    [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+                    [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+                "END" nl
+
+
+    statement  ::=  "LABEL" label nl
+                |   "GOTO"  label nl
+                |   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
+                |   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
+                |   "ARRAY" array ['['(INTEGER)+']'] nl
+                |   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
+                |   “QUEUE” job nl
+                |   “JOIN” nl 
+                |   “RESULT”  nl {statement} nl "END" nl
+                |   "WITH” array (“EACH” nl {statement} nl "END" 
+                                | “COPY” array 
+                                | "PLOT" ["NEW"]) 
+                                nl
+                |   (expression | st) ( "PRINT" nl
+                                    | "PLOT"  nl
+                                    | ¨WAIT¨  nl
+                                    | "AS" (variable | '['array']') nl
+                                    | "DO" nl {statement} nl "END" nl
+                                    | "GOTO" label nl
+                                    |  nl )
+    expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
+    word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'| 'DEPTH' | 'INPUT'|'RAWIN')
+                                
+    label      ::=  ident
+    job        ::=  ident
+    array	   ::=  ident
+    function   ::=  ident
+    variable   ::=  ident
+
+
+    st         ::=	('.'|'..')
+    nl         ::= '\n'+
+    ident      ::= [a-zA-Z][a-zA-Z0-9]*
 
 
 Inspired by:
@@ -21,29 +90,3 @@ also inspriration from:
 
 Specials
 - from @AZHenley https://github.com/AZHenley/teenytinycompiler 
-
-
-The Grammer of TeenySTACKS
-
-    program    ::=	{statement}
-    statement  ::=  "LABEL" ident nl
-                |   "GOTO" ident nl
-                |   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
-                |   "DEFINE" ident nl {statement} nl "END" nl
-                |   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	   
-                |   (expression | st) ( "PRINT" nl
-                                    | "PLOT" nl
-                                    | "WAIT" nl
-                                    | "AS" ident nl
-                                    | "DO"   nl {statement} nl "END" nl
-                                    | "GOTO" ident nl
-                                    |  nl )
-
-
-
-    expression ::=	(INTEGER | STRING | "`" ident | ident | word )+
-    word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-    ident      ::=	(variable | function | STRING)
-
-    st         ::=	('.'|'..')
-    nl         ::= '\n'+

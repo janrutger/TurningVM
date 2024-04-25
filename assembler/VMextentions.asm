@@ -34,6 +34,25 @@ ret
     output %_plotter
 ret
 
+@plotnew
+    iobuff %_plotter
+ret
+
+@_plotarray
+    push 1
+    loadb
+    :lus_plotarray 
+        storeb
+        readelm '_input_plotarray'
+        jumpf :klaar_plotarray
+        storem %_plotter
+        incb
+    jump :lus_plotarray
+    :klaar_plotarray
+    output %_plotter
+    clrb
+ret
+
 @char2prtbuff
     storem %_display
     push 1
@@ -57,6 +76,18 @@ ret
     clrb
 ret
 
+@lcm
+    storem $b_lcm
+    storem $a_lcm
+    loadm $a_lcm
+    loadm $b_lcm
+    loadm $a_lcm
+    loadm $b_lcm
+    call @_gcd
+    call @div
+    call @mul
+ret
+
 
 @sleep
     speed 0
@@ -73,3 +104,72 @@ ret
     clra
     clrb
 ret
+
+@isqrt
+    storem $y_isqrt
+    push 0
+    storem $L_isqrt
+    loadm $y_isqrt
+    push 1
+    call @plus
+    storem $R_isqrt
+    :_0_condition_start_isqrt
+    loadm $L_isqrt
+    loadm $R_isqrt
+    push 1
+    call @minus
+    call @neq
+    loada
+    testz
+    clra
+    jumpf :_0_repeat_end_isqrt
+    loadm $L_isqrt
+    loadm $R_isqrt
+    call @plus
+    push 2
+    call @div
+    storem $M_isqrt
+    loadm $M_isqrt
+    loadm $M_isqrt
+    call @mul
+    loadm $y_isqrt
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_1_do_end_isqrt
+    loadm $M_isqrt
+    storem $R_isqrt
+    jump :done
+    :_1_do_end_isqrt
+    loadm $M_isqrt
+    storem $L_isqrt
+    :done
+    jump :_0_condition_start_isqrt
+    :_0_repeat_end_isqrt
+    loadm $L_isqrt
+ret
+
+
+@core 
+    speed 0
+    :loop_core
+        join
+        push 1
+        call @sleep
+    jump :loop_core
+ret
+
+
+
+@__illegal_Array_Index
+    push 'Illegal\_INDEX\_error\_'
+    call @char2prtbuff
+    call @printbuff
+halt
+
+@__MemAllocGlobels
+    push 'No\_globel\_mem\_config\_found'
+    call @char2prtbuff
+    call @printbuff
+halt

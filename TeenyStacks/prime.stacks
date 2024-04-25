@@ -1,0 +1,52 @@
+ARRAY workingList 
+ARRAY tmp 
+ARRAY primeList 
+
+INPUT AS max
+2 AS start
+
+{start max !=} DO
+        start AS [workingList]
+        start 1 + AS start
+    END
+
+FUNCTION check4prime
+    LABEL startrun
+        1 [workingList] AS n 
+        n AS [primeList]
+        n PLOT
+
+        WITH workingList EACH
+            . AS i
+
+            i n != DO
+                i n % 0 != DO
+                    i AS [tmp]
+                END 
+            END     
+        END 
+
+        ARRAY workingList
+        WITH tmp COPY workingList
+        ARRAY tmp
+
+    max 1 [workingList] DUP * < GOTO startrun 
+
+    WITH workingList EACH
+        .. AS [primeList]
+        . PLOT
+    END  
+END 
+
+
+
+check4prime
+
+
+#WITH primeList EACH
+#    . PLOT
+#END
+
+
+
+

@@ -1,0 +1,65 @@
+DEFINE
+    VALUE offset 1000
+    VALUE x 1
+
+    FUNCTION stepX
+        x 1 + AS x 
+        x
+    END
+
+    JOB sine USE x 
+        180 x - x * AS u
+        4000 u * 40500 u - / AS y
+    RETURN y
+
+END
+
+FUNCTION QueJobs 
+	{stepX 180 !=} REPEAT
+        QUEUE sine
+    END
+END
+
+
+FUNCTION AddResult
+    {DEPTH 0 !=} DO
+        LABEL lus2
+        RESULT
+            offset y + PLOT
+            GOTO lus2
+        END
+        JOIN
+    END
+    0 PLOT
+END
+
+FUNCTION SubResult
+    {DEPTH 0 !=} DO
+        LABEL lus1
+        RESULT
+            offset y - PLOT
+            GOTO lus1
+        END
+        JOIN
+    END  
+    0 PLOT 
+END
+
+
+0 PLOT
+
+QueJobs
+AddResult
+
+1 AS x
+QueJobs
+SubResult
+
+
+
+
+
+
+
+
+

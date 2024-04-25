@@ -49,6 +49,8 @@ class MMU:
             if memType == "IObuff":
                 if adres == '%_plotter':
                     self.ui.output(adres, memVal)
+                elif adres == '%_xygraph':
+                    self.ui.output(adres, memVal)
                 elif adres == '%_display':
                     self.ui.display(self.stringTable, memVal)
                 else:
@@ -197,7 +199,7 @@ class MMU:
                 self.virtMemAdresses[adres] = len(self.memory)
                 self.memory.append(("MEM", memVal))
             else:
-                self.panic("FATAL: WriteMem [unknown adres/invalid memtype]")
+                self.panic("FATAL: WriteMem [unknown adres/invalid memtype]" + adres)
 
 
     def makeStack(self, memType, adres):
@@ -245,3 +247,34 @@ class MMU:
             self.index(index, adres)
         else:
             self.panic("FATAL: set [unknown memtype]")
+
+    def peek(self, adres):
+        if isinstance(adres, int):
+            self.panic("FATAL: peek [illegal adress]")
+        else:
+            if adres in self.virtMemAdresses.keys():
+                memType, memVal = self.memory[self.virtMemAdresses[adres]]
+                if memType == "INDEX":  # Peek a adress
+                    if isinstance(memVal, int):
+                        self.panic("FATAL: peek [illegal adress]")
+                    elif memVal in self.virtMemAdresses.keys():
+                        return (self.peek(memVal))
+                    else:
+                        self.panic("FATAL: peek [unknown index]")
+                elif memType == "MEM" or memType == "ARRAY":  # Peek a value
+                    return ((adres, self.memory[self.virtMemAdresses[adres]]))
+                else:
+                    self.panic("FATAL: peek [unknown memtype]")
+            else:
+                self.panic("FATAL: peek [unknown adress] " + adres)
+
+    def poke(self, pokeVal):
+        if pokeVal[0] not in self.virtMemAdresses.keys():
+            if pokeVal[1][0] == "MEM":
+                self.writeMem(pokeVal[0], "0")
+            elif pokeVal[1][0] == "ARRAY":
+                self.array(pokeVal[0])
+            else:
+                self.panic("FATAL: WriteMem [unknown memtype]")
+        self.memory[self.virtMemAdresses[pokeVal[0]]] = (pokeVal[1])
+

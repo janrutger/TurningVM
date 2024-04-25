@@ -1,44 +1,44 @@
 
-program    ::=	{statement}
+program    ::=	[(define)] {statement}
+
+
+define	::= "DEFINE" nl
+				[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+				[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+				[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+			"END" nl
+
+
 statement  ::=  "LABEL" label nl
 			|   "GOTO"  label nl
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
-			|   "DEFINE" function nl {statement} nl "END" nl
-			|   "{" (expression | st) "}" "REPEAT" nl {statement} nl "END" nl	
-
-			|   (expression | st) ( "PRINT" [ "["(value)+"]" ] nl
-								  | "PLOT" nl
-								  | ¨WAIT¨ nl
-								  | "AS" variable nl
-							      | "DO"   nl {statement} nl "END" nl
-								  | "GOTO" label nl
-								  |  nl )
-
-
-expression ::=	(INTEGER | STRING | function | "`"function | struct'.'method | variable | word)+
-word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'INPUT'|'RAWIN')
-
-
-method     ::=  ( CREATE | APPEND ) "[" [(value)+          ] "]" |
-				( VALUES | TYPED  ) "[" [(index)+          ] "]" |
-                  LOOKUP            "["   index            ] "]" |
-                  PRINT             "[" [(index | STRING)+ ] "]" |
-                  LEN	     	             		  
-
-value      ::= 	('.' | INTEGER | STRING | variable | function | struct.LOOKUP)
-index      ::= 	(      INTEGER |          variable | function | struct.LOOKUP)  
-
-label      ::=  STRING
+			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
+			|   "ARRAY" array ['['(INTEGER)+']'] nl
+			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
+			|   “QUEUE” job nl
+			|   “JOIN” nl 
+			|   “RESULT”  nl {statement} nl "END" nl
+			|   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
+			|   (expression | st) ( "PRINT" nl
+									| "PLOT"  nl
+									| ¨WAIT¨  nl
+									| "AS" (variable | '['array']') nl
+									| "DO" nl {statement} nl "END" nl
+									| "GOTO" label nl
+									|  nl )
+expression ::=	(INTEGER | STRING | function | "`"function | variable | array |'['array']'| word)+
+word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
+     	             		  
+label      ::=  ident
+job        ::=  ident
+array	   ::=  ident
 function   ::=  ident
 variable   ::=  ident
-struct     ::=  ident
+
 
 st         ::=	('.'|'..')
 nl         ::= '\n'+
-
-
-
-
+ident      ::= [a-zA-Z][a-zA-Z0-9]*
 
 
 

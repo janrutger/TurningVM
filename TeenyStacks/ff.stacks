@@ -1,0 +1,24 @@
+INPUT AS n
+
+1 8 n * + AS s
+
+2 s < DO 
+    1
+    GOTO einde
+END
+
+s 2 / AS x0
+s x0 / x0 + 2 / AS x1
+{x0 x1 <} REPEAT 
+    x1 AS x0
+    s x0 / x0 + 2 / AS x1
+END 
+x0
+LABEL einde
+
+1 - 2 / AS m 
+
+{1 m + m * 2 n * % 0 !=} REPEAT
+    m 1 + AS m 
+END
+m PLOT

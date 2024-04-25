@@ -1,5 +1,5 @@
 1 AS s
-{s 2000 !=} REPEAT
+{s 500 !=} REPEAT
     TIMER 16 SET
     2 s < DO 
         1

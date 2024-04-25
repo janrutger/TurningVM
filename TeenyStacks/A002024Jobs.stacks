@@ -1,0 +1,37 @@
+DEFINE
+    VALUE n
+
+    FUNCTION A002024
+        n 8 * `isqrt 1 + 2 /
+    END
+
+    JOB calc USE n
+        A002024 AS r
+    RETURN r
+END
+
+
+1 AS n
+1500 AS end
+
+{n end >} DO
+    QUEUE calc
+    n 1 + AS n
+END
+
+
+1 AS n
+{n end >} DO
+    A002024 DUP PLOT
+    n  + AS n
+END
+
+
+{DEPTH 0 !=} DO
+    RESULT  
+        r PLOT
+    END
+    JOIN
+END
+
+

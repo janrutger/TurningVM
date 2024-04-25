@@ -1,0 +1,55 @@
+ARRAY data
+ARRAY tmp
+
+100 AS max
+
+TIMER 17 SET
+{max 0 !=} DO
+    `rand AS [data]
+    max 1 - AS max
+    WITH data PLOT NEW
+END
+TIMER 17 PRINT
+
+
+FUNCTION plot
+    WITH data PLOT NEW
+END
+
+FUNCTION sort
+    # 0 = True, 1 = False
+    0 AS sorting
+    
+    {sorting} DO
+        1 AS sorting
+        1 AS n
+        2 AS nn
+
+        LABEL lus
+            nn data 1 + == GOTO done
+            n [data] nn [data] < DO
+                nn [data] AS [tmp]
+                nn 1 + AS nn
+                0 AS sorting
+                GOTO lus
+            END 
+                n [data] AS [tmp]
+                nn AS n
+                nn 1 + AS nn
+                GOTO lus
+        LABEL done
+        n [data] AS [tmp]
+
+        ARRAY data
+        WITH tmp COPY data
+        ARRAY tmp     
+        plot 
+    END
+END
+
+
+plot
+TIMER 17 SET
+sort
+TIMER 17 PRINT
+plot
