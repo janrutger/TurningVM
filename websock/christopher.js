@@ -109,20 +109,34 @@ function xyGraphics(values) {
     for (let i = 0; i < values.length; i += 2) {
         var x;
         var y;
-        xyValues[i] = { x: values[i], y: values[i+1] };
+        xyValues[i] = { x: values[i+1], y: values[i] };
     }
     var options = {
         responsive: false, // Instruct chart js to respond nicely.
         //maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
         legend: { display: false },
         animation: false,
-        events: []
+        events: [],
+        scales: {
+            xAxes: [{
+                gridLines: {
+                    display: false
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    display: false
+                }
+            }]
+        }
     };
     // End Defining data
     var myChart = new Chart(ctx, {
         type: 'scatter',
         data: {
             datasets: [{
+                pointStyle: 'rect',
+                pointRadius: 6,
                 label: 'PLOTTER', // Name the series
                 data: xyValues, // Specify the data values array
                 borderColor: '#2196f3', // Add custom color border            
