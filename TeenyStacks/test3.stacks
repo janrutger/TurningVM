@@ -2,6 +2,8 @@ DEFINE
     ARRAY array [3 5 9]
 END
 
+ARRAY array [3 5 9]
+ARRAY array2
 
 INPUT AS zoek
 
@@ -15,3 +17,9 @@ LABEL found
 . PRINT
 
 LABEL notfound
+
+WITH array COPY array2
+
+10 AS [array2]
+
+2 [array2] PRINT

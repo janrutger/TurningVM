@@ -29,7 +29,7 @@ statement  ::=  "LABEL" label nl
 			|   (expression | tos) ( "PRINT" nl
 						| "PLOT"  nl
 						| ¨WAIT¨  nl
-						| "AS" (variable | '['array']') nl
+						| "AS" [“THIS”] (variable | '['array']') nl
 						| “MATCH” nl 
 							  "ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl 
 							[("ON" (expression) ['!='|'>'|'<'] "DO" nl {statement} nl "END" nl)+]

@@ -1,126 +1,207 @@
 @main
 settimer 0
 speed 0
-push 0
+array *workingList
+array *primeList
+array *tmp
+push 150
+storem $max
+push 2
 storem $start
-push 10
-storem $size
-loadm $size
+:_14_condition_start
+loadm $start
+loadm $max
+call @neq
+loada
+testz
+clra
+jumpf :_14_repeat_end
+loadm $start
+storem *workingList
+loadm $start
+push 1
+call @plus
+storem $start
+jump :_14_condition_start
+:_14_repeat_end
+call @~check4primes
+push 1
+storem $n
+loadm *primeList
 storem $end
-push 30
-storem $count
-:_4_condition_start
-loadm $count
+:_15_condition_start
+loadm $n
+loadm $end
+call @gt
+loada
+testz
+clra
+jumpf :_15_repeat_end
+loadm $n
+push 1
+call @plus
+readelm *primeList
+jumpt :_16_readelm_done
+call @__illegal_Array_Index
+:_16_readelm_done
+loadm $n
+readelm *primeList
+jumpt :_17_readelm_done
+call @__illegal_Array_Index
+:_17_readelm_done
+call @minus
+call @dup
+call @plot
+prt
+loadm $n
+push 1
+call @plus
+storem $n
+jump :_15_condition_start
+:_15_repeat_end
+prttimer 0
+ret
+@~calc
+push 0
+storem $res
+push 1
+readelm *arg
+jumpt :_0_readelm_done
+call @__illegal_Array_Index
+:_0_readelm_done
+push 2
+readelm *arg
+jumpt :_1_readelm_done
+call @__illegal_Array_Index
+:_1_readelm_done
+call @mod
 push 0
 call @neq
 loada
 testz
 clra
-jumpf :_4_repeat_end
-array *block
-loadm $start
-storem *block
-loadm $end
-storem *block
-push 'jobinput_batch'
-job @~batch
-loadm $start
-loadm $size
-call @plus
-storem $start
-loadm $start
-loadm $size
-call @plus
-storem $end
-loadm $count
+jumpf :_2_do_end
 push 1
-call @minus
-storem $count
-jump :_4_condition_start
-:_4_repeat_end
-:_5_condition_start
+readelm *arg
+jumpt :_3_readelm_done
+call @__illegal_Array_Index
+:_3_readelm_done
+storem $res
+:_2_do_end
+done $res
+@~check4primes
+:startrun
+push 1
+readelm *workingList
+jumpt :_4_readelm_done
+call @__illegal_Array_Index
+:_4_readelm_done
+storem $n
+loadm $n
+storem *primeList
+push 1
+storem $_5_workingList
+:_5_start_each
+loadm $_5_workingList
+readelm *workingList
+jumpf :_5_end_each
+storem $i
+loadm $i
+loadm $n
+call @neq
+loada
+testz
+clra
+jumpf :_6_do_end
+array *arg
+loadm $i
+storem *arg
+loadm $n
+storem *arg
+push 'jobinput_calc'
+job @~calc
+:_6_do_end
+loadm $_5_workingList
+loadb
+incb
+moveb
+storem $_5_workingList
+jump :_5_start_each
+:_5_end_each
+:_7_condition_start
 pending
 push 0
 call @neq
 loada
 testz
 clra
-jumpf :_5_repeat_end
+jumpf :_7_repeat_end
 :lus
 result
-jumpf :_6_no_result
-push '_input_plotarray'
-index  *result
-call @_plotarray
-jump :lus
-:_6_no_result
-join
-jump :_5_condition_start
-:_5_repeat_end
-prttimer 0
-ret
-@~calc
-storem $n
+jumpf :_8_no_result
+loadm $res
 push 0
-storem $c
-:_0_condition_start
-push 0
-loadm $n
-call @gt
-loada
-testz
-clra
-jumpf :_0_repeat_end
-loadm $n
-loadm $n
-call @isqrt
-call @dup
-call @mul
-call @minus
-storem $n
-loadm $c
-push 1
-call @plus
-storem $c
-jump :_0_condition_start
-:_0_repeat_end
-loadm $c
-ret
-@~batch
-array *result
-push 1
-readelm *block
-jumpt :_1_readelm_done
-call @__illegal_Array_Index
-:_1_readelm_done
-storem $m
-push 2
-readelm *block
-jumpt :_2_readelm_done
-call @__illegal_Array_Index
-:_2_readelm_done
-storem $end
-:_3_condition_start
-loadm $m
-loadm $end
 call @neq
 loada
 testz
 clra
-jumpf :_3_repeat_end
-loadm $m
-call @~calc
-storem *result
-loadm $m
+jumpf :_9_do_end
+loadm $res
+storem *tmp
+:_9_do_end
+jump :lus
+:_8_no_result
+join
+jump :_7_condition_start
+:_7_repeat_end
+array *workingList
 push 1
-call @plus
-storem $m
-jump :_3_condition_start
-:_3_repeat_end
-done *result
+storem $_10_tmp
+:_10_start_copy
+loadm $_10_tmp
+readelm *tmp
+jumpf :_10_end_copy
+storem *workingList
+loadm $_10_tmp
+loadb
+incb
+moveb
+storem $_10_tmp
+jump :_10_start_copy
+:_10_end_copy
+array *tmp
+loadm $max
+push 1
+readelm *workingList
+jumpt :_11_readelm_done
+call @__illegal_Array_Index
+:_11_readelm_done
+call @dup
+call @mul
+call @lt
+loada
+testz
+clra
+jumpf :_12_goto_end
+jump :startrun
+:_12_goto_end
+push 1
+storem $_13_workingList
+:_13_start_each
+loadm $_13_workingList
+readelm *workingList
+jumpf :_13_end_each
+storem *primeList
+loadm $_13_workingList
+loadb
+incb
+moveb
+storem $_13_workingList
+jump :_13_start_each
+:_13_end_each
+ret
 @__MemAllocGlobels
-array *result
-array *block
-push 'jobinput_batch'
-index *block
+array *arg
+push 'jobinput_calc'
+index *arg
 ret
