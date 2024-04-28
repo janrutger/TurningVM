@@ -24,7 +24,7 @@ statement  ::=  "LABEL" label nl
 			|   “QUEUE” job nl
 			|   “JOIN” nl 
 			|   “RESULT”  nl {statement} nl "END" nl
-			|   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
+			|   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” [“THIS”] array | "PLOT" ["NEW"]) nl
 			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
 			|   (expression | tos) ( "PRINT" nl
 						| "PLOT"  nl
