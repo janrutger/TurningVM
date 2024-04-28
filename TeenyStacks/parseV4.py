@@ -55,7 +55,7 @@ class Parser:
 
     # Returns true if symbol is not used yet
     def isFreeSymbol(self, symbol):
-        return symbol not in self.symbols and symbol not in self.functions and symbol not in self.jobs and symbol not in self.arrays
+        return symbol not in self.symbols and symbol not in self.functions and symbol not in self.jobs and symbol not in self.arrays and symbol not in self.things
 
     def abort(self, message):
         sys.exit("Error. " + message)
@@ -154,6 +154,58 @@ class Parser:
                 self.nl()
             else:
                 self.abort("Already in use as a Variable: " + self.curToken.text)
+        
+        # [("THING" thing nl
+        #   "INIT" nl {statement} nl "END" nl
+        #   "THIS" function nl {statement} nl "END" nl
+        #  ["THIS" function nl {statement} nl "END" nl] +
+        #   "END" nl)+]
+        while self.checkToken(TokenType.THING):
+            self.match(TokenType.THING)
+            if self.isFreeSymbol(self.curToken.text):
+                self.things.add(self.curToken.text)
+            if self.curToken.text in self.things:
+                self.curThing = self.curToken.text
+                self.match(TokenType.IDENT)
+                self.nl()
+        #   "INIT" nl {statement} nl "END" nl
+                self.match(TokenType.INIT)
+                self.nl()
+                while not self.checkToken(TokenType.END):
+                    self.statement()
+                self.match(TokenType.END)
+                self.nl()
+        #   "THIS" function nl {statement} nl "END" nl
+        #  ["THIS" function nl {statement} nl "END" nl] +
+                while self.checkToken(TokenType.THIS):
+                    self.this()
+                    symbol = self.curThis + self.curToken.text
+                    self.curThis = ""
+                    self.match(TokenType.IDENT)
+
+                    if self.isFreeSymbol(symbol):
+                        self.functions.add(symbol)
+                    if symbol in self.functions:
+                        self.emitter.context = "functions"
+                        self.emitter.emitLine("@~" + symbol)
+                        self.nl()
+                        while not self.checkToken(TokenType.END):
+                            self.statement()
+                        self.match(TokenType.END)
+                        self.emitter.emitLine("ret")
+                        self.emitter.context = "program"
+                        self.nl()
+                    else:
+                        self.abort("Already in use as a variable, job or function: " + symbol)
+                #   "END" nl)+]
+                self.curThing = None
+                self.curthis  = ""
+                self.match(TokenType.END)
+                self.nl()
+            else:
+                self.abort("Already in use as a Somethis: " + self.curThing)
+
+
 
         # [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
         while self.checkToken(TokenType.JOB):
@@ -195,7 +247,7 @@ class Parser:
             self.emitter.memLine("ret")
             self.nl()
         else:
-            self.abort("Wrong keyword VALUE/FUNCTION/JOB allowd or missing END statement: " + self.curToken.text)
+            self.abort("Wrong keyword VALUE/FUNCTION/JOB/THING allowd or missing END statement: " + self.curToken.text)
 
     # statement  ::=  
     # One of the following statements...
@@ -518,6 +570,7 @@ class Parser:
                 self.nl()
 
     # expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
+    # expression ::=	(INTEGER | STRING | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
     def expression(self):
         while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.THIS):
             if self.checkToken(TokenType.NUMBER):
@@ -625,6 +678,12 @@ class Parser:
             self.emitter.emitLine("loadm " + "*" + symbol)
         elif symbol in self.functions:
             self.emitter.emitLine("call " + "@~" + symbol)
+        elif symbol in self.things:
+            thing = symbol
+            self.nextToken()
+            function = self.curToken.text
+            #self.match(TokenType.IDENT)
+            self.emitter.emitLine("call " + "@~__" + thing + "__" + function )
         else:
             self.abort("Referencing variable before assignment: " + symbol)
         self.nextToken()

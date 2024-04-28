@@ -1,25 +1,24 @@
 DEFINE
     ARRAY array [3 5 9]
+
+    THING Ding 
+        INIT
+           1 [array] AS THIS n
+           2 [array] AS THIS m
+           3 AS m
+        END
+
+        THIS plus
+            THIS m THIS n + PRINT
+        END
+
+        THIS minus
+            THIS m THIS n - PRINT
+        END
+    END
 END
 
-ARRAY array [3 5 9]
-ARRAY array2
 
-INPUT AS zoek
+5 6 * PRINT
 
-WITH array EACH
-    DUP zoek == GOTO found
-    DROP
-END
-GOTO notfound
-
-LABEL found
-. PRINT
-
-LABEL notfound
-
-WITH array COPY array2
-
-10 AS [array2]
-
-2 [array2] PRINT
+Ding plus

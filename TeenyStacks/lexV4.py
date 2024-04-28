@@ -249,6 +249,7 @@ class TokenType(enum.Enum):
     NEW = 142
     THING = 143
     THIS = 144
+    INIT =145
 
     #
     PLUS = 201
