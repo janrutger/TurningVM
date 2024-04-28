@@ -1,4 +1,4 @@
-from lexV3 import *
+from lexV4 import *
 from emitV3 import *
 from parseV4 import *
 import sys

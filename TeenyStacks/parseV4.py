@@ -1,5 +1,5 @@
 import sys
-from lexV3 import *
+from lexV4 import *
 
 # Parser object keeps track of current token and checks if the code matches the grammar.
 class Parser:
@@ -258,13 +258,17 @@ class Parser:
                 self.abort("Already in use as a Variable " + self.curToken.text)
 
        	# |   "ARRAY" array['['(INTEGER)+']'] nl
+        # |   "ARRAY" [“THIS”] array ['['(INTEGER)+']'] nl
         elif self.checkToken(TokenType.ARRAY):
             self.match(TokenType.ARRAY)
+
+            if self.checkToken(TokenType.THIS):
+                self.this()
 
             if self.checkToken(TokenType.IDENT):
                 symbol = self.curThis + self.curToken.text
                 self.curThis = ""
-                self.match(TokenType.IDENT)
+            self.match(TokenType.IDENT)
 
             if self.isFreeSymbol(symbol):
                 self.arrays.add(symbol)
@@ -315,10 +319,13 @@ class Parser:
         elif self.checkToken(TokenType.WITH):
             self.match(TokenType.WITH)
 
+            if self.checkToken(TokenType.THIS):
+                self.this()
+
             if self.checkToken(TokenType.IDENT):
                 symbol = self.curThis + self.curToken.text
                 self.curThis = ""
-                self.match(TokenType.IDENT)
+            self.match(TokenType.IDENT)
 
             if symbol not in self.arrays:
                 self.abort("Referencing variable before assignment: " + self.curToken.text)
@@ -364,6 +371,8 @@ class Parser:
                 self.emitter.emitLine("jumpf " + ":_" + num + "_end_copy")
                 self.match(TokenType.COPY)
 
+                if self.checkToken(TokenType.THIS):
+                    self.this()
                 if self.checkToken(TokenType.IDENT):
                     symbol2 = self.curThis + self.curToken.text
                     self.curThis = ""
@@ -447,8 +456,11 @@ class Parser:
                 self.nextToken()
                 self.nl()
             # | "AS" (variable | '['array']') nl
+            # | "AS" [“THIS”] (variable | '['array']') nl
             elif self.checkToken(TokenType.AS):
                 self.nextToken()
+                if self.checkToken(TokenType.THIS):
+                    self.this()
                 if self.checkToken(TokenType.IDENT):
                     symbol = self.curThis + self.curToken.text
                     self.curThis = ""
@@ -507,7 +519,7 @@ class Parser:
 
     # expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
     def expression(self):
-        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL):
+        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.THIS):
             if self.checkToken(TokenType.NUMBER):
                 self.emitter.emitLine("push " + self.curToken.text)
                 self.nextToken()
@@ -518,6 +530,8 @@ class Parser:
                 self.nextToken()
                 self.emitter.emitLine("call " + "@" + self.curToken.text)
                 self.match(TokenType.IDENT)
+            elif self.checkToken(TokenType.THIS):
+                self.this() 
             elif self.checkToken(TokenType.OPENBL):
                 self.nextToken()
                 num = self.LabelNum()
@@ -613,6 +627,14 @@ class Parser:
             self.emitter.emitLine("call " + "@~" + symbol)
         else:
             self.abort("Referencing variable before assignment: " + symbol)
+        self.nextToken()
+
+    # THIS
+    def this(self):
+        if self.curThing == None:
+            self.abort("Using THIS outside a THING is not allowd")
+        else:
+            self.curThis = "__" + self.curThing + "__"
         self.nextToken()
 
     # st ::= ('.'|'..')
