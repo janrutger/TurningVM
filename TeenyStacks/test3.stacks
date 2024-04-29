@@ -13,12 +13,13 @@ DEFINE
         END
 
         THIS minus
-            THIS m THIS n - PRINT
+            THIS m THIS n -     
         END
     END
 END
 
 
-5 6 * PRINT
+5 6 * m - PRINT
 
 Ding plus
+Ding minus PRINT

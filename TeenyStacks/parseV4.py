@@ -683,7 +683,7 @@ class Parser:
             self.nextToken()
             function = self.curToken.text
             #self.match(TokenType.IDENT)
-            self.emitter.emitLine("call " + "@~__" + thing + "__" + function )
+            self.emitter.emitLine("call " + "@~(" + thing + ")_" + function )
         else:
             self.abort("Referencing variable before assignment: " + symbol)
         self.nextToken()
@@ -693,7 +693,7 @@ class Parser:
         if self.curThing == None:
             self.abort("Using THIS outside a THING is not allowd")
         else:
-            self.curThis = "__" + self.curThing + "__"
+            self.curThis = "(" + self.curThing + ")_"
         self.nextToken()
 
     # st ::= ('.'|'..')
