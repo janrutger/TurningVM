@@ -34,12 +34,12 @@ Ding minus PRINT
 
 INPUT MATCH
         ON 1 DO
-            1 PRINT
+            . PRINT
         END
-        ON 2 DO
-            2 PRINT
+        ON 2 DO >
+            . PRINT
         END
         NO
-            0 PRINT
+            DROP 0 PRINT
         END
     END

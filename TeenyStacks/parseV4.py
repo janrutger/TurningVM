@@ -548,7 +548,7 @@ class Parser:
                     while self.curToken.text == "ON":
                         num2 = self.LabelNum()
                         self.match(TokenType.ON)
-                        self.emitter.emitLine("DUP")
+                        self.emitter.emitLine("call @dup")
                         self.expression()
 
                         self.match(TokenType.DO)
@@ -573,7 +573,7 @@ class Parser:
                         self.emitter.emitLine("jumpf " + ":_" + num2 + "_do_end")
                         while not self.checkToken(TokenType.END):
                             self.statement()
-                        self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
+                        self.emitter.emitLine("jump " + ":_" + num + "_match_end")
                         self.match(TokenType.END)
                         self.emitter.emitLine(":_" + num2 + "_do_end")
                         self.nl()
@@ -582,10 +582,10 @@ class Parser:
                         self.nl()
                         while not self.checkToken(TokenType.END):
                             self.statement()
-                        self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
+                        self.emitter.emitLine("jump " + ":_" + num + "_match_end")
                         self.match(TokenType.END)
                     self.nl()
-                    self.emitter.emitLine("DROP")
+                    self.emitter.emitLine("call @drop")
                     self.emitter.emitLine(":_" + num + "_match_end")
                     self.match(TokenType.END)
                     self.nl()           

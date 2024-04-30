@@ -26,32 +26,31 @@ call @~(Ding)_multi
 call @~(Ding)_minus
 prt
 call @input
-DUP
+call @dup
 push 1
 call @eq
 loada
 testz
 clra
 jumpf :_3_do_end
-push 1
 prt
-jumpf :_2_match_end
+jump :_2_match_end
 :_3_do_end
-DUP
+call @dup
 push 2
-call @eq
+call @gt
 loada
 testz
 clra
 jumpf :_4_do_end
-push 2
 prt
-jumpf :_2_match_end
+jump :_2_match_end
 :_4_do_end
+pull
 push 0
 prt
-jumpf :_2_match_end
-DROP
+jump :_2_match_end
+call @drop
 :_2_match_end
 prttimer 0
 ret
