@@ -25,7 +25,34 @@ call @~(Ding)_plus
 call @~(Ding)_multi
 call @~(Ding)_minus
 prt
-call @~(Ding)_this
+call @input
+DUP
+push 1
+call @eq
+loada
+testz
+clra
+jumpf :_3_do_end
+push 1
+prt
+jumpf :_2_match_end
+:_3_do_end
+DUP
+push 2
+call @eq
+loada
+testz
+clra
+jumpf :_4_do_end
+push 2
+prt
+jumpf :_2_match_end
+:_4_do_end
+push 0
+prt
+jumpf :_2_match_end
+DROP
+:_2_match_end
 prttimer 0
 ret
 @~(Ding)_plus

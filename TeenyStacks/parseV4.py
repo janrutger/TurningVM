@@ -554,7 +554,7 @@ class Parser:
                         self.match(TokenType.DO)
                         if self.checkToken(TokenType.NEWLINE):
                             self.emitter.emitLine("call @eq")
-                        elif: self.curToken.text == '==':
+                        elif self.curToken.text == '==':
                             self.emitter.emitLine("call @eq")
                             self.nextToken()
                         elif self.curToken.text == '!=':
@@ -573,14 +573,16 @@ class Parser:
                         self.emitter.emitLine("jumpf " + ":_" + num2 + "_do_end")
                         while not self.checkToken(TokenType.END):
                             self.statement()
-                            self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
+                        self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
                         self.match(TokenType.END)
                         self.emitter.emitLine(":_" + num2 + "_do_end")
                         self.nl()
-                    if self.curToken(TokenType.NO):
+                    if self.checkToken(TokenType.NO):
+                        self.match(TokenType.NO)
+                        self.nl()
                         while not self.checkToken(TokenType.END):
                             self.statement()
-                            self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
+                        self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
                         self.match(TokenType.END)
                     self.nl()
                     self.emitter.emitLine("DROP")

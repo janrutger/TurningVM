@@ -30,3 +30,16 @@ END
 Ding plus
 Ding multi
 Ding minus PRINT
+
+
+INPUT MATCH
+        ON 1 DO
+            1 PRINT
+        END
+        ON 2 DO
+            2 PRINT
+        END
+        NO
+            0 PRINT
+        END
+    END
