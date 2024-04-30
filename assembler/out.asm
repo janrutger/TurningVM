@@ -22,8 +22,10 @@ loadm $m
 call @minus
 prt
 call @~(Ding)_plus
+call @~(Ding)_multi
 call @~(Ding)_minus
 prt
+call @~(Ding)_this
 prttimer 0
 ret
 @~(Ding)_plus
@@ -36,6 +38,12 @@ ret
 loadm $(Ding)_m
 loadm $(Ding)_n
 call @minus
+ret
+@~(Ding)_multi
+call @~(Ding)_minus
+call @~(Ding)_minus
+call @mul
+prt
 ret
 @__MemAllocGlobels
 array *array

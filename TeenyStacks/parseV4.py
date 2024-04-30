@@ -539,6 +539,57 @@ class Parser:
                         self.abort(
                             "Referencing variable before assignment: " + symbol)
 
+            elif self.checkToken(TokenType.MATCH):
+                num  = self.LabelNum()
+                self.match(TokenType.MATCH)
+                self.nl()
+
+                if self.curToken.text == "ON":
+                    while self.curToken.text == "ON":
+                        num2 = self.LabelNum()
+                        self.match(TokenType.ON)
+                        self.emitter.emitLine("DUP")
+                        self.expression()
+
+                        self.match(TokenType.DO)
+                        if self.checkToken(TokenType.NEWLINE):
+                            self.emitter.emitLine("call @eq")
+                        elif: self.curToken.text == '==':
+                            self.emitter.emitLine("call @eq")
+                            self.nextToken()
+                        elif self.curToken.text == '!=':
+                            self.emitter.emitLine("call @neq")
+                            self.nextToken()
+                        elif self.curToken.text == '<':
+                            self.emitter.emitLine("call @lt")
+                            self.nextToken()
+                        elif self.curToken.text == '>':
+                            self.emitter.emitLine("call @gt")
+                            self.nextToken()
+                        self.nl()
+                        self.emitter.emitLine("loada")
+                        self.emitter.emitLine("testz")
+                        self.emitter.emitLine("clra")
+                        self.emitter.emitLine("jumpf " + ":_" + num2 + "_do_end")
+                        while not self.checkToken(TokenType.END):
+                            self.statement()
+                            self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
+                        self.match(TokenType.END)
+                        self.emitter.emitLine(":_" + num2 + "_do_end")
+                        self.nl()
+                    if self.curToken(TokenType.NO):
+                        while not self.checkToken(TokenType.END):
+                            self.statement()
+                            self.emitter.emitLine("jumpf " + ":_" + num + "_match_end")
+                        self.match(TokenType.END)
+                    self.nl()
+                    self.emitter.emitLine("DROP")
+                    self.emitter.emitLine(":_" + num + "_match_end")
+                    self.match(TokenType.END)
+                    self.nl()           
+                else:
+                    self.abort("at least one ON is requered with MATCH")
+
             elif self.checkToken(TokenType.DO):
                 num = self.LabelNum()
                 self.nextToken()

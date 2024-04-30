@@ -250,6 +250,9 @@ class TokenType(enum.Enum):
     THING = 143
     THIS = 144
     INIT =145
+    MATCH = 146
+    ON = 147
+    NO = 148
 
     #
     PLUS = 201

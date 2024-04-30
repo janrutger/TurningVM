@@ -15,11 +15,18 @@ DEFINE
         THIS minus
             THIS m THIS n -     
         END
+
+        THIS multi
+            THIS minus THIS minus * PRINT
+        END
+
     END
+
 END
 
 
-5 6 * m - PRINT
+5 6 *  m - PRINT
 
 Ding plus
+Ding multi
 Ding minus PRINT
