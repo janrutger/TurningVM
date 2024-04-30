@@ -50,8 +50,21 @@ pull
 push 0
 prt
 jump :_2_match_end
-call @drop
+pull
 :_2_match_end
+call @input
+call @dup
+push 1
+call @eq
+loada
+testz
+clra
+jumpf :_6_do_end
+prt
+jump :_5_match_end
+:_6_do_end
+pull
+:_5_match_end
 prttimer 0
 ret
 @~(Ding)_plus

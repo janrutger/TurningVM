@@ -43,3 +43,9 @@ INPUT MATCH
             DROP 0 PRINT
         END
     END
+
+INPUT MATCH
+        ON 1 DO 
+            . PRINT
+        END
+    END
