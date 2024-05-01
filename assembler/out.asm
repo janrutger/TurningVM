@@ -45,6 +45,7 @@ jump :_42_condition_start
 :_42_repeat_end
 loadm *Lresult
 prt
+settimer 17
 push 1
 storem $_43_Lresult
 :_43_start_each
@@ -113,7 +114,21 @@ push 90
 call @~(turtle)_right
 jump :_44_match_end
 :_49_do_end
+pull
 :_44_match_end
+gettimer 17
+storem $Ctime
+loadm $Ltime
+loadm $Ctime
+call @gt
+loada
+testz
+clra
+jumpf :_50_do_end
+call @drawCommit
+loadm $Ctime
+storem $Ltime
+:_50_do_end
 loadm $_43_Lresult
 loadb
 incb
@@ -121,6 +136,7 @@ moveb
 storem $_43_Lresult
 jump :_43_start_each
 :_43_end_each
+call @drawCommit
 prttimer 0
 ret
 @~makeNewF
@@ -176,6 +192,7 @@ push 'A'
 storem *Ltemp
 jump :_1_match_end
 :_3_do_end
+pull
 :_1_match_end
 loadm $_0_Lresult
 loadb
@@ -256,6 +273,7 @@ push '-'
 storem *Ltemp
 jump :_6_match_end
 :_10_do_end
+pull
 :_6_match_end
 loadm $_5_Lresult
 loadb
@@ -559,8 +577,10 @@ storem $(turtle)_y
 loadm $(turtle)_x
 loadm $(turtle)_y
 call @draw
+call @drawCommit
 jump :_14_match_end
 :_37_do_end
+pull
 :_14_match_end
 ret
 @~(turtle)_forward
@@ -584,6 +604,10 @@ jump :_41_condition_start
 :_41_repeat_end
 ret
 @__MemAllocGlobels
+push 0
+storem $Ltime
+push 0
+storem $Ltime
 array *size
 push 160
 storem *size

@@ -56,6 +56,10 @@ ret
 @draw
     storem %_xygraph
     storem %_xygraph
+    #output %_xygraph
+ret
+
+@drawCommit
     output %_xygraph
 ret
 
