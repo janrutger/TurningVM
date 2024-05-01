@@ -136,7 +136,7 @@ function xyGraphics(values) {
         data: {
             datasets: [{
                 pointStyle: 'rect',
-                pointRadius: 6,
+                pointRadius: 4,
                 label: 'PLOTTER', // Name the series
                 data: xyValues, // Specify the data values array
                 borderColor: '#2196f3', // Add custom color border            

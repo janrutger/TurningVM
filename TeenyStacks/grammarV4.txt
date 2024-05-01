@@ -31,8 +31,8 @@ statement  ::=  "LABEL" label nl
 						| ¨WAIT¨  nl
 						| "AS" [“THIS”] (variable | '['array']') nl
 						| “MATCH” nl 
-							  "ON" (expression) "DO" ['!='|'>'|'<'] nl {statement} nl "END" nl 
-							[("ON" (expression) "DO" ['!='|'>'|'<'] nl {statement} nl "END" nl)+]
+							  "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
+							[("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
 							[ "NO" nl {statement} nl "END" nl]
 						  "END" nl
 						| "DO" nl {statement} nl "END" nl

@@ -1,0 +1,97 @@
+DEFINE
+    ARRAY size [160 80]
+    THING turtle
+        INIT
+            0 AS THIS x
+            0 AS THIS y 
+            0 AS THIS angle
+
+            0 0 `draw
+            1 [size] 2 [size] `draw
+        END
+
+        THIS goto
+            . AS THIS y
+            . AS THIS x 
+            THIS x THIS y `draw
+        END
+
+        THIS right
+            THIS angle + 360 % AS THIS angle
+        END
+
+        THIS move
+            THIS angle 360 % 45 / MATCH
+                ON 0 DO
+                    DROP
+                    1 THIS y + 2 [size] % AS THIS y 
+                    THIS x THIS y `draw
+                END
+                ON 1 DO
+                    DROP
+                    1 THIS x + 1 [size] % AS THIS x 
+                    1 THIS y + 2 [size] % AS THIS y 
+                    THIS x THIS y `draw
+                END
+                ON 2 DO
+                    DROP
+                    1 THIS x + 1 [size] % AS THIS x
+                    THIS x THIS y `draw
+                END
+                ON 3 DO
+                    DROP
+                    1 THIS x + 1 [size] % AS THIS x
+                    2 [size] THIS y + 1 - 2 [size] % AS THIS y
+                    THIS x THIS y `draw
+                END
+                ON 4 DO
+                    DROP
+                    2 [size] THIS y + 1 - 2 [size] % AS THIS y
+                    THIS x THIS y `draw
+                END
+                ON 5 DO
+                    DROP
+                    1 [size] THIS x + 1 - 1 [size] % AS THIS x 
+                    2 [size] THIS y + 1 - 2 [size] % AS THIS y
+                    THIS x THIS y `draw
+                END
+                ON 6 DO
+                    DROP
+                    1 [size] THIS x + 1 - 1 [size] % AS THIS x 
+                    THIS x THIS y `draw
+                END
+                ON 7 DO
+                    DROP
+                    1 [size] THIS x + 1 - 1 [size] % AS THIS x 
+                    1 THIS y + 2 [size] % AS THIS y
+                    THIS x THIS y `draw
+                END
+            END
+        END
+    END
+END
+
+
+#56 34 turtle goto
+turtle move
+
+45 turtle right
+turtle move 
+
+45 turtle right
+turtle move 
+
+45 turtle right
+turtle move 
+
+45 turtle right
+turtle move
+
+45 turtle right
+turtle move 
+
+45 turtle right
+turtle move 
+
+45 turtle right
+turtle move 

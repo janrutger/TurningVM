@@ -53,6 +53,12 @@ ret
     clrb
 ret
 
+@draw
+    storem %_xygraph
+    storem %_xygraph
+    output %_xygraph
+ret
+
 @char2prtbuff
     storem %_display
     push 1

@@ -1,95 +1,337 @@
 @main
 settimer 0
 speed 0
+push 0
+storem $(turtle)_x
+push 0
+storem $(turtle)_y
+push 0
+storem $(turtle)_angle
+push 0
+push 0
+call @draw
 push 1
-readelm *array
+readelm *size
 jumpt :_0_readelm_done
 call @__illegal_Array_Index
 :_0_readelm_done
-storem $(Ding)_n
 push 2
-readelm *array
+readelm *size
 jumpt :_1_readelm_done
 call @__illegal_Array_Index
 :_1_readelm_done
-storem $(Ding)_m
-push 3
-storem $m
-push 5
-push 6
-call @mul
-loadm $m
-call @minus
-prt
-call @~(Ding)_plus
-call @~(Ding)_multi
-call @~(Ding)_minus
-prt
-call @input
+call @draw
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+push 45
+call @~(turtle)_right
+call @~(turtle)_move
+prttimer 0
+ret
+@~(turtle)_goto
+storem $(turtle)_y
+storem $(turtle)_x
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+ret
+@~(turtle)_right
+loadm $(turtle)_angle
+call @plus
+push 360
+call @mod
+storem $(turtle)_angle
+ret
+@~(turtle)_move
+loadm $(turtle)_angle
+push 360
+call @mod
+push 45
+call @div
 call @dup
-push 1
+push 0
 call @eq
 loada
 testz
 clra
 jumpf :_3_do_end
-prt
+pull
+push 1
+loadm $(turtle)_y
+call @plus
+push 2
+readelm *size
+jumpt :_4_readelm_done
+call @__illegal_Array_Index
+:_4_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
 jump :_2_match_end
 :_3_do_end
-call @dup
-push 2
-call @gt
-loada
-testz
-clra
-jumpf :_4_do_end
-prt
-jump :_2_match_end
-:_4_do_end
-pull
-push 0
-prt
-jump :_2_match_end
-pull
-:_2_match_end
-call @input
 call @dup
 push 1
 call @eq
 loada
 testz
 clra
-jumpf :_6_do_end
-prt
-jump :_5_match_end
-:_6_do_end
+jumpf :_5_do_end
 pull
-:_5_match_end
-prttimer 0
-ret
-@~(Ding)_plus
-loadm $(Ding)_m
-loadm $(Ding)_n
+push 1
+loadm $(turtle)_x
 call @plus
-prt
-ret
-@~(Ding)_minus
-loadm $(Ding)_m
-loadm $(Ding)_n
+push 1
+readelm *size
+jumpt :_6_readelm_done
+call @__illegal_Array_Index
+:_6_readelm_done
+call @mod
+storem $(turtle)_x
+push 1
+loadm $(turtle)_y
+call @plus
+push 2
+readelm *size
+jumpt :_7_readelm_done
+call @__illegal_Array_Index
+:_7_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_5_do_end
+call @dup
+push 2
+call @eq
+loada
+testz
+clra
+jumpf :_8_do_end
+pull
+push 1
+loadm $(turtle)_x
+call @plus
+push 1
+readelm *size
+jumpt :_9_readelm_done
+call @__illegal_Array_Index
+:_9_readelm_done
+call @mod
+storem $(turtle)_x
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_8_do_end
+call @dup
+push 3
+call @eq
+loada
+testz
+clra
+jumpf :_10_do_end
+pull
+push 1
+loadm $(turtle)_x
+call @plus
+push 1
+readelm *size
+jumpt :_11_readelm_done
+call @__illegal_Array_Index
+:_11_readelm_done
+call @mod
+storem $(turtle)_x
+push 2
+readelm *size
+jumpt :_12_readelm_done
+call @__illegal_Array_Index
+:_12_readelm_done
+loadm $(turtle)_y
+call @plus
+push 1
 call @minus
-ret
-@~(Ding)_multi
-call @~(Ding)_minus
-call @~(Ding)_minus
-call @mul
-prt
+push 2
+readelm *size
+jumpt :_13_readelm_done
+call @__illegal_Array_Index
+:_13_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_10_do_end
+call @dup
+push 4
+call @eq
+loada
+testz
+clra
+jumpf :_14_do_end
+pull
+push 2
+readelm *size
+jumpt :_15_readelm_done
+call @__illegal_Array_Index
+:_15_readelm_done
+loadm $(turtle)_y
+call @plus
+push 1
+call @minus
+push 2
+readelm *size
+jumpt :_16_readelm_done
+call @__illegal_Array_Index
+:_16_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_14_do_end
+call @dup
+push 5
+call @eq
+loada
+testz
+clra
+jumpf :_17_do_end
+pull
+push 1
+readelm *size
+jumpt :_18_readelm_done
+call @__illegal_Array_Index
+:_18_readelm_done
+loadm $(turtle)_x
+call @plus
+push 1
+call @minus
+push 1
+readelm *size
+jumpt :_19_readelm_done
+call @__illegal_Array_Index
+:_19_readelm_done
+call @mod
+storem $(turtle)_x
+push 2
+readelm *size
+jumpt :_20_readelm_done
+call @__illegal_Array_Index
+:_20_readelm_done
+loadm $(turtle)_y
+call @plus
+push 1
+call @minus
+push 2
+readelm *size
+jumpt :_21_readelm_done
+call @__illegal_Array_Index
+:_21_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_17_do_end
+call @dup
+push 6
+call @eq
+loada
+testz
+clra
+jumpf :_22_do_end
+pull
+push 1
+readelm *size
+jumpt :_23_readelm_done
+call @__illegal_Array_Index
+:_23_readelm_done
+loadm $(turtle)_x
+call @plus
+push 1
+call @minus
+push 1
+readelm *size
+jumpt :_24_readelm_done
+call @__illegal_Array_Index
+:_24_readelm_done
+call @mod
+storem $(turtle)_x
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_22_do_end
+call @dup
+push 7
+call @eq
+loada
+testz
+clra
+jumpf :_25_do_end
+pull
+push 1
+readelm *size
+jumpt :_26_readelm_done
+call @__illegal_Array_Index
+:_26_readelm_done
+loadm $(turtle)_x
+call @plus
+push 1
+call @minus
+push 1
+readelm *size
+jumpt :_27_readelm_done
+call @__illegal_Array_Index
+:_27_readelm_done
+call @mod
+storem $(turtle)_x
+push 1
+loadm $(turtle)_y
+call @plus
+push 2
+readelm *size
+jumpt :_28_readelm_done
+call @__illegal_Array_Index
+:_28_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_2_match_end
+:_25_do_end
+pull
+:_2_match_end
 ret
 @__MemAllocGlobels
-array *array
-push 3
-storem *array
-push 5
-storem *array
-push 9
-storem *array
+array *size
+push 160
+storem *size
+push 80
+storem *size
 ret
