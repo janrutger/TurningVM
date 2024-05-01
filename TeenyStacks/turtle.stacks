@@ -1,97 +1,159 @@
 DEFINE
     ARRAY size [160 80]
+    ARRAY Lresult 
+    ARRAY Ltemp
+    ARRAY newF
+
+    FUNCTION makeNewF
+        "F" AS [newF]
+        "+" AS [newF]
+        "F" AS [newF]
+        "-" AS [newF]
+        "F" AS [newF]
+        "-" AS [newF]
+        "F" AS [newF]
+        "+" AS [newF]
+        "F" AS [newF]
+    END
+
+    FUNCTION Algae
+        WITH Lresult EACH
+            . MATCH
+                ON "A" DO
+                    "A" AS [Ltemp]
+                    "B" AS [Ltemp]
+                END
+                ON "B" DO
+                   "A" AS [Ltemp] 
+                END
+            END
+        END
+        ARRAY Lresult
+        WITH Ltemp COPY Lresult
+        ARRAY Ltemp
+    END
+
+    FUNCTION Koch
+        WITH Lresult EACH
+            . MATCH
+                ON "F" DO
+                    WITH newF COPY Ltemp
+                END
+                ON "+" DO
+                    "+" AS [Ltemp]
+                END
+                ON "-" DO
+                    "-" AS [Ltemp]
+                END
+            END
+        END
+        ARRAY Lresult
+        WITH Ltemp COPY Lresult
+        ARRAY Ltemp
+    END
+    
+
     THING turtle
         INIT
             0 AS THIS x
             0 AS THIS y 
-            0 AS THIS angle
+            90 AS THIS angle
 
             0 0 `draw
             1 [size] 2 [size] `draw
         END
-
         THIS goto
             . AS THIS y
             . AS THIS x 
             THIS x THIS y `draw
         END
-
         THIS right
             THIS angle + 360 % AS THIS angle
         END
-
         THIS move
             THIS angle 360 % 45 / MATCH
                 ON 0 DO
-                    DROP
                     1 THIS y + 2 [size] % AS THIS y 
                     THIS x THIS y `draw
                 END
                 ON 1 DO
-                    DROP
                     1 THIS x + 1 [size] % AS THIS x 
                     1 THIS y + 2 [size] % AS THIS y 
                     THIS x THIS y `draw
                 END
                 ON 2 DO
-                    DROP
                     1 THIS x + 1 [size] % AS THIS x
                     THIS x THIS y `draw
                 END
                 ON 3 DO
-                    DROP
                     1 THIS x + 1 [size] % AS THIS x
                     2 [size] THIS y + 1 - 2 [size] % AS THIS y
                     THIS x THIS y `draw
                 END
                 ON 4 DO
-                    DROP
                     2 [size] THIS y + 1 - 2 [size] % AS THIS y
                     THIS x THIS y `draw
                 END
                 ON 5 DO
-                    DROP
                     1 [size] THIS x + 1 - 1 [size] % AS THIS x 
                     2 [size] THIS y + 1 - 2 [size] % AS THIS y
                     THIS x THIS y `draw
                 END
                 ON 6 DO
-                    DROP
                     1 [size] THIS x + 1 - 1 [size] % AS THIS x 
                     THIS x THIS y `draw
                 END
                 ON 7 DO
-                    DROP
                     1 [size] THIS x + 1 - 1 [size] % AS THIS x 
                     1 THIS y + 2 [size] % AS THIS y
                     THIS x THIS y `draw
                 END
             END
         END
+        THIS forward
+            . AS steps
+            0 AS s
+            {s steps !=} DO
+                turtle move
+                s 1 + AS s
+            END
+        END
+    END
+END
+
+makeNewF
+"F" AS [Lresult]
+0 AS n
+INPUT AS nn 
+
+{n nn !=} DO
+    #Algae
+    Koch
+    n 1 + AS n
+END
+
+Lresult PRINT
+
+WITH Lresult EACH
+    . MATCH
+        ON "A" DO
+            4 turtle forward
+        END
+        ON "B" DO
+            315 turtle right
+            1 turtle forward
+        END
+        ON "F" DO
+            2 turtle forward
+        END
+        ON "+" DO
+            270 turtle right
+        END
+        ON "-" DO
+            90 turtle right
+        END
     END
 END
 
 
-#56 34 turtle goto
-turtle move
 
-45 turtle right
-turtle move 
-
-45 turtle right
-turtle move 
-
-45 turtle right
-turtle move 
-
-45 turtle right
-turtle move
-
-45 turtle right
-turtle move 
-
-45 turtle right
-turtle move 
-
-45 turtle right
-turtle move 

@@ -571,6 +571,7 @@ class Parser:
                         self.emitter.emitLine("testz")
                         self.emitter.emitLine("clra")
                         self.emitter.emitLine("jumpf " + ":_" + num2 + "_do_end")
+                        self.emitter.emitLine("pull")
                         while not self.checkToken(TokenType.END):
                             self.statement()
                         self.emitter.emitLine("jump " + ":_" + num + "_match_end")
@@ -582,7 +583,7 @@ class Parser:
                         self.nl()
                         while not self.checkToken(TokenType.END):
                             self.statement()
-                        self.emitter.emitLine("jump " + ":_" + num + "_match_end")
+                        #self.emitter.emitLine("jump " + ":_" + num + "_match_end")
                         self.match(TokenType.END)
                         self.nl()
                     self.emitter.emitLine("pull")
