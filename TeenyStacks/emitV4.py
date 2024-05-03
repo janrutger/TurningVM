@@ -19,8 +19,8 @@ class Emitter:
         elif self.context == "meminit":
             self.allocGLOBELS += code + '\n'
 
-    def memLine(self, code):
-        self.allocGLOBELS += code + '\n'
+    #def memLine(self, code):
+    #    self.allocGLOBELS += code + '\n'
 
     def headerLine(self, code):
         self.header += code + '\n'
