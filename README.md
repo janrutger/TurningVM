@@ -21,6 +21,7 @@ STACKS: An RPN-based Language for the TuringVM Machine
 
 The Grammer of TeenySTACKS V3
 
+    Version 4: Including THING object and Match instruction
     Version 3: Including Array datatype and a-sync Jobs
     Version 2: Includes Functions
     Version    Initial (thanks for AZHenley)
@@ -30,17 +31,17 @@ The Grammer of TeenySTACKS V3
 
 
     define	::=	"DEFINE" nl
-                [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
-                [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+                    [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
 
-                [ ("THING" thing nl 
-                    "INIT" nl {statement} nl "END" nl
-                    "THIS" function nl {statement} nl "END" nl
-                    ["THIS" function nl {statement} nl "END" nl]+ 
-                "END" nl)+]
+                    [ ("THING" thing nl 
+                        "INIT" nl {statement} nl "END" nl
+                        "THIS" function nl {statement} nl "END" nl
+                        ["THIS" function nl {statement} nl "END" nl]+ 
+                    "END" nl)+]
 
-                [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
-            "END" nl
+                    [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+                "END" nl
 
 
     statement  ::=  "LABEL" label nl
