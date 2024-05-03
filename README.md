@@ -19,7 +19,7 @@ STACKS: An RPN-based Language for the TuringVM Machine
 
 
 
-The Grammer of TeenySTACKS V3
+The Grammer of TeenySTACKS Version 4
 
     Version 4: Including THING object and Match instruction
     Version 3: Including Array datatype and a-sync Jobs
@@ -59,10 +59,10 @@ The Grammer of TeenySTACKS V3
                             | ¨WAIT¨  nl
                             | "AS" [“THIS”] (variable | '['array']') nl
                             | “MATCH” nl 
-                                "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
+                                  "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
                                 [("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
                                 [ "NO" nl {statement} nl "END" nl]
-                            "END" nl
+                              "END" nl
                             | "DO" nl {statement} nl "END" nl
                             | "GOTO" label nl
                             |  nl )
