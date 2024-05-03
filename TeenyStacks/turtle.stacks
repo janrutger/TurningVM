@@ -59,9 +59,6 @@ DEFINE
             0 AS THIS x
             0 AS THIS y 
             90 AS THIS angle
-
-            0 0 `draw
-            1 [size] 2 [size] `draw
         END
         THIS goto
             . AS THIS y
@@ -72,7 +69,7 @@ DEFINE
             THIS angle + 360 % AS THIS angle
         END
         THIS move
-            THIS angle 360 % 45 / MATCH
+            THIS angle 22 + 45 / MATCH
                 ON 0 DO
                     1 THIS y + 2 [size] % AS THIS y 
                     THIS x THIS y `draw
@@ -107,7 +104,6 @@ DEFINE
                 ON 7 DO
                     1 [size] THIS x + 1 - 1 [size] % AS THIS x 
                     1 THIS y + 2 [size] % AS THIS y
-                    THIS x THIS y `draw `drawCommit
                 END
             END
         END
@@ -122,6 +118,8 @@ DEFINE
     END
 END
 
+0 0 `draw `drawCommit
+1 [size] 2 [size] `draw `drawCommit
 makeNewF
 "F" AS [Lresult]
 0 AS n
@@ -146,7 +144,7 @@ WITH Lresult EACH
             1 turtle forward
         END
         ON "F" DO
-            2 turtle forward
+            4 turtle forward
         END
         ON "+" DO
             270 turtle right
@@ -157,6 +155,7 @@ WITH Lresult EACH
     END
     TIMER 17 GET 
     . AS Ctime
+    
     Ltime Ctime > DO
         `drawCommit
         Ctime AS Ltime

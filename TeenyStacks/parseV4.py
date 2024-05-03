@@ -95,23 +95,27 @@ class Parser:
 
     def defineBlock(self):
         # [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
-        self.emitter.memLine("@__MemAllocGlobels")
+        self.emitter.context = "meminit"
+        self.emitter.emitLine("@__MemAllocGlobels")
+        self.emitter.emitLine("speed 10")
+        self.emitter.context = "program"
         while self.checkToken(TokenType.VALUE) or self.checkToken(TokenType.ARRAY):
+            self.emitter.context = "meminit"
             if self.checkToken(TokenType.VALUE):
                 self.match(TokenType.VALUE)
                 if self.isFreeSymbol(self.curToken.text):
                     self.symbols.add(self.curToken.text)
                 if self.curToken.text in self.symbols:
-                    self.emitter.memLine("push " + str(0))
-                    self.emitter.memLine("storem " + "$" + self.curToken.text)
+                    self.emitter.emitLine("push " + str(0))
+                    self.emitter.emitLine("storem " + "$" + self.curToken.text)
                     var = self.curToken.text
                     self.match(TokenType.IDENT)
                 else:
                     self.abort("Already in use as Function: " + self.curToken.text)
 
                 if self.checkToken(TokenType.NUMBER):
-                    self.emitter.memLine("push " + self.curToken.text)
-                    self.emitter.memLine("storem " + "$" + var)
+                    self.emitter.emitLine("push " + self.curToken.text)
+                    self.emitter.emitLine("storem " + "$" + var)
                     self.match(TokenType.NUMBER)
                 self.nl()
 
@@ -120,7 +124,7 @@ class Parser:
                 if self.isFreeSymbol(self.curToken.text):
                     self.arrays.add(self.curToken.text)
                 if self.curToken.text in self.arrays:
-                    self.emitter.memLine("array " + "*" + self.curToken.text)
+                    self.emitter.emitLine("array " + "*" + self.curToken.text)
                     arr = self.curToken.text
                     self.match(TokenType.IDENT)
                 else:
@@ -129,12 +133,12 @@ class Parser:
                 if self.checkToken(TokenType.OPENBL):
                     self.match(TokenType.OPENBL)
                     while self.checkToken(TokenType.NUMBER):
-                        self.emitter.memLine("push " + self.curToken.text)
-                        self.emitter.memLine("storem " + "*" + arr)
+                        self.emitter.emitLine("push " + self.curToken.text)
+                        self.emitter.emitLine("storem " + "*" + arr)
                         self.match(TokenType.NUMBER)
                     self.match(TokenType.CLOSEBL)
                 self.nl()
-
+                self.emitter.context = "program"
 
         # [ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
         while self.checkToken(TokenType.FUNCTION):
@@ -170,11 +174,13 @@ class Parser:
                 self.nl()
         #   "INIT" nl {statement} nl "END" nl
                 self.match(TokenType.INIT)
+                self.emitter.context = "meminit"
                 self.nl()
                 while not self.checkToken(TokenType.END):
                     self.statement()
                 self.match(TokenType.END)
                 self.nl()
+                self.emitter.context = "program"
         #   "THIS" function nl {statement} nl "END" nl
         #  ["THIS" function nl {statement} nl "END" nl] +
                 while self.checkToken(TokenType.THIS):
@@ -217,18 +223,20 @@ class Parser:
                 self.emitter.context = "functions"
                 self.emitter.emitLine("@~" + self.curToken.text)
                 self.match(TokenType.IDENT)
-                self.emitter.memLine("push " + "'jobinput_" + jobName + "'")
+                self.emitter.context = "meminit"
+                self.emitter.emitLine("push " + "'jobinput_" + jobName + "'")
                 self.match(TokenType.USE)
                 if self.curToken.text in self.symbols:
-                    self.emitter.memLine("index " + "$" + self.curToken.text)
+                    self.emitter.emitLine("index " + "$" + self.curToken.text)
                     self.match(TokenType.IDENT)
                 elif self.curToken.text in self.arrays:
-                    self.emitter.memLine("index " + "*" + self.curToken.text)
+                    self.emitter.emitLine("index " + "*" + self.curToken.text)
                     self.match(TokenType.IDENT)            
                 else:
                     self.abort(
                         "Referencing variable before assignment: " + self.curToken.text)
                 self.nl()
+                self.emitter.context = "functions"
                 while not self.checkToken(TokenType.RETURN):
                     self.statement()
                 self.match(TokenType.RETURN)
@@ -244,7 +252,9 @@ class Parser:
                 self.nl()
         if self.checkToken(TokenType.END):
             self.match(TokenType.END)
-            self.emitter.memLine("ret")
+            self.emitter.context = "meminit"
+            self.emitter.emitLine("ret")
+            self.emitter.context = "program"
             self.nl()
         else:
             self.abort("Wrong keyword VALUE/FUNCTION/JOB/THING allowd or missing END statement: " + self.curToken.text)

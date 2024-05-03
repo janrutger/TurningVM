@@ -131,7 +131,7 @@ class Machine:
 
         self.initCode = [('LIFO', '%_system'), ('CALL', '@core'), ('HALT', '')]
 
-        self.cpu0.run_rpc([('LIFO', '%_system'), ('IOBUFF', '%_display'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
+        self.cpu0.run_rpc([('LIFO', '%_system'), ('IOBUFF', '%_display'),('IOBUFF', '%_xygraph'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
         self.memPage0 = self.cpu0.memPage()
         self.cpu0.enable_mpu(self.jobQueue, self.jobResults, 0)
 
