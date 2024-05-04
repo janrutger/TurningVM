@@ -55,17 +55,17 @@ The Grammer of TeenySTACKS Version 4
                 |   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” [“THIS”] array | "PLOT" ["NEW"]) nl
                 |   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
                 |   (expression | tos) ( "PRINT" nl
-                            | "PLOT"  nl
-                            | ¨WAIT¨  nl
-                            | "AS" [“THIS”] (variable | '['array']') nl
-                            | “MATCH” nl 
-                                  "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
-                                [("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
-                                [ "NO" nl {statement} nl "END" nl]
-                              "END" nl
-                            | "DO" nl {statement} nl "END" nl
-                            | "GOTO" label nl
-                            |  nl )
+                                    | "PLOT"  nl
+                                    | ¨WAIT¨  nl
+                                    | "AS" [“THIS”] (variable | '['array']') nl
+                                    | “MATCH” nl 
+                                        "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
+                                        [("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
+                                        [ "NO" nl {statement} nl "END" nl]
+                                    "END" nl
+                                    | "DO" nl {statement} nl "END" nl
+                                    | "GOTO" label nl
+                                    |  nl )
 
     expression ::=	(INTEGER | STRING | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
     word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
