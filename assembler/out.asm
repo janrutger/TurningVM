@@ -1,22 +1,6 @@
 @main
 settimer 0
 speed 0
-push 0
-push 0
-call @draw
-call @drawCommit
-push 1
-readelm *size
-jumpt :_40_readelm_done
-call @__illegal_Array_Index
-:_40_readelm_done
-push 2
-readelm *size
-jumpt :_41_readelm_done
-call @__illegal_Array_Index
-:_41_readelm_done
-call @draw
-call @drawCommit
 call @~makeNewF
 push 'F'
 storem *Lresult
@@ -24,32 +8,58 @@ push 0
 storem $n
 call @input
 storem $nn
-:_42_condition_start
+:_40_condition_start
 loadm $n
 loadm $nn
 call @neq
 loada
 testz
 clra
-jumpf :_42_repeat_end
+jumpf :_40_repeat_end
 call @~Koch
 loadm $n
 push 1
 call @plus
 storem $n
-jump :_42_condition_start
-:_42_repeat_end
+jump :_40_condition_start
+:_40_repeat_end
 loadm *Lresult
 prt
 settimer 17
 push 1
-storem $_43_Lresult
-:_43_start_each
-loadm $_43_Lresult
+storem $_41_Lresult
+:_41_start_each
+loadm $_41_Lresult
 readelm *Lresult
-jumpf :_43_end_each
+jumpf :_41_end_each
 call @dup
 push 'A'
+call @eq
+loada
+testz
+clra
+jumpf :_43_do_end
+pull
+push 4
+call @~(turtle)_forward
+jump :_42_match_end
+:_43_do_end
+call @dup
+push 'B'
+call @eq
+loada
+testz
+clra
+jumpf :_44_do_end
+pull
+push 315
+call @~(turtle)_right
+push 1
+call @~(turtle)_forward
+jump :_42_match_end
+:_44_do_end
+call @dup
+push 'F'
 call @eq
 loada
 testz
@@ -58,81 +68,41 @@ jumpf :_45_do_end
 pull
 push 4
 call @~(turtle)_forward
-jump :_44_match_end
+jump :_42_match_end
 :_45_do_end
-call @dup
-push 'B'
-call @eq
-loada
-testz
-clra
-jumpf :_46_do_end
-pull
-push 315
-call @~(turtle)_right
-push 1
-call @~(turtle)_forward
-jump :_44_match_end
-:_46_do_end
-call @dup
-push 'F'
-call @eq
-loada
-testz
-clra
-jumpf :_47_do_end
-pull
-push 4
-call @~(turtle)_forward
-jump :_44_match_end
-:_47_do_end
 call @dup
 push '+'
 call @eq
 loada
 testz
 clra
-jumpf :_48_do_end
+jumpf :_46_do_end
 pull
 push 270
 call @~(turtle)_right
-jump :_44_match_end
-:_48_do_end
+jump :_42_match_end
+:_46_do_end
 call @dup
 push '-'
 call @eq
 loada
 testz
 clra
-jumpf :_49_do_end
+jumpf :_47_do_end
 pull
 push 90
 call @~(turtle)_right
-jump :_44_match_end
-:_49_do_end
+jump :_42_match_end
+:_47_do_end
 pull
-:_44_match_end
-gettimer 17
-storem $Ctime
-loadm $Ltime
-loadm $Ctime
-call @gt
-loada
-testz
-clra
-jumpf :_50_do_end
-call @drawCommit
-loadm $Ctime
-storem $Ltime
-:_50_do_end
-loadm $_43_Lresult
+:_42_match_end
+loadm $_41_Lresult
 loadb
 incb
 moveb
-storem $_43_Lresult
-jump :_43_start_each
-:_43_end_each
-call @drawCommit
+storem $_41_Lresult
+jump :_41_start_each
+:_41_end_each
 prttimer 0
 ret
 @~makeNewF

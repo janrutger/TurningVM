@@ -118,8 +118,8 @@ DEFINE
     END
 END
 
-0 0 `draw `drawCommit
-1 [size] 2 [size] `draw `drawCommit
+#0 0 `draw 1 [size] 2 [size] `draw 
+
 makeNewF
 "F" AS [Lresult]
 0 AS n
@@ -153,15 +153,7 @@ WITH Lresult EACH
             90 turtle right
         END
     END
-    TIMER 17 GET 
-    . AS Ctime
-    
-    Ltime Ctime > DO
-        `drawCommit
-        Ctime AS Ltime
-    END
-
 END
-`drawCommit
+
 
 
