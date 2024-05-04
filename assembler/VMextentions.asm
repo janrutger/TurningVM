@@ -179,6 +179,7 @@ ret
 halt
 
 @__MemAllocGlobels
+    call @init_vmachine
     push 'No\_globel\_mem\_config\_found'
     call @char2prtbuff
     call @printbuff

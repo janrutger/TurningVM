@@ -47,7 +47,7 @@ function load() {
 function start() {
     console.log("start button")
     websock.send(JSON.stringify({ "commando": "start" }));
-    println("Start VMmachine")
+    println("Starting VMmachine")
     
 }
 

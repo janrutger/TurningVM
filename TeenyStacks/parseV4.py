@@ -97,7 +97,7 @@ class Parser:
         # [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
         self.emitter.context = "meminit"
         self.emitter.emitLine("@__MemAllocGlobels")
-        self.emitter.emitLine("speed 10")
+        self.emitter.emitLine("call @init_vmachine")
         self.emitter.context = "program"
         while self.checkToken(TokenType.VALUE) or self.checkToken(TokenType.ARRAY):
             self.emitter.context = "meminit"
