@@ -56,11 +56,11 @@ ret
 @draw
     storem %_xygraph
     storem %_xygraph
-    output %_xygraph
+    #output %_xygraph
 ret
 
 @drawCommit
-    #output %_xygraph
+    output %_xygraph
 ret
 
 @char2prtbuff
@@ -180,7 +180,7 @@ halt
 
 @__MemAllocGlobels
     call @init_vmachine
-    push 'No\_globel\_mem\_config\_found'
+    push 'mem\_configuration\_definition\_not\_defined'
     call @char2prtbuff
     call @printbuff
 halt
