@@ -53,13 +53,39 @@ ret
     clrb
 ret
 
+@drawNew
+    output %_xygraph
+ret
+
+@drawRate
+    settimer 2
+    gettimer 2
+    storem $_lastRefresh
+    storem $_refreshRate
+ret
+
+
 @draw
     storem %_xygraph
     storem %_xygraph
-    #output %_xygraph
+    gettimer 2
+    loadm $_lastRefresh
+    call @minus
+    loadm $_refreshRate
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_draw_end
+        output %_xygraph
+        gettimer 2
+        push 1
+        call @minus
+        storem $_lastRefresh
+    :_draw_end
 ret
 
-@drawCommit
+@drawBuff
     output %_xygraph
 ret
 

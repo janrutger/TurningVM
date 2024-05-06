@@ -1,0 +1,11 @@
+0 `drawRate
+
+1 WAIT
+
+
+0 0 `draw
+5 5 `draw
+10 10 `draw
+
+`drawBuff
+

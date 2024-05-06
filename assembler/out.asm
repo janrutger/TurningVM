@@ -1,9 +1,8 @@
 @main
 settimer 0
 speed 0
-settimer 17
-gettimer 17
-storem $Ltime
+push 0
+call @drawRate
 push 0
 push 0
 call @draw
@@ -112,21 +111,6 @@ jump :_44_match_end
 :_49_do_end
 pull
 :_44_match_end
-gettimer 17
-loadm $Ltime
-call @minus
-push 1
-call @lt
-loada
-testz
-clra
-jumpf :_50_do_end
-call @drawCommit
-gettimer 17
-push 1
-call @minus
-storem $Ltime
-:_50_do_end
 loadm $_43_Lresult
 loadb
 incb
@@ -134,7 +118,7 @@ moveb
 storem $_43_Lresult
 jump :_43_start_each
 :_43_end_each
-call @drawCommit
+call @drawBuff
 prttimer 0
 ret
 @~makeNewF
@@ -604,9 +588,9 @@ storem $Ltime
 push 0
 storem $Ltime
 array *size
-push 640
+push 160
 storem *size
-push 320
+push 80
 storem *size
 array *Lresult
 array *Ltemp

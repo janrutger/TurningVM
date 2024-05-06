@@ -1,7 +1,7 @@
 DEFINE
     VALUE Ltime 0
-    #ARRAY size [160 80]
-    ARRAY size [640 320]
+    ARRAY size [160 80]
+    #ARRAY size [640 320]
     ARRAY Lresult 
     ARRAY Ltemp
     ARRAY newF
@@ -119,9 +119,7 @@ DEFINE
     END
 END
 
-TIMER 17 SET
-TIMER 17 GET
-. AS Ltime
+0 `drawRate
 
 0 0 `draw 1 [size] 2 [size] `draw 
 
@@ -159,14 +157,9 @@ WITH Lresult EACH
             90 turtle right
         END
     END
-    TIMER 17 GET
-    Ltime - 1 < DO
-            `drawCommit
-            TIMER 17 GET
-            1 - AS Ltime
-        END
+
 END
-`drawCommit
+`drawBuff
 
 
 
