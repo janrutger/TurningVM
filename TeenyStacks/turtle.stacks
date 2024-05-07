@@ -102,17 +102,18 @@ DEFINE
     END
 END
 
-`drawNew 
+
 ARRAY Lresult
+"F" AS [Lresult]
+
+`drawNew 
 0 `drawRate 0 0 `draw 1 [size] 2 [size] `draw 
 0 0 turtle goto
-
 
 newF 0 == DO
     makeNewF
 END 
 
-"F" AS [Lresult]
 0 AS n
 INPUT AS nn 
 
