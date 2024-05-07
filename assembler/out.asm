@@ -1,6 +1,8 @@
 @main
 settimer 0
 speed 0
+call @drawNew
+array *Lresult
 push 0
 call @drawRate
 push 0
@@ -8,116 +10,101 @@ push 0
 call @draw
 push 1
 readelm *size
-jumpt :_40_readelm_done
+jumpt :_35_readelm_done
 call @__illegal_Array_Index
-:_40_readelm_done
+:_35_readelm_done
 push 2
 readelm *size
-jumpt :_41_readelm_done
+jumpt :_36_readelm_done
 call @__illegal_Array_Index
-:_41_readelm_done
+:_36_readelm_done
 call @draw
+push 0
+push 0
+call @~(turtle)_goto
+loadm *newF
+push 0
+call @eq
+loada
+testz
+clra
+jumpf :_37_do_end
 call @~makeNewF
+:_37_do_end
 push 'F'
 storem *Lresult
 push 0
 storem $n
 call @input
 storem $nn
-:_42_condition_start
+:_38_condition_start
 loadm $n
 loadm $nn
 call @neq
 loada
 testz
 clra
-jumpf :_42_repeat_end
+jumpf :_38_repeat_end
 call @~Koch
 loadm $n
 push 1
 call @plus
 storem $n
-jump :_42_condition_start
-:_42_repeat_end
+jump :_38_condition_start
+:_38_repeat_end
 loadm *Lresult
 prt
 push 1
-storem $_43_Lresult
-:_43_start_each
-loadm $_43_Lresult
+storem $_39_Lresult
+:_39_start_each
+loadm $_39_Lresult
 readelm *Lresult
-jumpf :_43_end_each
-call @dup
-push 'A'
-call @eq
-loada
-testz
-clra
-jumpf :_45_do_end
-pull
-push 4
-call @~(turtle)_forward
-jump :_44_match_end
-:_45_do_end
-call @dup
-push 'B'
-call @eq
-loada
-testz
-clra
-jumpf :_46_do_end
-pull
-push 315
-call @~(turtle)_right
-push 1
-call @~(turtle)_forward
-jump :_44_match_end
-:_46_do_end
+jumpf :_39_end_each
 call @dup
 push 'F'
 call @eq
 loada
 testz
 clra
-jumpf :_47_do_end
+jumpf :_41_do_end
 pull
 push 4
 call @~(turtle)_forward
-jump :_44_match_end
-:_47_do_end
+jump :_40_match_end
+:_41_do_end
 call @dup
 push '+'
 call @eq
 loada
 testz
 clra
-jumpf :_48_do_end
+jumpf :_42_do_end
 pull
 push 270
 call @~(turtle)_right
-jump :_44_match_end
-:_48_do_end
+jump :_40_match_end
+:_42_do_end
 call @dup
 push '-'
 call @eq
 loada
 testz
 clra
-jumpf :_49_do_end
+jumpf :_43_do_end
 pull
 push 90
 call @~(turtle)_right
-jump :_44_match_end
-:_49_do_end
+jump :_40_match_end
+:_43_do_end
 pull
-:_44_match_end
-loadm $_43_Lresult
+:_40_match_end
+loadm $_39_Lresult
 loadb
 incb
 moveb
-storem $_43_Lresult
-jump :_43_start_each
-:_43_end_each
+storem $_39_Lresult
+jump :_39_start_each
+:_39_end_each
 call @drawBuff
 prttimer 0
 ret
@@ -141,7 +128,7 @@ storem *newF
 push 'F'
 storem *newF
 ret
-@~Algae
+@~Koch
 push 1
 storem $_0_Lresult
 :_0_start_each
@@ -149,31 +136,53 @@ loadm $_0_Lresult
 readelm *Lresult
 jumpf :_0_end_each
 call @dup
-push 'A'
+push 'F'
 call @eq
 loada
 testz
 clra
 jumpf :_2_do_end
 pull
-push 'A'
+push 1
+storem $_3_newF
+:_3_start_copy
+loadm $_3_newF
+readelm *newF
+jumpf :_3_end_copy
 storem *Ltemp
-push 'B'
-storem *Ltemp
+loadm $_3_newF
+loadb
+incb
+moveb
+storem $_3_newF
+jump :_3_start_copy
+:_3_end_copy
 jump :_1_match_end
 :_2_do_end
 call @dup
-push 'B'
+push '+'
 call @eq
 loada
 testz
 clra
-jumpf :_3_do_end
+jumpf :_4_do_end
 pull
-push 'A'
+push '+'
 storem *Ltemp
 jump :_1_match_end
-:_3_do_end
+:_4_do_end
+call @dup
+push '-'
+call @eq
+loada
+testz
+clra
+jumpf :_5_do_end
+pull
+push '-'
+storem *Ltemp
+jump :_1_match_end
+:_5_do_end
 pull
 :_1_match_end
 loadm $_0_Lresult
@@ -185,100 +194,19 @@ jump :_0_start_each
 :_0_end_each
 array *Lresult
 push 1
-storem $_4_Ltemp
-:_4_start_copy
-loadm $_4_Ltemp
+storem $_6_Ltemp
+:_6_start_copy
+loadm $_6_Ltemp
 readelm *Ltemp
-jumpf :_4_end_copy
+jumpf :_6_end_copy
 storem *Lresult
-loadm $_4_Ltemp
+loadm $_6_Ltemp
 loadb
 incb
 moveb
-storem $_4_Ltemp
-jump :_4_start_copy
-:_4_end_copy
-array *Ltemp
-ret
-@~Koch
-push 1
-storem $_5_Lresult
-:_5_start_each
-loadm $_5_Lresult
-readelm *Lresult
-jumpf :_5_end_each
-call @dup
-push 'F'
-call @eq
-loada
-testz
-clra
-jumpf :_7_do_end
-pull
-push 1
-storem $_8_newF
-:_8_start_copy
-loadm $_8_newF
-readelm *newF
-jumpf :_8_end_copy
-storem *Ltemp
-loadm $_8_newF
-loadb
-incb
-moveb
-storem $_8_newF
-jump :_8_start_copy
-:_8_end_copy
-jump :_6_match_end
-:_7_do_end
-call @dup
-push '+'
-call @eq
-loada
-testz
-clra
-jumpf :_9_do_end
-pull
-push '+'
-storem *Ltemp
-jump :_6_match_end
-:_9_do_end
-call @dup
-push '-'
-call @eq
-loada
-testz
-clra
-jumpf :_10_do_end
-pull
-push '-'
-storem *Ltemp
-jump :_6_match_end
-:_10_do_end
-pull
-:_6_match_end
-loadm $_5_Lresult
-loadb
-incb
-moveb
-storem $_5_Lresult
-jump :_5_start_each
-:_5_end_each
-array *Lresult
-push 1
-storem $_11_Ltemp
-:_11_start_copy
-loadm $_11_Ltemp
-readelm *Ltemp
-jumpf :_11_end_copy
-storem *Lresult
-loadm $_11_Ltemp
-loadb
-incb
-moveb
-storem $_11_Ltemp
-jump :_11_start_copy
-:_11_end_copy
+storem $_6_Ltemp
+jump :_6_start_copy
+:_6_end_copy
 array *Ltemp
 ret
 @~(turtle)_goto
@@ -307,25 +235,81 @@ call @eq
 loada
 testz
 clra
-jumpf :_13_do_end
+jumpf :_8_do_end
 pull
 push 1
 loadm $(turtle)_y
 call @plus
 push 2
 readelm *size
-jumpt :_14_readelm_done
+jumpt :_9_readelm_done
 call @__illegal_Array_Index
-:_14_readelm_done
+:_9_readelm_done
 call @mod
 storem $(turtle)_y
 loadm $(turtle)_x
 loadm $(turtle)_y
 call @draw
-jump :_12_match_end
-:_13_do_end
+jump :_7_match_end
+:_8_do_end
 call @dup
 push 1
+call @eq
+loada
+testz
+clra
+jumpf :_10_do_end
+pull
+push 1
+loadm $(turtle)_x
+call @plus
+push 1
+readelm *size
+jumpt :_11_readelm_done
+call @__illegal_Array_Index
+:_11_readelm_done
+call @mod
+storem $(turtle)_x
+push 1
+loadm $(turtle)_y
+call @plus
+push 2
+readelm *size
+jumpt :_12_readelm_done
+call @__illegal_Array_Index
+:_12_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_7_match_end
+:_10_do_end
+call @dup
+push 2
+call @eq
+loada
+testz
+clra
+jumpf :_13_do_end
+pull
+push 1
+loadm $(turtle)_x
+call @plus
+push 1
+readelm *size
+jumpt :_14_readelm_done
+call @__illegal_Array_Index
+:_14_readelm_done
+call @mod
+storem $(turtle)_x
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_7_match_end
+:_13_do_end
+call @dup
+push 3
 call @eq
 loada
 testz
@@ -342,91 +326,80 @@ call @__illegal_Array_Index
 :_16_readelm_done
 call @mod
 storem $(turtle)_x
-push 1
-loadm $(turtle)_y
-call @plus
 push 2
 readelm *size
 jumpt :_17_readelm_done
 call @__illegal_Array_Index
 :_17_readelm_done
-call @mod
-storem $(turtle)_y
-loadm $(turtle)_x
-loadm $(turtle)_y
-call @draw
-jump :_12_match_end
-:_15_do_end
-call @dup
-push 2
-call @eq
-loada
-testz
-clra
-jumpf :_18_do_end
-pull
-push 1
-loadm $(turtle)_x
-call @plus
-push 1
-readelm *size
-jumpt :_19_readelm_done
-call @__illegal_Array_Index
-:_19_readelm_done
-call @mod
-storem $(turtle)_x
-loadm $(turtle)_x
-loadm $(turtle)_y
-call @draw
-jump :_12_match_end
-:_18_do_end
-call @dup
-push 3
-call @eq
-loada
-testz
-clra
-jumpf :_20_do_end
-pull
-push 1
-loadm $(turtle)_x
-call @plus
-push 1
-readelm *size
-jumpt :_21_readelm_done
-call @__illegal_Array_Index
-:_21_readelm_done
-call @mod
-storem $(turtle)_x
-push 2
-readelm *size
-jumpt :_22_readelm_done
-call @__illegal_Array_Index
-:_22_readelm_done
 loadm $(turtle)_y
 call @plus
 push 1
 call @minus
 push 2
 readelm *size
-jumpt :_23_readelm_done
+jumpt :_18_readelm_done
 call @__illegal_Array_Index
-:_23_readelm_done
+:_18_readelm_done
 call @mod
 storem $(turtle)_y
 loadm $(turtle)_x
 loadm $(turtle)_y
 call @draw
-jump :_12_match_end
-:_20_do_end
+jump :_7_match_end
+:_15_do_end
 call @dup
 push 4
 call @eq
 loada
 testz
 clra
-jumpf :_24_do_end
+jumpf :_19_do_end
 pull
+push 2
+readelm *size
+jumpt :_20_readelm_done
+call @__illegal_Array_Index
+:_20_readelm_done
+loadm $(turtle)_y
+call @plus
+push 1
+call @minus
+push 2
+readelm *size
+jumpt :_21_readelm_done
+call @__illegal_Array_Index
+:_21_readelm_done
+call @mod
+storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
+jump :_7_match_end
+:_19_do_end
+call @dup
+push 5
+call @eq
+loada
+testz
+clra
+jumpf :_22_do_end
+pull
+push 1
+readelm *size
+jumpt :_23_readelm_done
+call @__illegal_Array_Index
+:_23_readelm_done
+loadm $(turtle)_x
+call @plus
+push 1
+call @minus
+push 1
+readelm *size
+jumpt :_24_readelm_done
+call @__illegal_Array_Index
+:_24_readelm_done
+call @mod
+storem $(turtle)_x
 push 2
 readelm *size
 jumpt :_25_readelm_done
@@ -446,10 +419,10 @@ storem $(turtle)_y
 loadm $(turtle)_x
 loadm $(turtle)_y
 call @draw
-jump :_12_match_end
-:_24_do_end
+jump :_7_match_end
+:_22_do_end
 call @dup
-push 5
+push 6
 call @eq
 loada
 testz
@@ -472,78 +445,33 @@ call @__illegal_Array_Index
 :_29_readelm_done
 call @mod
 storem $(turtle)_x
-push 2
-readelm *size
-jumpt :_30_readelm_done
-call @__illegal_Array_Index
-:_30_readelm_done
-loadm $(turtle)_y
-call @plus
-push 1
-call @minus
-push 2
-readelm *size
-jumpt :_31_readelm_done
-call @__illegal_Array_Index
-:_31_readelm_done
-call @mod
-storem $(turtle)_y
 loadm $(turtle)_x
 loadm $(turtle)_y
 call @draw
-jump :_12_match_end
+jump :_7_match_end
 :_27_do_end
-call @dup
-push 6
-call @eq
-loada
-testz
-clra
-jumpf :_32_do_end
-pull
-push 1
-readelm *size
-jumpt :_33_readelm_done
-call @__illegal_Array_Index
-:_33_readelm_done
-loadm $(turtle)_x
-call @plus
-push 1
-call @minus
-push 1
-readelm *size
-jumpt :_34_readelm_done
-call @__illegal_Array_Index
-:_34_readelm_done
-call @mod
-storem $(turtle)_x
-loadm $(turtle)_x
-loadm $(turtle)_y
-call @draw
-jump :_12_match_end
-:_32_do_end
 call @dup
 push 7
 call @eq
 loada
 testz
 clra
-jumpf :_35_do_end
+jumpf :_30_do_end
 pull
 push 1
 readelm *size
-jumpt :_36_readelm_done
+jumpt :_31_readelm_done
 call @__illegal_Array_Index
-:_36_readelm_done
+:_31_readelm_done
 loadm $(turtle)_x
 call @plus
 push 1
 call @minus
 push 1
 readelm *size
-jumpt :_37_readelm_done
+jumpt :_32_readelm_done
 call @__illegal_Array_Index
-:_37_readelm_done
+:_32_readelm_done
 call @mod
 storem $(turtle)_x
 push 1
@@ -551,35 +479,35 @@ loadm $(turtle)_y
 call @plus
 push 2
 readelm *size
-jumpt :_38_readelm_done
+jumpt :_33_readelm_done
 call @__illegal_Array_Index
-:_38_readelm_done
+:_33_readelm_done
 call @mod
 storem $(turtle)_y
-jump :_12_match_end
-:_35_do_end
+jump :_7_match_end
+:_30_do_end
 pull
-:_12_match_end
+:_7_match_end
 ret
 @~(turtle)_forward
 storem $steps
 push 0
 storem $s
-:_39_condition_start
+:_34_condition_start
 loadm $s
 loadm $steps
 call @neq
 loada
 testz
 clra
-jumpf :_39_repeat_end
+jumpf :_34_repeat_end
 call @~(turtle)_move
 loadm $s
 push 1
 call @plus
 storem $s
-jump :_39_condition_start
-:_39_repeat_end
+jump :_34_condition_start
+:_34_repeat_end
 ret
 @__MemAllocGlobels
 call @init_vmachine

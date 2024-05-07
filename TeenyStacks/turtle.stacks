@@ -18,23 +18,6 @@ DEFINE
         "F" AS [newF]
     END
 
-    FUNCTION Algae
-        WITH Lresult EACH
-            . MATCH
-                ON "A" DO
-                    "A" AS [Ltemp]
-                    "B" AS [Ltemp]
-                END
-                ON "B" DO
-                   "A" AS [Ltemp] 
-                END
-            END
-        END
-        ARRAY Lresult
-        WITH Ltemp COPY Lresult
-        ARRAY Ltemp
-    END
-
     FUNCTION Koch
         WITH Lresult EACH
             . MATCH
@@ -119,17 +102,21 @@ DEFINE
     END
 END
 
-0 `drawRate
+`drawNew 
+ARRAY Lresult
+0 `drawRate 0 0 `draw 1 [size] 2 [size] `draw 
+0 0 turtle goto
 
-0 0 `draw 1 [size] 2 [size] `draw 
 
-makeNewF
+newF 0 == DO
+    makeNewF
+END 
+
 "F" AS [Lresult]
 0 AS n
 INPUT AS nn 
 
 {n nn !=} DO
-    #Algae
     Koch
     n 1 + AS n
 END
@@ -139,16 +126,8 @@ Lresult PRINT
 
 WITH Lresult EACH
     . MATCH
-        ON "A" DO
-            4 turtle forward
-        END
-        ON "B" DO
-            315 turtle right
-            1 turtle forward
-        END
         ON "F" DO
             4 turtle forward
-            #`drawCommit
         END
         ON "+" DO
             270 turtle right

@@ -54,7 +54,7 @@ ret
 ret
 
 @drawNew
-    output %_xygraph
+    iobuff %_xygraph
 ret
 
 @drawRate
