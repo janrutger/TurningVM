@@ -6,8 +6,6 @@ push 'F'
 storem *Lresult
 call @drawNew
 push 0
-call @drawRate
-push 0
 push 0
 call @draw
 push 1

@@ -542,19 +542,19 @@ class Parser:
                 self.emitter.emitLine("call @plot")
                 self.nextToken()
                 self.nl()
-                
+
             # | “DRAW” [“RATE”] nl
             elif self.checkToken(TokenType.DRAW):
                 self.match(TokenType.DRAW)
                 if self.checkToken(TokenType.RATE):
                     self.drawing = True
-                    self.emitter.emitLine("push " + str(0))
                     self.emitter.emitLine("call @drawRate")
                     self.match(TokenType.RATE)
                 elif self.checkToken(TokenType.NEWLINE) and self.drawing:
                     self.emitter.emitLine("call @draw")
                 else:
-                    self.abort("DRAWing not enabled, or invalid DRAW instruction")
+                    self.abort(
+                        "DRAWing not enabled, or invalid DRAW instruction: " + self.curToken.text)
                 self.nl()
 
             elif self.checkToken(TokenType.WAIT):

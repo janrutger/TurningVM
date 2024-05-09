@@ -1,11 +1,8 @@
-0 `drawRate
+DEFINE
+    DRAW
+END
 
-1 WAIT
+DRAW NOW
 
-
-0 0 `draw
-5 5 `draw
-10 10 `draw
-
-`drawBuff
-
+0 DRAW RATE
+10 10 DRAW
