@@ -31,17 +31,19 @@ The Grammer of TeenySTACKS Version 4
 
 
     define	::=	"DEFINE" nl
-                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
-                    [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+                [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+                [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
 
-                    [ ("THING" thing nl 
-                         "INIT" nl {statement} nl "END" nl
-                         "THIS" function nl {statement} nl "END" nl
-                        ["THIS" function nl {statement} nl "END" nl]+ 
-                    "END" nl)+]
+                [ "DRAW" ] nl
 
-                    [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
-                "END" nl
+                [ ("THING" thing nl 
+                    "INIT" nl {statement} nl "END" nl
+                    "THIS" function nl {statement} nl "END" nl
+                    ["THIS" function nl {statement} nl "END" nl]+ 
+                "END" nl)+]
+
+                [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+            "END" nl
 
 
     statement  ::=  "LABEL" label nl
@@ -52,20 +54,26 @@ The Grammer of TeenySTACKS Version 4
                 |   “QUEUE” job nl
                 |   “JOIN” nl 
                 |   “RESULT”  nl {statement} nl "END" nl
+
+                |   “DRAW” (“NOW” | "NEW") nl
+
                 |   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” [“THIS”] array | "PLOT" ["NEW"]) nl
                 |   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
                 |   (expression | tos) ( "PRINT" nl
-                                    | "PLOT"  nl
-                                    | ¨WAIT¨  nl
-                                    | "AS" [“THIS”] (variable | '['array']') nl
-                                    | “MATCH” nl 
-                                        "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
-                                        [("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
-                                        [ "NO" nl {statement} nl "END" nl]
-                                    "END" nl
-                                    | "DO" nl {statement} nl "END" nl
-                                    | "GOTO" label nl
-                                    |  nl )
+                                | "PLOT"  nl
+
+                                | “DRAW” [“RATE”] nl
+
+                                | ¨WAIT¨  nl
+                                | "AS" [“THIS”] (variable | '['array']') nl
+                                | “MATCH” nl 
+                                    "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
+                                    [("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
+                                    [ "NO" nl {statement} nl "END" nl]
+                                "END" nl
+                                | "DO" nl {statement} nl "END" nl
+                                | "GOTO" label nl
+                                |  nl )
 
     expression ::=	(INTEGER | STRING | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
     word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
