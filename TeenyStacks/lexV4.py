@@ -253,6 +253,9 @@ class TokenType(enum.Enum):
     MATCH = 146
     ON = 147
     NO = 148
+    DRAW = 149
+    NOW = 150
+    RATE = 151
 
     #
     PLUS = 201

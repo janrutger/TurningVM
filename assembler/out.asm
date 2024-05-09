@@ -1,8 +1,10 @@
 @main
 settimer 0
 speed 0
-call @drawNew
 array *Lresult
+push 'F'
+storem *Lresult
+call @drawNew
 push 0
 call @drawRate
 push 0
@@ -31,8 +33,6 @@ clra
 jumpf :_37_do_end
 call @~makeNewF
 :_37_do_end
-push 'F'
-storem *Lresult
 push 0
 storem $n
 call @input
@@ -523,6 +523,8 @@ storem *size
 array *Lresult
 array *Ltemp
 array *newF
+push 0
+call @drawRate
 push 0
 storem $(turtle)_x
 push 0

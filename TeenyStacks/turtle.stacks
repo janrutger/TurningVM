@@ -6,6 +6,8 @@ DEFINE
     ARRAY Ltemp
     ARRAY newF
 
+    DRAW
+
     FUNCTION makeNewF
         "F" AS [newF]
         "+" AS [newF]

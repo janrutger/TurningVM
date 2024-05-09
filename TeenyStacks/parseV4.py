@@ -16,6 +16,8 @@ class Parser:
         self.curThing = None
         self.curThis = ""
 
+        self.drawing = False
+
         self.labelsDeclared = set() # Keep track of all labels declared
         self.labelsGotoed = set() # All labels goto'ed, so we know if they exist or not.
 
@@ -139,6 +141,16 @@ class Parser:
                     self.match(TokenType.CLOSEBL)
                 self.nl()
                 self.emitter.context = "program"
+
+        # [ "DRAW" ] nl
+        if self.checkToken(TokenType.DRAW):
+            self.drawing = True
+            self.emitter.context = "meminit"
+            self.emitter.emitLine("push " + str(0))
+            self.emitter.emitLine("call @drawRate")
+            self.emitter.context = "program"
+            self.match(TokenType.DRAW)
+            self.nl()
 
         # [ ("FUNCTION" function nl {statement} <nl> "END" nl)+ ]
         while self.checkToken(TokenType.FUNCTION):
@@ -375,6 +387,23 @@ class Parser:
             self.match(TokenType.END)
             self.emitter.emitLine(":_" + num + "_no_result")
             self.nl()
+
+        # |   “DRAW” (“NOW” | "NEW") nl
+        elif self.checkToken(TokenType.DRAW):
+            if self.drawing:
+                self.match(TokenType.DRAW)
+                if self.checkToken(TokenType.NOW):
+                    self.emitter.emitLine("call @drawBuff")
+                    self.match(TokenType.NOW)
+                elif self.checkToken(TokenType.NEW):
+                    self.emitter.emitLine("call @drawNew")
+                    self.match(TokenType.NEW)
+                else:
+                    self.abort("Invalid DRAW instruction: " + self.curToken.text)
+            else:
+                self.abort("DRAWing not enabled, do before use DRAW")
+            self.nl()
+
         
         # |   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array ) nl
         # |   “WITH” array (“EACH” nl {statement} nl "END" | “COPY” array | "PLOT" ["NEW"]) nl
@@ -513,6 +542,21 @@ class Parser:
                 self.emitter.emitLine("call @plot")
                 self.nextToken()
                 self.nl()
+                
+            # | “DRAW” [“RATE”] nl
+            elif self.checkToken(TokenType.DRAW):
+                self.match(TokenType.DRAW)
+                if self.checkToken(TokenType.RATE):
+                    self.drawing = True
+                    self.emitter.emitLine("push " + str(0))
+                    self.emitter.emitLine("call @drawRate")
+                    self.match(TokenType.RATE)
+                elif self.checkToken(TokenType.NEWLINE) and self.drawing:
+                    self.emitter.emitLine("call @draw")
+                else:
+                    self.abort("DRAWing not enabled, or invalid DRAW instruction")
+                self.nl()
+
             elif self.checkToken(TokenType.WAIT):
                 self.emitter.emitLine("call @sleep")
                 self.nextToken()
