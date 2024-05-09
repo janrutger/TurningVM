@@ -4,6 +4,8 @@ speed 0
 array *Lresult
 push 'F'
 storem *Lresult
+push 5
+call @drawRate
 call @drawNew
 push 0
 push 0
@@ -33,6 +35,9 @@ call @~makeNewF
 :_37_do_end
 push 0
 storem $n
+push 'Aantal\_generaties'
+call @char2prtbuff
+call @printbuff
 call @input
 storem $nn
 :_38_condition_start
@@ -482,6 +487,9 @@ call @__illegal_Array_Index
 :_33_readelm_done
 call @mod
 storem $(turtle)_y
+loadm $(turtle)_x
+loadm $(turtle)_y
+call @draw
 jump :_7_match_end
 :_30_do_end
 pull
@@ -509,10 +517,6 @@ jump :_34_condition_start
 ret
 @__MemAllocGlobels
 call @init_vmachine
-push 0
-storem $Ltime
-push 0
-storem $Ltime
 array *size
 push 160
 storem *size

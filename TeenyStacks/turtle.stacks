@@ -1,5 +1,5 @@
 DEFINE
-    VALUE Ltime 0
+    #VALUE Ltime 0
     ARRAY size [160 80]
     #ARRAY size [640 320]
     ARRAY Lresult 
@@ -90,6 +90,7 @@ DEFINE
                 ON 7 DO
                     1 [size] THIS x + 1 - 1 [size] % AS THIS x 
                     1 THIS y + 2 [size] % AS THIS y
+                    THIS x THIS y DRAW
                 END
             END
         END
@@ -108,8 +109,8 @@ END
 ARRAY Lresult
 "F" AS [Lresult]
 
+5 DRAW RATE 
 DRAW NEW
-0 DRAW RATE 
 
 0 0 DRAW 
 1 [size] 2 [size] DRAW
@@ -120,6 +121,7 @@ newF 0 == DO
 END 
 
 0 AS n
+"Aantal generaties" SHOW
 INPUT AS nn 
 
 {n nn !=} DO

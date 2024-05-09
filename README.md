@@ -21,19 +21,19 @@ STACKS: An RPN-based Language for the TuringVM Machine
 
 The Grammer of TeenySTACKS Version 4
 
-    Version 4: Including THING object and MATCH, DRAW instructions
+    Version 4: Including THING object and MATCH, DRAW, SHOW instructions
     Version 3: Including Array datatype and a-sync Jobs
     Version 2: Includes Functions
-    Version    Initial (thanks for AZHenley)
+    Version    Initial (thanks to AZHenley)
     ----------------------------------------------------
 
     program    ::=	[(define)] {statement}
 
 
     define	::=	"DEFINE" nl
-                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]				
+                    [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]		
+                    [ "DRAW" nl ]		
                     [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
-                    [ "DRAW" nl ]
 
                     [ ("THING" thing nl 
                         "INIT" nl {statement} nl "END" nl
@@ -70,7 +70,7 @@ The Grammer of TeenySTACKS Version 4
                                 | "GOTO" label nl
                                 |  nl )
 
-    expression ::=	(INTEGER | STRING | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
+    expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
     word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
                                 
     label      ::=  ident

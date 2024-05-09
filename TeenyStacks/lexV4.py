@@ -256,6 +256,7 @@ class TokenType(enum.Enum):
     DRAW = 149
     NOW = 150
     RATE = 151
+    SHOW = 152
 
     #
     PLUS = 201

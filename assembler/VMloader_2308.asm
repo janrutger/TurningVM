@@ -10,7 +10,7 @@ nop
 nop
 
 @init_vmachine
-    speed 100
+    speed 5
     clra
     clrb
     iobuff %_plotter

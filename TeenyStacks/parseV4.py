@@ -678,7 +678,7 @@ class Parser:
                 self.nl()
 
     # expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
-    # expression ::=	(INTEGER | STRING | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
+    # expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
     def expression(self):
         while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.THIS):
             if self.checkToken(TokenType.NUMBER):
@@ -687,6 +687,10 @@ class Parser:
             elif self.checkToken(TokenType.STRING):
                 self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
                 self.nextToken()
+                if self.checkToken(TokenType.SHOW):
+                    self.emitter.emitLine("call " + "@char2prtbuff")
+                    self.emitter.emitLine("call " + "@printbuff")
+                    self.nextToken()
             elif self.checkToken(TokenType.BT):
                 self.nextToken()
                 self.emitter.emitLine("call " + "@" + self.curToken.text)
