@@ -36,10 +36,10 @@ The Grammer of TeenySTACKS Version 4
                     [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
 
                     [ ("THING" thing nl 
-                        "INIT" nl {statement} nl "END" nl
-                        "THIS" function nl {statement} nl "END" nl
+                         "INIT" nl {statement} nl "END" nl
+                         "THIS" function nl {statement} nl "END" nl
                         ["THIS" function nl {statement} nl "END" nl]+ 
-                    "END" nl)+]
+                       "END" nl)+]
 
                     [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
                 "END" nl

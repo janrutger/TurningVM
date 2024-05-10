@@ -20,7 +20,7 @@ DEFINE
         "F" AS [newF]
     END
 
-    FUNCTION Koch
+    FUNCTION koch
         WITH Lresult EACH
             . MATCH
                 ON "F" DO
@@ -40,7 +40,7 @@ DEFINE
     END
     
 
-    THING turtle
+    THING Turtle
         INIT
             0 AS THIS x
             0 AS THIS y 
@@ -98,7 +98,7 @@ DEFINE
             . AS steps
             0 AS s
             {s steps !=} DO
-                turtle move
+                Turtle move
                 s 1 + AS s
             END
         END
@@ -109,23 +109,23 @@ END
 ARRAY Lresult
 "F" AS [Lresult]
 
-5 DRAW RATE 
+0 DRAW RATE 
 DRAW NEW
 
 0 0 DRAW 
 1 [size] 2 [size] DRAW
-0 0 turtle goto
+0 0 Turtle goto
 
 newF 0 == DO
     makeNewF
 END 
 
 0 AS n
-"Aantal generaties" SHOW
+"Aantal generaties:" SHOW
 INPUT AS nn 
 
 {n nn !=} DO
-    Koch
+    koch
     n 1 + AS n
 END
 
@@ -135,13 +135,13 @@ Lresult PRINT
 WITH Lresult EACH
     . MATCH
         ON "F" DO
-            4 turtle forward
+            4 Turtle forward
         END
         ON "+" DO
-            270 turtle right
+            270 Turtle right
         END
         ON "-" DO
-            90 turtle right
+            90 Turtle right
         END
     END
 
