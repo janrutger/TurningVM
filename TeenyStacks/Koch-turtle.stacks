@@ -1,5 +1,4 @@
 DEFINE
-    #VALUE Ltime 0
     ARRAY size [160 80]
     #ARRAY size [640 320]
     ARRAY Lresult 
