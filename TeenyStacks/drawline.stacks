@@ -5,8 +5,8 @@ DEFINE
     VALUE x 1
     VALUE y 2
 
-    ARRAY P2 [35 30]
-    ARRAY P1 [100 70]
+    ARRAY P1 [35 30]
+    ARRAY P2 [100 70]
 
     DRAW
 
@@ -18,6 +18,7 @@ DEFINE
             0 AS THIS lineY
             0 AS THIS targetX
             0 AS THIS targetY
+            
 
             90 AS THIS angle
         END
@@ -34,6 +35,9 @@ DEFINE
             . AS THIS lineX
             THIS lineX THIS lineY DRAW
         END
+        THIS slope
+            THIS lineY THIS targetY `diff 1000 * THIS lineX THIS targetX `diff / 
+        END 
         THIS next
             . AS THIS targetY
             . AS THIS targetX
@@ -42,14 +46,36 @@ DEFINE
                 ON THIS lineX DO >
                     THIS targetY MATCH
                         ON THIS lineY DO >
+                        THIS slope PRINT
                             THIS lineX 1 - AS THIS lineX
                             THIS lineY 1 - AS THIS lineY
                             THIS lineX THIS lineY DRAW
                         END
+
                         ON THIS lineY DO <
-                            THIS lineX 1 - AS THIS lineX
-                            THIS lineY 1 + AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                            THIS slope MATCH
+                                ON 53333 < DO
+                                    THIS lineX 1   AS THIS lineX
+                                    THIS lineY 1 + AS THIS lineY
+                                    THIS lineX THIS lineY DRAW
+                                END
+                                ON 26667 < DO
+                                    THIS lineX 1 - AS THIS lineX
+                                    THIS lineY 1 + AS THIS lineY
+                                    THIS lineX THIS lineY DRAW
+                                END
+                                ON 26667 > DO
+                                    THIS lineX 1   AS THIS lineX
+                                    THIS lineY 1 + AS THIS lineY
+                                    THIS lineX THIS lineY DRAW
+                                END
+                                NO
+                                    "ERROR" SHOW
+                                END
+                            END
+                            #THIS lineX 1 - AS THIS lineX
+                            #THIS lineY 1 + AS THIS lineY
+                            #THIS lineX THIS lineY DRAW
                         END
                         NO
                             THIS lineX 1 - AS THIS lineX
@@ -58,14 +84,17 @@ DEFINE
                         END
                     END
                 END
+
                 ON THIS lineX DO <
                     THIS targetY MATCH
                         ON THIS lineY DO >
+                        THIS slope PRINT
                             THIS lineX 1 + AS THIS lineX
                             THIS lineY 1 - AS THIS lineY
                             THIS lineX THIS lineY DRAW
                         END
                         ON THIS lineY DO <
+                        THIS slope PRINT
                             THIS lineX 1 + AS THIS lineX
                             THIS lineY 1 + AS THIS lineY
                             THIS lineX THIS lineY DRAW

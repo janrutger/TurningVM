@@ -9,40 +9,18 @@ push 0
 call @draw
 push 1
 readelm *size
-jumpt :_40_readelm_done
+jumpt :_44_readelm_done
 call @__illegal_Array_Index
-:_40_readelm_done
+:_44_readelm_done
 push 2
 readelm *size
-jumpt :_41_readelm_done
+jumpt :_45_readelm_done
 call @__illegal_Array_Index
-:_41_readelm_done
+:_45_readelm_done
 call @draw
 push 0
 push 0
 call @~(Turtle)_goto
-loadm $x
-readelm *P2
-jumpt :_42_readelm_done
-call @__illegal_Array_Index
-:_42_readelm_done
-loadm $y
-readelm *P2
-jumpt :_43_readelm_done
-call @__illegal_Array_Index
-:_43_readelm_done
-call @~(Turtle)_goto
-loadm $x
-readelm *P1
-jumpt :_44_readelm_done
-call @__illegal_Array_Index
-:_44_readelm_done
-loadm $y
-readelm *P1
-jumpt :_45_readelm_done
-call @__illegal_Array_Index
-:_45_readelm_done
-call @~(Turtle)_line
 loadm $x
 readelm *P2
 jumpt :_46_readelm_done
@@ -53,18 +31,18 @@ readelm *P2
 jumpt :_47_readelm_done
 call @__illegal_Array_Index
 :_47_readelm_done
-call @~(Turtle)_next
+call @~(Turtle)_goto
 loadm $x
-readelm *P2
+readelm *P1
 jumpt :_48_readelm_done
 call @__illegal_Array_Index
 :_48_readelm_done
 loadm $y
-readelm *P2
+readelm *P1
 jumpt :_49_readelm_done
 call @__illegal_Array_Index
 :_49_readelm_done
-call @~(Turtle)_next
+call @~(Turtle)_line
 loadm $x
 readelm *P2
 jumpt :_50_readelm_done
@@ -835,6 +813,28 @@ jumpt :_189_readelm_done
 call @__illegal_Array_Index
 :_189_readelm_done
 call @~(Turtle)_next
+loadm $x
+readelm *P2
+jumpt :_190_readelm_done
+call @__illegal_Array_Index
+:_190_readelm_done
+loadm $y
+readelm *P2
+jumpt :_191_readelm_done
+call @__illegal_Array_Index
+:_191_readelm_done
+call @~(Turtle)_next
+loadm $x
+readelm *P2
+jumpt :_192_readelm_done
+call @__illegal_Array_Index
+:_192_readelm_done
+loadm $y
+readelm *P2
+jumpt :_193_readelm_done
+call @__illegal_Array_Index
+:_193_readelm_done
+call @~(Turtle)_next
 call @drawBuff
 prttimer 0
 ret
@@ -859,6 +859,17 @@ loadm $(Turtle)_lineX
 loadm $(Turtle)_lineY
 call @draw
 ret
+@~(Turtle)_slope
+loadm $(Turtle)_lineY
+loadm $(Turtle)_targetY
+call @diff
+push 1000
+call @mul
+loadm $(Turtle)_lineX
+loadm $(Turtle)_targetX
+call @diff
+call @div
+ret
 @~(Turtle)_next
 storem $(Turtle)_targetY
 storem $(Turtle)_targetX
@@ -880,6 +891,8 @@ testz
 clra
 jumpf :_3_do_end
 pull
+call @~(Turtle)_slope
+prt
 loadm $(Turtle)_lineX
 push 1
 call @minus
@@ -901,6 +914,37 @@ testz
 clra
 jumpf :_4_do_end
 pull
+call @~(Turtle)_slope
+call @dup
+push 53333
+call @lt
+call @eq
+loada
+testz
+clra
+jumpf :_6_do_end
+pull
+loadm $(Turtle)_lineX
+push 1
+storem $(Turtle)_lineX
+loadm $(Turtle)_lineY
+push 1
+call @plus
+storem $(Turtle)_lineY
+loadm $(Turtle)_lineX
+loadm $(Turtle)_lineY
+call @draw
+jump :_5_match_end
+:_6_do_end
+call @dup
+push 26667
+call @lt
+call @eq
+loada
+testz
+clra
+jumpf :_7_do_end
+pull
 loadm $(Turtle)_lineX
 push 1
 call @minus
@@ -912,6 +956,34 @@ storem $(Turtle)_lineY
 loadm $(Turtle)_lineX
 loadm $(Turtle)_lineY
 call @draw
+jump :_5_match_end
+:_7_do_end
+call @dup
+push 26667
+call @gt
+call @eq
+loada
+testz
+clra
+jumpf :_8_do_end
+pull
+loadm $(Turtle)_lineX
+push 1
+storem $(Turtle)_lineX
+loadm $(Turtle)_lineY
+push 1
+call @plus
+storem $(Turtle)_lineY
+loadm $(Turtle)_lineX
+loadm $(Turtle)_lineY
+call @draw
+jump :_5_match_end
+:_8_do_end
+push 'ERROR'
+call @char2prtbuff
+call @printbuff
+pull
+:_5_match_end
 jump :_2_match_end
 :_4_do_end
 loadm $(Turtle)_lineX
@@ -933,92 +1005,96 @@ call @lt
 loada
 testz
 clra
-jumpf :_5_do_end
+jumpf :_9_do_end
 pull
 loadm $(Turtle)_targetY
 call @dup
 loadm $(Turtle)_lineY
 call @gt
-loada
-testz
-clra
-jumpf :_7_do_end
-pull
-loadm $(Turtle)_lineX
-push 1
-call @plus
-storem $(Turtle)_lineX
-loadm $(Turtle)_lineY
-push 1
-call @minus
-storem $(Turtle)_lineY
-loadm $(Turtle)_lineX
-loadm $(Turtle)_lineY
-call @draw
-jump :_6_match_end
-:_7_do_end
-call @dup
-loadm $(Turtle)_lineY
-call @lt
-loada
-testz
-clra
-jumpf :_8_do_end
-pull
-loadm $(Turtle)_lineX
-push 1
-call @plus
-storem $(Turtle)_lineX
-loadm $(Turtle)_lineY
-push 1
-call @plus
-storem $(Turtle)_lineY
-loadm $(Turtle)_lineX
-loadm $(Turtle)_lineY
-call @draw
-jump :_6_match_end
-:_8_do_end
-loadm $(Turtle)_lineX
-push 1
-call @plus
-storem $(Turtle)_lineX
-loadm $(Turtle)_lineY
-storem $(Turtle)_lineY
-loadm $(Turtle)_lineX
-loadm $(Turtle)_lineY
-call @draw
-pull
-:_6_match_end
-jump :_0_match_end
-:_5_do_end
-loadm $(Turtle)_targetY
-call @dup
-loadm $(Turtle)_lineY
-call @gt
-loada
-testz
-clra
-jumpf :_10_do_end
-pull
-loadm $(Turtle)_lineX
-storem $(Turtle)_lineX
-loadm $(Turtle)_lineY
-push 1
-call @minus
-storem $(Turtle)_lineY
-loadm $(Turtle)_lineX
-loadm $(Turtle)_lineY
-call @draw
-jump :_9_match_end
-:_10_do_end
-call @dup
-loadm $(Turtle)_lineY
-call @lt
 loada
 testz
 clra
 jumpf :_11_do_end
 pull
+call @~(Turtle)_slope
+prt
+loadm $(Turtle)_lineX
+push 1
+call @plus
+storem $(Turtle)_lineX
+loadm $(Turtle)_lineY
+push 1
+call @minus
+storem $(Turtle)_lineY
+loadm $(Turtle)_lineX
+loadm $(Turtle)_lineY
+call @draw
+jump :_10_match_end
+:_11_do_end
+call @dup
+loadm $(Turtle)_lineY
+call @lt
+loada
+testz
+clra
+jumpf :_12_do_end
+pull
+call @~(Turtle)_slope
+prt
+loadm $(Turtle)_lineX
+push 1
+call @plus
+storem $(Turtle)_lineX
+loadm $(Turtle)_lineY
+push 1
+call @plus
+storem $(Turtle)_lineY
+loadm $(Turtle)_lineX
+loadm $(Turtle)_lineY
+call @draw
+jump :_10_match_end
+:_12_do_end
+loadm $(Turtle)_lineX
+push 1
+call @plus
+storem $(Turtle)_lineX
+loadm $(Turtle)_lineY
+storem $(Turtle)_lineY
+loadm $(Turtle)_lineX
+loadm $(Turtle)_lineY
+call @draw
+pull
+:_10_match_end
+jump :_0_match_end
+:_9_do_end
+loadm $(Turtle)_targetY
+call @dup
+loadm $(Turtle)_lineY
+call @gt
+loada
+testz
+clra
+jumpf :_14_do_end
+pull
+loadm $(Turtle)_lineX
+storem $(Turtle)_lineX
+loadm $(Turtle)_lineY
+push 1
+call @minus
+storem $(Turtle)_lineY
+loadm $(Turtle)_lineX
+loadm $(Turtle)_lineY
+call @draw
+jump :_13_match_end
+:_14_do_end
+call @dup
+loadm $(Turtle)_lineY
+call @lt
+loada
+testz
+clra
+jumpf :_15_do_end
+pull
 loadm $(Turtle)_lineX
 push 1
 storem $(Turtle)_lineX
@@ -1029,13 +1105,13 @@ storem $(Turtle)_lineY
 loadm $(Turtle)_lineX
 loadm $(Turtle)_lineY
 call @draw
-jump :_9_match_end
-:_11_do_end
+jump :_13_match_end
+:_15_do_end
 push 'DONE....'
 call @char2prtbuff
 call @printbuff
 pull
-:_9_match_end
+:_13_match_end
 pull
 :_0_match_end
 ret
@@ -1051,39 +1127,39 @@ call @eq
 loada
 testz
 clra
-jumpf :_13_do_end
+jumpf :_17_do_end
 pull
 push 1
 loadm $(Turtle)_y
 call @plus
 push 2
 readelm *size
-jumpt :_14_readelm_done
+jumpt :_18_readelm_done
 call @__illegal_Array_Index
-:_14_readelm_done
+:_18_readelm_done
 call @mod
 storem $(Turtle)_y
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_13_do_end
+jump :_16_match_end
+:_17_do_end
 call @dup
 push 1
 call @eq
 loada
 testz
 clra
-jumpf :_15_do_end
+jumpf :_19_do_end
 pull
 push 1
 loadm $(Turtle)_x
 call @plus
 push 1
 readelm *size
-jumpt :_16_readelm_done
+jumpt :_20_readelm_done
 call @__illegal_Array_Index
-:_16_readelm_done
+:_20_readelm_done
 call @mod
 storem $(Turtle)_x
 push 1
@@ -1091,203 +1167,203 @@ loadm $(Turtle)_y
 call @plus
 push 2
 readelm *size
-jumpt :_17_readelm_done
+jumpt :_21_readelm_done
 call @__illegal_Array_Index
-:_17_readelm_done
+:_21_readelm_done
 call @mod
 storem $(Turtle)_y
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_15_do_end
+jump :_16_match_end
+:_19_do_end
 call @dup
 push 2
 call @eq
 loada
 testz
 clra
-jumpf :_18_do_end
+jumpf :_22_do_end
 pull
 push 1
 loadm $(Turtle)_x
 call @plus
 push 1
 readelm *size
-jumpt :_19_readelm_done
+jumpt :_23_readelm_done
 call @__illegal_Array_Index
-:_19_readelm_done
+:_23_readelm_done
 call @mod
 storem $(Turtle)_x
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_18_do_end
+jump :_16_match_end
+:_22_do_end
 call @dup
 push 3
 call @eq
 loada
 testz
 clra
-jumpf :_20_do_end
+jumpf :_24_do_end
 pull
 push 1
 loadm $(Turtle)_x
 call @plus
 push 1
 readelm *size
-jumpt :_21_readelm_done
+jumpt :_25_readelm_done
 call @__illegal_Array_Index
-:_21_readelm_done
+:_25_readelm_done
 call @mod
 storem $(Turtle)_x
 push 2
 readelm *size
-jumpt :_22_readelm_done
+jumpt :_26_readelm_done
 call @__illegal_Array_Index
-:_22_readelm_done
+:_26_readelm_done
 loadm $(Turtle)_y
 call @plus
 push 1
 call @minus
 push 2
 readelm *size
-jumpt :_23_readelm_done
+jumpt :_27_readelm_done
 call @__illegal_Array_Index
-:_23_readelm_done
+:_27_readelm_done
 call @mod
 storem $(Turtle)_y
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_20_do_end
+jump :_16_match_end
+:_24_do_end
 call @dup
 push 4
 call @eq
 loada
 testz
 clra
-jumpf :_24_do_end
+jumpf :_28_do_end
 pull
 push 2
 readelm *size
-jumpt :_25_readelm_done
+jumpt :_29_readelm_done
 call @__illegal_Array_Index
-:_25_readelm_done
+:_29_readelm_done
 loadm $(Turtle)_y
 call @plus
 push 1
 call @minus
 push 2
 readelm *size
-jumpt :_26_readelm_done
+jumpt :_30_readelm_done
 call @__illegal_Array_Index
-:_26_readelm_done
+:_30_readelm_done
 call @mod
 storem $(Turtle)_y
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_24_do_end
+jump :_16_match_end
+:_28_do_end
 call @dup
 push 5
 call @eq
 loada
 testz
 clra
-jumpf :_27_do_end
+jumpf :_31_do_end
 pull
 push 1
 readelm *size
-jumpt :_28_readelm_done
+jumpt :_32_readelm_done
 call @__illegal_Array_Index
-:_28_readelm_done
+:_32_readelm_done
 loadm $(Turtle)_x
 call @plus
 push 1
 call @minus
 push 1
 readelm *size
-jumpt :_29_readelm_done
+jumpt :_33_readelm_done
 call @__illegal_Array_Index
-:_29_readelm_done
+:_33_readelm_done
 call @mod
 storem $(Turtle)_x
 push 2
 readelm *size
-jumpt :_30_readelm_done
+jumpt :_34_readelm_done
 call @__illegal_Array_Index
-:_30_readelm_done
+:_34_readelm_done
 loadm $(Turtle)_y
 call @plus
 push 1
 call @minus
 push 2
 readelm *size
-jumpt :_31_readelm_done
+jumpt :_35_readelm_done
 call @__illegal_Array_Index
-:_31_readelm_done
+:_35_readelm_done
 call @mod
 storem $(Turtle)_y
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_27_do_end
+jump :_16_match_end
+:_31_do_end
 call @dup
 push 6
 call @eq
 loada
 testz
 clra
-jumpf :_32_do_end
+jumpf :_36_do_end
 pull
 push 1
 readelm *size
-jumpt :_33_readelm_done
+jumpt :_37_readelm_done
 call @__illegal_Array_Index
-:_33_readelm_done
+:_37_readelm_done
 loadm $(Turtle)_x
 call @plus
 push 1
 call @minus
 push 1
 readelm *size
-jumpt :_34_readelm_done
+jumpt :_38_readelm_done
 call @__illegal_Array_Index
-:_34_readelm_done
+:_38_readelm_done
 call @mod
 storem $(Turtle)_x
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_32_do_end
+jump :_16_match_end
+:_36_do_end
 call @dup
 push 7
 call @eq
 loada
 testz
 clra
-jumpf :_35_do_end
+jumpf :_39_do_end
 pull
 push 1
 readelm *size
-jumpt :_36_readelm_done
+jumpt :_40_readelm_done
 call @__illegal_Array_Index
-:_36_readelm_done
+:_40_readelm_done
 loadm $(Turtle)_x
 call @plus
 push 1
 call @minus
 push 1
 readelm *size
-jumpt :_37_readelm_done
+jumpt :_41_readelm_done
 call @__illegal_Array_Index
-:_37_readelm_done
+:_41_readelm_done
 call @mod
 storem $(Turtle)_x
 push 1
@@ -1295,38 +1371,38 @@ loadm $(Turtle)_y
 call @plus
 push 2
 readelm *size
-jumpt :_38_readelm_done
+jumpt :_42_readelm_done
 call @__illegal_Array_Index
-:_38_readelm_done
+:_42_readelm_done
 call @mod
 storem $(Turtle)_y
 loadm $(Turtle)_x
 loadm $(Turtle)_y
 call @draw
-jump :_12_match_end
-:_35_do_end
+jump :_16_match_end
+:_39_do_end
 pull
-:_12_match_end
+:_16_match_end
 ret
 @~(Turtle)_forward
 storem $steps
 push 0
 storem $s
-:_39_condition_start
+:_43_condition_start
 loadm $s
 loadm $steps
 call @neq
 loada
 testz
 clra
-jumpf :_39_repeat_end
+jumpf :_43_repeat_end
 call @~(Turtle)_move
 loadm $s
 push 1
 call @plus
 storem $s
-jump :_39_condition_start
-:_39_repeat_end
+jump :_43_condition_start
+:_43_repeat_end
 ret
 @__MemAllocGlobels
 call @init_vmachine
@@ -1343,16 +1419,16 @@ push 0
 storem $y
 push 2
 storem $y
-array *P2
-push 35
-storem *P2
-push 30
-storem *P2
 array *P1
+push 35
+storem *P1
+push 30
+storem *P1
+array *P2
 push 100
-storem *P1
+storem *P2
 push 70
-storem *P1
+storem *P2
 push 0
 call @drawRate
 push 0

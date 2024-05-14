@@ -9,6 +9,23 @@ ret
   movea
 ret
 
+@diff
+    loada
+    loadb
+    testg
+    jumpt :_diff_01
+    moveb
+    movea
+    jump :_diff_02
+    :_diff_01
+    movea
+    moveb
+    :_diff_02
+    sub
+    moveb
+    clra
+ret
+
 
 @input 
     :_input_loop
