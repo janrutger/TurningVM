@@ -6,7 +6,7 @@ DEFINE
     VALUE y 2
 
     ARRAY P1 [35 30]
-    ARRAY P2 [100 70]
+    ARRAY P2 [40 70]
 
     DRAW
 
@@ -14,8 +14,7 @@ DEFINE
         INIT
             0 AS THIS x
             0 AS THIS y 
-            0 AS THIS lineX
-            0 AS THIS lineY
+
             0 AS THIS targetX
             0 AS THIS targetY
             
@@ -30,93 +29,70 @@ DEFINE
         THIS right
             THIS angle + 360 % AS THIS angle
         END
-        THIS line 
-            . AS THIS lineY
-            . AS THIS lineX
-            THIS lineX THIS lineY DRAW
-        END
+
         THIS slope
-            THIS lineY THIS targetY `diff 1000 * THIS lineX THIS targetX `diff / 
+            THIS y THIS targetY `diff  THIS x THIS targetX `diff / 
         END 
-        THIS next
+        THIS line
             . AS THIS targetY
             . AS THIS targetX
 
             THIS targetX MATCH
-                ON THIS lineX DO >
+                ON THIS x DO >  # East (right side)
                     THIS targetY MATCH
-                        ON THIS lineY DO >
+                        ON THIS y DO > 
                         THIS slope PRINT
-                            THIS lineX 1 - AS THIS lineX
-                            THIS lineY 1 - AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                            THIS x 1 - AS THIS x
+                            THIS y 1 - AS THIS y
+                            THIS x THIS y DRAW
                         END
 
-                        ON THIS lineY DO <
-                            THIS slope MATCH
-                                ON 53333 < DO
-                                    THIS lineX 1   AS THIS lineX
-                                    THIS lineY 1 + AS THIS lineY
-                                    THIS lineX THIS lineY DRAW
-                                END
-                                ON 26667 < DO
-                                    THIS lineX 1 - AS THIS lineX
-                                    THIS lineY 1 + AS THIS lineY
-                                    THIS lineX THIS lineY DRAW
-                                END
-                                ON 26667 > DO
-                                    THIS lineX 1   AS THIS lineX
-                                    THIS lineY 1 + AS THIS lineY
-                                    THIS lineX THIS lineY DRAW
-                                END
-                                NO
-                                    "ERROR" SHOW
-                                END
-                            END
-                            #THIS lineX 1 - AS THIS lineX
-                            #THIS lineY 1 + AS THIS lineY
-                            #THIS lineX THIS lineY DRAW
+                        ON THIS y DO <
+                        THIS slope PRINT    
+                            THIS x 1 - AS THIS x
+                            THIS y 1 + AS THIS y
+                            THIS x THIS y DRAW
                         END
                         NO
-                            THIS lineX 1 - AS THIS lineX
-                            THIS lineY     AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                            THIS x 1 - AS THIS x
+                            THIS y     AS THIS y
+                            THIS x THIS y DRAW
                         END
                     END
                 END
 
-                ON THIS lineX DO <
+                ON THIS x DO < # West (left side)
                     THIS targetY MATCH
-                        ON THIS lineY DO >
+                        ON THIS y DO >
                         THIS slope PRINT
-                            THIS lineX 1 + AS THIS lineX
-                            THIS lineY 1 - AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                            THIS x 1 + AS THIS x
+                            THIS y 1 - AS THIS y
+                            THIS x THIS y DRAW
                         END
-                        ON THIS lineY DO <
+                        ON THIS y DO <
                         THIS slope PRINT
-                            THIS lineX 1 + AS THIS lineX
-                            THIS lineY 1 + AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                            THIS x 1 + AS THIS x
+                            THIS y 1 + AS THIS y
+                            THIS x THIS y DRAW
                         END
                         NO
-                            THIS lineX 1 + AS THIS lineX
-                            THIS lineY     AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                            THIS x 1 + AS THIS x
+                            THIS y     AS THIS y
+                            THIS x THIS y DRAW
                         END
                     END
                 END
                 NO
                    THIS targetY MATCH
-                        ON THIS lineY DO >
-                            THIS lineX     AS THIS lineX
-                            THIS lineY 1 - AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                        ON THIS y DO >
+                            THIS x     AS THIS x
+                            THIS y 1 - AS THIS y
+                            THIS x THIS y DRAW
                         END
-                        ON THIS lineY DO <
-                            THIS lineX 1   AS THIS lineX
-                            THIS lineY 1 + AS THIS lineY
-                            THIS lineX THIS lineY DRAW
+                        ON THIS y DO <
+                            THIS x 1   AS THIS x
+                            THIS y 1 + AS THIS y
+                            THIS x THIS y DRAW
                         END
                         NO
                             "DONE...." SHOW
@@ -187,80 +163,15 @@ DRAW NEW
 0 0 Turtle goto
 
 x [P2] y [P2] Turtle goto
-x [P1] y [P1] Turtle line
+x [P1] y [P1] Turtle goto
 
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
-x [P2] y [P2] Turtle next
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+
 
 DRAW NOW
 
