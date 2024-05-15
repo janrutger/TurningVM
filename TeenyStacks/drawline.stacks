@@ -6,7 +6,7 @@ DEFINE
     VALUE y 2
 
     ARRAY P1 [35 30]
-    ARRAY P2 [40 70]
+    ARRAY P2 [70 33]
 
     DRAW
 
@@ -33,74 +33,7 @@ DEFINE
         THIS slope
             THIS y THIS targetY `diff  THIS x THIS targetX `diff / 
         END 
-        THIS line
-            . AS THIS targetY
-            . AS THIS targetX
-
-            THIS targetX MATCH
-                ON THIS x DO >  # East (right side)
-                    THIS targetY MATCH
-                        ON THIS y DO > 
-                        THIS slope PRINT
-                            THIS x 1 - AS THIS x
-                            THIS y 1 - AS THIS y
-                            THIS x THIS y DRAW
-                        END
-
-                        ON THIS y DO <
-                        THIS slope PRINT    
-                            THIS x 1 - AS THIS x
-                            THIS y 1 + AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                        NO
-                            THIS x 1 - AS THIS x
-                            THIS y     AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                    END
-                END
-
-                ON THIS x DO < # West (left side)
-                    THIS targetY MATCH
-                        ON THIS y DO >
-                        THIS slope PRINT
-                            THIS x 1 + AS THIS x
-                            THIS y 1 - AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                        ON THIS y DO <
-                        THIS slope PRINT
-                            THIS x 1 + AS THIS x
-                            THIS y 1 + AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                        NO
-                            THIS x 1 + AS THIS x
-                            THIS y     AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                    END
-                END
-                NO
-                   THIS targetY MATCH
-                        ON THIS y DO >
-                            THIS x     AS THIS x
-                            THIS y 1 - AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                        ON THIS y DO <
-                            THIS x 1   AS THIS x
-                            THIS y 1 + AS THIS y
-                            THIS x THIS y DRAW
-                        END
-                        NO
-                            "DONE...." SHOW
-                        END
-                    END
-                END
-            END
-        END
+        
         THIS move
             THIS angle 22 + 45 / MATCH
                 ON 0 DO
@@ -141,6 +74,103 @@ DEFINE
                 END
             END
         END
+
+        THIS line
+            . AS THIS targetY
+            . AS THIS targetX
+
+            THIS targetX MATCH
+                ON THIS x DO >                  # West (left side)
+                    THIS targetY MATCH
+                        ON THIS y DO > 
+                        THIS slope PRINT
+                            THIS x 1 - AS THIS x
+                            THIS y 1 - AS THIS y
+                            THIS x THIS y DRAW
+                        END
+
+                        ON THIS y DO <
+                        THIS slope PRINT    
+                            THIS x 1 - AS THIS x
+                            THIS y 1 + AS THIS y
+                            THIS x THIS y DRAW
+                        END
+                        NO
+                            THIS x 1 - AS THIS x
+                            THIS y     AS THIS y
+                            THIS x THIS y DRAW
+                        END
+                    END
+                END
+
+                ON THIS x DO <                  # East (right side)
+                    THIS targetY MATCH
+                        ON THIS y DO >              # ES (East-South)
+                        THIS slope PRINT
+                            
+                            THIS x 1 + AS THIS x
+                            THIS y 1 - AS THIS y
+                            THIS x THIS y DRAW
+                        END
+                        ON THIS y DO <              # EN (East-North)
+
+                        THIS slope MATCH
+                                ON 10 DO < 
+                                    0 AS THIS angle
+                                    THIS move 
+                                END
+                                ON 10 DO >
+                                    45 AS THIS angle
+                                    THIS move
+                                END
+                                ON 10  DO ==
+                                    90 AS THIS angle
+                                    THIS move
+                                END
+                                NO
+                                    THIS slope PRINT
+                                    "ERROR" SHOW
+                                END
+                            END
+
+                        #THIS slope PRINT
+                        #    THIS x 1 + AS THIS x
+                        #    THIS y 1 + AS THIS y
+                        #    THIS x THIS y DRAW
+                        END
+                        NO                        # East
+                            90 AS THIS angle
+                            THIS move
+
+                            #THIS x 1 + AS THIS x
+                            #THIS y     AS THIS y
+                            #THIS x THIS y DRAW
+                        END
+                    END
+                END
+                NO
+                   THIS targetY MATCH 
+                        ON THIS y DO >              # South
+                            THIS x     AS THIS x
+                            THIS y 1 - AS THIS y
+                            THIS x THIS y DRAW
+                        END
+                        ON THIS y DO <              # North
+                            0 AS THIS angle
+                            THIS move
+
+                            # THIS x 1   AS THIS x
+                            # THIS y 1 + AS THIS y
+                            # THIS x THIS y DRAW
+                        END
+                        NO
+                            "DONE...." SHOW
+                        END
+                    END
+                END
+            END
+        END
+
         THIS forward
             . AS steps
             0 AS s
@@ -165,6 +195,49 @@ DRAW NEW
 x [P2] y [P2] Turtle goto
 x [P1] y [P1] Turtle goto
 
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
 x [P2] y [P2] Turtle line
 x [P2] y [P2] Turtle line
 x [P2] y [P2] Turtle line
