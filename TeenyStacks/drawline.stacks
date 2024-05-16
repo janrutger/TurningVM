@@ -5,8 +5,8 @@ DEFINE
     VALUE x 1
     VALUE y 2
 
-    ARRAY P1 [35 30]
-    ARRAY P2 [70 33]
+    ARRAY P1 [10 10]
+    ARRAY P2 [150 50]
 
     DRAW
 
@@ -31,7 +31,14 @@ DEFINE
         END
 
         THIS slope
-            THIS y THIS targetY `diff  THIS x THIS targetX `diff / 
+            THIS y THIS targetY `diff THIS y THIS targetY `diff + THIS x THIS targetX `diff / 
+            .. PRINT
+            #THIS y THIS targetY `diff  THIS x THIS targetX `diff 2 / + THIS x THIS targetX `diff / 
+        END 
+        THIS slope2
+            THIS y THIS targetY `diff THIS y THIS targetY `diff + 10 * THIS x THIS targetX `diff / 
+            . PRINT
+            #THIS y THIS targetY `diff  THIS x THIS targetX `diff 2 / + THIS x THIS targetX `diff / 
         END 
         
         THIS move
@@ -115,16 +122,17 @@ DEFINE
                         ON THIS y DO <              # EN (East-North)
 
                         THIS slope MATCH
-                                ON 10 DO < 
+                                ON 9 DO < 
                                     0 AS THIS angle
                                     THIS move 
                                 END
-                                ON 10 DO >
-                                    45 AS THIS angle
+                                ON 0  DO ==
+                                THIS slope2 
+                                    90 AS THIS angle
                                     THIS move
                                 END
-                                ON 10  DO ==
-                                    90 AS THIS angle
+                                ON 10 DO >
+                                    45 AS THIS angle
                                     THIS move
                                 END
                                 NO
@@ -194,6 +202,106 @@ DRAW NEW
 
 x [P2] y [P2] Turtle goto
 x [P1] y [P1] Turtle goto
+
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
+x [P2] y [P2] Turtle line
 
 x [P2] y [P2] Turtle line
 x [P2] y [P2] Turtle line
