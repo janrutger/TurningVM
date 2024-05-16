@@ -6,7 +6,7 @@ DEFINE
     VALUE y 2
 
     ARRAY P1 [10 10]
-    ARRAY P2 [150 50]
+    ARRAY P2 [12 70]
 
     DRAW
 
@@ -123,15 +123,17 @@ DEFINE
 
                         THIS slope MATCH
                                 ON 9 DO < 
+                                    THIS slope2 
                                     0 AS THIS angle
                                     THIS move 
                                 END
                                 ON 0  DO ==
-                                THIS slope2 
+                                    THIS slope2 
                                     90 AS THIS angle
                                     THIS move
                                 END
                                 ON 10 DO >
+                                    THIS slope2 
                                     45 AS THIS angle
                                     THIS move
                                 END

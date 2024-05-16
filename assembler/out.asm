@@ -2065,6 +2065,7 @@ testz
 clra
 jumpf :_37_do_end
 pull
+call @~(Turtle)_slope2
 push 0
 storem $(Turtle)_angle
 call @~(Turtle)_move
@@ -2092,6 +2093,7 @@ testz
 clra
 jumpf :_39_do_end
 pull
+call @~(Turtle)_slope2
 push 45
 storem $(Turtle)_angle
 call @~(Turtle)_move
@@ -2195,9 +2197,9 @@ storem *P1
 push 10
 storem *P1
 array *P2
-push 150
+push 12
 storem *P2
-push 50
+push 70
 storem *P2
 push 0
 call @drawRate
