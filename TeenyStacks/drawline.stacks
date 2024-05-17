@@ -6,7 +6,7 @@ DEFINE
     VALUE y 2
 
     ARRAY P1 [10 10]
-    ARRAY P2 [12 70]
+    ARRAY P2 [120 70]
 
     DRAW
 
@@ -31,14 +31,9 @@ DEFINE
         END
 
         THIS slope
-            THIS y THIS targetY `diff THIS y THIS targetY `diff + THIS x THIS targetX `diff / 
+            THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff / 
             .. PRINT
-            #THIS y THIS targetY `diff  THIS x THIS targetX `diff 2 / + THIS x THIS targetX `diff / 
-        END 
-        THIS slope2
-            THIS y THIS targetY `diff THIS y THIS targetY `diff + 10 * THIS x THIS targetX `diff / 
-            . PRINT
-            #THIS y THIS targetY `diff  THIS x THIS targetX `diff 2 / + THIS x THIS targetX `diff / 
+            #THIS y THIS targetY `diff THIS y THIS targetY `diff + 10 * THIS x THIS targetX `diff /
         END 
         
         THIS move
@@ -121,25 +116,18 @@ DEFINE
                         END
                         ON THIS y DO <              # EN (East-North)
 
-                        THIS slope MATCH
-                                ON 9 DO < 
-                                    THIS slope2 
+                            THIS slope MATCH
+                                ON 100 DO < 
                                     0 AS THIS angle
                                     THIS move 
                                 END
-                                ON 0  DO ==
-                                    THIS slope2 
+                                ON 5  DO >                                   
                                     90 AS THIS angle
                                     THIS move
                                 END
-                                ON 10 DO >
-                                    THIS slope2 
+                                NO                                    
                                     45 AS THIS angle
                                     THIS move
-                                END
-                                NO
-                                    THIS slope PRINT
-                                    "ERROR" SHOW
                                 END
                             END
 
