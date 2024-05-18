@@ -32,8 +32,7 @@ DEFINE
         THIS slope
             THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff / 
             .. PRINT
-            #THIS y THIS targetY `diff THIS y THIS targetY `diff + 10 * THIS x THIS targetX `diff /
-        END 
+           END 
         
         THIS move
             THIS angle 22 + 45 / MATCH
@@ -100,20 +99,17 @@ DEFINE
                                     THIS move
                                 END
                             END
-                            #THIS x 1 - AS THIS x
-                            #THIS y 1 - AS THIS y
-                            #THIS x THIS y DRAW
                         END
 
                         ON THIS y DO <          # WN (West North)   
                         "West North" SHOW
                             THIS slope MATCH
                                 ON 100 DO < 
-                                    270 AS THIS angle
+                                    0 AS THIS angle
                                     THIS move 
                                 END
                                 ON 5  DO >                                   
-                                    0 AS THIS angle
+                                    270 AS THIS angle
                                     THIS move
                                 END
                                 NO                                    
@@ -121,16 +117,10 @@ DEFINE
                                     THIS move
                                 END
                             END                         
-                            #THIS x 1 - AS THIS x
-                            #THIS y 1 + AS THIS y
-                            #THIS x THIS y DRAW
                         END
                         NO                     # West
                             270 AS THIS angle
                             THIS move
-                            #THIS x 1 - AS THIS x
-                            #THIS y     AS THIS y
-                            #THIS x THIS y DRAW
                         END
                     END
                 END
@@ -154,9 +144,6 @@ DEFINE
                                     THIS move
                                 END
                             END
-                            #THIS x 1 + AS THIS x
-                            #THIS y 1 - AS THIS y
-                            #THIS x THIS y DRAW
                         END
                         ON THIS y DO <              # EN (East-North)
                             "East North" SHOW
@@ -165,7 +152,7 @@ DEFINE
                                     0 AS THIS angle
                                     THIS move 
                                 END
-                                ON 5  DO >                                   
+                                ON 7  DO >                                   
                                     90 AS THIS angle
                                     THIS move
                                 END
@@ -175,20 +162,11 @@ DEFINE
                                     THIS move
                                 END
                             END
-
-                        #THIS slope PRINT
-                        #    THIS x 1 + AS THIS x
-                        #    THIS y 1 + AS THIS y
-                        #    THIS x THIS y DRAW
                         END
                         NO                        # East
                             "East" SHOW 
                             90 AS THIS angle
                             THIS move
-
-                            #THIS x 1 + AS THIS x
-                            #THIS y     AS THIS y
-                            #THIS x THIS y DRAW
                         END
                     END
                 END
@@ -197,16 +175,10 @@ DEFINE
                         ON THIS y DO >              # South
                             180 AS THIS angle
                             THIS move
-                            #THIS x     AS THIS x
-                            #THIS y 1 - AS THIS y
-                            #THIS x THIS y DRAW
                         END
                         ON THIS y DO <              # North
                             0 AS THIS angle
                             THIS move
-                            # THIS x 1   AS THIS x
-                            # THIS y 1 + AS THIS y
-                            # THIS x THIS y DRAW
                         END
                         NO
                             "DONE...." SHOW
@@ -238,8 +210,9 @@ DEFINE
 END
 
 
-ARRAY P1 [15 57]
-ARRAY P2 [30 10]
+ARRAY P3 [30 50]
+ARRAY P2 [10 10]
+ARRAY P1 [50 10]
 
 0 DRAW RATE 
 DRAW NEW
@@ -254,6 +227,10 @@ x [P1] y [P1] Turtle goto
 DRAW NOW
 
 x [P2] y [P2] Turtle line
+x [P3] y [P3] Turtle line
+x [P1] y [P1] Turtle line
+
+
 
 
 

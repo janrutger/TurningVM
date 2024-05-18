@@ -41,7 +41,7 @@ statement  ::=  "LABEL" label nl
 								  "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
 								[("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
 								[ "NO" nl {statement} nl "END" nl]
-							"END" nl
+							  "END" nl
 							| "DO" nl {statement} nl "END" nl
 							| "GOTO" label nl
 							|  nl )

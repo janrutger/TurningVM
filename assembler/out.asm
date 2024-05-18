@@ -1,16 +1,21 @@
 @main
 settimer 0
 speed 0
-array *P1
-push 15
-storem *P1
-push 57
-storem *P1
-array *P2
+array *P3
 push 30
+storem *P3
+push 50
+storem *P3
+array *P2
+push 10
 storem *P2
 push 10
 storem *P2
+array *P1
+push 50
+storem *P1
+push 10
+storem *P1
 push 0
 call @drawRate
 call @drawNew
@@ -64,6 +69,28 @@ readelm *P2
 jumpt :_60_readelm_done
 call @__illegal_Array_Index
 :_60_readelm_done
+call @~(Turtle)_line
+loadm $x
+readelm *P3
+jumpt :_61_readelm_done
+call @__illegal_Array_Index
+:_61_readelm_done
+loadm $y
+readelm *P3
+jumpt :_62_readelm_done
+call @__illegal_Array_Index
+:_62_readelm_done
+call @~(Turtle)_line
+loadm $x
+readelm *P1
+jumpt :_63_readelm_done
+call @__illegal_Array_Index
+:_63_readelm_done
+loadm $y
+readelm *P1
+jumpt :_64_readelm_done
+call @__illegal_Array_Index
+:_64_readelm_done
 call @~(Turtle)_line
 call @drawBuff
 prttimer 0
@@ -444,7 +471,7 @@ testz
 clra
 jumpf :_36_do_end
 pull
-push 270
+push 0
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_35_match_end
@@ -457,7 +484,7 @@ testz
 clra
 jumpf :_37_do_end
 pull
-push 0
+push 270
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_35_match_end
@@ -556,7 +583,7 @@ call @~(Turtle)_move
 jump :_45_match_end
 :_46_do_end
 call @dup
-push 5
+push 7
 call @gt
 loada
 testz
