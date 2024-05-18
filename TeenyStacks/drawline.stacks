@@ -156,8 +156,7 @@ DEFINE
                                     90 AS THIS angle
                                     THIS move
                                 END
-                                NO      
-                                                                 
+                                NO                                                                     
                                     45 AS THIS angle
                                     THIS move
                                 END
