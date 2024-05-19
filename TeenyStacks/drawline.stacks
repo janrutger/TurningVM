@@ -1,6 +1,6 @@
 DEFINE
-    ARRAY size [160 80]
-    #ARRAY size [640 320]
+    #ARRAY size [160 80]
+    ARRAY size [640 320]
 
     VALUE x 1
     VALUE y 2
@@ -13,6 +13,8 @@ DEFINE
         INIT
             0 AS THIS x
             0 AS THIS y 
+            1 AS THIS low
+            90 AS THIS high
 
             0 AS THIS targetX
             0 AS THIS targetY
@@ -35,6 +37,7 @@ DEFINE
            END 
         
         THIS move
+            THIS angle PRINT
             THIS angle 22 + 45 / MATCH
                 ON 0 DO
                     1 THIS y + 2 [size] % AS THIS y 
@@ -50,6 +53,7 @@ DEFINE
                     THIS x THIS y DRAW
                 END
                 ON 3 DO
+                    
                     1 THIS x + 1 [size] % AS THIS x
                     2 [size] THIS y + 1 - 2 [size] % AS THIS y
                     THIS x THIS y DRAW
@@ -68,6 +72,7 @@ DEFINE
                     THIS x THIS y DRAW
                 END
                 ON 7 DO
+                    
                     1 [size] THIS x + 1 - 1 [size] % AS THIS x 
                     1 THIS y + 2 [size] % AS THIS y
                     THIS x THIS y DRAW
@@ -86,11 +91,11 @@ DEFINE
                         ON THIS y DO >          # WS (west South)
                         "West South" SHOW
                             THIS slope MATCH
-                                ON 100 DO < 
+                                ON THIS high DO < 
                                     180 AS THIS angle
                                     THIS move 
                                 END
-                                ON 5  DO >                                   
+                                ON THIS low DO >                                   
                                     270 AS THIS angle
                                     THIS move
                                 END
@@ -104,11 +109,11 @@ DEFINE
                         ON THIS y DO <          # WN (West North)   
                         "West North" SHOW
                             THIS slope MATCH
-                                ON 100 DO < 
+                                ON THIS high DO < 
                                     0 AS THIS angle
                                     THIS move 
                                 END
-                                ON 5  DO >                                   
+                                ON THIS low DO >                                   
                                     270 AS THIS angle
                                     THIS move
                                 END
@@ -131,11 +136,11 @@ DEFINE
                         "East South" SHOW
                         #THIS slope PRINT
                             THIS slope MATCH
-                                ON 100 DO < 
+                                ON THIS high DO < 
                                     180 AS THIS angle
                                     THIS move 
                                 END
-                                ON 5  DO >                                   
+                                ON THIS low DO >                                   
                                     90 AS THIS angle
                                     THIS move
                                 END
@@ -148,11 +153,11 @@ DEFINE
                         ON THIS y DO <              # EN (East-North)
                             "East North" SHOW
                             THIS slope MATCH
-                                ON 100 DO < 
+                                ON THIS high DO < 
                                     0 AS THIS angle
                                     THIS move 
                                 END
-                                ON 7  DO >                                   
+                                ON THIS low DO >                                   
                                     90 AS THIS angle
                                     THIS move
                                 END
@@ -209,25 +214,49 @@ DEFINE
 END
 
 
-ARRAY P3 [30 50]
-ARRAY P2 [10 10]
-ARRAY P1 [50 10]
+ARRAY P3 [61 50]
+ARRAY P2 [81 20]
+ARRAY P1 [40 20]
 
-0 DRAW RATE 
+1 DRAW RATE 
 DRAW NEW
 
 0 0 DRAW 
 1 [size] 2 [size] DRAW
 0 0 Turtle goto
 
-x [P2] y [P2] Turtle goto
-x [P1] y [P1] Turtle goto
+#x [P2] y [P2] Turtle goto
+#x [P1] y [P1] Turtle goto
 
 DRAW NOW
 
-x [P2] y [P2] Turtle line
-x [P3] y [P3] Turtle line
-x [P1] y [P1] Turtle line
+#x [P2] y [P2] Turtle line
+#x [P3] y [P3] Turtle line
+#x [P1] y [P1] Turtle line
+
+ 10 10 Turtle goto
+140 15 Turtle line
+ 10 10 Turtle goto
+140 20 Turtle line
+ 10 10 Turtle goto
+540 30 Turtle line
+ 10 10 Turtle goto
+540 50 Turtle line
+ 10 10 Turtle goto
+540 170 Turtle line
+
+10 10 Turtle goto
+70 270 Turtle line
+10 10 Turtle goto
+50 270 Turtle line
+10 10 Turtle goto
+40 70 Turtle line
+10 10 Turtle goto
+35 270 Turtle line
+10 10 Turtle goto
+20 70 Turtle line
+10 10 Turtle goto
+15 70 Turtle line
 
 
 
