@@ -1,6 +1,6 @@
 DEFINE
-    #ARRAY size [160 80]
-    ARRAY size [640 320]
+    ARRAY size [160 80]
+    #ARRAY size [640 320]
 
     VALUE x 1
     VALUE y 2
@@ -14,7 +14,7 @@ DEFINE
             0 AS THIS x
             0 AS THIS y 
             1 AS THIS low
-            90 AS THIS high
+            140 AS THIS high
 
             0 AS THIS targetX
             0 AS THIS targetY
@@ -33,11 +33,11 @@ DEFINE
 
         THIS slope
             THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff / 
-            .. PRINT
+            #.. PRINT
            END 
         
         THIS move
-            THIS angle PRINT
+            #THIS angle PRINT
             THIS angle 22 + 45 / MATCH
                 ON 0 DO
                     1 THIS y + 2 [size] % AS THIS y 
@@ -161,9 +161,43 @@ DEFINE
                                     90 AS THIS angle
                                     THIS move
                                 END
-                                NO                                                                     
-                                    45 AS THIS angle
-                                    THIS move
+                                NO 
+                                    #THIS slope PRINT
+                                    #"HERE" SHOW
+                                    THIS slope MATCH
+                                        ON 100 DO <
+                                            45 AS THIS angle
+                                            THIS move
+                                        END
+                                        ON 50 DO <
+                                            0 AS THIS angle
+                                            THIS move
+                                        END
+                                        ON 40 DO <
+                                            45 AS THIS angle
+                                            THIS move
+                                        END
+                                        ON 30 DO <
+                                            0 AS THIS angle
+                                            THIS move
+                                        END
+                                        ON  10 DO <
+                                            45 AS THIS angle
+                                            THIS move 
+                                        END
+                                        ON  6 DO <
+                                            0 AS THIS angle
+                                            THIS move 
+                                        END
+                                        ON 3 DO <
+                                            45 AS THIS angle
+                                            THIS move
+                                        END
+                                        NO   
+                                            90 AS THIS angle
+                                            THIS move
+                                        END
+                                    END
                                 END
                             END
                         END
@@ -177,10 +211,12 @@ DEFINE
                 NO
                    THIS targetY MATCH 
                         ON THIS y DO >              # South
+                            "South" SHOW
                             180 AS THIS angle
                             THIS move
                         END
                         ON THIS y DO <              # North
+                            "North" SHOW
                             0 AS THIS angle
                             THIS move
                         END
@@ -235,28 +271,44 @@ DRAW NOW
 #x [P1] y [P1] Turtle line
 
  10 10 Turtle goto
-140 15 Turtle line
+140 70 Turtle line
+
+
+ 10 10 Turtle goto
+15 70 Turtle line
+
+ 10 10 Turtle goto
+20 70 Turtle line
+
+ 10 10 Turtle goto
+30 70 Turtle line
+
+ 10 10 Turtle goto
+40 70 Turtle line
+
+ 10 10 Turtle goto
+50 70 Turtle line
+
+ 10 10 Turtle goto
+60 70 Turtle line
+
+ 10 10 Turtle goto
+70 70 Turtle line
+
+ 10 10 Turtle goto
+140 60 Turtle line
+
+ 10 10 Turtle goto
+140 30 Turtle line
+
  10 10 Turtle goto
 140 20 Turtle line
- 10 10 Turtle goto
-540 30 Turtle line
- 10 10 Turtle goto
-540 50 Turtle line
- 10 10 Turtle goto
-540 170 Turtle line
 
-10 10 Turtle goto
-70 270 Turtle line
-10 10 Turtle goto
-50 270 Turtle line
-10 10 Turtle goto
-40 70 Turtle line
-10 10 Turtle goto
-35 270 Turtle line
-10 10 Turtle goto
-20 70 Turtle line
-10 10 Turtle goto
-15 70 Turtle line
+ 10 10 Turtle goto
+150 15 Turtle line
+
+
+
 
 
 
