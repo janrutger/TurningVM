@@ -169,11 +169,11 @@ DEFINE
                                             45 AS THIS angle
                                             THIS move
                                         END
-                                        ON 50 DO <
-                                            0 AS THIS angle
-                                            THIS move
-                                        END
-                                        ON 40 DO <
+                                        #ON 50 DO <
+                                        #    0 AS THIS angle
+                                        #    THIS move
+                                        #END
+                                        ON 60 DO <
                                             45 AS THIS angle
                                             THIS move
                                         END
@@ -271,7 +271,7 @@ DRAW NOW
 #x [P1] y [P1] Turtle line
 
  10 10 Turtle goto
-140 70 Turtle line
+140 40 Turtle line
 
 
  10 10 Turtle goto

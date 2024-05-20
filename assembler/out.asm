@@ -24,14 +24,14 @@ push 0
 call @draw
 push 1
 readelm *size
+jumpt :_60_readelm_done
+call @__illegal_Array_Index
+:_60_readelm_done
+push 2
+readelm *size
 jumpt :_61_readelm_done
 call @__illegal_Array_Index
 :_61_readelm_done
-push 2
-readelm *size
-jumpt :_62_readelm_done
-call @__illegal_Array_Index
-:_62_readelm_done
 call @draw
 push 0
 push 0
@@ -41,7 +41,7 @@ push 10
 push 10
 call @~(Turtle)_goto
 push 140
-push 70
+push 40
 call @~(Turtle)_line
 push 10
 push 10
@@ -625,83 +625,70 @@ call @~(Turtle)_move
 jump :_48_match_end
 :_49_do_end
 call @dup
-push 50
+push 60
 call @lt
 loada
 testz
 clra
 jumpf :_50_do_end
 pull
-push 0
-storem $(Turtle)_angle
-call @~(Turtle)_move
-jump :_48_match_end
-:_50_do_end
-call @dup
-push 40
-call @lt
-loada
-testz
-clra
-jumpf :_51_do_end
-pull
 push 45
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_48_match_end
-:_51_do_end
+:_50_do_end
 call @dup
 push 30
 call @lt
 loada
 testz
 clra
-jumpf :_52_do_end
+jumpf :_51_do_end
 pull
 push 0
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_48_match_end
-:_52_do_end
+:_51_do_end
 call @dup
 push 10
 call @lt
 loada
 testz
 clra
-jumpf :_53_do_end
+jumpf :_52_do_end
 pull
 push 45
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_48_match_end
-:_53_do_end
+:_52_do_end
 call @dup
 push 6
 call @lt
 loada
 testz
 clra
-jumpf :_54_do_end
+jumpf :_53_do_end
 pull
 push 0
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_48_match_end
-:_54_do_end
+:_53_do_end
 call @dup
 push 3
 call @lt
 loada
 testz
 clra
-jumpf :_55_do_end
+jumpf :_54_do_end
 pull
 push 45
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_48_match_end
-:_55_do_end
+:_54_do_end
 push 90
 storem $(Turtle)_angle
 call @~(Turtle)_move
@@ -728,7 +715,7 @@ call @gt
 loada
 testz
 clra
-jumpf :_57_do_end
+jumpf :_56_do_end
 pull
 push 'South'
 call @char2prtbuff
@@ -736,15 +723,15 @@ call @printbuff
 push 180
 storem $(Turtle)_angle
 call @~(Turtle)_move
-jump :_56_match_end
-:_57_do_end
+jump :_55_match_end
+:_56_do_end
 call @dup
 loadm $(Turtle)_y
 call @lt
 loada
 testz
 clra
-jumpf :_58_do_end
+jumpf :_57_do_end
 pull
 push 'North'
 call @char2prtbuff
@@ -752,32 +739,32 @@ call @printbuff
 push 0
 storem $(Turtle)_angle
 call @~(Turtle)_move
-jump :_56_match_end
-:_58_do_end
+jump :_55_match_end
+:_57_do_end
 push 'DONE....'
 call @char2prtbuff
 call @printbuff
 push 1
 storem $(Turtle)_lineDrawing
 pull
-:_56_match_end
+:_55_match_end
 pull
 :_27_match_end
 ret
 @~(Turtle)_line
 storem $tmpY
 storem $tmpX
-:_59_condition_start
+:_58_condition_start
 loadm $(Turtle)_lineDrawing
 loada
 testz
 clra
-jumpf :_59_repeat_end
+jumpf :_58_repeat_end
 loadm $tmpX
 loadm $tmpY
 call @~(Turtle)_dot
-jump :_59_condition_start
-:_59_repeat_end
+jump :_58_condition_start
+:_58_repeat_end
 push 0
 storem $(Turtle)_lineDrawing
 ret
@@ -785,21 +772,21 @@ ret
 storem $steps
 push 0
 storem $s
-:_60_condition_start
+:_59_condition_start
 loadm $s
 loadm $steps
 call @neq
 loada
 testz
 clra
-jumpf :_60_repeat_end
+jumpf :_59_repeat_end
 call @~(Turtle)_move
 loadm $s
 push 1
 call @plus
 storem $s
-jump :_60_condition_start
-:_60_repeat_end
+jump :_59_condition_start
+:_59_repeat_end
 ret
 @__MemAllocGlobels
 call @init_vmachine
