@@ -177,11 +177,11 @@ DEFINE
                                             45 AS THIS angle
                                             THIS move 
                                         END
-                                        ON  6 DO <
+                                        ON  7 DO <
                                             90 AS THIS angle
                                             THIS move 
                                         END
-                                        ON 3 DO <
+                                        ON 2 DO <
                                             45 AS THIS angle
                                             THIS move
                                         END
@@ -262,51 +262,71 @@ DRAW NOW
 #x [P3] y [P3] Turtle line
 #x [P1] y [P1] Turtle line
 
+159 79 Turtle goto
+ 10 10 Turtle goto
+159 79 Turtle line
+
+90 70 Turtle goto
 10 10 Turtle goto
 90 70 Turtle line
 
+15 70 Turtle goto
  10 10 Turtle goto
 15 70 Turtle line
 
+20 70 Turtle goto
  10 10 Turtle goto
 20 70 Turtle line
 
+30 70 Turtle goto
  10 10 Turtle goto
 30 70 Turtle line
 
+40 70 Turtle goto
  10 10 Turtle goto
 40 70 Turtle line
 
+50 70 Turtle goto
  10 10 Turtle goto
 50 70 Turtle line
 
+60 70 Turtle goto
  10 10 Turtle goto
 60 70 Turtle line
 
+70 70 Turtle goto
  10 10 Turtle goto
 70 70 Turtle line
 
+80 70 Turtle goto
 10 10 Turtle goto
 80 70 Turtle line
 
+120 70 Turtle goto
 10 10 Turtle goto
 120 70 Turtle line
 
+140 60 Turtle goto
  10 10 Turtle goto
 140 60 Turtle line
 
+140 50 Turtle goto
  10 10 Turtle goto
 140 50 Turtle line
 
+140 40 Turtle goto
  10 10 Turtle goto
 140 40 Turtle line
 
+150 30 Turtle goto
  10 10 Turtle goto
 150 30 Turtle line
 
+150 20 Turtle goto
  10 10 Turtle goto
 150 20 Turtle line
 
+150 15 Turtle goto
  10 10 Turtle goto
 150 15 Turtle line
 
