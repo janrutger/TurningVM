@@ -33,7 +33,7 @@ DEFINE
 
         THIS slope
             THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff / 
-            #.. PRINT
+            .. PRINT
            END 
         
         THIS move
@@ -165,19 +165,11 @@ DEFINE
                                     #THIS slope PRINT
                                     #"HERE" SHOW
                                     THIS slope MATCH
-                                        ON 100 DO <
+                                        ON 67 DO <
                                             45 AS THIS angle
                                             THIS move
                                         END
-                                        #ON 50 DO <
-                                        #    0 AS THIS angle
-                                        #    THIS move
-                                        #END
-                                        ON 60 DO <
-                                            45 AS THIS angle
-                                            THIS move
-                                        END
-                                        ON 30 DO <
+                                        ON 33 DO <
                                             0 AS THIS angle
                                             THIS move
                                         END
@@ -186,7 +178,7 @@ DEFINE
                                             THIS move 
                                         END
                                         ON  6 DO <
-                                            0 AS THIS angle
+                                            90 AS THIS angle
                                             THIS move 
                                         END
                                         ON 3 DO <
@@ -270,9 +262,8 @@ DRAW NOW
 #x [P3] y [P3] Turtle line
 #x [P1] y [P1] Turtle line
 
- 10 10 Turtle goto
-140 40 Turtle line
-
+10 10 Turtle goto
+90 70 Turtle line
 
  10 10 Turtle goto
 15 70 Turtle line
@@ -295,23 +286,29 @@ DRAW NOW
  10 10 Turtle goto
 70 70 Turtle line
 
+10 10 Turtle goto
+80 70 Turtle line
+
+10 10 Turtle goto
+120 70 Turtle line
+
  10 10 Turtle goto
 140 60 Turtle line
 
  10 10 Turtle goto
-140 30 Turtle line
+140 50 Turtle line
 
  10 10 Turtle goto
-140 20 Turtle line
+140 40 Turtle line
+
+ 10 10 Turtle goto
+150 30 Turtle line
+
+ 10 10 Turtle goto
+150 20 Turtle line
 
  10 10 Turtle goto
 150 15 Turtle line
-
-
-
-
-
-
 
 
 DRAW NOW
