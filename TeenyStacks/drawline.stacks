@@ -262,6 +262,10 @@ DRAW NOW
 #x [P3] y [P3] Turtle line
 #x [P1] y [P1] Turtle line
 
+11 79 Turtle goto
+ 10 10 Turtle goto
+11 79 Turtle line
+
 159 79 Turtle goto
  10 10 Turtle goto
 159 79 Turtle line
