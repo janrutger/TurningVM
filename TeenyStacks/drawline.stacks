@@ -13,8 +13,9 @@ DEFINE
         INIT
             0 AS THIS x
             0 AS THIS y 
-            1 AS THIS low
-            140 AS THIS high
+
+            7 AS THIS low
+            30 AS THIS high
 
             0 AS THIS targetX
             0 AS THIS targetY
@@ -35,6 +36,7 @@ DEFINE
             THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff / 
             .. PRINT
            END 
+
         
         THIS move
             #THIS angle PRINT
@@ -162,34 +164,8 @@ DEFINE
                                     THIS move
                                 END
                                 NO 
-                                    #THIS slope PRINT
-                                    #"HERE" SHOW
-                                    THIS slope MATCH
-                                        ON 67 DO <
-                                            45 AS THIS angle
-                                            THIS move
-                                        END
-                                        ON 33 DO <
-                                            0 AS THIS angle
-                                            THIS move
-                                        END
-                                        ON  10 DO <
-                                            45 AS THIS angle
-                                            THIS move 
-                                        END
-                                        ON  7 DO <
-                                            90 AS THIS angle
-                                            THIS move 
-                                        END
-                                        ON 2 DO <
-                                            45 AS THIS angle
-                                            THIS move
-                                        END
-                                        NO   
-                                            90 AS THIS angle
-                                            THIS move
-                                        END
-                                    END
+                                    45 AS THIS angle
+                                    THIS move
                                 END
                             END
                         END
@@ -242,97 +218,30 @@ DEFINE
 END
 
 
-ARRAY P3 [61 50]
-ARRAY P2 [81 20]
+ARRAY P3 [60 40]
+ARRAY P2 [80 20]
 ARRAY P1 [40 20]
 
-1 DRAW RATE 
+0 DRAW RATE 
 DRAW NEW
 
 0 0 DRAW 
 1 [size] 2 [size] DRAW
 0 0 Turtle goto
 
-#x [P2] y [P2] Turtle goto
-#x [P1] y [P1] Turtle goto
+x [P3] y [P3] Turtle goto
+x [P2] y [P2] Turtle goto
+x [P1] y [P1] Turtle goto
 
 DRAW NOW
 
-#x [P2] y [P2] Turtle line
-#x [P3] y [P3] Turtle line
-#x [P1] y [P1] Turtle line
+x [P2] y [P2] Turtle line
+x [P3] y [P3] Turtle line
+x [P1] y [P1] Turtle line
 
-11 79 Turtle goto
- 10 10 Turtle goto
-11 79 Turtle line
 
-159 79 Turtle goto
- 10 10 Turtle goto
-159 79 Turtle line
 
-90 70 Turtle goto
-10 10 Turtle goto
-90 70 Turtle line
 
-15 70 Turtle goto
- 10 10 Turtle goto
-15 70 Turtle line
-
-20 70 Turtle goto
- 10 10 Turtle goto
-20 70 Turtle line
-
-30 70 Turtle goto
- 10 10 Turtle goto
-30 70 Turtle line
-
-40 70 Turtle goto
- 10 10 Turtle goto
-40 70 Turtle line
-
-50 70 Turtle goto
- 10 10 Turtle goto
-50 70 Turtle line
-
-60 70 Turtle goto
- 10 10 Turtle goto
-60 70 Turtle line
-
-70 70 Turtle goto
- 10 10 Turtle goto
-70 70 Turtle line
-
-80 70 Turtle goto
-10 10 Turtle goto
-80 70 Turtle line
-
-120 70 Turtle goto
-10 10 Turtle goto
-120 70 Turtle line
-
-140 60 Turtle goto
- 10 10 Turtle goto
-140 60 Turtle line
-
-140 50 Turtle goto
- 10 10 Turtle goto
-140 50 Turtle line
-
-140 40 Turtle goto
- 10 10 Turtle goto
-140 40 Turtle line
-
-150 30 Turtle goto
- 10 10 Turtle goto
-150 30 Turtle line
-
-150 20 Turtle goto
- 10 10 Turtle goto
-150 20 Turtle line
-
-150 15 Turtle goto
- 10 10 Turtle goto
-150 15 Turtle line
 
 
 DRAW NOW
