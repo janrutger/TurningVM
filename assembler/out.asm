@@ -1,21 +1,6 @@
 @main
 settimer 0
 speed 0
-array *P3
-push 60
-storem *P3
-push 40
-storem *P3
-array *P2
-push 80
-storem *P2
-push 20
-storem *P2
-array *P1
-push 40
-storem *P1
-push 20
-storem *P1
 push 0
 call @drawRate
 call @drawNew
@@ -24,82 +9,267 @@ push 0
 call @draw
 push 1
 readelm *size
-jumpt :_69_readelm_done
+jumpt :_99_readelm_done
 call @__illegal_Array_Index
-:_69_readelm_done
+:_99_readelm_done
 push 2
 readelm *size
-jumpt :_70_readelm_done
+jumpt :_100_readelm_done
 call @__illegal_Array_Index
-:_70_readelm_done
+:_100_readelm_done
 call @draw
 push 0
 push 0
 call @~(Turtle)_goto
+array *P3
+push 30
+storem *P3
+push 40
+storem *P3
+array *P2
+push 50
+storem *P2
+push 20
+storem *P2
+array *P1
+push 10
+storem *P1
+push 20
+storem *P1
+loadm $x
+readelm *P3
+jumpt :_101_readelm_done
+call @__illegal_Array_Index
+:_101_readelm_done
+loadm $y
+readelm *P3
+jumpt :_102_readelm_done
+call @__illegal_Array_Index
+:_102_readelm_done
+call @~(Turtle)_goto
+loadm $x
+readelm *P2
+jumpt :_103_readelm_done
+call @__illegal_Array_Index
+:_103_readelm_done
+loadm $y
+readelm *P2
+jumpt :_104_readelm_done
+call @__illegal_Array_Index
+:_104_readelm_done
+call @~(Turtle)_goto
+loadm $x
+readelm *P1
+jumpt :_105_readelm_done
+call @__illegal_Array_Index
+:_105_readelm_done
+loadm $y
+readelm *P1
+jumpt :_106_readelm_done
+call @__illegal_Array_Index
+:_106_readelm_done
+call @~(Turtle)_goto
 call @drawBuff
-push 120
-push 70
-call @~(Turtle)_goto
-push 10
-push 10
-call @~(Turtle)_goto
-push 120
-push 70
+loadm $x
+readelm *P2
+jumpt :_107_readelm_done
+call @__illegal_Array_Index
+:_107_readelm_done
+loadm $y
+readelm *P2
+jumpt :_108_readelm_done
+call @__illegal_Array_Index
+:_108_readelm_done
 call @~(Turtle)_line
-push 140
-push 60
-call @~(Turtle)_goto
-push 10
-push 10
-call @~(Turtle)_goto
-push 140
-push 60
+loadm $x
+readelm *P3
+jumpt :_109_readelm_done
+call @__illegal_Array_Index
+:_109_readelm_done
+loadm $y
+readelm *P3
+jumpt :_110_readelm_done
+call @__illegal_Array_Index
+:_110_readelm_done
 call @~(Turtle)_line
-push 140
-push 50
-call @~(Turtle)_goto
-push 10
-push 10
-call @~(Turtle)_goto
-push 140
-push 50
+loadm $x
+readelm *P1
+jumpt :_111_readelm_done
+call @__illegal_Array_Index
+:_111_readelm_done
+loadm $y
+readelm *P1
+jumpt :_112_readelm_done
+call @__illegal_Array_Index
+:_112_readelm_done
 call @~(Turtle)_line
-push 140
-push 40
-call @~(Turtle)_goto
-push 10
-push 10
-call @~(Turtle)_goto
-push 140
-push 40
-call @~(Turtle)_line
-push 150
-push 30
-call @~(Turtle)_goto
-push 10
-push 10
-call @~(Turtle)_goto
-push 150
-push 30
-call @~(Turtle)_line
-push 150
+call @drawBuff
+array *P3
+push 80
+storem *P3
+push 55
+storem *P3
+array *P2
+push 100
+storem *P2
 push 20
-call @~(Turtle)_goto
-push 10
-push 10
-call @~(Turtle)_goto
-push 150
+storem *P2
+array *P1
+push 60
+storem *P1
 push 20
-call @~(Turtle)_line
-push 150
-push 15
+storem *P1
+loadm $x
+readelm *P3
+jumpt :_113_readelm_done
+call @__illegal_Array_Index
+:_113_readelm_done
+loadm $y
+readelm *P3
+jumpt :_114_readelm_done
+call @__illegal_Array_Index
+:_114_readelm_done
 call @~(Turtle)_goto
-push 10
-push 10
+loadm $x
+readelm *P2
+jumpt :_115_readelm_done
+call @__illegal_Array_Index
+:_115_readelm_done
+loadm $y
+readelm *P2
+jumpt :_116_readelm_done
+call @__illegal_Array_Index
+:_116_readelm_done
 call @~(Turtle)_goto
-push 150
-push 15
+loadm $x
+readelm *P1
+jumpt :_117_readelm_done
+call @__illegal_Array_Index
+:_117_readelm_done
+loadm $y
+readelm *P1
+jumpt :_118_readelm_done
+call @__illegal_Array_Index
+:_118_readelm_done
+call @~(Turtle)_goto
+call @drawBuff
+loadm $x
+readelm *P2
+jumpt :_119_readelm_done
+call @__illegal_Array_Index
+:_119_readelm_done
+loadm $y
+readelm *P2
+jumpt :_120_readelm_done
+call @__illegal_Array_Index
+:_120_readelm_done
 call @~(Turtle)_line
+loadm $x
+readelm *P3
+jumpt :_121_readelm_done
+call @__illegal_Array_Index
+:_121_readelm_done
+loadm $y
+readelm *P3
+jumpt :_122_readelm_done
+call @__illegal_Array_Index
+:_122_readelm_done
+call @~(Turtle)_line
+loadm $x
+readelm *P1
+jumpt :_123_readelm_done
+call @__illegal_Array_Index
+:_123_readelm_done
+loadm $y
+readelm *P1
+jumpt :_124_readelm_done
+call @__illegal_Array_Index
+:_124_readelm_done
+call @~(Turtle)_line
+call @drawBuff
+array *P3
+push 130
+storem *P3
+push 65
+storem *P3
+array *P2
+push 150
+storem *P2
+push 20
+storem *P2
+array *P1
+push 110
+storem *P1
+push 20
+storem *P1
+loadm $x
+readelm *P3
+jumpt :_125_readelm_done
+call @__illegal_Array_Index
+:_125_readelm_done
+loadm $y
+readelm *P3
+jumpt :_126_readelm_done
+call @__illegal_Array_Index
+:_126_readelm_done
+call @~(Turtle)_goto
+loadm $x
+readelm *P2
+jumpt :_127_readelm_done
+call @__illegal_Array_Index
+:_127_readelm_done
+loadm $y
+readelm *P2
+jumpt :_128_readelm_done
+call @__illegal_Array_Index
+:_128_readelm_done
+call @~(Turtle)_goto
+loadm $x
+readelm *P1
+jumpt :_129_readelm_done
+call @__illegal_Array_Index
+:_129_readelm_done
+loadm $y
+readelm *P1
+jumpt :_130_readelm_done
+call @__illegal_Array_Index
+:_130_readelm_done
+call @~(Turtle)_goto
+call @drawBuff
+loadm $x
+readelm *P2
+jumpt :_131_readelm_done
+call @__illegal_Array_Index
+:_131_readelm_done
+loadm $y
+readelm *P2
+jumpt :_132_readelm_done
+call @__illegal_Array_Index
+:_132_readelm_done
+call @~(Turtle)_line
+loadm $x
+readelm *P3
+jumpt :_133_readelm_done
+call @__illegal_Array_Index
+:_133_readelm_done
+loadm $y
+readelm *P3
+jumpt :_134_readelm_done
+call @__illegal_Array_Index
+:_134_readelm_done
+call @~(Turtle)_line
+loadm $x
+readelm *P1
+jumpt :_135_readelm_done
+call @__illegal_Array_Index
+:_135_readelm_done
+loadm $y
+readelm *P1
+jumpt :_136_readelm_done
+call @__illegal_Array_Index
+:_136_readelm_done
+call @~(Turtle)_line
+call @drawBuff
 call @drawBuff
 prttimer 0
 ret
@@ -127,8 +297,6 @@ loadm $(Turtle)_x
 loadm $(Turtle)_targetX
 call @diff
 call @div
-call @dup
-prt
 ret
 @~(Turtle)_notOnTarget
 loadm $(Turtle)_y
@@ -492,6 +660,28 @@ pull
 push 180
 storem $(Turtle)_angle
 call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_39_do_end
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_midH
+call @gt
+loada
+testz
+clra
+jumpf :_41_do_end
+pull
+push 225
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_40_match_end
+:_41_do_end
+pull
+:_40_match_end
+:_39_do_end
 jump :_37_match_end
 :_38_do_end
 call @dup
@@ -500,16 +690,73 @@ call @gt
 loada
 testz
 clra
-jumpf :_39_do_end
+jumpf :_42_do_end
 pull
 push 270
 storem $(Turtle)_angle
 call @~(Turtle)_move
-jump :_37_match_end
-:_39_do_end
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_43_do_end
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_midL
+call @lt
+loada
+testz
+clra
+jumpf :_45_do_end
+pull
 push 225
 storem $(Turtle)_angle
 call @~(Turtle)_move
+jump :_44_match_end
+:_45_do_end
+pull
+:_44_match_end
+:_43_do_end
+jump :_37_match_end
+:_42_do_end
+push 225
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_46_do_end
+call @~(Turtle)_slope
+call @dup
+push 20
+call @lt
+loada
+testz
+clra
+jumpf :_48_do_end
+pull
+push 1800
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_47_match_end
+:_48_do_end
+call @dup
+push 10
+call @gt
+loada
+testz
+clra
+jumpf :_49_do_end
+pull
+push 270
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_47_match_end
+:_49_do_end
+pull
+:_47_match_end
+:_46_do_end
 pull
 :_37_match_end
 jump :_35_match_end
@@ -520,115 +767,9 @@ call @lt
 loada
 testz
 clra
-jumpf :_40_do_end
-pull
-push 'West\_North'
-call @char2prtbuff
-call @printbuff
-call @~(Turtle)_slope
-call @dup
-loadm $(Turtle)_high
-call @lt
-loada
-testz
-clra
-jumpf :_42_do_end
-pull
-push 0
-storem $(Turtle)_angle
-call @~(Turtle)_move
-jump :_41_match_end
-:_42_do_end
-call @dup
-loadm $(Turtle)_low
-call @gt
-loada
-testz
-clra
-jumpf :_43_do_end
-pull
-push 270
-storem $(Turtle)_angle
-call @~(Turtle)_move
-jump :_41_match_end
-:_43_do_end
-push 315
-storem $(Turtle)_angle
-call @~(Turtle)_move
-pull
-:_41_match_end
-jump :_35_match_end
-:_40_do_end
-push 270
-storem $(Turtle)_angle
-call @~(Turtle)_move
-pull
-:_35_match_end
-jump :_33_match_end
-:_34_do_end
-call @dup
-loadm $(Turtle)_x
-call @lt
-loada
-testz
-clra
-jumpf :_44_do_end
-pull
-loadm $(Turtle)_targetY
-call @dup
-loadm $(Turtle)_y
-call @gt
-loada
-testz
-clra
-jumpf :_46_do_end
-pull
-push 'East\_South'
-call @char2prtbuff
-call @printbuff
-call @~(Turtle)_slope
-call @dup
-loadm $(Turtle)_high
-call @lt
-loada
-testz
-clra
-jumpf :_48_do_end
-pull
-push 180
-storem $(Turtle)_angle
-call @~(Turtle)_move
-jump :_47_match_end
-:_48_do_end
-call @dup
-loadm $(Turtle)_low
-call @gt
-loada
-testz
-clra
-jumpf :_49_do_end
-pull
-push 90
-storem $(Turtle)_angle
-call @~(Turtle)_move
-jump :_47_match_end
-:_49_do_end
-push 135
-storem $(Turtle)_angle
-call @~(Turtle)_move
-pull
-:_47_match_end
-jump :_45_match_end
-:_46_do_end
-call @dup
-loadm $(Turtle)_y
-call @lt
-loada
-testz
-clra
 jumpf :_50_do_end
 pull
-push 'East\_North'
+push 'West\_North'
 call @char2prtbuff
 call @printbuff
 call @~(Turtle)_slope
@@ -657,7 +798,7 @@ testz
 clra
 jumpf :_55_do_end
 pull
-push 45
+push 315
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_54_match_end
@@ -675,7 +816,7 @@ testz
 clra
 jumpf :_56_do_end
 pull
-push 90
+push 270
 storem $(Turtle)_angle
 call @~(Turtle)_move
 call @~(Turtle)_notOnTarget
@@ -692,7 +833,7 @@ testz
 clra
 jumpf :_59_do_end
 pull
-push 45
+push 315
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_58_match_end
@@ -702,7 +843,7 @@ pull
 :_57_do_end
 jump :_51_match_end
 :_56_do_end
-push 45
+push 315
 storem $(Turtle)_angle
 call @~(Turtle)_move
 call @~(Turtle)_notOnTarget
@@ -732,7 +873,7 @@ testz
 clra
 jumpf :_63_do_end
 pull
-push 90
+push 270
 storem $(Turtle)_angle
 call @~(Turtle)_move
 jump :_61_match_end
@@ -742,20 +883,23 @@ pull
 :_60_do_end
 pull
 :_51_match_end
-jump :_45_match_end
+jump :_35_match_end
 :_50_do_end
-push 'East'
-call @char2prtbuff
-call @printbuff
-push 90
+push 270
 storem $(Turtle)_angle
 call @~(Turtle)_move
-call @~(Turtle)_notOnTarget
-prt
 pull
-:_45_match_end
+:_35_match_end
 jump :_33_match_end
-:_44_do_end
+:_34_do_end
+call @dup
+loadm $(Turtle)_x
+call @lt
+loada
+testz
+clra
+jumpf :_64_do_end
+pull
 loadm $(Turtle)_targetY
 call @dup
 loadm $(Turtle)_y
@@ -763,7 +907,266 @@ call @gt
 loada
 testz
 clra
-jumpf :_65_do_end
+jumpf :_66_do_end
+pull
+push 'East\_South'
+call @char2prtbuff
+call @printbuff
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_high
+call @lt
+loada
+testz
+clra
+jumpf :_68_do_end
+pull
+push 180
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_69_do_end
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_midH
+call @gt
+loada
+testz
+clra
+jumpf :_71_do_end
+pull
+push 135
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_70_match_end
+:_71_do_end
+pull
+:_70_match_end
+:_69_do_end
+jump :_67_match_end
+:_68_do_end
+call @dup
+loadm $(Turtle)_low
+call @gt
+loada
+testz
+clra
+jumpf :_72_do_end
+pull
+push 90
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_73_do_end
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_midL
+call @lt
+loada
+testz
+clra
+jumpf :_75_do_end
+pull
+push 135
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_74_match_end
+:_75_do_end
+pull
+:_74_match_end
+:_73_do_end
+jump :_67_match_end
+:_72_do_end
+push 135
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_76_do_end
+call @~(Turtle)_slope
+call @dup
+push 20
+call @lt
+loada
+testz
+clra
+jumpf :_78_do_end
+pull
+push 180
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_77_match_end
+:_78_do_end
+call @dup
+push 10
+call @gt
+loada
+testz
+clra
+jumpf :_79_do_end
+pull
+push 90
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_77_match_end
+:_79_do_end
+pull
+:_77_match_end
+:_76_do_end
+pull
+:_67_match_end
+jump :_65_match_end
+:_66_do_end
+call @dup
+loadm $(Turtle)_y
+call @lt
+loada
+testz
+clra
+jumpf :_80_do_end
+pull
+push 'East\_North'
+call @char2prtbuff
+call @printbuff
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_high
+call @lt
+loada
+testz
+clra
+jumpf :_82_do_end
+pull
+push 0
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_83_do_end
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_midH
+call @gt
+loada
+testz
+clra
+jumpf :_85_do_end
+pull
+push 45
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_84_match_end
+:_85_do_end
+pull
+:_84_match_end
+:_83_do_end
+jump :_81_match_end
+:_82_do_end
+call @dup
+loadm $(Turtle)_low
+call @gt
+loada
+testz
+clra
+jumpf :_86_do_end
+pull
+push 90
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_87_do_end
+call @~(Turtle)_slope
+call @dup
+loadm $(Turtle)_midL
+call @lt
+loada
+testz
+clra
+jumpf :_89_do_end
+pull
+push 45
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_88_match_end
+:_89_do_end
+pull
+:_88_match_end
+:_87_do_end
+jump :_81_match_end
+:_86_do_end
+push 45
+storem $(Turtle)_angle
+call @~(Turtle)_move
+call @~(Turtle)_notOnTarget
+loada
+testz
+clra
+jumpf :_90_do_end
+call @~(Turtle)_slope
+call @dup
+push 20
+call @lt
+loada
+testz
+clra
+jumpf :_92_do_end
+pull
+push 0
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_91_match_end
+:_92_do_end
+call @dup
+push 10
+call @gt
+loada
+testz
+clra
+jumpf :_93_do_end
+pull
+push 90
+storem $(Turtle)_angle
+call @~(Turtle)_move
+jump :_91_match_end
+:_93_do_end
+pull
+:_91_match_end
+:_90_do_end
+pull
+:_81_match_end
+jump :_65_match_end
+:_80_do_end
+push 'East'
+call @char2prtbuff
+call @printbuff
+push 90
+storem $(Turtle)_angle
+call @~(Turtle)_move
+pull
+:_65_match_end
+jump :_33_match_end
+:_64_do_end
+loadm $(Turtle)_targetY
+call @dup
+loadm $(Turtle)_y
+call @gt
+loada
+testz
+clra
+jumpf :_95_do_end
 pull
 push 'South'
 call @char2prtbuff
@@ -771,15 +1174,15 @@ call @printbuff
 push 180
 storem $(Turtle)_angle
 call @~(Turtle)_move
-jump :_64_match_end
-:_65_do_end
+jump :_94_match_end
+:_95_do_end
 call @dup
 loadm $(Turtle)_y
 call @lt
 loada
 testz
 clra
-jumpf :_66_do_end
+jumpf :_96_do_end
 pull
 push 'North'
 call @char2prtbuff
@@ -787,32 +1190,29 @@ call @printbuff
 push 0
 storem $(Turtle)_angle
 call @~(Turtle)_move
-jump :_64_match_end
-:_66_do_end
-push 'DONE....'
-call @char2prtbuff
-call @printbuff
+jump :_94_match_end
+:_96_do_end
 push 1
 storem $(Turtle)_lineDrawing
 pull
-:_64_match_end
+:_94_match_end
 pull
 :_33_match_end
 ret
 @~(Turtle)_line
 storem $tmpY
 storem $tmpX
-:_67_condition_start
+:_97_condition_start
 loadm $(Turtle)_lineDrawing
 loada
 testz
 clra
-jumpf :_67_repeat_end
+jumpf :_97_repeat_end
 loadm $tmpX
 loadm $tmpY
 call @~(Turtle)_dot
-jump :_67_condition_start
-:_67_repeat_end
+jump :_97_condition_start
+:_97_repeat_end
 push 0
 storem $(Turtle)_lineDrawing
 ret
@@ -820,21 +1220,21 @@ ret
 storem $steps
 push 0
 storem $s
-:_68_condition_start
+:_98_condition_start
 loadm $s
 loadm $steps
 call @neq
 loada
 testz
 clra
-jumpf :_68_repeat_end
+jumpf :_98_repeat_end
 call @~(Turtle)_move
 loadm $s
 push 1
 call @plus
 storem $s
-jump :_68_condition_start
-:_68_repeat_end
+jump :_98_condition_start
+:_98_repeat_end
 ret
 @__MemAllocGlobels
 call @init_vmachine

@@ -36,9 +36,8 @@ DEFINE
         END
 
         THIS slope
-            THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff / 
-            .. PRINT
-           END 
+            THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff /
+        END 
 
         THIS notOnTarget
             THIS y THIS targetY == MATCH
@@ -117,14 +116,42 @@ DEFINE
                                 ON THIS high DO < 
                                     180 AS THIS angle
                                     THIS move 
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS midH DO >
+                                                225 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END    
                                 END
                                 ON THIS low DO >                                   
                                     270 AS THIS angle
                                     THIS move
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS midL DO <
+                                                225 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                                 NO                                    
                                     225 AS THIS angle
                                     THIS move
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS 20  DO <
+                                                1800 AS THIS angle
+                                                THIS move
+                                            END
+                                            ON THIS 10 DO >
+                                                270 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                             END
                         END
@@ -135,14 +162,42 @@ DEFINE
                                 ON THIS high DO < 
                                     0 AS THIS angle
                                     THIS move 
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS midH DO >
+                                                315 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                                 ON THIS low DO >                                   
                                     270 AS THIS angle
                                     THIS move
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS midL DO <
+                                                315 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                                 NO                                    
                                     315 AS THIS angle
                                     THIS move
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS 20  DO <
+                                                0 AS THIS angle
+                                                THIS move
+                                            END
+                                            ON THIS 10 DO >
+                                                270 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                             END                         
                         END
@@ -162,14 +217,42 @@ DEFINE
                                 ON THIS high DO < 
                                     180 AS THIS angle
                                     THIS move 
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS midH DO >
+                                                135 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                                 ON THIS low DO >                                   
                                     90 AS THIS angle
                                     THIS move
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS midL DO <
+                                                135 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                                 NO                                    
                                     135 AS THIS angle
                                     THIS move
+                                    THIS notOnTarget DO
+                                        THIS slope MATCH
+                                            ON THIS 20  DO <
+                                                180 AS THIS angle
+                                                THIS move
+                                            END
+                                            ON THIS 10 DO >
+                                                90 AS THIS angle
+                                                THIS move
+                                            END
+                                        END
+                                    END
                                 END
                             END
                         END
@@ -222,7 +305,6 @@ DEFINE
                             "East" SHOW 
                             90 AS THIS angle
                             THIS move
-                            THIS notOnTarget PRINT
                         END
                     END
                 END
@@ -239,7 +321,7 @@ DEFINE
                             THIS move
                         END
                         NO
-                            "DONE...." SHOW
+                            #"DONE...." SHOW
                             1 AS THIS lineDrawing
                         END
                     END
@@ -268,9 +350,7 @@ DEFINE
 END
 
 
-ARRAY P3 [60 40]
-ARRAY P2 [80 20]
-ARRAY P1 [40 20]
+
 
 0 DRAW RATE 
 DRAW NEW
@@ -279,47 +359,73 @@ DRAW NEW
 1 [size] 2 [size] DRAW
 0 0 Turtle goto
 
-#x [P3] y [P3] Turtle goto
-#x [P2] y [P2] Turtle goto
-#x [P1] y [P1] Turtle goto
+ARRAY P3 [30 40]
+ARRAY P2 [50 20]
+ARRAY P1 [10 20]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [80 55]
+ARRAY P2 [100 20]
+ARRAY P1 [60 20]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [130 65]
+ARRAY P2 [150 20]
+ARRAY P1 [110 20]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+
+
+
+
+
+#159 79 Turtle goto
+# 10 10 Turtle goto
+#159 79 Turtle line
+
+#30 70 Turtle goto
+#10 10 Turtle goto
+#30 70 Turtle line
+
 
 DRAW NOW
 
-#x [P2] y [P2] Turtle line
-#x [P3] y [P3] Turtle line
-#x [P1] y [P1] Turtle line
-
-120 70 Turtle goto
-10 10 Turtle goto
-120 70 Turtle line
-
-140 60 Turtle goto
- 10 10 Turtle goto
-140 60 Turtle line
-
-140 50 Turtle goto
- 10 10 Turtle goto
-140 50 Turtle line
-
-140 40 Turtle goto
- 10 10 Turtle goto
-140 40 Turtle line
-
-150 30 Turtle goto
- 10 10 Turtle goto
-150 30 Turtle line
-
-150 20 Turtle goto
- 10 10 Turtle goto
-150 20 Turtle line
-
-150 15 Turtle goto
- 10 10 Turtle goto
-150 15 Turtle line
-
-
-
-DRAW NOW
 
 
 
