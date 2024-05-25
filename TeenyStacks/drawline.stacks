@@ -143,7 +143,7 @@ DEFINE
                                     THIS notOnTarget DO
                                         THIS slope MATCH
                                             ON THIS 20  DO <
-                                                1800 AS THIS angle
+                                                180 AS THIS angle
                                                 THIS move
                                             END
                                             ON THIS 10 DO >
@@ -357,11 +357,12 @@ DRAW NEW
 
 0 0 DRAW 
 1 [size] 2 [size] DRAW
+DRAW NEW
 0 0 Turtle goto
 
-ARRAY P3 [30 40]
-ARRAY P2 [50 20]
-ARRAY P1 [10 20]
+ARRAY P3 [30 30]
+ARRAY P2 [50 10]
+ARRAY P1 [10 10]
 
     x [P3] y [P3] Turtle goto
     x [P2] y [P2] Turtle goto
@@ -376,9 +377,9 @@ ARRAY P1 [10 20]
     DRAW NOW
 
 
-ARRAY P3 [80 55]
-ARRAY P2 [100 20]
-ARRAY P1 [60 20]
+ARRAY P3 [80 45]
+ARRAY P2 [100 10]
+ARRAY P1 [60 10]
 
     x [P3] y [P3] Turtle goto
     x [P2] y [P2] Turtle goto
@@ -393,9 +394,9 @@ ARRAY P1 [60 20]
     DRAW NOW
 
 
-ARRAY P3 [130 65]
-ARRAY P2 [150 20]
-ARRAY P1 [110 20]
+ARRAY P3 [130 55]
+ARRAY P2 [150 10]
+ARRAY P1 [110 10]
 
     x [P3] y [P3] Turtle goto
     x [P2] y [P2] Turtle goto
@@ -410,7 +411,54 @@ ARRAY P1 [110 20]
     DRAW NOW
 
 
+ARRAY P3 [30 30]
+ARRAY P2 [50 75]
+ARRAY P1 [10 75]
 
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+ARRAY P3 [80 45]
+ARRAY P2 [100 75]
+ARRAY P1 [60 75]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [130 55]
+ARRAY P2 [150 75]
+ARRAY P1 [110 75]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
 
 
 
