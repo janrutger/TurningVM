@@ -1,10 +1,12 @@
 # Emitter object keeps track of the generated code and outputs it.
 class Emitter:
     def __init__(self, out):
-        self.fullPath = "../assembler/out.asm"
+        self.fullPath      = "../assembler/out.asm"
+        self.fullPathThing = "../assembler/out-thg.asm"
         self.header = ""
         self.code = ""
         self.functions = ""
+        self.things = ""
         self.allocGLOBELS = ""
         self.context = "program"
 
@@ -16,6 +18,8 @@ class Emitter:
             self.code += code + '\n'
         elif self.context == "functions":
             self.functions += code + '\n'
+        elif self.context == "things":
+            self.things += code + '\n'
         elif self.context == "meminit":
             self.allocGLOBELS += code + '\n'
 
@@ -27,4 +31,8 @@ class Emitter:
 
     def writeFile(self):
         with open(self.fullPath, 'w') as outputFile:
-            outputFile.write(self.header + self.code + self.functions + self.allocGLOBELS)
+            outputFile.write(self.header + self.code + self.functions + self.things + self.allocGLOBELS)
+        
+        if self.things != "":
+            with open(self.fullPathThing, 'w') as outputFile:
+                outputFile.write(self.things)

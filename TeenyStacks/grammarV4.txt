@@ -13,6 +13,8 @@ define	::=	"DEFINE" nl
 				["THIS" function nl {statement} nl "END" nl]+ 
 			   "END" nl)+]
 
+			[ (USE thing nl)+]
+
 			[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
 		"END" nl
 

@@ -5,7 +5,7 @@ DEFINE
     ARRAY Ltemp
     ARRAY newF
 
-    DRAW
+    #DRAW
 
     FUNCTION makeNewF
         "F" AS [newF]
@@ -38,70 +38,7 @@ DEFINE
         ARRAY Ltemp
     END
     
-
-    THING Turtle
-        INIT
-            0 AS THIS x
-            0 AS THIS y 
-            90 AS THIS angle
-        END
-        THIS goto
-            . AS THIS y
-            . AS THIS x 
-            THIS x THIS y DRAW
-        END
-        THIS right
-            THIS angle + 360 % AS THIS angle
-        END
-        THIS move
-            THIS angle 22 + 45 / MATCH
-                ON 0 DO
-                    1 THIS y + 2 [size] % AS THIS y 
-                    THIS x THIS y DRAW
-                END
-                ON 1 DO
-                    1 THIS x + 1 [size] % AS THIS x 
-                    1 THIS y + 2 [size] % AS THIS y 
-                    THIS x THIS y DRAW
-                END
-                ON 2 DO
-                    1 THIS x + 1 [size] % AS THIS x
-                    THIS x THIS y DRAW
-                END
-                ON 3 DO
-                    1 THIS x + 1 [size] % AS THIS x
-                    2 [size] THIS y + 1 - 2 [size] % AS THIS y
-                    THIS x THIS y DRAW
-                END
-                ON 4 DO
-                    2 [size] THIS y + 1 - 2 [size] % AS THIS y
-                    THIS x THIS y DRAW
-                END
-                ON 5 DO
-                    1 [size] THIS x + 1 - 1 [size] % AS THIS x 
-                    2 [size] THIS y + 1 - 2 [size] % AS THIS y
-                    THIS x THIS y DRAW
-                END
-                ON 6 DO
-                    1 [size] THIS x + 1 - 1 [size] % AS THIS x 
-                    THIS x THIS y DRAW
-                END
-                ON 7 DO
-                    1 [size] THIS x + 1 - 1 [size] % AS THIS x 
-                    1 THIS y + 2 [size] % AS THIS y
-                    THIS x THIS y DRAW
-                END
-            END
-        END
-        THIS forward
-            . AS steps
-            0 AS s
-            {s steps !=} DO
-                Turtle move
-                s 1 + AS s
-            END
-        END
-    END
+    USE Turtle
 END
 
 
