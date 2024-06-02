@@ -2,7 +2,7 @@
 class Emitter:
     def __init__(self, out):
         self.fullPath      = "../assembler/out.asm"
-        self.fullPathThing = "../assembler/out-thg.asm"
+        self.fullPathThing = "../assembler/out.thg"
         self.header = ""
         self.code = ""
         self.functions = ""

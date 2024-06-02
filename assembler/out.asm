@@ -21,7 +21,7 @@ call @draw
 call @drawNew
 push 0
 push 0
-call @~(Turtle)_goto
+call @~(Turtle)goto
 array *P3
 push 30
 storem *P3
@@ -47,7 +47,7 @@ readelm *P3
 jumpt :_3_readelm_done
 call @__illegal_Array_Index
 :_3_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P2
 jumpt :_4_readelm_done
@@ -58,7 +58,7 @@ readelm *P2
 jumpt :_5_readelm_done
 call @__illegal_Array_Index
 :_5_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P1
 jumpt :_6_readelm_done
@@ -69,7 +69,7 @@ readelm *P1
 jumpt :_7_readelm_done
 call @__illegal_Array_Index
 :_7_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 call @drawBuff
 loadm $x
 readelm *P2
@@ -81,7 +81,7 @@ readelm *P2
 jumpt :_9_readelm_done
 call @__illegal_Array_Index
 :_9_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P3
 jumpt :_10_readelm_done
@@ -92,7 +92,7 @@ readelm *P3
 jumpt :_11_readelm_done
 call @__illegal_Array_Index
 :_11_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P1
 jumpt :_12_readelm_done
@@ -103,7 +103,7 @@ readelm *P1
 jumpt :_13_readelm_done
 call @__illegal_Array_Index
 :_13_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 call @drawBuff
 array *P3
 push 80
@@ -130,7 +130,7 @@ readelm *P3
 jumpt :_15_readelm_done
 call @__illegal_Array_Index
 :_15_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P2
 jumpt :_16_readelm_done
@@ -141,7 +141,7 @@ readelm *P2
 jumpt :_17_readelm_done
 call @__illegal_Array_Index
 :_17_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P1
 jumpt :_18_readelm_done
@@ -152,7 +152,7 @@ readelm *P1
 jumpt :_19_readelm_done
 call @__illegal_Array_Index
 :_19_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 call @drawBuff
 loadm $x
 readelm *P2
@@ -164,7 +164,7 @@ readelm *P2
 jumpt :_21_readelm_done
 call @__illegal_Array_Index
 :_21_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P3
 jumpt :_22_readelm_done
@@ -175,7 +175,7 @@ readelm *P3
 jumpt :_23_readelm_done
 call @__illegal_Array_Index
 :_23_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P1
 jumpt :_24_readelm_done
@@ -186,7 +186,7 @@ readelm *P1
 jumpt :_25_readelm_done
 call @__illegal_Array_Index
 :_25_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 call @drawBuff
 array *P3
 push 130
@@ -213,7 +213,7 @@ readelm *P3
 jumpt :_27_readelm_done
 call @__illegal_Array_Index
 :_27_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P2
 jumpt :_28_readelm_done
@@ -224,7 +224,7 @@ readelm *P2
 jumpt :_29_readelm_done
 call @__illegal_Array_Index
 :_29_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P1
 jumpt :_30_readelm_done
@@ -235,7 +235,7 @@ readelm *P1
 jumpt :_31_readelm_done
 call @__illegal_Array_Index
 :_31_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 call @drawBuff
 loadm $x
 readelm *P2
@@ -247,7 +247,7 @@ readelm *P2
 jumpt :_33_readelm_done
 call @__illegal_Array_Index
 :_33_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P3
 jumpt :_34_readelm_done
@@ -258,7 +258,7 @@ readelm *P3
 jumpt :_35_readelm_done
 call @__illegal_Array_Index
 :_35_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P1
 jumpt :_36_readelm_done
@@ -269,7 +269,7 @@ readelm *P1
 jumpt :_37_readelm_done
 call @__illegal_Array_Index
 :_37_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 call @drawBuff
 array *P3
 push 30
@@ -296,7 +296,7 @@ readelm *P3
 jumpt :_39_readelm_done
 call @__illegal_Array_Index
 :_39_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P2
 jumpt :_40_readelm_done
@@ -307,7 +307,7 @@ readelm *P2
 jumpt :_41_readelm_done
 call @__illegal_Array_Index
 :_41_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P1
 jumpt :_42_readelm_done
@@ -318,7 +318,7 @@ readelm *P1
 jumpt :_43_readelm_done
 call @__illegal_Array_Index
 :_43_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 call @drawBuff
 loadm $x
 readelm *P2
@@ -330,7 +330,7 @@ readelm *P2
 jumpt :_45_readelm_done
 call @__illegal_Array_Index
 :_45_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P3
 jumpt :_46_readelm_done
@@ -341,7 +341,7 @@ readelm *P3
 jumpt :_47_readelm_done
 call @__illegal_Array_Index
 :_47_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P1
 jumpt :_48_readelm_done
@@ -352,7 +352,7 @@ readelm *P1
 jumpt :_49_readelm_done
 call @__illegal_Array_Index
 :_49_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 call @drawBuff
 array *P3
 push 80
@@ -379,7 +379,7 @@ readelm *P3
 jumpt :_51_readelm_done
 call @__illegal_Array_Index
 :_51_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P2
 jumpt :_52_readelm_done
@@ -390,7 +390,7 @@ readelm *P2
 jumpt :_53_readelm_done
 call @__illegal_Array_Index
 :_53_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P1
 jumpt :_54_readelm_done
@@ -401,7 +401,7 @@ readelm *P1
 jumpt :_55_readelm_done
 call @__illegal_Array_Index
 :_55_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 call @drawBuff
 loadm $x
 readelm *P2
@@ -413,7 +413,7 @@ readelm *P2
 jumpt :_57_readelm_done
 call @__illegal_Array_Index
 :_57_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P3
 jumpt :_58_readelm_done
@@ -424,7 +424,7 @@ readelm *P3
 jumpt :_59_readelm_done
 call @__illegal_Array_Index
 :_59_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P1
 jumpt :_60_readelm_done
@@ -435,7 +435,7 @@ readelm *P1
 jumpt :_61_readelm_done
 call @__illegal_Array_Index
 :_61_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 call @drawBuff
 array *P3
 push 130
@@ -462,7 +462,7 @@ readelm *P3
 jumpt :_63_readelm_done
 call @__illegal_Array_Index
 :_63_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P2
 jumpt :_64_readelm_done
@@ -473,7 +473,7 @@ readelm *P2
 jumpt :_65_readelm_done
 call @__illegal_Array_Index
 :_65_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 loadm $x
 readelm *P1
 jumpt :_66_readelm_done
@@ -484,7 +484,7 @@ readelm *P1
 jumpt :_67_readelm_done
 call @__illegal_Array_Index
 :_67_readelm_done
-call @~(Turtle)_goto
+call @~(Turtle)goto
 call @drawBuff
 loadm $x
 readelm *P2
@@ -496,7 +496,7 @@ readelm *P2
 jumpt :_69_readelm_done
 call @__illegal_Array_Index
 :_69_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P3
 jumpt :_70_readelm_done
@@ -507,7 +507,7 @@ readelm *P3
 jumpt :_71_readelm_done
 call @__illegal_Array_Index
 :_71_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 loadm $x
 readelm *P1
 jumpt :_72_readelm_done
@@ -518,7 +518,7 @@ readelm *P1
 jumpt :_73_readelm_done
 call @__illegal_Array_Index
 :_73_readelm_done
-call @~(Turtle)_line
+call @~(Turtle)line
 call @drawBuff
 call @drawBuff
 prttimer 0
@@ -538,5 +538,5 @@ push 0
 storem $y
 push 2
 storem $y
-call @~(Turtle)_INIT
+call @~(Turtle)INIT
 ret

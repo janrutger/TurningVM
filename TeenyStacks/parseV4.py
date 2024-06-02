@@ -142,6 +142,83 @@ class Parser:
                 self.nl()
                 self.emitter.context = "program"
 
+        # [("THING" thing nl
+        #   "INIT" nl {statement} nl "END" nl
+        #   "THIS" function nl {statement} nl "END" nl
+        #  ["THIS" function nl {statement} nl "END" nl] +
+        #   "END" nl)+]
+        while self.checkToken(TokenType.THING):
+            self.match(TokenType.THING)
+            if self.isFreeSymbol(self.curToken.text):
+                self.things.add(self.curToken.text)
+            if self.curToken.text in self.things:
+                self.curThing = self.curToken.text
+                self.match(TokenType.IDENT)
+                self.nl()
+        #   "INIT" nl {statement} nl "END" nl
+                self.this()
+                symbol = self.curThis + "INIT"
+                self.curThis = ""
+                if self.isFreeSymbol(symbol):
+                    self.functions.add(symbol)
+                if symbol in self.functions:
+                    self.emitter.context = "things"
+                    self.emitter.emitLine("@~" + symbol)
+                    self.nl()
+                    while not self.checkToken(TokenType.END):
+                        self.statement()
+                    self.match(TokenType.END)
+                    self.emitter.emitLine("ret")
+                    self.emitter.context = "program"
+                    self.nl()
+
+        #   "THIS" function nl {statement} nl "END" nl
+        #  ["THIS" function nl {statement} nl "END" nl] +
+                while self.checkToken(TokenType.THIS):
+                    self.this()
+                    symbol = self.curThis + self.curToken.text
+                    self.curThis = ""
+                    self.match(TokenType.IDENT)
+
+                    if self.isFreeSymbol(symbol):
+                        self.functions.add(symbol)
+                    if symbol in self.functions:
+                        self.emitter.context = "things"
+                        self.emitter.emitLine("@~" + symbol)
+                        self.nl()
+                        while not self.checkToken(TokenType.END):
+                            self.statement()
+                        self.match(TokenType.END)
+                        self.emitter.emitLine("ret")
+                        self.emitter.context = "program"
+                        self.nl()
+                    else:
+                        self.abort(
+                            "Already in use as a variable, job or function: " + symbol)
+                #   "END" nl)+]
+                self.curThing = None
+                self.curthis = ""
+                self.match(TokenType.END)
+                self.nl()
+            else:
+                self.abort("Already in use as a Somethis: " + self.curThing)
+
+        # USE thing nl
+        while self.checkToken(TokenType.USE):
+            self.match(TokenType.USE)
+            if self.isFreeSymbol(self.curToken.text):
+                self.things.add(self.curToken.text)
+            if self.curToken.text in self.things:
+                self.emitter.context = "meminit"
+                self.emitter.emitLine(
+                    "call @~(" + self.curToken.text + ")INIT")
+                self.emitter.context = "program"
+                self.match(TokenType.IDENT)
+                self.nl()
+            else:
+                self.abort(
+                    "Already in use as a variable, job or function: " + self.curToken.text)
+
         # [ "DRAW" ] nl
         if self.checkToken(TokenType.DRAW):
             self.drawing = True
@@ -171,90 +248,7 @@ class Parser:
             else:
                 self.abort("Already in use as a Variable: " + self.curToken.text)
         
-        # [("THING" thing nl
-        #   "INIT" nl {statement} nl "END" nl
-        #   "THIS" function nl {statement} nl "END" nl
-        #  ["THIS" function nl {statement} nl "END" nl] +
-        #   "END" nl)+]
-        while self.checkToken(TokenType.THING):
-            self.match(TokenType.THING)
-            if self.isFreeSymbol(self.curToken.text):
-                self.things.add(self.curToken.text)
-            if self.curToken.text in self.things:
-                self.curThing = self.curToken.text
-                self.match(TokenType.IDENT)
-                self.nl()
-        #   "INIT" nl {statement} nl "END" nl
-                self.this()
-                symbol = self.curThis + "INIT"
-                self.curThis = ""
-                if self.isFreeSymbol(symbol):
-                        self.functions.add(symbol)
-                if symbol in self.functions:
-                    self.emitter.context = "things"
-                    self.emitter.emitLine("@~" + symbol)
-                    self.nl()
-                    while not self.checkToken(TokenType.END):
-                        self.statement()
-                    self.match(TokenType.END)
-                    self.emitter.emitLine("ret")
-                    self.emitter.context = "program"
-                    self.nl()
-
-                    #self.emitter.context = "meminit"
-                    #self.emitter.emitLine("call @~" + symbol)
-                    #self.emitter.context = "program"
-                # self.match(TokenType.INIT)
-                # self.emitter.context = "meminit"
-                # self.nl()
-                # while not self.checkToken(TokenType.END):
-                #     self.statement()
-                # self.match(TokenType.END)
-                # self.nl()
-                # self.emitter.context = "program"
-        #   "THIS" function nl {statement} nl "END" nl
-        #  ["THIS" function nl {statement} nl "END" nl] +
-                while self.checkToken(TokenType.THIS):
-                    self.this()
-                    symbol = self.curThis + self.curToken.text
-                    self.curThis = ""
-                    self.match(TokenType.IDENT)
-
-                    if self.isFreeSymbol(symbol):
-                        self.functions.add(symbol)
-                    if symbol in self.functions:
-                        self.emitter.context = "things"
-                        self.emitter.emitLine("@~" + symbol)
-                        self.nl()
-                        while not self.checkToken(TokenType.END):
-                            self.statement()
-                        self.match(TokenType.END)
-                        self.emitter.emitLine("ret")
-                        self.emitter.context = "program"
-                        self.nl()
-                    else:
-                        self.abort("Already in use as a variable, job or function: " + symbol)
-                #   "END" nl)+]
-                self.curThing = None
-                self.curthis  = ""
-                self.match(TokenType.END)
-                self.nl()
-            else:
-                self.abort("Already in use as a Somethis: " + self.curThing)
-
-        # USE thing nl
-        while self.checkToken(TokenType.USE):
-            self.match(TokenType.USE)
-            if self.isFreeSymbol(self.curToken.text):
-                self.things.add(self.curToken.text)
-            if self.curToken.text in self.things:
-                self.emitter.context = "meminit"
-                self.emitter.emitLine("call @~(" + self.curToken.text + ")_INIT")
-                self.emitter.context = "program"
-                self.match(TokenType.IDENT)
-                self.nl()
-            else:
-                self.abort("Already in use as a variable, job or function: " + self.curToken.text)
+        
             
 
         # [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
@@ -827,7 +821,7 @@ class Parser:
             self.nextToken()
             function = self.curToken.text
             #self.match(TokenType.IDENT)
-            self.emitter.emitLine("call " + "@~(" + thing + ")_" + function )
+            self.emitter.emitLine("call " + "@~(" + thing + ")" + function )
         else:
             self.abort("Referencing variable before assignment: " + symbol)
         self.nextToken()
@@ -837,7 +831,7 @@ class Parser:
         if self.curThing == None:
             self.abort("Using THIS outside a THING is not allowd")
         else:
-            self.curThis = "(" + self.curThing + ")_"
+            self.curThis = "(" + self.curThing + ")"
         self.nextToken()
 
     # st ::= ('.'|'..')
