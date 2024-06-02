@@ -1,0 +1,91 @@
+DEFINE
+    ARRAY size [160 80]
+
+    USE Turtle
+    DRAW
+
+    FUNCTION circle
+        0 AS start
+        Turtle goto
+        {start 360 >} DO
+            Turtle move
+            45 Turtle right
+            Turtle move
+            start 45 + AS start
+        END
+        DRAW NOW
+    END
+
+    FUNCTION cross
+        ARRAY cursor
+        SWAP
+        . AS [cursor]
+        . AS [cursor]
+        1 [cursor]     2 [cursor] Turtle goto
+        1 [cursor] 5 + 2 [cursor] 5 - Turtle line
+        1 [cursor] 5 + 2 [cursor] Turtle goto
+        1 [cursor]     2 [cursor] 5 - Turtle line
+        DRAW NOW
+    END
+
+    FUNCTION grid
+         5 25 Turtle goto
+        75 25 Turtle line
+
+        25  5 Turtle goto
+        25 75 Turtle line
+
+         5 50 Turtle goto
+        75 50 Turtle line
+
+        50  5 Turtle goto
+        50 75 Turtle line
+    END
+
+
+END
+
+0 0 DRAW
+1 [size] 2 [size] DRAW
+
+grid
+
+LABEL loop
+    INPUT AS gridpoint
+    gridpoint MATCH
+        ON 1 DO
+            12 12 circle
+        END
+        ON 2 DO
+            37 12 cross
+        END
+        ON 3 DO
+            62  12 circle
+        END
+        ON 4 DO
+            12  37 cross
+        END
+        ON 5 DO
+            37  37 circle
+        END
+        ON 6 DO
+            62 37 cross
+        END
+        ON 7 DO
+            12  62 circle
+        END
+        ON 8 DO
+            37  62 cross
+        END
+        ON 9 DO
+            62  62 circle
+        END
+        ON 0 DO
+            GOTO done
+        END
+    END
+GOTO loop
+
+
+LABEL done
+DRAW NOW
