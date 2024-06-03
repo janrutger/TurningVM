@@ -165,6 +165,10 @@ clra
 jumpf :_53_do_end
 call @~circle
 :_53_do_end
+call @~(c1)owner
+prt
+call @~(c2)owner
+prt
 loadm $player
 call @dup
 push 'playX'
@@ -379,6 +383,9 @@ jump :_0_match_end
 pull
 :_0_match_end
 ret
+@~(c1)owner
+loadm $(c1)player
+ret
 @~(c2)INIT
 push 37
 storem $(c2)x
@@ -417,6 +424,9 @@ jump :_3_match_end
 :_5_do_end
 pull
 :_3_match_end
+ret
+@~(c2)owner
+loadm $(c2)player
 ret
 @~(c3)INIT
 push 62
@@ -457,6 +467,9 @@ jump :_6_match_end
 pull
 :_6_match_end
 ret
+@~(c3)owner
+loadm $(c3)player
+ret
 @~(c4)INIT
 push 12
 storem $(c4)x
@@ -495,6 +508,9 @@ jump :_9_match_end
 :_11_do_end
 pull
 :_9_match_end
+ret
+@~(c4)owner
+loadm $(c4)player
 ret
 @~(c5)INIT
 push 37
@@ -535,6 +551,9 @@ jump :_12_match_end
 pull
 :_12_match_end
 ret
+@~(c5)owner
+loadm $(c5)player
+ret
 @~(c6)INIT
 push 62
 storem $(c6)x
@@ -573,6 +592,9 @@ jump :_15_match_end
 :_17_do_end
 pull
 :_15_match_end
+ret
+@~(c6)owner
+loadm $(c6)player
 ret
 @~(c7)INIT
 push 12
@@ -613,6 +635,9 @@ jump :_18_match_end
 pull
 :_18_match_end
 ret
+@~(c7)owner
+loadm $(c7)player
+ret
 @~(c8)INIT
 push 37
 storem $(c8)x
@@ -652,6 +677,9 @@ jump :_21_match_end
 pull
 :_21_match_end
 ret
+@~(c8)owner
+loadm $(c8)player
+ret
 @~(c9)INIT
 push 62
 storem $(c9)x
@@ -690,6 +718,9 @@ jump :_24_match_end
 :_26_do_end
 pull
 :_24_match_end
+ret
+@~(c9)owner
+loadm $(c9)player
 ret
 @__MemAllocGlobels
 call @init_vmachine

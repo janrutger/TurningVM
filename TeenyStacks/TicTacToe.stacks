@@ -17,6 +17,9 @@ DEFINE
                 END
             END
         END
+        THIS owner
+            THIS player
+        END
     END
     THING c2
         INIT 
@@ -34,6 +37,9 @@ DEFINE
                     DROP 1
                 END
             END
+        END
+        THIS owner
+            THIS player
         END
     END
     THING c3
@@ -53,6 +59,9 @@ DEFINE
                 END
             END
         END
+        THIS owner
+            THIS player
+        END
     END
     THING c4
         INIT 
@@ -70,6 +79,9 @@ DEFINE
                     DROP 1
                 END
             END
+        END
+        THIS owner
+            THIS player
         END
     END
     THING c5
@@ -89,6 +101,9 @@ DEFINE
                 END
             END
         END
+        THIS owner
+            THIS player
+        END
     END
     THING c6
         INIT 
@@ -106,6 +121,9 @@ DEFINE
                     DROP 1
                 END
             END
+        END
+        THIS owner
+            THIS player
         END
     END
     THING c7
@@ -125,6 +143,9 @@ DEFINE
                 END
             END
         END
+        THIS owner
+            THIS player
+        END
     END
     THING c8
         INIT 
@@ -143,6 +164,9 @@ DEFINE
                 END
             END
         END
+        THIS owner
+            THIS player
+        END
     END
     THING c9
         INIT 
@@ -160,6 +184,9 @@ DEFINE
                     DROP 1
                 END
             END
+        END
+        THIS owner
+            THIS player
         END
     END
     
@@ -273,6 +300,8 @@ grid
             END 
 
             #Check for winner here
+            c1 owner PRINT
+            c2 owner PRINT
 
 
             #swith player here
@@ -286,7 +315,6 @@ grid
                     "input playerX" SHOW 
                 END
             END
-            
             1 steps + AS steps
         END
         ON 1 DO
