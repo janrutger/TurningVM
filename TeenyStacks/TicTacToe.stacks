@@ -29,6 +29,10 @@ DEFINE
     END
 
     FUNCTION grid
+        DRAW NEW
+        0 0 DRAW
+        1 [size] 2 [size] DRAW
+
          5 25 Turtle goto
         75 25 Turtle line
 
@@ -40,15 +44,13 @@ DEFINE
 
         50  5 Turtle goto
         50 75 Turtle line
+        DRAW NOW
     END
-
-
 END
 
-0 0 DRAW
-1 [size] 2 [size] DRAW
 
 grid
+
 
 LABEL loop
     INPUT AS gridpoint

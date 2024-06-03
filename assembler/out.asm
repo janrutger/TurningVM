@@ -1,20 +1,8 @@
 @main
 settimer 0
 speed 0
-push 0
-push 0
-call @draw
-push 1
-readelm *size
-jumpt :_9_readelm_done
-call @__illegal_Array_Index
-:_9_readelm_done
-push 2
-readelm *size
-jumpt :_10_readelm_done
-call @__illegal_Array_Index
-:_10_readelm_done
-call @draw
+push 99
+call @drawRate
 call @~grid
 :loop
 call @input
@@ -239,6 +227,21 @@ call @~(Turtle)line
 call @drawBuff
 ret
 @~grid
+call @drawNew
+push 0
+push 0
+call @draw
+push 1
+readelm *size
+jumpt :_9_readelm_done
+call @__illegal_Array_Index
+:_9_readelm_done
+push 2
+readelm *size
+jumpt :_10_readelm_done
+call @__illegal_Array_Index
+:_10_readelm_done
+call @draw
 push 5
 push 25
 call @~(Turtle)goto
@@ -263,6 +266,7 @@ call @~(Turtle)goto
 push 50
 push 75
 call @~(Turtle)line
+call @drawBuff
 ret
 @__MemAllocGlobels
 call @init_vmachine
