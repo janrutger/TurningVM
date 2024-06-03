@@ -1,7 +1,181 @@
 DEFINE
     ARRAY size [160 80]
+    THING c1
+        INIT 
+            12 AS THIS x 
+            12 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c2
+        INIT 
+            37 AS THIS x 
+            12 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c3
+        INIT 
+            62 AS THIS x 
+            12 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c4
+        INIT 
+            12 AS THIS x 
+            37 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c5
+        INIT 
+            37 AS THIS x 
+            37 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c6
+        INIT 
+            62 AS THIS x 
+            37 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c7
+        INIT 
+            12 AS THIS x 
+            62 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c8
+        INIT 
+            37 AS THIS x 
+            62 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    THING c9
+        INIT 
+            62 AS THIS x 
+            62 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+    END
+    
+
 
     USE Turtle
+    USE c1
+    USE c2
+    USE c3
+    USE c4
+    USE c5
+    USE c6
+    USE c7
+    USE c8
+    USE c9
+
     DRAW
 
     FUNCTION circle
@@ -51,43 +225,75 @@ END
 
 grid
 
+"playX" AS player
+"input playerX" SHOW
+0 AS steps
 
-LABEL loop
-    INPUT AS gridpoint
-    gridpoint MATCH
+{steps 9 !=} DO    
+    INPUT MATCH
         ON 1 DO
-            12 12 circle
+            player c1 take
         END
         ON 2 DO
-            37 12 cross
+            player c2 take
         END
         ON 3 DO
-            62  12 circle
+            player c3 take
         END
         ON 4 DO
-            12  37 cross
+            player c4 take
         END
         ON 5 DO
-            37  37 circle
+            player c5 take
         END
         ON 6 DO
-            62 37 cross
+            player c6 take
         END
         ON 7 DO
-            12  62 circle
+            player c7 take
         END
         ON 8 DO
-            37  62 cross
+            player c8 take
         END
         ON 9 DO
-            62  62 circle
+            player c9 take
         END
         ON 0 DO
             GOTO done
         END
     END
-GOTO loop
 
+    . MATCH
+        ON 0 DO
+            player "playX" == DO
+                cross
+            END
+            player "playO" == DO
+                circle
+            END 
+
+            #Check for winner here
+
+
+            #swith player here
+            player MATCH
+                ON "playX" DO
+                    "playO" AS player
+                    "input playerO" SHOW
+                END
+                NO
+                   "playX" AS player
+                    "input playerX" SHOW 
+                END
+            END
+            
+            1 steps + AS steps
+        END
+        ON 1 DO
+           "Invalid move" SHOW
+        END
+    END
+END
 
 LABEL done
 DRAW NOW
