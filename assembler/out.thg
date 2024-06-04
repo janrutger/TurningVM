@@ -40,6 +40,10 @@ ret
 @~(c1)owner
 loadm $(c1)player
 ret
+@~(c1)point
+loadm $(c1)x
+loadm $(c1)y
+ret
 @~(c2)INIT
 push 37
 storem $(c2)x
@@ -124,6 +128,10 @@ ret
 @~(c3)owner
 loadm $(c3)player
 ret
+@~(c3)point
+loadm $(c3)x
+loadm $(c3)y
+ret
 @~(c4)INIT
 push 12
 storem $(c4)x
@@ -165,6 +173,10 @@ pull
 ret
 @~(c4)owner
 loadm $(c4)player
+ret
+@~(c4)point
+loadm $(c4)x
+loadm $(c4)y
 ret
 @~(c5)INIT
 push 37
@@ -250,6 +262,10 @@ ret
 @~(c6)owner
 loadm $(c6)player
 ret
+@~(c6)point
+loadm $(c6)x
+loadm $(c6)y
+ret
 @~(c7)INIT
 push 12
 storem $(c7)x
@@ -291,6 +307,10 @@ pull
 ret
 @~(c7)owner
 loadm $(c7)player
+ret
+@~(c7)point
+loadm $(c7)x
+loadm $(c7)y
 ret
 @~(c8)INIT
 push 37
@@ -375,4 +395,8 @@ pull
 ret
 @~(c9)owner
 loadm $(c9)player
+ret
+@~(c9)point
+loadm $(c9)x
+loadm $(c9)y
 ret

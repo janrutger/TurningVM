@@ -166,9 +166,47 @@ jumpf :_53_do_end
 call @~circle
 :_53_do_end
 call @~(c1)owner
-prt
+push 'free'
+call @neq
+call @~(c1)owner
 call @~(c2)owner
-prt
+call @eq
+call @eq
+call @~(c2)owner
+call @~(c3)owner
+call @eq
+call @eq
+loada
+testz
+clra
+jumpf :_54_do_end
+call @~(c1)owner
+call @~(c1)point
+call @~(c3)point
+call @~winner
+jump :done
+:_54_do_end
+call @~(c4)owner
+push 'free'
+call @neq
+call @~(c4)owner
+call @~(c5)owner
+call @eq
+call @eq
+call @~(c5)owner
+call @~(c6)owner
+call @eq
+call @eq
+loada
+testz
+clra
+jumpf :_55_do_end
+call @~(c4)owner
+call @~(c4)point
+call @~(c6)point
+call @~winner
+jump :done
+:_55_do_end
 loadm $player
 call @dup
 push 'playX'
@@ -176,22 +214,22 @@ call @eq
 loada
 testz
 clra
-jumpf :_55_do_end
+jumpf :_57_do_end
 pull
 push 'playO'
 storem $player
 push 'input\_playerO'
 call @char2prtbuff
 call @printbuff
-jump :_54_match_end
-:_55_do_end
+jump :_56_match_end
+:_57_do_end
 push 'playX'
 storem $player
 push 'input\_playerX'
 call @char2prtbuff
 call @printbuff
 pull
-:_54_match_end
+:_56_match_end
 push 1
 loadm $steps
 call @plus
@@ -204,13 +242,13 @@ call @eq
 loada
 testz
 clra
-jumpf :_56_do_end
+jumpf :_58_do_end
 pull
 push 'Invalid\_move'
 call @char2prtbuff
 call @printbuff
 jump :_50_match_end
-:_56_do_end
+:_58_do_end
 pull
 :_50_match_end
 jump :_38_condition_start
@@ -344,6 +382,11 @@ push 75
 call @~(Turtle)line
 call @drawBuff
 ret
+@~winner
+call @~(Turtle)goto
+call @~(Turtle)line
+pull
+ret
 @~(c1)INIT
 push 12
 storem $(c1)x
@@ -385,6 +428,10 @@ pull
 ret
 @~(c1)owner
 loadm $(c1)player
+ret
+@~(c1)point
+loadm $(c1)x
+loadm $(c1)y
 ret
 @~(c2)INIT
 push 37
@@ -470,6 +517,10 @@ ret
 @~(c3)owner
 loadm $(c3)player
 ret
+@~(c3)point
+loadm $(c3)x
+loadm $(c3)y
+ret
 @~(c4)INIT
 push 12
 storem $(c4)x
@@ -511,6 +562,10 @@ pull
 ret
 @~(c4)owner
 loadm $(c4)player
+ret
+@~(c4)point
+loadm $(c4)x
+loadm $(c4)y
 ret
 @~(c5)INIT
 push 37
@@ -596,6 +651,10 @@ ret
 @~(c6)owner
 loadm $(c6)player
 ret
+@~(c6)point
+loadm $(c6)x
+loadm $(c6)y
+ret
 @~(c7)INIT
 push 12
 storem $(c7)x
@@ -637,6 +696,10 @@ pull
 ret
 @~(c7)owner
 loadm $(c7)player
+ret
+@~(c7)point
+loadm $(c7)x
+loadm $(c7)y
 ret
 @~(c8)INIT
 push 37
@@ -721,6 +784,10 @@ pull
 ret
 @~(c9)owner
 loadm $(c9)player
+ret
+@~(c9)point
+loadm $(c9)x
+loadm $(c9)y
 ret
 @__MemAllocGlobels
 call @init_vmachine

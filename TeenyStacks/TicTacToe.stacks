@@ -20,6 +20,9 @@ DEFINE
         THIS owner
             THIS player
         END
+        THIS point
+            THIS x THIS y
+        END
     END
     THING c2
         INIT 
@@ -62,6 +65,9 @@ DEFINE
         THIS owner
             THIS player
         END
+        THIS point
+            THIS x THIS y
+        END
     END
     THING c4
         INIT 
@@ -82,6 +88,9 @@ DEFINE
         END
         THIS owner
             THIS player
+        END
+        THIS point
+            THIS x THIS y
         END
     END
     THING c5
@@ -125,6 +134,9 @@ DEFINE
         THIS owner
             THIS player
         END
+        THIS point
+            THIS x THIS y
+        END
     END
     THING c7
         INIT 
@@ -145,6 +157,9 @@ DEFINE
         END
         THIS owner
             THIS player
+        END
+        THIS point
+            THIS x THIS y
         END
     END
     THING c8
@@ -187,6 +202,9 @@ DEFINE
         END
         THIS owner
             THIS player
+        END
+        THIS point
+            THIS x THIS y
         END
     END
     
@@ -247,6 +265,12 @@ DEFINE
         50 75 Turtle line
         DRAW NOW
     END
+
+    FUNCTION winner
+        Turtle goto
+        Turtle line
+        DROP
+    END
 END
 
 
@@ -300,8 +324,15 @@ grid
             END 
 
             #Check for winner here
-            c1 owner PRINT
-            c2 owner PRINT
+            c1 owner "free" != c1 owner c2 owner == == c2 owner c3 owner == == DO
+                c1 owner c1 point c3 point winner
+                GOTO done
+            END
+            c4 owner "free" != c4 owner c5 owner == == c5 owner c6 owner == == DO
+                c4 owner c4 point c6 point winner
+                GOTO done
+            END
+
 
 
             #swith player here
