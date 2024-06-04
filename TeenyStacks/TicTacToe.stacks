@@ -44,6 +44,9 @@ DEFINE
         THIS owner
             THIS player
         END
+        THIS point
+            THIS x THIS y
+        END
     END
     THING c3
         INIT 
@@ -113,6 +116,9 @@ DEFINE
         THIS owner
             THIS player
         END
+        THIS point
+            THIS x THIS y
+        END
     END
     THING c6
         INIT 
@@ -181,6 +187,9 @@ DEFINE
         END
         THIS owner
             THIS player
+        END
+        THIS point
+            THIS x THIS y
         END
     END
     THING c9
@@ -324,12 +333,39 @@ grid
             END 
 
             #Check for winner here
-            c1 owner "free" != c1 owner c2 owner == == c2 owner c3 owner == == DO
+            #Horizontaal
+            c1 owner "free" != c1 owner c2 owner == + c2 owner c3 owner == + DO
                 c1 owner c1 point c3 point winner
                 GOTO done
             END
-            c4 owner "free" != c4 owner c5 owner == == c5 owner c6 owner == == DO
+            c4 owner "free" != c4 owner c5 owner == + c5 owner c6 owner == + DO
                 c4 owner c4 point c6 point winner
+                GOTO done
+            END
+            c7 owner "free" != c7 owner c8 owner == + c8 owner c9 owner == + DO
+                c7 owner c7 point c9 point winner
+                GOTO done
+            END
+            #Vertikaal
+            c1 owner "free" != c1 owner c4 owner == + c4 owner c7 owner == + DO
+                c1 owner c1 point c7 point winner
+                GOTO done
+            END
+            c2 owner "free" != c2 owner c5 owner == + c5 owner c8 owner == + DO
+                c2 owner c2 point c8 point winner
+                GOTO done
+            END
+            c3 owner "free" != c3 owner c6 owner == + c6 owner c9 owner == + DO
+                c3 owner c3 point c9 point winner
+                GOTO done
+            END
+            #Diagnonaal
+            c1 owner "free" != c1 owner c5 owner == + c5 owner c9 owner == + DO
+                c1 owner c1 point c9 point winner
+                GOTO done
+            END
+            c3 owner "free" != c3 owner c5 owner == + c5 owner c7 owner == + DO
+                c3 owner c3 point c7 point winner
                 GOTO done
             END
 
@@ -356,3 +392,8 @@ END
 
 LABEL done
 DRAW NOW
+
+
+
+
+#  ((c7 owner "free" !=) (c7 owner c8 owner ==) +) (c8 owner c9 owner ==)) + DO

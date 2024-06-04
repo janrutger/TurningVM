@@ -86,6 +86,10 @@ ret
 @~(c2)owner
 loadm $(c2)player
 ret
+@~(c2)point
+loadm $(c2)x
+loadm $(c2)y
+ret
 @~(c3)INIT
 push 62
 storem $(c3)x
@@ -220,6 +224,10 @@ ret
 @~(c5)owner
 loadm $(c5)player
 ret
+@~(c5)point
+loadm $(c5)x
+loadm $(c5)y
+ret
 @~(c6)INIT
 push 62
 storem $(c6)x
@@ -353,6 +361,10 @@ pull
 ret
 @~(c8)owner
 loadm $(c8)player
+ret
+@~(c8)point
+loadm $(c8)x
+loadm $(c8)y
 ret
 @~(c9)INIT
 push 62

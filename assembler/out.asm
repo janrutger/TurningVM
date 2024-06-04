@@ -171,11 +171,11 @@ call @neq
 call @~(c1)owner
 call @~(c2)owner
 call @eq
-call @eq
+call @plus
 call @~(c2)owner
 call @~(c3)owner
 call @eq
-call @eq
+call @plus
 loada
 testz
 clra
@@ -192,11 +192,11 @@ call @neq
 call @~(c4)owner
 call @~(c5)owner
 call @eq
-call @eq
+call @plus
 call @~(c5)owner
 call @~(c6)owner
 call @eq
-call @eq
+call @plus
 loada
 testz
 clra
@@ -207,6 +207,132 @@ call @~(c6)point
 call @~winner
 jump :done
 :_55_do_end
+call @~(c7)owner
+push 'free'
+call @neq
+call @~(c7)owner
+call @~(c8)owner
+call @eq
+call @plus
+call @~(c8)owner
+call @~(c9)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_56_do_end
+call @~(c7)owner
+call @~(c7)point
+call @~(c9)point
+call @~winner
+jump :done
+:_56_do_end
+call @~(c1)owner
+push 'free'
+call @neq
+call @~(c1)owner
+call @~(c4)owner
+call @eq
+call @plus
+call @~(c4)owner
+call @~(c7)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_57_do_end
+call @~(c1)owner
+call @~(c1)point
+call @~(c7)point
+call @~winner
+jump :done
+:_57_do_end
+call @~(c2)owner
+push 'free'
+call @neq
+call @~(c2)owner
+call @~(c5)owner
+call @eq
+call @plus
+call @~(c5)owner
+call @~(c8)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_58_do_end
+call @~(c2)owner
+call @~(c2)point
+call @~(c8)point
+call @~winner
+jump :done
+:_58_do_end
+call @~(c3)owner
+push 'free'
+call @neq
+call @~(c3)owner
+call @~(c6)owner
+call @eq
+call @plus
+call @~(c6)owner
+call @~(c9)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_59_do_end
+call @~(c3)owner
+call @~(c3)point
+call @~(c9)point
+call @~winner
+jump :done
+:_59_do_end
+call @~(c1)owner
+push 'free'
+call @neq
+call @~(c1)owner
+call @~(c5)owner
+call @eq
+call @plus
+call @~(c5)owner
+call @~(c9)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_60_do_end
+call @~(c1)owner
+call @~(c1)point
+call @~(c9)point
+call @~winner
+jump :done
+:_60_do_end
+call @~(c3)owner
+push 'free'
+call @neq
+call @~(c3)owner
+call @~(c5)owner
+call @eq
+call @plus
+call @~(c5)owner
+call @~(c7)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_61_do_end
+call @~(c3)owner
+call @~(c3)point
+call @~(c7)point
+call @~winner
+jump :done
+:_61_do_end
 loadm $player
 call @dup
 push 'playX'
@@ -214,22 +340,22 @@ call @eq
 loada
 testz
 clra
-jumpf :_57_do_end
+jumpf :_63_do_end
 pull
 push 'playO'
 storem $player
 push 'input\_playerO'
 call @char2prtbuff
 call @printbuff
-jump :_56_match_end
-:_57_do_end
+jump :_62_match_end
+:_63_do_end
 push 'playX'
 storem $player
 push 'input\_playerX'
 call @char2prtbuff
 call @printbuff
 pull
-:_56_match_end
+:_62_match_end
 push 1
 loadm $steps
 call @plus
@@ -242,13 +368,13 @@ call @eq
 loada
 testz
 clra
-jumpf :_58_do_end
+jumpf :_64_do_end
 pull
 push 'Invalid\_move'
 call @char2prtbuff
 call @printbuff
 jump :_50_match_end
-:_58_do_end
+:_64_do_end
 pull
 :_50_match_end
 jump :_38_condition_start
@@ -475,6 +601,10 @@ ret
 @~(c2)owner
 loadm $(c2)player
 ret
+@~(c2)point
+loadm $(c2)x
+loadm $(c2)y
+ret
 @~(c3)INIT
 push 62
 storem $(c3)x
@@ -609,6 +739,10 @@ ret
 @~(c5)owner
 loadm $(c5)player
 ret
+@~(c5)point
+loadm $(c5)x
+loadm $(c5)y
+ret
 @~(c6)INIT
 push 62
 storem $(c6)x
@@ -742,6 +876,10 @@ pull
 ret
 @~(c8)owner
 loadm $(c8)player
+ret
+@~(c8)point
+loadm $(c8)x
+loadm $(c8)y
 ret
 @~(c9)INIT
 push 62
