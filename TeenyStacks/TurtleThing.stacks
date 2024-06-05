@@ -105,7 +105,7 @@ DEFINE
                 ON THIS x DO >                  # West (left side)
                     THIS targetY MATCH
                         ON THIS y DO >          # WS (west South)
-                        "West South" SHOW
+                        #"West South" SHOW
                             THIS slope MATCH
                                 ON THIS high DO < 
                                     180 AS THIS angle
@@ -151,7 +151,7 @@ DEFINE
                         END
 
                         ON THIS y DO <          # WN (West North)   
-                        "West North" SHOW
+                        #"West North" SHOW
                             THIS slope MATCH
                                 ON THIS high DO < 
                                     0 AS THIS angle
@@ -205,7 +205,7 @@ DEFINE
                 ON THIS x DO <                  # East (right side)
                     THIS targetY MATCH
                         ON THIS y DO >              # ES (East-South)
-                        "East South" SHOW
+                        #"East South" SHOW
                         #THIS slope PRINT
                             THIS slope MATCH
                                 ON THIS high DO < 
@@ -251,7 +251,7 @@ DEFINE
                             END
                         END
                         ON THIS y DO <              # EN (East-North)
-                            "East North" SHOW
+                            #"East North" SHOW
                             THIS slope MATCH
                                 ON THIS high DO < 
                                     0 AS THIS angle
@@ -296,7 +296,7 @@ DEFINE
                             END
                         END
                         NO                        # East
-                            "East" SHOW 
+                            #"East" SHOW 
                             90 AS THIS angle
                             THIS move
                         END
@@ -305,12 +305,12 @@ DEFINE
                 NO
                    THIS targetY MATCH 
                         ON THIS y DO >              # South
-                            "South" SHOW
+                            #"South" SHOW
                             180 AS THIS angle
                             THIS move
                         END
                         ON THIS y DO <              # North
-                            "North" SHOW
+                            #"North" SHOW
                             0 AS THIS angle
                             THIS move
                         END

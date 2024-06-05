@@ -233,8 +233,12 @@ DEFINE
     DRAW
 
     FUNCTION circle
+        ARRAY cursor
+        SWAP
+        2 + AS [cursor]
+        2 - AS [cursor]
+        1 [cursor] 2 [cursor] Turtle goto
         0 AS start
-        Turtle goto
         {start 360 >} DO
             Turtle move
             45 Turtle right
@@ -249,10 +253,10 @@ DEFINE
         SWAP
         . AS [cursor]
         . AS [cursor]
-        1 [cursor]     2 [cursor] Turtle goto
-        1 [cursor] 5 + 2 [cursor] 5 - Turtle line
-        1 [cursor] 5 + 2 [cursor] Turtle goto
-        1 [cursor]     2 [cursor] 5 - Turtle line
+        1 [cursor] 3 - 2 [cursor] 3 + Turtle goto
+        1 [cursor] 2 + 2 [cursor] 2 - Turtle line
+        1 [cursor] 2 + 2 [cursor] 3 + Turtle goto
+        1 [cursor] 3 - 2 [cursor] 2 - Turtle line
         DRAW NOW
     END
 

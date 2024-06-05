@@ -26,7 +26,7 @@ class MMU:
                 self.symbolTable[info[0]] = len(self.memory)
             else:
                 self.memory.append(line)
-        print(self.memory)
+        print(len(self.memory))
 
     def initMem(self):
         self.memory = []

@@ -9,14 +9,14 @@ call @char2prtbuff
 call @printbuff
 push 0
 storem $steps
-:_38_condition_start
+:_40_condition_start
 loadm $steps
 push 9
 call @neq
 loada
 testz
 clra
-jumpf :_38_repeat_end
+jumpf :_40_repeat_end
 call @input
 call @dup
 push 1
@@ -24,38 +24,14 @@ call @eq
 loada
 testz
 clra
-jumpf :_40_do_end
-pull
-loadm $player
-call @~(c1)take
-jump :_39_match_end
-:_40_do_end
-call @dup
-push 2
-call @eq
-loada
-testz
-clra
-jumpf :_41_do_end
-pull
-loadm $player
-call @~(c2)take
-jump :_39_match_end
-:_41_do_end
-call @dup
-push 3
-call @eq
-loada
-testz
-clra
 jumpf :_42_do_end
 pull
 loadm $player
-call @~(c3)take
-jump :_39_match_end
+call @~(c1)take
+jump :_41_match_end
 :_42_do_end
 call @dup
-push 4
+push 2
 call @eq
 loada
 testz
@@ -63,11 +39,11 @@ clra
 jumpf :_43_do_end
 pull
 loadm $player
-call @~(c4)take
-jump :_39_match_end
+call @~(c2)take
+jump :_41_match_end
 :_43_do_end
 call @dup
-push 5
+push 3
 call @eq
 loada
 testz
@@ -75,11 +51,11 @@ clra
 jumpf :_44_do_end
 pull
 loadm $player
-call @~(c5)take
-jump :_39_match_end
+call @~(c3)take
+jump :_41_match_end
 :_44_do_end
 call @dup
-push 6
+push 4
 call @eq
 loada
 testz
@@ -87,11 +63,11 @@ clra
 jumpf :_45_do_end
 pull
 loadm $player
-call @~(c6)take
-jump :_39_match_end
+call @~(c4)take
+jump :_41_match_end
 :_45_do_end
 call @dup
-push 7
+push 5
 call @eq
 loada
 testz
@@ -99,11 +75,11 @@ clra
 jumpf :_46_do_end
 pull
 loadm $player
-call @~(c7)take
-jump :_39_match_end
+call @~(c5)take
+jump :_41_match_end
 :_46_do_end
 call @dup
-push 8
+push 6
 call @eq
 loada
 testz
@@ -111,11 +87,11 @@ clra
 jumpf :_47_do_end
 pull
 loadm $player
-call @~(c8)take
-jump :_39_match_end
+call @~(c6)take
+jump :_41_match_end
 :_47_do_end
 call @dup
-push 9
+push 7
 call @eq
 loada
 testz
@@ -123,22 +99,33 @@ clra
 jumpf :_48_do_end
 pull
 loadm $player
-call @~(c9)take
-jump :_39_match_end
+call @~(c7)take
+jump :_41_match_end
 :_48_do_end
 call @dup
-push 0
+push 8
 call @eq
 loada
 testz
 clra
 jumpf :_49_do_end
 pull
-jump :done
-jump :_39_match_end
+loadm $player
+call @~(c8)take
+jump :_41_match_end
 :_49_do_end
+call @dup
+push 9
+call @eq
+loada
+testz
+clra
+jumpf :_50_do_end
 pull
-:_39_match_end
+loadm $player
+call @~(c9)take
+jump :_41_match_end
+:_50_do_end
 call @dup
 push 0
 call @eq
@@ -147,24 +134,37 @@ testz
 clra
 jumpf :_51_do_end
 pull
+jump :done
+jump :_41_match_end
+:_51_do_end
+pull
+:_41_match_end
+call @dup
+push 0
+call @eq
+loada
+testz
+clra
+jumpf :_53_do_end
+pull
 loadm $player
 push 'playX'
 call @eq
 loada
 testz
 clra
-jumpf :_52_do_end
+jumpf :_54_do_end
 call @~cross
-:_52_do_end
+:_54_do_end
 loadm $player
 push 'playO'
 call @eq
 loada
 testz
 clra
-jumpf :_53_do_end
+jumpf :_55_do_end
 call @~circle
-:_53_do_end
+:_55_do_end
 call @~(c1)owner
 push 'free'
 call @neq
@@ -174,60 +174,60 @@ call @eq
 call @plus
 call @~(c2)owner
 call @~(c3)owner
-call @eq
-call @plus
-loada
-testz
-clra
-jumpf :_54_do_end
-call @~(c1)owner
-call @~(c1)point
-call @~(c3)point
-call @~winner
-jump :done
-:_54_do_end
-call @~(c4)owner
-push 'free'
-call @neq
-call @~(c4)owner
-call @~(c5)owner
-call @eq
-call @plus
-call @~(c5)owner
-call @~(c6)owner
-call @eq
-call @plus
-loada
-testz
-clra
-jumpf :_55_do_end
-call @~(c4)owner
-call @~(c4)point
-call @~(c6)point
-call @~winner
-jump :done
-:_55_do_end
-call @~(c7)owner
-push 'free'
-call @neq
-call @~(c7)owner
-call @~(c8)owner
-call @eq
-call @plus
-call @~(c8)owner
-call @~(c9)owner
 call @eq
 call @plus
 loada
 testz
 clra
 jumpf :_56_do_end
+call @~(c1)owner
+call @~(c1)point
+call @~(c3)point
+call @~winner
+jump :done
+:_56_do_end
+call @~(c4)owner
+push 'free'
+call @neq
+call @~(c4)owner
+call @~(c5)owner
+call @eq
+call @plus
+call @~(c5)owner
+call @~(c6)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_57_do_end
+call @~(c4)owner
+call @~(c4)point
+call @~(c6)point
+call @~winner
+jump :done
+:_57_do_end
+call @~(c7)owner
+push 'free'
+call @neq
+call @~(c7)owner
+call @~(c8)owner
+call @eq
+call @plus
+call @~(c8)owner
+call @~(c9)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_58_do_end
 call @~(c7)owner
 call @~(c7)point
 call @~(c9)point
 call @~winner
 jump :done
-:_56_do_end
+:_58_do_end
 call @~(c1)owner
 push 'free'
 call @neq
@@ -242,13 +242,13 @@ call @plus
 loada
 testz
 clra
-jumpf :_57_do_end
+jumpf :_59_do_end
 call @~(c1)owner
 call @~(c1)point
 call @~(c7)point
 call @~winner
 jump :done
-:_57_do_end
+:_59_do_end
 call @~(c2)owner
 push 'free'
 call @neq
@@ -263,52 +263,10 @@ call @plus
 loada
 testz
 clra
-jumpf :_58_do_end
+jumpf :_60_do_end
 call @~(c2)owner
 call @~(c2)point
 call @~(c8)point
-call @~winner
-jump :done
-:_58_do_end
-call @~(c3)owner
-push 'free'
-call @neq
-call @~(c3)owner
-call @~(c6)owner
-call @eq
-call @plus
-call @~(c6)owner
-call @~(c9)owner
-call @eq
-call @plus
-loada
-testz
-clra
-jumpf :_59_do_end
-call @~(c3)owner
-call @~(c3)point
-call @~(c9)point
-call @~winner
-jump :done
-:_59_do_end
-call @~(c1)owner
-push 'free'
-call @neq
-call @~(c1)owner
-call @~(c5)owner
-call @eq
-call @plus
-call @~(c5)owner
-call @~(c9)owner
-call @eq
-call @plus
-loada
-testz
-clra
-jumpf :_60_do_end
-call @~(c1)owner
-call @~(c1)point
-call @~(c9)point
 call @~winner
 jump :done
 :_60_do_end
@@ -316,11 +274,11 @@ call @~(c3)owner
 push 'free'
 call @neq
 call @~(c3)owner
-call @~(c5)owner
+call @~(c6)owner
 call @eq
 call @plus
-call @~(c5)owner
-call @~(c7)owner
+call @~(c6)owner
+call @~(c9)owner
 call @eq
 call @plus
 loada
@@ -329,10 +287,52 @@ clra
 jumpf :_61_do_end
 call @~(c3)owner
 call @~(c3)point
-call @~(c7)point
+call @~(c9)point
 call @~winner
 jump :done
 :_61_do_end
+call @~(c1)owner
+push 'free'
+call @neq
+call @~(c1)owner
+call @~(c5)owner
+call @eq
+call @plus
+call @~(c5)owner
+call @~(c9)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_62_do_end
+call @~(c1)owner
+call @~(c1)point
+call @~(c9)point
+call @~winner
+jump :done
+:_62_do_end
+call @~(c3)owner
+push 'free'
+call @neq
+call @~(c3)owner
+call @~(c5)owner
+call @eq
+call @plus
+call @~(c5)owner
+call @~(c7)owner
+call @eq
+call @plus
+loada
+testz
+clra
+jumpf :_63_do_end
+call @~(c3)owner
+call @~(c3)point
+call @~(c7)point
+call @~winner
+jump :done
+:_63_do_end
 loadm $player
 call @dup
 push 'playX'
@@ -340,61 +340,79 @@ call @eq
 loada
 testz
 clra
-jumpf :_63_do_end
+jumpf :_65_do_end
 pull
 push 'playO'
 storem $player
 push 'input\_playerO'
 call @char2prtbuff
 call @printbuff
-jump :_62_match_end
-:_63_do_end
+jump :_64_match_end
+:_65_do_end
 push 'playX'
 storem $player
 push 'input\_playerX'
 call @char2prtbuff
 call @printbuff
 pull
-:_62_match_end
+:_64_match_end
 push 1
 loadm $steps
 call @plus
 storem $steps
-jump :_50_match_end
-:_51_do_end
+jump :_52_match_end
+:_53_do_end
 call @dup
 push 1
 call @eq
 loada
 testz
 clra
-jumpf :_64_do_end
+jumpf :_66_do_end
 pull
 push 'Invalid\_move'
 call @char2prtbuff
 call @printbuff
-jump :_50_match_end
-:_64_do_end
+jump :_52_match_end
+:_66_do_end
 pull
-:_50_match_end
-jump :_38_condition_start
-:_38_repeat_end
+:_52_match_end
+jump :_40_condition_start
+:_40_repeat_end
 :done
 call @drawBuff
 prttimer 0
 ret
 @~circle
+array *cursor
+call @swap
+push 2
+call @plus
+storem *cursor
+push 2
+call @minus
+storem *cursor
+push 1
+readelm *cursor
+jumpt :_27_readelm_done
+call @__illegal_Array_Index
+:_27_readelm_done
+push 2
+readelm *cursor
+jumpt :_28_readelm_done
+call @__illegal_Array_Index
+:_28_readelm_done
+call @~(Turtle)goto
 push 0
 storem $start
-call @~(Turtle)goto
-:_27_condition_start
+:_29_condition_start
 loadm $start
 push 360
 call @gt
 loada
 testz
 clra
-jumpf :_27_repeat_end
+jumpf :_29_repeat_end
 call @~(Turtle)move
 push 45
 call @~(Turtle)right
@@ -403,8 +421,8 @@ loadm $start
 push 45
 call @plus
 storem $start
-jump :_27_condition_start
-:_27_repeat_end
+jump :_29_condition_start
+:_29_repeat_end
 call @drawBuff
 ret
 @~cross
@@ -414,54 +432,62 @@ storem *cursor
 storem *cursor
 push 1
 readelm *cursor
-jumpt :_28_readelm_done
-call @__illegal_Array_Index
-:_28_readelm_done
-push 2
-readelm *cursor
-jumpt :_29_readelm_done
-call @__illegal_Array_Index
-:_29_readelm_done
-call @~(Turtle)goto
-push 1
-readelm *cursor
 jumpt :_30_readelm_done
 call @__illegal_Array_Index
 :_30_readelm_done
-push 5
-call @plus
+push 3
+call @minus
 push 2
 readelm *cursor
 jumpt :_31_readelm_done
 call @__illegal_Array_Index
 :_31_readelm_done
-push 5
-call @minus
-call @~(Turtle)line
+push 3
+call @plus
+call @~(Turtle)goto
 push 1
 readelm *cursor
 jumpt :_32_readelm_done
 call @__illegal_Array_Index
 :_32_readelm_done
-push 5
+push 2
 call @plus
 push 2
 readelm *cursor
 jumpt :_33_readelm_done
 call @__illegal_Array_Index
 :_33_readelm_done
-call @~(Turtle)goto
+push 2
+call @minus
+call @~(Turtle)line
 push 1
 readelm *cursor
 jumpt :_34_readelm_done
 call @__illegal_Array_Index
 :_34_readelm_done
 push 2
+call @plus
+push 2
 readelm *cursor
 jumpt :_35_readelm_done
 call @__illegal_Array_Index
 :_35_readelm_done
-push 5
+push 3
+call @plus
+call @~(Turtle)goto
+push 1
+readelm *cursor
+jumpt :_36_readelm_done
+call @__illegal_Array_Index
+:_36_readelm_done
+push 3
+call @minus
+push 2
+readelm *cursor
+jumpt :_37_readelm_done
+call @__illegal_Array_Index
+:_37_readelm_done
+push 2
 call @minus
 call @~(Turtle)line
 call @drawBuff
@@ -473,14 +499,14 @@ push 0
 call @draw
 push 1
 readelm *size
-jumpt :_36_readelm_done
+jumpt :_38_readelm_done
 call @__illegal_Array_Index
-:_36_readelm_done
+:_38_readelm_done
 push 2
 readelm *size
-jumpt :_37_readelm_done
+jumpt :_39_readelm_done
 call @__illegal_Array_Index
-:_37_readelm_done
+:_39_readelm_done
 call @draw
 push 5
 push 25
