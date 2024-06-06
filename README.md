@@ -21,7 +21,7 @@ STACKS: An RPN-based Language for the TuringVM Machine
 
 The Grammer of TeenySTACKS Version 4
 
-    Version 4: Including THING object and MATCH, DRAW, SHOW instructions
+    Version 4: Including shareble THINGs and MATCH, DRAW, SHOW instructions
     Version 3: Including Array datatype and a-sync Jobs
     Version 2: Includes Functions
     Version    Initial (thanks to AZHenley)
@@ -31,20 +31,20 @@ The Grammer of TeenySTACKS Version 4
 
 
     define	::=	"DEFINE" nl
-          [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
-          
-          [ ("THING" thing nl 
-            "INIT" nl {statement} nl "END" nl
-            "THIS" function nl {statement} nl "END" nl
-            ["THIS" function nl {statement} nl "END" nl]+ 
-            "END" nl)+]
+            [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
+            
+            [ ("THING" thing nl 
+              "INIT" nl {statement} nl "END" nl
+              "THIS" function nl {statement} nl "END" nl
+              ["THIS" function nl {statement} nl "END" nl]+ 
+              "END" nl)+]
 
-          [ ("USE" thing nl)+]
+            [ ("USE" thing nl)+]
 
-          [ "DRAW" ] nl				
-          [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
-          [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
-        "END" nl
+            [ "DRAW" ] nl				
+            [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+            [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+          "END" nl
 
 
     statement  ::=  "LABEL" label nl
