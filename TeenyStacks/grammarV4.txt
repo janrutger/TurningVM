@@ -11,7 +11,7 @@ define	::=	"DEFINE" nl
 				["THIS" function nl {statement} nl "END" nl]+ 
 			   "END" nl)+]
 
-			[ (USE thing nl)+]
+			[ ("USE" thing nl)+]
 
 			[ "DRAW" ] nl				
 			[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
@@ -21,6 +21,9 @@ define	::=	"DEFINE" nl
 
 statement  ::=  "LABEL" label nl
 			|   "GOTO"  label nl
+
+			|   "USE"   thing nl
+			
 			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
 			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
 			|   "ARRAY" [“THIS”] array ['['(INTEGER)+']'] nl
@@ -62,6 +65,8 @@ thing      ::=  ident
 tos        ::=	('.'|'..')
 nl         ::= '\n'+
 ident      ::= [a-zA-Z][a-zA-Z0-9]*
+
+comment_line ::= "#" (ident)+ nl
 
 
 

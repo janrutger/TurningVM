@@ -5,7 +5,7 @@ DEFINE
     ARRAY Ltemp
     ARRAY newF
     
-    USE Turtle
+    
 
     #DRAW
 
@@ -43,6 +43,7 @@ DEFINE
 
 END
 
+USE Turtle
 
 ARRAY Lresult
 "F" AS [Lresult]

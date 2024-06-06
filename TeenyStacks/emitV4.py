@@ -7,6 +7,7 @@ class Emitter:
         self.code = ""
         self.functions = ""
         self.things = ""
+        self.things += "# Start of THINGS" + '\n'
         self.allocGLOBELS = ""
         self.context = "program"
 
