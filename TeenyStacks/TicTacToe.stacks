@@ -220,15 +220,7 @@ DEFINE
 
 
     USE Turtle
-    USE c1
-    USE c2
-    USE c3
-    USE c4
-    USE c5
-    USE c6
-    USE c7
-    USE c8
-    USE c9
+    
 
     DRAW
 
@@ -265,16 +257,16 @@ DEFINE
         0 0 DRAW
         1 [size] 2 [size] DRAW
 
-         5 25 Turtle goto
+         0 25 Turtle goto
         75 25 Turtle line
 
-        25  5 Turtle goto
+        25  0 Turtle goto
         25 75 Turtle line
 
-         5 50 Turtle goto
+         0 50 Turtle goto
         75 50 Turtle line
 
-        50  5 Turtle goto
+        50  0 Turtle goto
         50 75 Turtle line
         DRAW NOW
     END
@@ -286,6 +278,15 @@ DEFINE
     END
 END
 
+USE c1
+USE c2
+USE c3
+USE c4
+USE c5
+USE c6
+USE c7
+USE c8
+USE c9
 
 grid
 

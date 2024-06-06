@@ -33,6 +33,9 @@ class Emitter:
         with open(self.fullPath, 'w') as outputFile:
             outputFile.write(self.header + self.code + self.functions + self.things + self.allocGLOBELS)
         
-        if self.things != "":
-            with open(self.fullPathThing, 'w') as outputFile:
-                outputFile.write(self.things)
+        # if self.things != "":
+        #     with open(self.fullPathThing, 'w') as outputFile:
+        #         outputFile.write(self.things)
+
+        with open(self.fullPathThing, 'w') as outputFile:
+            outputFile.write(self.things)

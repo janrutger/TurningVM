@@ -1,6 +1,15 @@
 @main
 settimer 0
 speed 0
+call @~(c1)INIT
+call @~(c2)INIT
+call @~(c3)INIT
+call @~(c4)INIT
+call @~(c5)INIT
+call @~(c6)INIT
+call @~(c7)INIT
+call @~(c8)INIT
+call @~(c9)INIT
 call @~grid
 push 'playX'
 storem $player
@@ -508,26 +517,26 @@ jumpt :_39_readelm_done
 call @__illegal_Array_Index
 :_39_readelm_done
 call @draw
-push 5
+push 0
 push 25
 call @~(Turtle)goto
 push 75
 push 25
 call @~(Turtle)line
 push 25
-push 5
+push 0
 call @~(Turtle)goto
 push 25
 push 75
 call @~(Turtle)line
-push 5
+push 0
 push 50
 call @~(Turtle)goto
 push 75
 push 50
 call @~(Turtle)line
 push 50
-push 5
+push 0
 call @~(Turtle)goto
 push 50
 push 75
@@ -961,15 +970,6 @@ storem *size
 push 80
 storem *size
 call @~(Turtle)INIT
-call @~(c1)INIT
-call @~(c2)INIT
-call @~(c3)INIT
-call @~(c4)INIT
-call @~(c5)INIT
-call @~(c6)INIT
-call @~(c7)INIT
-call @~(c8)INIT
-call @~(c9)INIT
 push 0
 call @drawRate
 ret

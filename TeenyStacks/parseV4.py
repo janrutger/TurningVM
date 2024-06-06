@@ -322,6 +322,20 @@ class Parser:
             self.match(TokenType.IDENT)
             self.nl() 
 
+        # USE thing nl 
+        elif self.checkToken(TokenType.USE):
+            self.match(TokenType.USE)
+            if self.isFreeSymbol(self.curToken.text):
+                self.things.add(self.curToken.text)
+            if self.curToken.text in self.things:
+                self.emitter.headerLine(
+                    "call @~(" + self.curToken.text + ")INIT")
+                self.match(TokenType.IDENT)
+                self.nl()
+            else:
+                self.abort(
+                    "Already in use as a variable, job or function: " + self.curToken.text)
+
         # | "TIMER" INTEGER("SET" | "PRINT" | "GET")
         elif self.checkToken(TokenType.TIMER):
             self.nextToken()
