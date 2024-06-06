@@ -34,8 +34,8 @@ The Grammer of TeenySTACKS Version 4
               [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
               
               [ ("THING" thing nl 
-                "INIT" nl {statement} nl "END" nl
-                "THIS" function nl {statement} nl "END" nl
+                 "INIT"          nl {statement} nl "END" nl
+                 "THIS" function nl {statement} nl "END" nl
                 ["THIS" function nl {statement} nl "END" nl]+ 
                 "END" nl)+]
 
