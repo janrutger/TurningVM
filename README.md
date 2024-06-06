@@ -31,20 +31,20 @@ The Grammer of TeenySTACKS Version 4
 
 
     define	::=	"DEFINE" nl
-            [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
-            
-            [ ("THING" thing nl 
-              "INIT" nl {statement} nl "END" nl
-              "THIS" function nl {statement} nl "END" nl
-              ["THIS" function nl {statement} nl "END" nl]+ 
-              "END" nl)+]
+              [ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
+              
+              [ ("THING" thing nl 
+                "INIT" nl {statement} nl "END" nl
+                "THIS" function nl {statement} nl "END" nl
+                ["THIS" function nl {statement} nl "END" nl]+ 
+                "END" nl)+]
 
-            [ ("USE" thing nl)+]
+              [ ("USE" thing nl)+]
 
-            [ "DRAW" ] nl				
-            [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
-            [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
-          "END" nl
+              [ "DRAW" ] nl				
+              [ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+              [ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+            "END" nl
 
 
     statement  ::=  "LABEL" label nl
