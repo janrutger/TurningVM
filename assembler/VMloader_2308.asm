@@ -10,7 +10,7 @@ nop
 nop
 
 @init_vmachine
-    speed 10
+    speed 5
     clra
     clrb
     iobuff %_plotter
@@ -27,7 +27,6 @@ nop
     storem $_cRandom
     push 65536
     storem $_mRandom
-    speed 200
 ret
 
 @plus

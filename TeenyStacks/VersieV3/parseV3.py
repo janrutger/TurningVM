@@ -1,5 +1,5 @@
 import sys
-from lexV3 import *
+from TeenyStacks.VersieV3.lexV3 import *
 
 # Parser object keeps track of current token and checks if the code matches the grammar.
 class Parser:

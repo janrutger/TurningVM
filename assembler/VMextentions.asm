@@ -9,6 +9,23 @@ ret
   movea
 ret
 
+@diff
+    loada
+    loadb
+    testg
+    jumpt :_diff_01
+    moveb
+    movea
+    jump :_diff_02
+    :_diff_01
+    movea
+    moveb
+    :_diff_02
+    sub
+    moveb
+    clra
+ret
+
 
 @input 
     :_input_loop
@@ -51,6 +68,42 @@ ret
     :klaar_plotarray
     output %_plotter
     clrb
+ret
+
+@drawNew
+    iobuff %_xygraph
+ret
+
+@drawRate
+    settimer 2
+    gettimer 2
+    storem $_lastRefresh
+    storem $_refreshRate
+ret
+
+
+@draw
+    storem %_xygraph
+    storem %_xygraph
+    gettimer 2
+    loadm $_lastRefresh
+    call @minus
+    loadm $_refreshRate
+    call @lt
+    loada
+    testz
+    clra
+    jumpf :_draw_end
+        output %_xygraph
+        gettimer 2
+        push 1
+        call @minus
+        storem $_lastRefresh
+    :_draw_end
+ret
+
+@drawBuff
+    output %_xygraph
 ret
 
 @char2prtbuff
@@ -169,7 +222,8 @@ ret
 halt
 
 @__MemAllocGlobels
-    push 'No\_globel\_mem\_config\_found'
+    call @init_vmachine
+    push 'mem\_configuration\_definition\_not\_defined'
     call @char2prtbuff
     call @printbuff
 halt

@@ -1,0 +1,142 @@
+DEFINE
+    ARRAY size [160 80]
+    #ARRAY size [640 320]
+
+    VALUE x 1
+    VALUE y 2
+
+    USE Turtle
+END
+
+
+
+
+0 DRAW RATE 
+DRAW NEW
+
+0 0 DRAW 
+1 [size] 2 [size] DRAW
+DRAW NEW
+0 0 Turtle goto
+
+ARRAY P3 [30 30]
+ARRAY P2 [50 10]
+ARRAY P1 [10 10]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [80 45]
+ARRAY P2 [100 10]
+ARRAY P1 [60 10]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [130 55]
+ARRAY P2 [150 10]
+ARRAY P1 [110 10]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [30 30]
+ARRAY P2 [50 75]
+ARRAY P1 [10 75]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+ARRAY P3 [80 45]
+ARRAY P2 [100 75]
+ARRAY P1 [60 75]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+ARRAY P3 [130 55]
+ARRAY P2 [150 75]
+ARRAY P1 [110 75]
+
+    x [P3] y [P3] Turtle goto
+    x [P2] y [P2] Turtle goto
+    x [P1] y [P1] Turtle goto
+
+    DRAW NOW
+
+    x [P2] y [P2] Turtle line
+    x [P3] y [P3] Turtle line
+    x [P1] y [P1] Turtle line
+
+    DRAW NOW
+
+
+
+
+#159 79 Turtle goto
+# 10 10 Turtle goto
+#159 79 Turtle line
+
+#30 70 Turtle goto
+#10 10 Turtle goto
+#30 70 Turtle line
+
+
+DRAW NOW
+
+
+
+
+
+
+
+

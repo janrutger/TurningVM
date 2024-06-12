@@ -1,0 +1,404 @@
+DEFINE
+    ARRAY size [160 80]
+    THING c1
+        INIT 
+            12 AS THIS x 
+            12 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c2
+        INIT 
+            37 AS THIS x 
+            12 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c3
+        INIT 
+            62 AS THIS x 
+            12 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c4
+        INIT 
+            12 AS THIS x 
+            37 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c5
+        INIT 
+            37 AS THIS x 
+            37 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c6
+        INIT 
+            62 AS THIS x 
+            37 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c7
+        INIT 
+            12 AS THIS x 
+            62 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c8
+        INIT 
+            37 AS THIS x 
+            62 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    THING c9
+        INIT 
+            62 AS THIS x 
+            62 AS THIS y
+            "free" AS THIS player
+        END
+        THIS take
+            THIS player MATCH
+                ON "free" DO ==
+                    . AS THIS player
+                    THIS x THIS y 0
+                END
+                ON "free" DO !=
+                    DROP 1
+                END
+            END
+        END
+        THIS owner
+            THIS player
+        END
+        THIS point
+            THIS x THIS y
+        END
+    END
+    
+
+
+    USE Turtle
+    
+
+    DRAW
+
+    FUNCTION circle
+        ARRAY cursor
+        SWAP
+        2 + AS [cursor]
+        2 - AS [cursor]
+        1 [cursor] 2 [cursor] Turtle goto
+        0 AS start
+        {start 360 >} DO
+            Turtle move
+            45 Turtle right
+            Turtle move
+            start 45 + AS start
+        END
+        DRAW NOW
+    END
+
+    FUNCTION cross
+        ARRAY cursor
+        SWAP
+        . AS [cursor]
+        . AS [cursor]
+        1 [cursor] 3 - 2 [cursor] 3 + Turtle goto
+        1 [cursor] 2 + 2 [cursor] 2 - Turtle line
+        1 [cursor] 2 + 2 [cursor] 3 + Turtle goto
+        1 [cursor] 3 - 2 [cursor] 2 - Turtle line
+        DRAW NOW
+    END
+
+    FUNCTION grid
+        DRAW NEW
+        0 0 DRAW
+        1 [size] 2 [size] DRAW
+
+         0 25 Turtle goto
+        75 25 Turtle line
+
+        25  0 Turtle goto
+        25 75 Turtle line
+
+         0 50 Turtle goto
+        75 50 Turtle line
+
+        50  0 Turtle goto
+        50 75 Turtle line
+        DRAW NOW
+    END
+
+    FUNCTION winner
+        Turtle goto
+        Turtle line
+        DROP
+    END
+END
+
+USE c1
+USE c2
+USE c3
+USE c4
+USE c5
+USE c6
+USE c7
+USE c8
+USE c9
+
+grid
+
+"playX" AS player
+"input playerX" SHOW
+0 AS steps
+
+{steps 9 !=} DO    
+    INPUT MATCH
+        ON 1 DO
+            player c1 take
+        END
+        ON 2 DO
+            player c2 take
+        END
+        ON 3 DO
+            player c3 take
+        END
+        ON 4 DO
+            player c4 take
+        END
+        ON 5 DO
+            player c5 take
+        END
+        ON 6 DO
+            player c6 take
+        END
+        ON 7 DO
+            player c7 take
+        END
+        ON 8 DO
+            player c8 take
+        END
+        ON 9 DO
+            player c9 take
+        END
+        ON 0 DO
+            GOTO done
+        END
+    END
+
+    . MATCH
+        ON 0 DO
+            player "playX" == DO
+                cross
+            END
+            player "playO" == DO
+                circle
+            END 
+
+            #Check for winner here
+            #Horizontaal
+            c1 owner "free" != c1 owner c2 owner == + c2 owner c3 owner == + DO
+                c1 owner c1 point c3 point winner
+                GOTO done
+            END
+            c4 owner "free" != c4 owner c5 owner == + c5 owner c6 owner == + DO
+                c4 owner c4 point c6 point winner
+                GOTO done
+            END
+            c7 owner "free" != c7 owner c8 owner == + c8 owner c9 owner == + DO
+                c7 owner c7 point c9 point winner
+                GOTO done
+            END
+            #Vertikaal
+            c1 owner "free" != c1 owner c4 owner == + c4 owner c7 owner == + DO
+                c1 owner c1 point c7 point winner
+                GOTO done
+            END
+            c2 owner "free" != c2 owner c5 owner == + c5 owner c8 owner == + DO
+                c2 owner c2 point c8 point winner
+                GOTO done
+            END
+            c3 owner "free" != c3 owner c6 owner == + c6 owner c9 owner == + DO
+                c3 owner c3 point c9 point winner
+                GOTO done
+            END
+            #Diagnonaal
+            c1 owner "free" != c1 owner c5 owner == + c5 owner c9 owner == + DO
+                c1 owner c1 point c9 point winner
+                GOTO done
+            END
+            c3 owner "free" != c3 owner c5 owner == + c5 owner c7 owner == + DO
+                c3 owner c3 point c7 point winner
+                GOTO done
+            END
+
+
+
+            #swith player here
+            player MATCH
+                ON "playX" DO
+                    "playO" AS player
+                    "input playerO" SHOW
+                END
+                NO
+                   "playX" AS player
+                    "input playerX" SHOW 
+                END
+            END
+            1 steps + AS steps
+        END
+        ON 1 DO
+           "Invalid move" SHOW
+        END
+    END
+END
+
+LABEL done
+DRAW NOW
+
+
+
+
+#  ((c7 owner "free" !=) (c7 owner c8 owner ==) +) (c8 owner c9 owner ==)) + DO

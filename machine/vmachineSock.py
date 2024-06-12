@@ -131,7 +131,8 @@ class Machine:
 
         self.initCode = [('LIFO', '%_system'), ('CALL', '@core'), ('HALT', '')]
 
-        self.cpu0.run_rpc([('LIFO', '%_system'), ('IOBUFF', '%_display'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
+        #self.cpu0.run_rpc([('LIFO', '%_system'), ('IOBUFF', '%_display'),('IOBUFF', '%_xygraph'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
+        self.cpu0.run_rpc([('LIFO', '%_system'),('CALL', '@__MemAllocGlobels'), ('HALT', '')])
         self.memPage0 = self.cpu0.memPage()
         self.cpu0.enable_mpu(self.jobQueue, self.jobResults, 0)
 
@@ -196,7 +197,7 @@ class Machine:
     def init(self):
         # self.cpu0.run_rpc([('SPEED', 1), ('CLRA', ''), ('CLRB', ''), ('IOBUFF', '%_plotter'), ('OUTPUT', '%_plotter'), ('IOBUFF', '%_kbd'),
         #                    ('LIFO', '%_system'), ('HALT', '')])
-        self.cpu0.run_rpc([('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('HALT', '')])
+        self.cpu0.run_rpc([('LIFO', '%_system'), ('CALL', '@init_vmachine'), ('SPEED', 300), ('HALT', '')])
 
     def minus(self):
         self.cpu0.run_rpc([('CALL', '@minus'), ('HALT', '')])

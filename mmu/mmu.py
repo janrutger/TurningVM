@@ -26,7 +26,7 @@ class MMU:
                 self.symbolTable[info[0]] = len(self.memory)
             else:
                 self.memory.append(line)
-        print(self.memory)
+        print(len(self.memory))
 
     def initMem(self):
         self.memory = []
@@ -131,7 +131,7 @@ class MMU:
             else:
                 self.panic("FATAL: readElement [unknown memtype]")
         else:
-            self.panic("FATAL: readElement [unknown adress]")
+            self.panic("FATAL: readElement [unknown adress]" + adres)
 
 
 
@@ -166,7 +166,7 @@ class MMU:
                 else:
                     self.panic("FATAL: readMem [unknown memtype]")
             else:
-                self.panic("FATAL: readMem [unknown adress]")
+                self.panic("FATAL: readMem [unknown adress]" + adres)
 
     def writeMem(self, adres, memVal):
         if isinstance(adres, int):

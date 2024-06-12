@@ -13,7 +13,7 @@ ARRAY workingList
 ARRAY primeList 
 ARRAY tmp 
 
-500 AS max
+300 AS max
 2 AS start
 
 FUNCTION check4primes
