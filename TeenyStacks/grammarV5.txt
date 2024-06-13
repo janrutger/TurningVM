@@ -1,0 +1,75 @@
+
+program    ::=	[(define)] {statement}
+
+
+define	::=	"DEFINE" nl
+			[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
+
+			[ ("STRUCT" struct '[' INTEGER | (ident)+ ']')+ ]
+			
+			[ ("THING" thing nl 
+				 "INIT" nl {statement} nl "END" nl
+				 "THIS" function nl {statement} nl "END" nl
+				["THIS" function nl {statement} nl "END" nl]+ 
+			   "END" nl)+]
+			[ ("USE" thing nl)+]
+			[ "DRAW" ] nl				
+			[ ("FUNCTION" function nl {statement} nl "END" nl)+ ]
+			[ ("JOB" job "USE" (variable | array) nl {statement} nl "RETURN" (variable | array) nl)+ ]
+		"END" nl
+
+
+statement  ::=  "LABEL" label nl
+			|   "GOTO"  label nl
+			|   "USE"   thing nl
+			|   "TIMER" INTEGER ("SET" | "PRINT" | "GET") nl
+			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
+			|   "ARRAY" [“THIS”] array ['['(INTEGER)+']'] nl
+
+			|	"STRUCT" [“THIS”] struct '[' INTEGER | (ident)+ ']'
+
+			|   “QUEUE” job nl
+			|   “JOIN” nl 
+			|   “RESULT”  nl {statement} nl "END" nl
+			|   “DRAW” (“NOW” | "NEW") nl
+			|   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” [“THIS”] array | "PLOT" ["NEW"]) nl
+			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
+			|   (expression | tos) ( "PRINT" nl
+							| "PLOT"  nl
+							| “DRAW” [“RATE”] nl
+							| ¨WAIT¨  nl
+
+							| "AS" [“THIS”] (variable | '['array']' | struct '[' (INTEGER)+ | (ident)+ ']' ) nl
+
+							| “MATCH” nl 
+								  "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
+								[("ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl)+]
+								[ "NO" nl {statement} nl "END" nl]
+							  "END" nl
+							| "DO" nl {statement} nl "END" nl
+							| "GOTO" label nl
+							|  nl )
+
+expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] (variable | array | '['array']' | struct '[' (INTEGER)+ | (ident)+ ']' ) | thing function | word)+
+
+
+
+word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
+     	             		  
+label      ::=  ident
+job        ::=  ident
+array	   ::=  ident
+function   ::=  ident
+variable   ::=  ident
+thing      ::=  ident
+
+
+tos        ::=	('.'|'..')
+nl         ::= '\n'+
+ident      ::= [a-zA-Z][a-zA-Z0-9]*
+
+comment_line ::= "#" (ident)+ nl
+
+
+
+
