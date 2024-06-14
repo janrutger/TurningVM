@@ -1,3 +1,4 @@
+# Start of THINGS
 @~(Turtle)INIT
 push 0
 call @drawRate
@@ -26,6 +27,21 @@ storem $(Turtle)angle
 ret
 @~(Turtle)goto
 storem $(Turtle)y
+storem $(Turtle)x
+loadm $(Turtle)x
+loadm $(Turtle)y
+call @draw
+ret
+@~(Turtle)midway
+loadm $(Turtle)y
+call @plus
+push 2
+call @div
+storem $(Turtle)y
+loadm $(Turtle)x
+call @plus
+push 2
+call @div
 storem $(Turtle)x
 loadm $(Turtle)x
 loadm $(Turtle)y

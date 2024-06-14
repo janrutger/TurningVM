@@ -5,7 +5,7 @@ program    ::=	[(define)] {statement}
 define	::=	"DEFINE" nl
 			[ (("VALUE" variable [INTEGER] nl) | ("ARRAY" array ['['(INTEGER)+']'] nl))+ ]
 
-			[ ("STRUCT" struct '[' INTEGER | (ident)+ ']')+ ]
+			[ ("STRUCT" struct '[' INTEGER | (menber)+ ']')+ ]
 			
 			[ ("THING" thing nl 
 				 "INIT" nl {statement} nl "END" nl
@@ -26,7 +26,7 @@ statement  ::=  "LABEL" label nl
 			|   ("DEFINE" | "FUNCTION") function nl {statement} nl "END" nl
 			|   "ARRAY" [“THIS”] array ['['(INTEGER)+']'] nl
 
-			|	"STRUCT" [“THIS”] struct '[' INTEGER | (ident)+ ']'
+			|	"STRUCT" [“THIS”] struct '[' INTEGER | (member)+ ']'
 
 			|   “QUEUE” job nl
 			|   “JOIN” nl 
@@ -39,7 +39,7 @@ statement  ::=  "LABEL" label nl
 							| “DRAW” [“RATE”] nl
 							| ¨WAIT¨  nl
 
-							| "AS" [“THIS”] (variable | '['array']' | struct '[' (INTEGER)+ | (ident)+ ']' ) nl
+							| "AS" [“THIS”] (variable | '['array']' | struct '[' (INTEGER)+ | (member)+ ']' ) nl
 
 							| “MATCH” nl 
 								  "ON" (expression) "DO" ['=='|'!='|'>'|'<'] nl {statement} nl "END" nl 
@@ -50,7 +50,8 @@ statement  ::=  "LABEL" label nl
 							| "GOTO" label nl
 							|  nl )
 
-expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] (variable | array | '['array']' | struct '[' (INTEGER)+ | (ident)+ ']' ) | thing function | word)+
+
+expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] (variable | array | '['array']' | struct '[' (INTEGER)+ | (member)+ ']' ) | thing function | word)+
 
 
 
@@ -62,13 +63,18 @@ array	   ::=  ident
 function   ::=  ident
 variable   ::=  ident
 thing      ::=  ident
+struct     ::=  ident
+member     ::=  ident
 
 
 tos        ::=	('.'|'..')
 nl         ::= '\n'+
+
 ident      ::= [a-zA-Z][a-zA-Z0-9]*
 
-comment_line ::= "#" (ident)+ nl
+COMMENT		::= "#" [a-zA-Z0-9]* nl
+INTEGER		::= [0-9]*
+STRING		::= ‘“’ [a-zA-Z0-9]* ‘“’ 
 
 
 

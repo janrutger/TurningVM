@@ -25,6 +25,11 @@ DEFINE
             . AS THIS x 
             THIS x THIS y DRAW
         END
+        THIS midway
+            THIS y + 2 / AS THIS y
+            THIS x + 2 / AS THIS x 
+            THIS x THIS y DRAW
+        END
         THIS right
             THIS angle + 360 % AS THIS angle
         END

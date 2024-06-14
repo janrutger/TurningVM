@@ -1,415 +1,84 @@
 # Start of THINGS
-@~(c1)INIT
-push 12
-storem $(c1)x
-push 12
-storem $(c1)y
-push 'free'
-storem $(c1)player
+@~(Chaos)INIT
+push 0
+storem $(Chaos)P1x
+push 0
+storem $(Chaos)P1y
+push 0
+storem $(Chaos)P2x
+push 70
+storem $(Chaos)P2y
+push 70
+storem $(Chaos)P3x
+push 70
+storem $(Chaos)P3y
+push 70
+storem $(Chaos)P4x
+push 0
+storem $(Chaos)P4y
+push 1
+storem $(Chaos)cp
 ret
-@~(c1)take
-loadm $(c1)player
+@~(Chaos)corner
+call @rand
+push 3
+call @mod
+loadm $(Chaos)cp
+call @plus
+push 4
+call @mod
+push 1
+call @plus
+storem $(Chaos)cp
+loadm $(Chaos)cp
 call @dup
-push 'free'
+push 0
 call @eq
 loada
 testz
 clra
 jumpf :_1_do_end
 pull
-storem $(c1)player
-loadm $(c1)x
-loadm $(c1)y
-push 0
+loadm $(Chaos)P1x
+loadm $(Chaos)P1y
 jump :_0_match_end
 :_1_do_end
 call @dup
-push 'free'
-call @neq
+push 1
+call @eq
 loada
 testz
 clra
 jumpf :_2_do_end
 pull
-pull
-push 1
+loadm $(Chaos)P2x
+loadm $(Chaos)P2y
 jump :_0_match_end
 :_2_do_end
-pull
-:_0_match_end
-ret
-@~(c1)owner
-loadm $(c1)player
-ret
-@~(c1)point
-loadm $(c1)x
-loadm $(c1)y
-ret
-@~(c2)INIT
-push 37
-storem $(c2)x
-push 12
-storem $(c2)y
-push 'free'
-storem $(c2)player
-ret
-@~(c2)take
-loadm $(c2)player
 call @dup
-push 'free'
+push 2
+call @eq
+loada
+testz
+clra
+jumpf :_3_do_end
+pull
+loadm $(Chaos)P3x
+loadm $(Chaos)P3y
+jump :_0_match_end
+:_3_do_end
+call @dup
+push 3
 call @eq
 loada
 testz
 clra
 jumpf :_4_do_end
 pull
-storem $(c2)player
-loadm $(c2)x
-loadm $(c2)y
-push 0
-jump :_3_match_end
+loadm $(Chaos)P4x
+loadm $(Chaos)P4y
+jump :_0_match_end
 :_4_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_5_do_end
 pull
-pull
-push 1
-jump :_3_match_end
-:_5_do_end
-pull
-:_3_match_end
-ret
-@~(c2)owner
-loadm $(c2)player
-ret
-@~(c2)point
-loadm $(c2)x
-loadm $(c2)y
-ret
-@~(c3)INIT
-push 62
-storem $(c3)x
-push 12
-storem $(c3)y
-push 'free'
-storem $(c3)player
-ret
-@~(c3)take
-loadm $(c3)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_7_do_end
-pull
-storem $(c3)player
-loadm $(c3)x
-loadm $(c3)y
-push 0
-jump :_6_match_end
-:_7_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_8_do_end
-pull
-pull
-push 1
-jump :_6_match_end
-:_8_do_end
-pull
-:_6_match_end
-ret
-@~(c3)owner
-loadm $(c3)player
-ret
-@~(c3)point
-loadm $(c3)x
-loadm $(c3)y
-ret
-@~(c4)INIT
-push 12
-storem $(c4)x
-push 37
-storem $(c4)y
-push 'free'
-storem $(c4)player
-ret
-@~(c4)take
-loadm $(c4)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_10_do_end
-pull
-storem $(c4)player
-loadm $(c4)x
-loadm $(c4)y
-push 0
-jump :_9_match_end
-:_10_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_11_do_end
-pull
-pull
-push 1
-jump :_9_match_end
-:_11_do_end
-pull
-:_9_match_end
-ret
-@~(c4)owner
-loadm $(c4)player
-ret
-@~(c4)point
-loadm $(c4)x
-loadm $(c4)y
-ret
-@~(c5)INIT
-push 37
-storem $(c5)x
-push 37
-storem $(c5)y
-push 'free'
-storem $(c5)player
-ret
-@~(c5)take
-loadm $(c5)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_13_do_end
-pull
-storem $(c5)player
-loadm $(c5)x
-loadm $(c5)y
-push 0
-jump :_12_match_end
-:_13_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_14_do_end
-pull
-pull
-push 1
-jump :_12_match_end
-:_14_do_end
-pull
-:_12_match_end
-ret
-@~(c5)owner
-loadm $(c5)player
-ret
-@~(c5)point
-loadm $(c5)x
-loadm $(c5)y
-ret
-@~(c6)INIT
-push 62
-storem $(c6)x
-push 37
-storem $(c6)y
-push 'free'
-storem $(c6)player
-ret
-@~(c6)take
-loadm $(c6)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_16_do_end
-pull
-storem $(c6)player
-loadm $(c6)x
-loadm $(c6)y
-push 0
-jump :_15_match_end
-:_16_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_17_do_end
-pull
-pull
-push 1
-jump :_15_match_end
-:_17_do_end
-pull
-:_15_match_end
-ret
-@~(c6)owner
-loadm $(c6)player
-ret
-@~(c6)point
-loadm $(c6)x
-loadm $(c6)y
-ret
-@~(c7)INIT
-push 12
-storem $(c7)x
-push 62
-storem $(c7)y
-push 'free'
-storem $(c7)player
-ret
-@~(c7)take
-loadm $(c7)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_19_do_end
-pull
-storem $(c7)player
-loadm $(c7)x
-loadm $(c7)y
-push 0
-jump :_18_match_end
-:_19_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_20_do_end
-pull
-pull
-push 1
-jump :_18_match_end
-:_20_do_end
-pull
-:_18_match_end
-ret
-@~(c7)owner
-loadm $(c7)player
-ret
-@~(c7)point
-loadm $(c7)x
-loadm $(c7)y
-ret
-@~(c8)INIT
-push 37
-storem $(c8)x
-push 62
-storem $(c8)y
-push 'free'
-storem $(c8)player
-ret
-@~(c8)take
-loadm $(c8)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_22_do_end
-pull
-storem $(c8)player
-loadm $(c8)x
-loadm $(c8)y
-push 0
-jump :_21_match_end
-:_22_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_23_do_end
-pull
-pull
-push 1
-jump :_21_match_end
-:_23_do_end
-pull
-:_21_match_end
-ret
-@~(c8)owner
-loadm $(c8)player
-ret
-@~(c8)point
-loadm $(c8)x
-loadm $(c8)y
-ret
-@~(c9)INIT
-push 62
-storem $(c9)x
-push 62
-storem $(c9)y
-push 'free'
-storem $(c9)player
-ret
-@~(c9)take
-loadm $(c9)player
-call @dup
-push 'free'
-call @eq
-loada
-testz
-clra
-jumpf :_25_do_end
-pull
-storem $(c9)player
-loadm $(c9)x
-loadm $(c9)y
-push 0
-jump :_24_match_end
-:_25_do_end
-call @dup
-push 'free'
-call @neq
-loada
-testz
-clra
-jumpf :_26_do_end
-pull
-pull
-push 1
-jump :_24_match_end
-:_26_do_end
-pull
-:_24_match_end
-ret
-@~(c9)owner
-loadm $(c9)player
-ret
-@~(c9)point
-loadm $(c9)x
-loadm $(c9)y
+:_0_match_end
 ret
