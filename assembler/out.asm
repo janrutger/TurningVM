@@ -18,12 +18,12 @@ jumpt :_6_readelm_done
 call @__illegal_Array_Index
 :_6_readelm_done
 call @draw
-push 120
+push 15
 call @drawRate
 push 0
 storem $n
-push 70
-push 70
+push 300
+push 300
 call @mul
 storem $max
 array *cursor
@@ -69,13 +69,13 @@ push 0
 storem $(Chaos)P1y
 push 0
 storem $(Chaos)P2x
-push 70
+push 300
 storem $(Chaos)P2y
-push 70
+push 300
 storem $(Chaos)P3x
-push 70
+push 300
 storem $(Chaos)P3y
-push 70
+push 300
 storem $(Chaos)P4x
 push 0
 storem $(Chaos)P4y
@@ -86,12 +86,12 @@ ret
 call @rand
 push 3
 call @mod
+push 1
+call @plus
 loadm $(Chaos)cp
 call @plus
 push 4
 call @mod
-push 1
-call @plus
 storem $(Chaos)cp
 loadm $(Chaos)cp
 call @dup
@@ -148,9 +148,9 @@ ret
 @__MemAllocGlobels
 call @init_vmachine
 array *size
-push 160
+push 640
 storem *size
-push 80
+push 320
 storem *size
 push 0
 call @drawRate
