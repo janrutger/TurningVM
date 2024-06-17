@@ -4,30 +4,26 @@ push 0
 storem $(Chaos)P1x
 push 0
 storem $(Chaos)P1y
-push 0
+push 31
 storem $(Chaos)P2x
-push 300
+push 60
 storem $(Chaos)P2y
-push 300
+push 61
 storem $(Chaos)P3x
-push 300
-storem $(Chaos)P3y
-push 300
-storem $(Chaos)P4x
 push 0
-storem $(Chaos)P4y
+storem $(Chaos)P3y
 push 1
 storem $(Chaos)cp
 ret
 @~(Chaos)corner
 call @rand
-push 3
+push 2
 call @mod
 push 1
 call @plus
 loadm $(Chaos)cp
 call @plus
-push 4
+push 3
 call @mod
 storem $(Chaos)cp
 loadm $(Chaos)cp
@@ -67,18 +63,6 @@ loadm $(Chaos)P3x
 loadm $(Chaos)P3y
 jump :_0_match_end
 :_3_do_end
-call @dup
-push 3
-call @eq
-loada
-testz
-clra
-jumpf :_4_do_end
-pull
-loadm $(Chaos)P4x
-loadm $(Chaos)P4y
-jump :_0_match_end
-:_4_do_end
 pull
 :_0_match_end
 ret
