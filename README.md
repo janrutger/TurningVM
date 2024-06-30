@@ -113,7 +113,10 @@ also inspriration from:
 - Ben Eater https://youtu.be/TardkN4OGJg
 - Bens sleep https://youtu.be/g_koa00MBLg
 - Turtle https://en.wikipedia.org/wiki/Turtle_graphics
-- l-systems https://en.wikipedia.org/wiki/L-system 
+- l-systems https://en.wikipedia.org/wiki/L-system
+- Chaos game (video) https://youtu.be/kbKtFN71Lfs?si=sqZQdlHGEleEuBsc
+- Chaos game (wiki)  https://en.wikipedia.org/wiki/Chaos_game
+- eratosthenes explained https://www.youtube.com/watch?v=djzKCZHeVjY&list=LL
 - MMU https://nl.wikipedia.org/wiki/Memory_management_unit
 
 Specials

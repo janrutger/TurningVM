@@ -1,0 +1,13 @@
+LABEL begin
+    RAWIN MATCH                # Ask for input
+       ON 0 DO                 # Check it is an number
+          . PRINT              # print this number
+       END
+       ON 1 DO
+          "Its a string" SHOW  # it is't a number
+          "q" == GOTO end    # if input is an "q" jump to end
+       END        
+    END
+GOTO begin                     # Start over
+
+LABEL end                      # end of program

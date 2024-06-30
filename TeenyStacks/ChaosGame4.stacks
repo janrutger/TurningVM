@@ -1,19 +1,19 @@
 DEFINE
-    ARRAY size [160 80]
-    #ARRAY size [640 320]
+    #ARRAY size [160 80]
+    ARRAY size [640 320]
 
     THING Chaos
         INIT
              0 AS THIS P1x
              0 AS THIS P1y
 
-             0 AS THIS P2x
-            70 AS THIS P2y
+              0 AS THIS P2x
+            300 AS THIS P2y
 
-            70 AS THIS P3x
-            70 AS THIS P3y
+            300 AS THIS P3x
+            300 AS THIS P3y
 
-            70 AS THIS P4x
+            300 AS THIS P4x
              0 AS THIS P4y
 
             1 AS THIS cp
@@ -45,17 +45,18 @@ USE Turtle
 USE Chaos
 
 DRAW NEW
-#0 0 DRAW
-#1 [size] 2 [size] DRAW
-5 DRAW RATE
+0 0 DRAW
+1 [size] 2 [size] DRAW
+20 DRAW RATE
 
 0 AS n
-70 70 * AS max
-30 65 Turtle goto
+10000  AS max
+150 150 Turtle goto
 
 {n max >} DO
     Chaos corner Turtle midway
     n 1 + AS n
+    n PRINT
 END
 
 

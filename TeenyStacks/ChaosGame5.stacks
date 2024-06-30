@@ -1,0 +1,96 @@
+DEFINE
+    #ARRAY size [160 80]
+    ARRAY size [640 320]
+
+    THING Chaos
+        INIT
+            300 AS THIS P1x
+             25 AS THIS P1y
+ 
+            134 AS THIS P2x
+            146 AS THIS P2y
+
+            197 AS THIS P3x
+            342 AS THIS P3y
+
+            403 AS THIS P4x
+            342 AS THIS P4y
+
+            466 AS THIS P5x
+            146 AS THIS P5y
+
+
+            1 AS THIS cp
+        END
+        THIS corner
+            `rand 4 % 1 + THIS cp + 5 %  AS THIS cp
+            THIS cp MATCH
+                ON 0 DO
+                    THIS P1x THIS P1y
+                END
+                ON 1 DO
+                    THIS P2x THIS P2y
+                END
+                ON 2 DO
+                    THIS P3x THIS P3y
+                END
+                ON 3 DO
+                    THIS P4x THIS P4y
+                END
+                ON 4 DO
+                    THIS P5x THIS P5y
+                END 
+            END
+        END
+        THIS P1
+            THIS P1x THIS P1y 
+        END
+        THIS P2
+            THIS P2x THIS P2y 
+        END
+        THIS P3
+            THIS P3x THIS P3y 
+        END
+        THIS P4
+            THIS P4x THIS P4y 
+        END
+        THIS P5
+            THIS P5x THIS P5y 
+        END
+        
+        
+    END
+
+    DRAW
+
+END
+
+USE Turtle
+USE Chaos
+
+DRAW NEW
+0 0 DRAW
+1 [size] 2 [size] DRAW
+#Chaos P1 Turtle goto
+#Chaos P2 Turtle line
+#Chaos P3 Turtle line
+#Chaos P4 Turtle line
+#Chaos P5 Turtle line
+#Chaos P1 Turtle line
+
+10 DRAW RATE
+
+0 AS n
+5000  AS max
+150 150 Turtle goto
+
+{n max >} DO
+    Chaos corner Turtle midway
+    n 1 + AS n
+    n PRINT
+END
+
+
+0 0 DRAW
+1 [size] 2 [size] DRAW
+DRAW NOW
