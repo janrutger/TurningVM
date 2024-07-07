@@ -946,16 +946,16 @@ pull
 :_33_match_end
 ret
 @~(Turtle)line
-storem $tmpY
-storem $tmpX
+storem $(Turtle)tmpY
+storem $(Turtle)tmpX
 :_97_condition_start
 loadm $(Turtle)lineDrawing
 loada
 testz
 clra
 jumpf :_97_repeat_end
-loadm $tmpX
-loadm $tmpY
+loadm $(Turtle)tmpX
+loadm $(Turtle)tmpY
 call @~(Turtle)dot
 jump :_97_condition_start
 :_97_repeat_end

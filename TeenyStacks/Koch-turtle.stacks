@@ -59,7 +59,7 @@ USE Turtle
 ARRAY Lresult
 "F" AS [Lresult]
 
-5 DRAW RATE 
+0 DRAW RATE 
 DRAW NEW
 
 0 0 DRAW 
@@ -67,7 +67,7 @@ DRAW NEW
 0 0 Turtle goto
 
 newF 0 == DO
-    otherF
+    makeNewF
 END 
 
 0 AS n
@@ -88,12 +88,12 @@ WITH Lresult EACH
             4 Turtle forward
         END
         ON "+" DO
-            #270 Turtle right
-            300 Turtle right
+            270 Turtle right
+            #300 Turtle right
         END
         ON "-" DO
-            #90 Turtle right
-            60 Turtle right
+            90 Turtle right
+            #60 Turtle right
         END
     END
 

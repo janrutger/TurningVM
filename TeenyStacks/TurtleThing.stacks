@@ -34,6 +34,7 @@ DEFINE
             THIS angle + 360 % AS THIS angle
         END
 
+
         THIS slope
             THIS y THIS targetY `diff 15 * THIS x THIS targetX `diff /
         END 
@@ -329,10 +330,10 @@ DEFINE
         END
 
         THIS line 
-            . AS tmpY
-            . AS tmpX
+            . AS THIS tmpY
+            . AS THIS tmpX
             {THIS lineDrawing} DO
-               tmpX tmpY THIS dot
+               THIS tmpX THIS tmpY THIS dot
             END
             0 AS THIS lineDrawing
         END

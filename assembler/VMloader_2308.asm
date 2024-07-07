@@ -282,3 +282,15 @@ ret
     call @div 
 ret
 
+@bsr
+    loada
+    testz
+    jumpt :end_bsr
+        ex
+        :loop_bsr
+            ssr
+            decb
+        jumpf :loop_bsr
+        clrb
+    :end_bsr
+ret

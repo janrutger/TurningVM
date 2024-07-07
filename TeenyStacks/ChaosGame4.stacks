@@ -50,7 +50,7 @@ DRAW NEW
 20 DRAW RATE
 
 0 AS n
-10000  AS max
+5000  AS max
 150 150 Turtle goto
 
 {n max >} DO
