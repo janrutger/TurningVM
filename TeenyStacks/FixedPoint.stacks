@@ -37,10 +37,4 @@ USE FP
 3 FP to AS b
 2 FP to AS c
 
-a b FP div DUP FP print
-b FP mul DUP FP print
-
-b FP add DUP FP print
-a FP min DUP FP print
-
-c FP div FP print
+b c FP add c FP div c FP min c FP mul FP print
