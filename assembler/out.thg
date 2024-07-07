@@ -1,1 +1,32 @@
 # Start of THINGS
+@~(FP)INIT
+ret
+@~(FP)to
+loadm $FPbits
+call @bsl
+ret
+@~(FP)from
+loadm $FPbits
+call @bsr
+ret
+@~(FP)add
+call @plus
+ret
+@~(FP)min
+call @minus
+ret
+@~(FP)mul
+call @mul
+loadm $FPbits
+call @bsr
+ret
+@~(FP)div
+storem $(FP)tmp
+loadm $FPbits
+call @bsl
+loadm $(FP)tmp
+call @div
+ret
+@~(FP)print
+call @FPprint
+ret

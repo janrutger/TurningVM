@@ -12,7 +12,7 @@ from websock import UIconnect as UI
 
 ui = UI.UIconnect()
 memory = mmu.MMU(ui)
-executes = Executer(memory, ui, fp_bits=8)
+executes = Executer(memory, ui, fp_bits=12)
 machine = Machine(executes, ui)
 
 counter = 0
@@ -24,7 +24,7 @@ def runner():
 
 
 def load():
-    assembler = Assembler(fp_bits=8)
+    assembler = Assembler(fp_bits=12)
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader_2308.asm")))

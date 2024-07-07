@@ -1,0 +1,46 @@
+DEFINE
+    VALUE FPbits 12
+
+    THING FP 
+        INIT
+        END
+        THIS to 
+            FPbits `bsl
+        END
+        THIS from 
+            FPbits `bsr
+        END
+        THIS add
+            +
+        END
+        THIS min
+            -
+        END
+        THIS mul
+            * FPbits `bsr
+        END
+        THIS div
+            . AS THIS tmp
+            FPbits `bsl
+            THIS tmp /
+        END
+        THIS print
+            `FPprint
+        END
+    END
+END
+
+
+USE FP
+
+1 FP to AS a 
+3 FP to AS b
+2 FP to AS c
+
+a b FP div DUP FP print
+b FP mul DUP FP print
+
+b FP add DUP FP print
+a FP min DUP FP print
+
+c FP div FP print

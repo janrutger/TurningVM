@@ -123,6 +123,10 @@ ret
     iobuff %_display
 ret
 
+@FPprint
+    fp_prt
+ret
+
 @_gcd
     call @gcd
     storeb
