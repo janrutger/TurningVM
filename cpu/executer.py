@@ -8,7 +8,7 @@ from cpu import timers as ti
 
 
 class Executer:
-    def __init__(self, memory, ui):
+    def __init__(self, memory, ui, fp_bits=8):
         self.memory = memory
         self.tape_commander = tc.Tapecommander()
         self.execNOP = nop.Exec_no_opcode(self.tape_commander)
@@ -17,6 +17,7 @@ class Executer:
         self.ui = ui #need this for prt instruction
         self.pc = int(0)
         self.ControlC = False
+        self.fp_scale = 2 ** fp_bits
 
     def refresh_tapes(self, tapes):
         return self.execNOP.print(tapes)
@@ -130,7 +131,13 @@ class Executer:
         val = self.execNOP.pull()
         text2print = int(val, 2)
         self.ui.println(text2print)
-        #print("-->", int(val, 2))
+        self.pc = self.pc + 1
+        return "HALT"
+    
+    def fp_prt(self, operand):
+        val = self.execNOP.pull()
+        text2print = float(int(val, 2) / self.fp_scale)
+        self.ui.println(text2print)
         self.pc = self.pc + 1
         return "HALT"
 

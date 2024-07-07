@@ -71,6 +71,8 @@ def loadSchema():
     schema["clra"]      = ("CLRA", None)
 
     schema["prt"]       = ("PRT", None)
+    schema["fp_prt"]    = ("FP_PRT", None)
+
     schema["nop"]       = ("NOP", None)
 
     schema["speed"]     = ("SPEED", "n")
