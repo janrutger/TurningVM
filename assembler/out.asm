@@ -1,5 +1,5 @@
 @main
-    push 200
-    push 4
-    call @bsr
+    push 5
+    push 3
+    call @bsl
 ret

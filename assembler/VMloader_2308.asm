@@ -294,3 +294,16 @@ ret
         clrb
     :end_bsr
 ret
+
+@bsl
+    loada
+    testz
+    jumpt :end_bsl
+        ex
+        :loop_bsl
+            ssl
+            decb
+        jumpf :loop_bsl
+        clrb
+    :end_bsl
+ret

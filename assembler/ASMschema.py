@@ -58,6 +58,7 @@ def loadSchema():
     schema["sub"]       = ("SUB", None)
 
     schema["ssr"]       = ("SSR", None)
+    schema["ssl"]       = ("SSL", None)
     schema["abs"]       = ("ABS", None)
     schema["bc"]        = ("BC", None)
 

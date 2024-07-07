@@ -793,6 +793,20 @@ def loadlibrary():
     
     )
 
+    library["SSL"] =  (
+        ("START", {'ST': '1'}, ({"ST": "1"}, {"ST": "L"}, "new0")),
+        ("START", {'ST': '0'}, ({"ST": "0"}, {"ST": "R"}, "check")),
+        ("START", {'ST': '_'}, ({"ST": "#"}, {"ST": "L"}, "new0")),
+
+        ("new0",  {'ST': '_'}, ({"ST": "0"}, {"ST": "S"}, "HALT")),
+
+        ("check",  {'ST': '#'}, ({"ST": "#"}, {"ST": "L"}, "HALT")),
+        ("check",  {'ST': '1'}, ({"ST": "1"}, {"ST": "L"}, "back")),
+        ("check",  {'ST': '0'}, ({"ST": "0"}, {"ST": "L"}, "back")),
+
+        ("back",   {'ST': '0'}, ({"ST": "0"}, {"ST": "L"}, "new0")),
+    )
+
 
     return(library)
 
