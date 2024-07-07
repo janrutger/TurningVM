@@ -24,6 +24,9 @@ DEFINE
             FPbits `bsl
             THIS tmp /
         END
+        THIS frac
+            DUP FPbits `bsr FPbits `bsl -
+        END 
         THIS print
             `FPprint
         END
@@ -34,7 +37,7 @@ END
 USE FP
 
 1 FP to AS a 
-3 FP to AS b
-2 FP to AS c
+6 FP to AS b
+3 FP to AS c
 
-b c FP add c FP div c FP min c FP mul FP print
+b c FP div FP frac FP print

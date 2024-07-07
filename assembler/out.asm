@@ -5,21 +5,16 @@ call @~(FP)INIT
 push 1
 call @~(FP)to
 storem $a
-push 3
+push 6
 call @~(FP)to
 storem $b
-push 2
+push 3
 call @~(FP)to
 storem $c
 loadm $b
 loadm $c
-call @~(FP)add
-loadm $c
 call @~(FP)div
-loadm $c
-call @~(FP)min
-loadm $c
-call @~(FP)mul
+call @~(FP)frac
 call @~(FP)print
 prttimer 0
 ret
@@ -51,6 +46,14 @@ loadm $FPbits
 call @bsl
 loadm $(FP)tmp
 call @div
+ret
+@~(FP)frac
+call @dup
+loadm $FPbits
+call @bsr
+loadm $FPbits
+call @bsl
+call @minus
 ret
 @~(FP)print
 call @FPprint

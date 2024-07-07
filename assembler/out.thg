@@ -27,6 +27,14 @@ call @bsl
 loadm $(FP)tmp
 call @div
 ret
+@~(FP)frac
+call @dup
+loadm $FPbits
+call @bsr
+loadm $FPbits
+call @bsl
+call @minus
+ret
 @~(FP)print
 call @FPprint
 ret
