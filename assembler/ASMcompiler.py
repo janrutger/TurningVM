@@ -3,9 +3,11 @@ import sys
 
 
 class Compiler:
-    def __init__(self):
+    def __init__(self, fp_bits):
         self.ASMschema = schema.loadSchema()
         self.labels = {}
+
+        self.fp_scale = 2 ** fp_bits
 
         self.stringTable = {}
         self.stringTable["null"] = 0
@@ -40,6 +42,10 @@ class Compiler:
             return(str(operand_))
         if operand_[0] == "*":                      # operand is a mem array adres
             return (str(operand_))
+        
+        if operand_[0] == "F":                      # operand is Fixed Point value
+            val_ = float(operand_[1:]) * self.fp_scale
+            return ((bin(int(val_))[2:]))
             
         if operand_[0]==operand_[-1]=="'":          # operand is a string
             if operand_[1:-1] in self.stringTable:

@@ -2,8 +2,8 @@ from assembler import ASMcompiler as c
 
 
 class Assembler:
-    def __init__(self):
-        self.compiler = c.Compiler()
+    def __init__(self, fp_bits=8):
+        self.compiler = c.Compiler(fp_bits)
 
     def readASM(self, filename):
         ASMfile = []

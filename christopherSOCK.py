@@ -24,7 +24,7 @@ def runner():
 
 
 def load():
-    assembler = Assembler()
+    assembler = Assembler(fp_bits=12)
 
     # memory.loadMem(assembler.compile(
     #     assembler.readASM("./assembler/VMloader_2308.asm")))

@@ -1,5 +1,4 @@
 @main
-    push 5
-    push 3
-    call @bsl
+    push F0.14
+    prt
 ret
