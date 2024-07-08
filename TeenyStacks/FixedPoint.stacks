@@ -3,6 +3,8 @@ DEFINE
 
     THING FP 
         INIT
+            1 FPbits 1 - `bsl AS THIS half
+            1 FPbits `bsl AS THIS one
         END
         THIS to 
             FPbits `bsl
@@ -24,9 +26,31 @@ DEFINE
             FPbits `bsl
             THIS tmp /
         END
+        THIS sqrt
+            `isqrt FPbits 2 / `bsl
+        END
         THIS frac
             DUP FPbits `bsr FPbits `bsl -
         END 
+        THIS floor
+            FPbits `bsr FPbits `bsl
+        END 
+        THIS ceil
+            DUP
+            DUP FPbits `bsr FPbits `bsl - AS THIS fraction
+            FPbits `bsr FPbits `bsl
+            THIS fraction 0 < DO
+                THIS one +
+            END            
+        END
+        THIS round
+            DUP
+            DUP FPbits `bsr FPbits `bsl - AS THIS fraction
+            FPbits `bsr FPbits `bsl
+            THIS fraction THIS half < DO
+                THIS one +
+            END            
+        END
         THIS print
             `FPprint
         END
@@ -36,8 +60,8 @@ END
 
 USE FP
 
-1 FP to AS a 
-6 FP to AS b
-3 FP to AS c
+25 FP to AS a 
+8 FP to AS b
+5 FP to AS c
 
-b c FP div FP frac FP print
+b c FP div FP round FP print
