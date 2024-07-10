@@ -1,0 +1,5 @@
+25 `Fto AS a 
+11 `Fto AS b
+13 `Fto AS c
+
+b c `FDIV a `FADD  `FSQRT DUP `FMUL `FPRINT

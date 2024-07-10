@@ -3,8 +3,10 @@ DEFINE
 
     THING FP 
         INIT
+            12 AS FPbits
+            
             1 FPbits 1 - `bsl AS THIS half
-            1 FPbits `bsl AS THIS one
+            1 FPbits     `bsl AS THIS one
         END
         THIS to 
             FPbits `bsl
@@ -37,7 +39,7 @@ DEFINE
         END 
         THIS ceil
             DUP
-            DUP FPbits `bsr FPbits `bsl - AS THIS fraction
+            THIS frac AS THIS fraction
             FPbits `bsr FPbits `bsl
             THIS fraction 0 < DO
                 THIS one +
@@ -45,7 +47,7 @@ DEFINE
         END
         THIS round
             DUP
-            DUP FPbits `bsr FPbits `bsl - AS THIS fraction
+            THIS frac AS THIS fraction
             FPbits `bsr FPbits `bsl
             THIS fraction THIS half < DO
                 THIS one +
@@ -61,7 +63,7 @@ END
 USE FP
 
 25 FP to AS a 
-8 FP to AS b
-5 FP to AS c
+11 FP to AS b
+13 FP to AS c
 
-b c FP div FP round FP print
+b c FP div FP print

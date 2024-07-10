@@ -18,6 +18,7 @@ nop
     iobuff %_kbd
     iobuff %_display
     iobuff %_xygraph
+    call @F_INIT
 
     push 75
     storem $_aRandom
