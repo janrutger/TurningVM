@@ -1,6 +1,6 @@
-from lexV4 import *
+from lexV5 import *
 from emitV4 import *
-from parseV4 import *
+from parseV5 import *
 import sys
 
 def main():

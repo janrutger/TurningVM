@@ -34,7 +34,9 @@ statement  ::=  "LABEL" label nl
 			|   “DRAW” (“NOW” | "NEW") nl
 			|   “WITH” [“THIS”] array (“EACH” nl {statement} nl "END" | “COPY” [“THIS”] array | "PLOT" ["NEW"]) nl
 			|   "{" (expression) "}" ("REPEAT" | "DO") nl {statement} nl "END" nl		
-			|   (expression | tos) ( "PRINT" nl
+			|   (expression | tos) 
+			                ( "PRINT" nl
+			                | "FPRINT" nl
 							| "PLOT"  nl
 							| “DRAW” [“RATE”] nl
 							| ¨WAIT¨  nl
@@ -51,11 +53,16 @@ statement  ::=  "LABEL" label nl
 							|  nl )
 
 
-expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] (variable | array | '['array']' | struct '[' (INTEGER)+ | (member)+ ']' ) | thing function | word)+
+expression ::=	(INTEGER | FIXNUM | STRING ["SHOW"] | function | "`"function | [“THIS”] (variable | array | '['array']' | struct '[' (INTEGER)+ | (member)+ ']' ) | thing function | word)+
 
 
 
-word       ::=	('+'|'-'|'*'|'/'|'%'|'=='|'!='|'>'|'<'|'GCD'|'!'|'DUP'|'SWAP'|'OVER'|'DROP'|'DEPTH'|'INPUT'|'RAWIN')
+word       ::=	('+'|'-'|'*'|'/'|'%' 
+                |'=='|'!='|'>'|'<' 
+				|'GCD'|'!'|'ISQRT'|'RND' 
+				|'DUP'|'SWAP'|'OVER'|'DROP' 
+				|'DEPTH'|'INPUT'|'RAWIN' |'>>'|'<<' 
+				|'ADD'|'SUB'|'MUL'|'DIV'|'FLOOR'|'CEIL'|'ROUND'|'INT'|'FPN'|'SQRT')
      	             		  
 label      ::=  ident
 job        ::=  ident
@@ -71,9 +78,9 @@ tos        ::=	('.'|'..')
 nl         ::= '\n'+
 
 ident      ::= [a-zA-Z][a-zA-Z0-9]*
-
 COMMENT		::= "#" [a-zA-Z0-9]* nl
 INTEGER		::= [0-9]*
+FIXNUM		::= [0-9]* '.' [0-9]*
 STRING		::= ‘“’ [a-zA-Z0-9]* ‘“’ 
 
 

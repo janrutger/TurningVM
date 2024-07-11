@@ -14,31 +14,31 @@
     storem $FP_one
 ret
 
-@Fto
+@F_to_fpn
     loadm $FPbits
     call @bsl
 ret
 
-@Ffrom
+@F_to_int
     loadm $FPbits
     call @bsr
 ret
 
-@FADD
+@F_add
     call @plus
 ret
 
-@FMIN
+@F_min
     call @minus
 ret
 
-@FMUL
+@F_mul
     call @mul
     loadm $FPbits
     call @bsr
 ret
 
-@FDIV
+@F_div
     storem $FP_tmp
     loadm $FPbits
     call @bsl
@@ -46,7 +46,7 @@ ret
     call @div
 ret
 
-@FSQRT
+@F_sqrt
     call @isqrt
     loadm $FPbits
     push 2
@@ -54,7 +54,7 @@ ret
     call @bsl
 ret
 
-@FFRAC
+@FPFRAC
     call @dup
     loadm $FPbits
     call @bsr
@@ -63,16 +63,16 @@ ret
     call @minus
 ret
 
-@FFLOOR
+@F_floor
     loadm $FPbits
     call @bsr
     loadm $FPbits
     call @bsl
 ret
 
-@FCEIL
+@F_ceil
     call @dup
-    call @FFRAC
+    call @FPFRAC
     storem $FP_fraction
     loadm $FPbits
     call @bsr
@@ -90,9 +90,9 @@ ret
     :_0_do_end
 ret
 
-@FROUND
+@F_round
     call @dup
-    call @FFRAC
+    call @FPFRAC
     storem $FP_fraction
     loadm $FPbits
     call @bsr
@@ -110,6 +110,3 @@ ret
     :_1_do_end
 ret
 
-@FPRINT
-    fp_prt
-ret

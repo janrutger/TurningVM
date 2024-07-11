@@ -1,5 +1,5 @@
 import sys
-from lexV4 import *
+from lexV5 import *
 
 # Parser object keeps track of current token and checks if the code matches the grammar.
 class Parser:
@@ -578,6 +578,10 @@ class Parser:
                 self.emitter.emitLine("prt")
                 self.nextToken()
                 self.nl()
+            elif self.checkToken(TokenType.FPRINT):
+                self.emitter.emitLine("fp_prt")
+                self.nextToken()
+                self.nl()
             elif self.checkToken(TokenType.PLOT):
                 self.emitter.emitLine("call @plot")
                 self.nextToken()
@@ -720,9 +724,12 @@ class Parser:
     # expression ::=	(INTEGER | STRING | function | "`"function | variable | array | '['array']' | word)+
     # expression ::=	(INTEGER | STRING ["SHOW"] | function | "`"function | [“THIS”] variable | [“THIS”] array | [“THIS”] '['array']' | thing function | word)+
     def expression(self):
-        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.THIS):
+        while self.checkToken(TokenType.NUMBER) or self.checkToken(TokenType.FIXNUM) or self.checkToken(TokenType.STRING) or self.checkToken(TokenType.IDENT) or self.checkToken(TokenType.BT) or self.checkToken(TokenType.WORD) or self.checkToken(TokenType.OPENBL) or self.checkToken(TokenType.THIS):
             if self.checkToken(TokenType.NUMBER):
                 self.emitter.emitLine("push " + self.curToken.text)
+                self.nextToken()
+            elif self.checkToken(TokenType.FIXNUM):
+                self.emitter.emitLine("push F" + self.curToken.text)
                 self.nextToken()
             elif self.checkToken(TokenType.STRING):
                 self.emitter.emitLine("push " + "'" + self.curToken.text + "'")
@@ -814,6 +821,48 @@ class Parser:
             self.nextToken()
         elif self.curToken.text == 'DEPTH':
             self.emitter.emitLine("pending")
+            self.nextToken()
+        elif self.curToken.text == '<<':
+            self.emitter.emitLine("call @bsl")
+            self.nextToken()
+        elif self.curToken.text == '>>':
+            self.emitter.emitLine("call @bsr")
+            self.nextToken()
+        elif self.curToken.text == 'ADD':
+            self.emitter.emitLine("call @F_add")
+            self.nextToken()
+        elif self.curToken.text == 'SUB':
+            self.emitter.emitLine("call @F_min")
+            self.nextToken()
+        elif self.curToken.text == 'MUL':
+            self.emitter.emitLine("call @F_mul")
+            self.nextToken()
+        elif self.curToken.text == 'DIV':
+            self.emitter.emitLine("call @F_div")
+            self.nextToken()
+        elif self.curToken.text == 'SQRT':
+            self.emitter.emitLine("call @F_sqrt")
+            self.nextToken()
+        elif self.curToken.text == 'ISQRT':
+            self.emitter.emitLine("call @isqrt")
+            self.nextToken()
+        elif self.curToken.text == 'FLOOR':
+            self.emitter.emitLine("call @F_floor")
+            self.nextToken()
+        elif self.curToken.text == 'CEIL':
+            self.emitter.emitLine("call @F_ceil")
+            self.nextToken()
+        elif self.curToken.text == 'ROUND':
+            self.emitter.emitLine("call @F_round")
+            self.nextToken()
+        elif self.curToken.text == 'INT':
+            self.emitter.emitLine("call @F_to_int")
+            self.nextToken()
+        elif self.curToken.text == 'FPN':
+            self.emitter.emitLine("call @F_to_fpn")
+            self.nextToken()
+        elif self.curToken.text == 'RND':
+            self.emitter.emitLine("call @rand")
             self.nextToken()
         else:
             self.abort("UNKOWN Operator word: " + self.curToken.text)

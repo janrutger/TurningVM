@@ -5,7 +5,7 @@ ARRAY tmp
 
 TIMER 17 SET
 {max 0 !=} DO
-    `rand AS [data]
+    RND AS [data]
     max 1 - AS max
     WITH data PLOT NEW
 END
