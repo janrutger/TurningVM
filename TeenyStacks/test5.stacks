@@ -1,10 +1,56 @@
-99 ISQRT PRINT
 
-99 FPN SQRT FPRINT
-99.999 SQRT FPRINT
 
-1.5 1.25 ADD 0.251 ADD FPRINT
+FUNCTION p1 
+    4.0 2 3 4 * * FPN DIV 
+END
 
-1.5 PLOT
-1.25 PLOT
-0.25 PLOT
+FUNCTION p2
+    4.0 4 5 6 * * FPN DIV 
+END
+
+FUNCTION p3
+    4.0 6 7 8 * * FPN DIV 
+END
+
+FUNCTION p4
+    4.0 8 9 10 * * FPN DIV 
+END
+
+FUNCTION p5
+    4.0 10 11 12 * * FPN DIV 
+END
+
+FUNCTION p6
+    4.0 12 13 14 * * FPN DIV 
+END
+
+FUNCTION p7
+    4.0 14 15 16 * * FPN DIV 
+END
+
+FUNCTION p8
+    4.0 16 17 18 * * FPN DIV 
+END
+
+FUNCTION p9
+    4.0 18 19 20 * * FPN DIV 
+END
+
+FUNCTION p10
+    4.0 20 21 22 * * FPN DIV 
+END
+
+FUNCTION p11
+    4.0 22 23 24 * * FPN DIV 
+END
+
+
+3.0 p1 + 
+    p2 - 
+    p3 + 
+    p4 - 
+    p5 + 
+    p6 - 
+    p7 + 
+    p8 -
+    p9 + FPRINT
