@@ -18,6 +18,7 @@ class Executer:
         self.pc = int(0)
         self.ControlC = False
         self.fp_scale = 2 ** fp_bits
+        self.fp_nbits = fp_bits
 
     def refresh_tapes(self, tapes):
         return self.execNOP.print(tapes)
@@ -136,7 +137,9 @@ class Executer:
     
     def fp_prt(self, operand):
         val = self.execNOP.pull()
-        text2print = float(int(val, 2) / self.fp_scale)
+        #text2print = round(int(val, 2) / self.fp_scale, int(self.fp_nbits / 4 + 1))
+        text2print = f"{(int(val, 2) / self.fp_scale):.{(int(self.fp_nbits / 4 + 1))}f}"
+        #print(s)
         self.ui.println(text2print)
         self.pc = self.pc + 1
         return "HALT"

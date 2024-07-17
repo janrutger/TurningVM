@@ -1,49 +1,31 @@
 @main
 settimer 0
-speed 10
+speed 0
 push F3.0
 call @~p1
 call @plus
-call @dup
-fp_prt
 call @~p2
 call @minus
-call @dup
-fp_prt
 call @~p3
 call @plus
-call @dup
-fp_prt
 call @~p4
 call @minus
-call @dup
-fp_prt
 call @~p5
 call @plus
-call @dup
-fp_prt
 call @~p6
 call @minus
-call @dup
-fp_prt
 call @~p7
 call @plus
-call @dup
-fp_prt
 call @~p8
 call @minus
-call @dup
-fp_prt
 call @~p9
 call @plus
-call @dup
 fp_prt
-call @~p10
-call @minus
-call @dup
-fp_prt
-call @~p11
-call @plus
+push F1.0
+push F3.0
+call @F_div
+push F3.0
+call @F_mul
 fp_prt
 prttimer 0
 ret
@@ -132,26 +114,6 @@ push F4.0
 push 18
 push 19
 push 20
-call @mul
-call @mul
-call @F_to_fpn
-call @F_div
-ret
-@~p10
-push F4.0
-push 20
-push 21
-push 22
-call @mul
-call @mul
-call @F_to_fpn
-call @F_div
-ret
-@~p11
-push F4.0
-push 22
-push 23
-push 24
 call @mul
 call @mul
 call @F_to_fpn

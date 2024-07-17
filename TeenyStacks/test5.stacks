@@ -36,13 +36,8 @@ FUNCTION p9
     4.0 18 19 20 * * FPN DIV 
 END
 
-FUNCTION p10
-    4.0 20 21 22 * * FPN DIV 
-END
 
-FUNCTION p11
-    4.0 22 23 24 * * FPN DIV 
-END
+
 
 
 3.0 p1 + 
@@ -54,3 +49,5 @@ END
     p7 + 
     p8 -
     p9 + FPRINT
+
+    1.0 3.0 DIV 3.0 MUL FPRINT
